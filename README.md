@@ -1,70 +1,137 @@
-# Getting Started with Create React App
+# Back-End
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Team members
 
-## Available Scripts
+- Tasneem Hassasneh
+- Abdullah aljoulani
+- Anas Nemrawi
+- Hasan Tummalei
 
-In the project directory, you can run:
+## Description
 
-### `npm start`
+**Healthak** is a portable Pharmacy/Clinic web application that aims to provide medical services, patient profiles, disease control, physician dashboards, patient groups, appointment scheduling, and communication channels.
+The application's focus is on providing seamless communication between patients and physicians, personalized patient health tracking, and educational resources for patients. Physicians can monitor their patients' health, receive alerts, and engage in real-time consultations.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Wireframe
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+[Wireframe](https://miro.com/app/board/uXjVMx2wquE=/)
 
-### `npm test`
+## Features
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+**Title: User Registration.**
 
-### `npm run build`
+*As a potential user, I want to register on the healthcare platform to access personalized health profiles and connect with my healthcare provider.*
+​
+**Feature Tasks:**
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- Design a user registration form with fields for first name, last name, email, and password.
+- Implement server-side validation to ensure accurate and complete user data.
+- Store the registered user's information securely in the database.
+​
+**Acceptance Tests:**
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- Verify that the registration form captures all required user details correctly.
+- Test that the server validates the form data and provides appropriate error messages for any invalid entries.
+- Confirm that the user data is securely stored in the database.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+---
+​
+**Title: User Login**
 
-### `npm run eject`
+*As a registered user, I want to log in to the healthcare platform to access my health profile and communicate with my healthcare provider.*
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+**Feature Tasks:**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- Design a user login page with fields for email and password.
+- Implement server-side authentication to verify user credentials.
+- Retrieve the user's health profile data upon successful login.
+- Provide access to the user's personalized dashboard.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+**Acceptance Tests:**
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+- Check that the user's health profile data is retrieved correctly upon successful login.
+- Ensure that the personalized dashboard is accessible after successful login.
 
-## Learn More
+---
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+**Title: Health Profile Management.**
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+*As a user, I want to manage my health profile by entering and updating health parameters and receiving a weekly health status summary.*
 
-### Code Splitting
+**Feature Tasks:**
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+- Design a summary section to generate the user's weekly health status summary.
+- Store health parameter data securely in the database.
 
-### Analyzing the Bundle Size
+**Acceptance Tests:**
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+- Verify that the health profile page displays existing health parameters accurately.
+- Test the functionality of posting, updating, and deleting health parameters.
+- Confirm that the summary section generates the user's weekly health status summary correctly.
 
-### Making a Progressive Web App
+---
+​
+**Title: Patient-Physician Communication**
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+*As a patient, I want to communicate with my physician in real-time to ask health-related queries and receive prompt responses.*
 
-### Advanced Configuration
+**Feature Tasks:**
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+- Implement a real-time chat system between patients and physicians.
+- Store chat history securely for future reference.
+​
+**Acceptance Tests:**
 
-### Deployment
+- Test the real-time functionality of the chat system for smooth communication.
+- Confirm that chat history is securely stored and accessible to the respective users.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+---
 
-### `npm run build` fails to minify
+**Title: Educational Groups.**
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+*As a physician, I want to create groups for patients to provide health-related information and resources.*
+​
+**Feature Tasks:**
+
+- Design a page for physicians to create and manage groups.
+- Provide physicians with the ability to post l in the groups.
+​
+**Acceptance Tests:**
+
+- Verify that physicians can create and manage educational groups successfully.
+- Confirm that physicians can post educational content and resources for patients.
+
+## our Schemas
+
+![schema4](./src/assets/schema1.jpg)
+![schema1](./src/assets/schema2.jpg)
+![schema2](./src/assets/schema3.jpg)
+![schema3](./src/assets/schema4.jpg)
+
+## PM Tools
+
+1. **Trello** project management tool to distribution
+ of tasks to the team.
+
+2. **Miro** to draw wireframe for the project.
+
+3. **GitHub Projects** to create boards and manage tasks using GitHub issues and pull requests.
+
+4. **Slack** to communicate with the team.
+
+5. **Discord** to share the work together and fix the error's as a team.
+
+6. **Visual Studio Code** to write the code.
+
+7. **Render** to build and run the website.
+
+## Table of content
+
+| Topics        | Links           |
+|    ---             |      ---        |
+|1- ProjectDescription   |      [Read](./AboutTheProject/ProjectDescription.md)     |
+|2- Repo&Tooling   |      [Read](./AboutTheProject/Repo&Tooling.md)     |
+|3- TeamManagement   |      [Read](./AboutTheProject/TeamManagement.md)     |
+|4- Wireframes&SoftwareRequirements   |      [Read](./AboutTheProject/Wireframes&SoftwareRequirements.md)     |
+|5- Routes Documentation   |      [Read](./AboutTheProject//RoutesDocumentation.md)     |
+# front-end

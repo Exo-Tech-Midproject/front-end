@@ -4,7 +4,7 @@ import { Area, Bar, CartesianGrid, ComposedChart, Legend, Line, ResponsiveContai
 export default function VitalComposedChart({ data }) {
     return (
         <>
-            <ResponsiveContainer width='45%' height='80%' >
+            <ResponsiveContainer width='45%' height='80%' debounce={50} >
                 <ComposedChart width={730} height={250} data={data}>
                     <XAxis dataKey="name" />
                     <YAxis />
@@ -18,7 +18,7 @@ export default function VitalComposedChart({ data }) {
                     <Bar dataKey="bloodGlucose" barSize={30} fill="#112731" />
                 </ComposedChart>
             </ResponsiveContainer  >
-            <ResponsiveContainer width='45%' height='80%' >
+            <ResponsiveContainer width='45%' height='80%' debounce={50} >
                 <ComposedChart width={730} height={250} data={data}>
                     <XAxis dataKey="name" />
                     <YAxis />

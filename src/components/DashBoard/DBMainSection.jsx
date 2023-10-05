@@ -33,6 +33,7 @@ export default function DBMain({ open }) {
         <>
             <Main open={open}   >
                 <Routes>
+                    <Route path='/' element={<Profile />} />
                     <Route path='/profile' element={<Profile />} />
                     <Route path='/vitals' element={<Vitals />} />
                 </Routes>

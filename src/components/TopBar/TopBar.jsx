@@ -1,4 +1,8 @@
-import { Avatar, Box, IconButton, Typography } from '@mui/material'
+// import { Avatar, Box, IconButton, Typography } from '@mui/material'
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import Avatar from "@mui/material/Avatar";
+import IconButton from "@mui/material/IconButton";
 import React from 'react'
 import SpaceDashboardOutlinedIcon from '@mui/icons-material/SpaceDashboardOutlined';
 import NotificationsActiveOutlinedIcon from '@mui/icons-material/NotificationsActiveOutlined';

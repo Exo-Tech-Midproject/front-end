@@ -1,7 +1,11 @@
 import React from 'react'
-import { Container, TextField, Typography, Button, Stack } from '@mui/material'
-
+import Container from "@mui/material/Container";
+import Typography from "@mui/material/Typography";
+import Button from "@mui/material/Button";
+import Stack from "@mui/material/Stack";
+import TextField from "@mui/material/TextField";
 import Title from "../Title/index";
+
 
 function ContactForm() {
 

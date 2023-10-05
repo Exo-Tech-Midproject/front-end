@@ -1,5 +1,5 @@
-import { Typography, Box } from "@mui/material";
-
+import Typography from "@mui/material/Typography";
+import Box from "@mui/material/Box";
 import React from "react";
 import Title from "../components/Title";
 import { Aboutus2 } from "../utils/content";

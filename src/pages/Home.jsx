@@ -7,7 +7,7 @@ import Section4 from "../containers/Section4"
 import Section5 from "../containers/Section5"
 import Section6 from "../containers/Section6"
 
-export const Home = () => {
+export default function Home() {
     return (
         <div>
             {/* navbar */}

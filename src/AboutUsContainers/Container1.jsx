@@ -1,5 +1,7 @@
 import React from "react";
-import { Box, Container } from "@mui/material";
+import Box from "@mui/material/Box";
+import Container from "@mui/material/Container";
+
 import { Aboutus1 } from "../utils/content";
 
 const { HeroImg } = Aboutus1;

@@ -4,7 +4,7 @@ import { CartesianGrid, Legend, Line, LineChart, ResponsiveContainer, Tooltip, X
 export default function VitalLineChart({ data }) {
     return (
         <>
-            <ResponsiveContainer width='45%' height='80%' >
+            <ResponsiveContainer width='45%' height='80%' debounce={50} >
                 <LineChart data={data}>
 
 
@@ -18,7 +18,7 @@ export default function VitalLineChart({ data }) {
                     <Legend />
                 </LineChart>
             </ResponsiveContainer  >
-            <ResponsiveContainer width='45%' height='80%' >
+            <ResponsiveContainer width='45%' height='80%' debounce={50} >
                 <LineChart data={data}>
                     <Line type="monotone" dataKey="heartRate" stroke="#FF6969" strokeWidth={3} />
                     <Line type="monotone" dataKey="oxygenSat" stroke="#6499E9" strokeWidth={3} />

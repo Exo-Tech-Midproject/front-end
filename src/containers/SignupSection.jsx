@@ -1,4 +1,10 @@
-import { Container, Grid, Stack, Box, Typography, Button } from "@mui/material";
+// import { Container, Grid, Stack, Box, Typography, Button } from "@mui/material";
+import Box from "@mui/material/Box";
+import Container from "@mui/material/Container";
+import Typography from "@mui/material/Typography";
+import Stack from "@mui/material/Stack";
+import Grid from "@mui/material/Grid";
+import Button from "@mui/material/Button";
 import React, { useState } from "react";
 import Title from "../components/Title";
 import { signupcontent } from "../utils/content";

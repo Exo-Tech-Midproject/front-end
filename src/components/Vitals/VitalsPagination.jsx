@@ -5,7 +5,7 @@ import Stack from '@mui/material/Stack';
 export default function VitalsPagination() {
     return (
         <Stack spacing={2}>
-            <Pagination count={10} color='primary' size='large' sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }} />
+            <Pagination count={10} color='medical' size='large' sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }} />
         </Stack>
     );
 }

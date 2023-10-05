@@ -1,12 +1,21 @@
-import {
-  Box,
-  Button,
-  Container,
-  Stack,
-  Typography,
-  useMediaQuery,
-  useTheme,
-} from "@mui/material";
+// import {
+//   Box,
+//   Button,
+//   Container,
+//   Stack,
+//   Typography,
+//   useMediaQuery,
+//   useTheme,
+// } from "@mui/material";
+import Box from "@mui/material/Box";
+import Container from "@mui/material/Container";
+import Typography from "@mui/material/Typography";
+import Button from "@mui/material/Button";
+import Stack from "@mui/material/Stack";
+import { useTheme } from '@mui/material/styles';
+import useMediaQuery from "@mui/material/useMediaQuery";
+
+
 import { section1Content } from "../utils/content";
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import Title from "../components/Title";

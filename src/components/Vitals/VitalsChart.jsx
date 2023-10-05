@@ -1,7 +1,12 @@
-import { Box, Button, ButtonGroup } from '@mui/material';
+// import { Box, Button, ButtonGroup } from '@mui/material';
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import ButtonGroup from "@mui/material/ButtonGroup";
 import React, { useState } from 'react'
 import VitalLineChart from './VitalLineChart';
 import VitalComposedChart from './VitalComposedChart';
+import VitalBarChart from './VitalBarChart';
+
 export default function VitalsChart({ data }) {
     const [charType, setCharType] = useState('Composed')
 
@@ -60,16 +65,16 @@ export default function VitalsChart({ data }) {
             bgcolor={'white'}
             py={10}
             justifyContent='center'
-            borderRadius='100px'
+            borderRadius='20px'
             boxShadow='0px 2px 1px -1px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 1px 3px 0px rgba(0,0,0,0.12)'
         >
             {charType === 'Composed' && <VitalComposedChart data={obj} />}
             {charType === 'Line' && <VitalLineChart data={obj} />}
-            {/* {charType === 'Bar' && <VitalComposedChart data={obj} />} */}
+            {charType === 'Bar' && <VitalBarChart data={obj} />}
             {/* <VitalLineChart data={obj} /> */}
 
             <Box display='flex' justifyContent='center'>
-                <ButtonGroup variant='outlined' size='large'  >
+                <ButtonGroup variant='outlined' size='large' color='medical'  >
                     <Button onClick={() => setCharType('Bar')} sx={{ width: '33%', paddingX: 8 }}>Bar</Button>
                     <Button onClick={() => setCharType('Line')} sx={{ width: '33%', paddingX: 8 }}>Line</Button>
                     <Button onClick={() => setCharType('Composed')} sx={{ width: '33%', paddingX: 8 }}>Composed</Button>

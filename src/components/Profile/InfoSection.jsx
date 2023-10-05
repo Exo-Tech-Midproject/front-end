@@ -1,4 +1,8 @@
-import { Box, Button, Divider, Typography } from '@mui/material'
+// import { Box, Button, Divider, Typography } from '@mui/material'
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import Button from "@mui/material/Button";
+import Divider from "@mui/material/Divider";
 import React from 'react'
 import PhoneOutlinedIcon from '@mui/icons-material/PhoneOutlined';
 import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';

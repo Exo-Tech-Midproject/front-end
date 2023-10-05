@@ -41,16 +41,16 @@ import HeroImg from "../assets/images/Aboutus/aboutUsHero.jpg"
 import PorImg from "../assets/images/Aboutus/pro-image.jpg"
 
 export const Aboutus1 = {
-	HeroImg
-  };
+  HeroImg
+};
 
-  export const Aboutus2 = {
-	title: "OUR STORY",
-	subtitle: "Welcome to our virtual medical website! We are a passionate team of four individuals from diverse backgrounds in Jordan who came together through the LTUC Fullstack Developer Program. Our team members, Tasneem, Hasan, Anas, and Abdulla, each bring their unique skills and expertise to the table to make this project a reality. ",
-	};
-	export const Aboutus3 = {
-		PorImg
-	};
+export const Aboutus2 = {
+  title: "OUR STORY",
+  subtitle: "Welcome to our virtual medical website! We are a passionate team of four individuals from diverse backgrounds in Jordan who came together through the LTUC Fullstack Developer Program. Our team members, Tasneem, Hasan, Anas, and Abdulla, each bring their unique skills and expertise to the table to make this project a reality. ",
+};
+export const Aboutus3 = {
+  PorImg
+};
 
 export const section1Content = {
   MainVed,
@@ -60,9 +60,9 @@ export const section1Content = {
 
 export const section2Content = {
   items: [
-    {  title: "Peace of Mind" , subtitle: "the quick fox jumps over the lazy dog"},
-    {  title: "Set For Life" , subtitle: "the quick fox jumps over the lazy dog"},
-    { title: "100% Satisfaction" , subtitle: "the quick fox jumps over the lazy dog"},
+    { title: "Peace of Mind", subtitle: "the quick fox jumps over the lazy dog" },
+    { title: "Set For Life", subtitle: "the quick fox jumps over the lazy dog" },
+    { title: "100% Satisfaction", subtitle: "the quick fox jumps over the lazy dog" },
   ],
 };
 
@@ -74,8 +74,8 @@ export const section3Content = {
 
 export const section4Content = {
   title: "Our Services",
-  subtitle1:"How we can help",
-  subtitle2:"Online care is growing and so is our list of services and conditions.",
+  subtitle1: "How we can help",
+  subtitle2: "Online care is growing and so is our list of services and conditions.",
   ITEMS: [
     { logo: EthImg, name: "Sinus, Cough & Allerg" },
     { logo: BscImg, name: "Eye & Ear" },
@@ -120,7 +120,8 @@ export const section5Content = {
         subtitle: " Stay up-to-date with the latest news, medical advancements, and health tips through our blog and news section. Knowledge is power when it comes to your health.",
       },
     ],
-  },};
+  },
+};
 
 export const section6Content = {
   sec6img,
@@ -131,29 +132,29 @@ export const section6Content = {
     image: sec6img,
   },
   bottom: {
-    Image:sec6imgBottom,
+    Image: sec6imgBottom,
     title: "Real people",
     subtitle: "Always a human connection",
-    body:" Board-certified nurse practitioners are at the heart of every visit. They create a custom treatment plan you can trust. And, they are available to answer any questions about your plan for free."
+    body: " Board-certified nurse practitioners are at the heart of every visit. They create a custom treatment plan you can trust. And, they are available to answer any questions about your plan for free."
   },
 };
 
 export const logincontent = {
-    title: "Login",
-    Image:doctorLogin
+  title: "Login",
+  Image: doctorLogin
 };
 
 export const signupcontent = {
   title: "Create Account",
-  Image:doctorLogin
+  Image: doctorLogin
 };
 
 export const Contactcontent = {
-  top:{
+  top: {
     title: "Contact us",
-    body:"We value your feedback and are here to assist you. Please don't hesitate to reach out to us with any questions, comments, or concerns. You can get in touch with us through the following methods:"
+    body: "We value your feedback and are here to assist you. Please don't hesitate to reach out to us with any questions, comments, or concerns. You can get in touch with us through the following methods:"
   },
-  Image:contactbg  
+  Image: contactbg
 };
 
 export const footerContent = {
@@ -169,7 +170,7 @@ export const footerContent = {
     title: "Governance",
     links: [
       { title: "HEALTHAK" },
-      { title: "HEALTHAK" },
+      { title: "HEALTHAK2" },
       { title: "Forum" },
     ],
   },

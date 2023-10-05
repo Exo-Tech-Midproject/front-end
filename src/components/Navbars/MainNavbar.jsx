@@ -1,11 +1,18 @@
-import {
-  AppBar,
-  Container,
-  Stack,
-  Typography,
-  useMediaQuery,
-  useTheme
-} from "@mui/material";
+// import {
+//   AppBar,
+//   Container,
+//   Stack,
+//   Typography,
+//   useMediaQuery,
+//   useTheme
+// } from "@mui/material";
+
+import AppBar from "@mui/material/AppBar";
+import Container from "@mui/material/Container";
+import Stack from "@mui/material/Stack";
+import Typography from "@mui/material/Typography";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import { useTheme } from '@mui/material/styles';
 // import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import { NAVBAR_HEIGHT } from "../../constants";
 import useScrollPosition from "../../hooks/useScrollPosition";

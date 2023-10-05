@@ -1,12 +1,19 @@
-import {
-  Box,
-  Container,
-  Divider,
-  Grid,
-  IconButton,
-  Typography,
-  Link
-} from "@mui/material";
+// import {
+//   Box,
+//   Container,
+//   Divider,
+//   Grid,
+//   IconButton,
+//   Typography,
+//   Link
+// } from "@mui/material";
+import Box from "@mui/material/Box";
+import Container from "@mui/material/Container";
+import Divider from "@mui/material/Divider";
+import Grid from "@mui/material/Grid";
+import IconButton from "@mui/material/IconButton";
+import Typography from "@mui/material/Typography";
+import Link from "@mui/material/Link";
 import { Stack } from "@mui/system";
 import React from "react";
 import { footerContent } from "../../utils/content";

@@ -1,4 +1,11 @@
-import { Container, Grid, Stack, Tab, Tabs, Typography, Box } from "@mui/material";
+// import { Container, Grid, Stack, Tab, Tabs, Typography, Box } from "@mui/material";
+import Box from "@mui/material/Box";
+import Container from "@mui/material/Container";
+import Typography from "@mui/material/Typography";
+import Stack from "@mui/material/Stack";
+import Grid from "@mui/material/Grid";
+import Tab from "@mui/material/Tab";
+import Tabs from "@mui/material/Tabs";
 import{ useState } from "react";
 
 import Title from "../components/Title";

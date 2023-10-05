@@ -8,22 +8,27 @@ import DateRangeOutlinedIcon from '@mui/icons-material/DateRangeOutlined';
 export let ListData1 = [
     {
         items: 'Profile',
-        icon: <AccountCircleOutlinedIcon sx={{ color: `white` }} />
+        icon: <AccountCircleOutlinedIcon sx={{ color: `white` }} />,
+        path: '/dashboard/profile'
 
     },
     {
         items: 'Groups',
-        icon: <Groups2OutlinedIcon sx={{ color: `white` }} />
+        icon: <Groups2OutlinedIcon sx={{ color: `white` }} />,
+        path: '/dashboard/groups'
+
 
     },
     {
         items: 'Physicians',
-        icon: <LocalHospitalOutlinedIcon sx={{ color: `white` }} />
+        icon: <LocalHospitalOutlinedIcon sx={{ color: `white` }} />,
+        path: '/dashboard/physicians'
 
     },
     {
         items: 'Subscriptions',
-        icon: <QueueOutlinedIcon sx={{ color: `white` }} />
+        icon: <QueueOutlinedIcon sx={{ color: `white` }} />,
+        path: '/dashboard/subscriptions'
 
     }
 
@@ -31,22 +36,26 @@ export let ListData1 = [
 export let ListData2 = [
     {
         items: 'Medical History',
-        icon: <AccountCircleOutlinedIcon sx={{ color: `white` }} />
+        icon: <AccountCircleOutlinedIcon sx={{ color: `white` }} />,
+        path: '/dashboard/medical-history'
 
     },
     {
         items: 'Prescription',
-        icon: <MedicationLiquidOutlinedIcon sx={{ color: `white` }} />
+        icon: <MedicationLiquidOutlinedIcon sx={{ color: `white` }} />,
+        path: '/dashboard/prescription'
 
     },
     {
         items: 'Vitals',
-        icon: <MonitorHeartOutlinedIcon sx={{ color: `white` }} />
+        icon: <MonitorHeartOutlinedIcon sx={{ color: `white` }} />,
+        path: '/dashboard/vitals'
 
     },
     {
         items: 'Appointment',
-        icon: <DateRangeOutlinedIcon sx={{ color: `white` }} />
+        icon: <DateRangeOutlinedIcon sx={{ color: `white` }} />,
+        path: '/dashboard/appointment'
 
     }
 

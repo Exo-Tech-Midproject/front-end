@@ -1,4 +1,9 @@
-import { Box, Container, Grid, Stack, Typography } from "@mui/material";
+// import { Box, Container, Grid, Stack, Typography } from "@mui/material";
+import Box from "@mui/material/Box";
+import Container from "@mui/material/Container";
+import Typography from "@mui/material/Typography";
+import Stack from "@mui/material/Stack";
+import Grid from "@mui/material/Grid";
 import React from "react";
 // import CountUp from "react-countup";
 import Title from "../components/Title";

@@ -1,5 +1,10 @@
-import { Container, Grid, Typography, Box } from "@mui/material";
-import { Stack } from "@mui/system";
+// import { Container, Grid, Typography, Box } from "@mui/material";
+import Stack from "@mui/material/Stack";
+import Typography from "@mui/material/Typography";
+import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
+import Container from "@mui/material/Container";
+// import { Stack } from "@mui/system";
 import React from "react";
 import Title from "../components/Title";
 import { section4Content } from "../utils/content";

@@ -1,10 +1,20 @@
 import { Routes, Route } from "react-router-dom"
-import { Home } from "./pages/Home"
-import Login from "./pages/Login"
-import Dashboard from "./pages/Dashboard"
-import Signup from "./pages/signUp"
-import Contact from "./pages/Contact"
-import AboutUs from "./pages/AboutUs"
+import { lazy } from "react"
+
+// import Home from "./pages/Home"
+
+// import Login from "./pages/Login"
+// import Dashboard from "./pages/Dashboard"
+// import Signup from "./pages/signUp"
+// import Contact from "./pages/Contact"
+// import AboutUs from "./pages/AboutUs"
+
+const Home = lazy(() => import("./pages/Home"))
+const Login = lazy(() => import("./pages/Login"))
+const Dashboard = lazy(() => import("./pages/Dashboard"))
+const Signup = lazy(() => import("./pages/signUp"))
+const Contact = lazy(() => import("./pages/Contact"))
+const AboutUs = lazy(() => import("./pages/AboutUs"))
 
 
 const App = () => {

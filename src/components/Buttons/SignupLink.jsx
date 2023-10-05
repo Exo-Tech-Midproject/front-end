@@ -1,4 +1,5 @@
-import { Link, Button } from "@mui/material";
+import Link from "@mui/material/Link";
+import Button from "@mui/material/Button";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 
 const CustomLink = ({ sx = {}, ...props }) => {

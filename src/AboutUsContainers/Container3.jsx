@@ -1,16 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLinkedin, faGithub, faFacebook } from '@fortawesome/free-brands-svg-icons';
+import Typography from "@mui/material/Typography";
+import Box from "@mui/material/Box";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import CardActions from "@mui/material/CardActions";
+import Button from "@mui/material/Button";
+import CardMedia from "@mui/material/CardMedia";
 
-import {
-	Box,
-	Card,
-	CardContent,
-	Typography,
-	CardActions,
-	Button,
-	CardMedia,
-} from '@mui/material';
 
 import { Aboutus3 } from "../utils/content";
 

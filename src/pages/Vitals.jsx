@@ -8,7 +8,7 @@ import Divider from "@mui/material/Divider";
 import Grid from "@mui/material/Grid";
 
 // import oximeterAnimation from '../assets/lottie/oximeter.json'
-
+import vitalsCoverImg from '../assets/images/vitalsPage/VitalsCover.jpg'
 // import Lottie from "lottie-react";
 // import heartLottieAnimation from "../assets/lottie/Animation - 1696083322490 (1).json";
 import VitalsPagination from '../components/Vitals/VitalsPagination';
@@ -27,32 +27,32 @@ export default function Vitals() {
             </Box >
 
 
-            {/* <Box
-                width='100%'
+            <VitalsCreateSection />
+
+            <Divider sx={{ marginBottom: '50px' }} />
+            <Box
+                width={{ xs: '100%', sm: '80%', md: '75%' }}
                 // bgcolor={'green'}
-                px={15}
-                py={18}
+
+                py={8}
                 borderRadius={2}
                 margin='0 auto '
-                marginBottom='30px'
+                marginBottom='10px'
                 sx={{
-                    background: '#075239F1',
-                    backgroundImage: 'url("https://domf5oio6qrcr.cloudfront.net/medialibrary/8627/medicine-cardio-vital-signs.jpg")',
+                    background: '#112731FA',
+                    backgroundImage: `url(${vitalsCoverImg})`,
                     backgroundSize: '100% auto',
                     backgroundRepeat: 'no-repeat',
-                    // objectFit: 'cover',
-                    backgroundPosition: '20% 5%',
+                    objectFit: 'cover',
+                    backgroundPosition: '10%',
                     backgroundBlendMode: 'overlay'
                 }}>
+                <Typography letterSpacing={2} color='white' variant='h3' textAlign='center'>RECORDS</Typography>
 
-
-            </Box> */}
-            <VitalsCreateSection/>
-
-            <Divider sx={{ marginBottom: '20px' }} />
+            </Box>
             <Box px={3} mb='30px'>
                 {/* <Divider /> */}
-                <Grid container padding={2} marginTop={4} rowGap={3}>
+                <Grid container padding={2} marginTop={2} rowGap={3}>
                     <Grid item xs={12} sm={6} md={4} lg={3} px={1} py={1}>
                         <VitalCard />
                     </Grid>

@@ -62,6 +62,7 @@ export default function VitalsChart({ data }) {
             width='100%'
             height='600px'
             marginTop='30px'
+            marginBottom='30px'
             bgcolor={'white'}
             py={10}
             justifyContent='center'

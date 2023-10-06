@@ -28,7 +28,7 @@ export default function VitalsCreateSection() {
 
             </Box >
             <Box display='flex' justifyContent={'center'} position='relative'>
-                <Button variant='contained' color='medical' sx={{ alignSelf: 'center', position: 'relative', bottom: { xs: '15px', sm: '25px', md: '35px' }, width: { xs: '50%', md: '50%' }, height: { xs: '30px', sm: '50px', md: '70px' } }}>Add New Record</Button>
+                <Button variant='contained' color='medical' sx={{ alignSelf: 'center', position: 'relative', bottom: { xs: '15px', sm: '25px', md: '35px' }, width: { xs: '50%', md: '50%' }, height: { xs: '30px', sm: '50px', md: '70px' }, fontSize: { xs: '0.7rem', sm: '1rem', md: '2rem' } }}>Add New Record</Button>
                 {/* <Box
                     borderRadius={'22px'}
                     position='relative'

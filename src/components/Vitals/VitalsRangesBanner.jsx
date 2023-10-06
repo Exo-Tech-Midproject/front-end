@@ -1,13 +1,14 @@
 import { Box, Typography } from '@mui/material'
 import Lottie from 'lottie-react'
 import React from 'react'
-import heartAnimation from '../../assets/lottie/Animation - 1696083322490 (1).json'
+import heartAnimation from '../../assets/lottie/heartRate.json'
 import tempAnimation from '../../assets/lottie/thermoMeter.json'
 import bpAnimation from '../../assets/lottie/bloodPreassure.json'
 import oxygenctorAnimation from '../../assets/lottie/oximeter.json'
 import glucoseAnimation from '../../assets/lottie/bloodSugar.json'
 export default function VitalsRangesBanner() {
     return (
+        <>
         <Box display='flex' justifyContent='center' width={'100%'}>
             <Box width={'16%'}>
                 <Lottie animationData={heartAnimation} style={{ width: '100%', maxWidth: '140px' }} />
@@ -30,5 +31,6 @@ export default function VitalsRangesBanner() {
                 <Typography fontSize={{ xs: '0.331rem', sm: '0.6rem', md: '0.9rem' }} fontWeight={700}>[ 70-100 ]</Typography>
             </Box>
         </Box>
+        </>
     )
 }

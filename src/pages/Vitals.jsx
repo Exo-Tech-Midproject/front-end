@@ -13,6 +13,7 @@ import Grid from "@mui/material/Grid";
 // import heartLottieAnimation from "../assets/lottie/Animation - 1696083322490 (1).json";
 import VitalsPagination from '../components/Vitals/VitalsPagination';
 import VitalsChart from '../components/Vitals/VitalsChart';
+import VitalsCreateSection from '../components/Vitals/VitalsCreateSection';
 
 
 export default function Vitals() {
@@ -26,7 +27,7 @@ export default function Vitals() {
             </Box >
 
 
-            <Box
+            {/* <Box
                 width='100%'
                 // bgcolor={'green'}
                 px={15}
@@ -45,7 +46,8 @@ export default function Vitals() {
                 }}>
 
 
-            </Box>
+            </Box> */}
+            <VitalsCreateSection/>
 
             <Divider sx={{ marginBottom: '20px' }} />
             <Box px={3} mb='30px'>
@@ -63,7 +65,7 @@ export default function Vitals() {
                     <Grid item xs={12} sm={6} md={4} lg={3} px={1} py={1}>
                         <VitalCard />
                     </Grid>
-                    <Grid item xs={12} sm={6} md={4} lg={3} px={1} py={1}>
+                    {/* <Grid item xs={12} sm={6} md={4} lg={3} px={1} py={1}>
                         <VitalCard />
                     </Grid>
                     <Grid item xs={12} sm={6} md={4} lg={3} px={1} py={1}>
@@ -74,7 +76,7 @@ export default function Vitals() {
                     </Grid>
                     <Grid item xs={12} sm={6} md={4} lg={3} px={1} py={1}>
                         <VitalCard />
-                    </Grid>
+                    </Grid> */}
 
 
                 </Grid >

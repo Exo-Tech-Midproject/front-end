@@ -19,14 +19,20 @@ export default function IntroSection() {
                     /> */}
 
                 </Box>
-                <Box width={{ xs: '50%', sm: '55%', md: '60%' }} textAlign='center' display='flex' flexDirection={'column'} gap={{ xs: 3, sm: 4, md: 5 }} justifyContent={'center'} >
+                <Box width={{ xs: '50%', sm: '55%', md: '60%' }} textAlign='center' display='flex' flexDirection={'column'} gap={{ xs: 1, sm: 2, md: 3 }} justifyContent={'center'} >
                     <Typography fontSize={{ xs: '1.25rem', sm: '2.125rem', md: '3.75rem' }} m='0 auto'  >
                         It Starts With One Pill
                     </Typography>
-                    <Typography fontSize={{ xs: '.75rem', sm: '1rem', md: '2.125rem' }} m='0 auto'  >
+                    <Typography fontSize={{ xs: '.75rem', sm: '1rem', md: '2.125rem' }} m='0 auto' sx={{ textDecoration: 'underline', textDecorationColor: '#1F485BBA' }}  >
                         Important Tips
                     </Typography>
-                    
+                        <Typography letterSpacing={0.2} color={`#1F485BBA`} variant="subtitle2" fontSize={{ xs: '.45rem', sm: '0.75rem', md: '1.125rem' }} m='0 auto'  >
+                            • Follow the instructions of your doctor carefully.<br />
+                            • Feel free to ask how to use your medications.<br />
+                            • Even if you felt well, that doesn't mean you can stop.
+
+                        </Typography>
+
                     {/* <VitalsRangesBanner /> */}
                 </Box>
 
@@ -41,7 +47,20 @@ export default function IntroSection() {
                 </Box>
             </Box >
             <Box display='flex' justifyContent={'center'} position='relative'>
-                <Button variant='contained' color='medical' sx={{ alignSelf: 'center', position: 'relative', bottom: { xs: '15px', sm: '25px', md: '35px' }, width: { xs: '50%', md: '50%' }, height: { xs: '30px', sm: '50px', md: '70px' }, fontSize: { xs: '0.7rem', sm: '1rem', md: '2rem' } }}>Add New Record</Button>
+                <Button
+                    variant='contained'
+                    color='medical'
+                    sx={{
+                        alignSelf: 'center',
+                        position: 'relative',
+                        bottom: { xs: '15px', sm: '25px', md: '35px' },
+                        width: { xs: '50%', md: '50%' },
+                        height: { xs: '30px', sm: '50px', md: '70px' },
+                        fontSize: { xs: '0.7rem', sm: '1rem', md: '2rem' }
+                    }}
+                >
+                    Add Prescription
+                </Button>
                 {/* <Box
                     borderRadius={'22px'}
                     position='relative'

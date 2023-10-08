@@ -2,9 +2,13 @@ import * as React from 'react';
 import { useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import DBMain from './DBMainSection';
-import DBDrawer from './DBDrawer';
-import DBAppBar from './DBAppBar';
-import Footer from '../Footers/MainFooter';
+// import DBDrawer from './DBDrawer';
+// import DBAppBar from './DBAppBar';
+// import Footer from '../Footers/MainFooter';
+
+const DBDrawer = React.lazy(() => import('./DBDrawer'));
+const DBAppBar = React.lazy(() => import('./DBAppBar'));
+const Footer = React.lazy(() => import('../Footers/MainFooter'));
 
 export default function DashBoard() {
     const theme = useTheme();

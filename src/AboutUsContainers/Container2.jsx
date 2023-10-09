@@ -11,7 +11,7 @@ const { title, subtitle } = Aboutus2;
 const Container2 = () => {
 	return (
 		<Box display={"flex"} flexDirection={"column"} alignItems={"center"} justifyContent={"center"} sx={{
-			mt: { xs: 0, md: 10 },
+
 			backgroundColor: "white",
 			padding: "25px",
 

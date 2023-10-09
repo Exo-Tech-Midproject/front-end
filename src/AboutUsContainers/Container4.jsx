@@ -10,7 +10,7 @@ const Container4 = () => {
 
 	return (
 		<Box m={"0 auto"} display={"flex"} flexDirection={"column"} alignItems={"center"} justifyContent={"center"} sx={{
-			backgroundColor: "white",
+			backgroundColor: "#cdcdcd",
 			padding: "25px",
 			width: "100%",
 			height: "400px",

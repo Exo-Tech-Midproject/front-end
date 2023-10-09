@@ -4,6 +4,9 @@ import { styled } from '@mui/material/styles';
 // import Profile from '../Profile/Profile';
 import { Route, Routes } from 'react-router-dom';
 
+import Appointment from '../../pages/appointment';
+
+
 import PatientHistory from '../MedicalHistory/MedicalHistory'; 
 
 
@@ -12,6 +15,7 @@ import Loading from '../Loading/Loading';
 const Profile = React.lazy(() => import('../Profile/Profile'));
 const Vitals = React.lazy(() => import('../../pages/Vitals'));
 const Prescriptions = React.lazy(() => import('../../pages/Prescriptions'));
+
 
 
 const drawerWidth = 240;
@@ -42,6 +46,7 @@ export default function DBMain({ open }) {
             <Main open={open}   >
                 <Routes>
 
+
                     
                     
 
@@ -50,6 +55,7 @@ export default function DBMain({ open }) {
                     <Route path='/vitals' element={<React.Suspense fallback={<Loading />}><Vitals /></React.Suspense>} />
                     <Route path='/prescriptions' element={<React.Suspense fallback={<Loading />}><Prescriptions /></React.Suspense>} />
                       <Route path='/medical-history' element={<PatientHistory />} />
+                        <Route path='/appointment' element={<Appointment />} />
                 </Routes>
             </Main>
         </>

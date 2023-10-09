@@ -44,7 +44,7 @@ const SocialMediaButtons = () => {
 	);
 };
 
-export default function Container4() {
+export default function Container3() {
 
 	// --- expand on scroll ---
 
@@ -52,7 +52,7 @@ export default function Container4() {
 
 	useEffect(() => {
 		const handleScroll = () => {
-			if (window.scrollY > 700) {
+			if (window.scrollY > 900) {
 				setExpanded(true);
 			} else {
 				setExpanded(false);
@@ -115,8 +115,9 @@ export default function Container4() {
 						width: 280,
 						borderRadius: '20px',
 						maxWidth: '100%',
-						transition: 'max-height 2s ease',
+						transition: 'max-height 1.1s ease',
 						maxHeight: expanded ? '600px' : '280px',
+						// minHeight: expanded ? '600px' : '280px',
 					}}
 				>
 					<CardMedia component="img" height="220" image={card.image} alt={card.name} />

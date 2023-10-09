@@ -4,6 +4,7 @@ import { styled } from '@mui/material/styles';
 import Profile from '../Profile/Profile';
 import { Route, Routes } from 'react-router-dom';
 import Vitals from '../../pages/Vitals';
+import Appointment from '../../pages/appointment';
 
 
 const drawerWidth = 240;
@@ -36,6 +37,7 @@ export default function DBMain({ open }) {
                     <Route path='/' element={<Profile />} />
                     <Route path='/profile' element={<Profile />} />
                     <Route path='/vitals' element={<Vitals />} />
+					<Route path='/appointment' element={<Appointment />} />
                 </Routes>
             </Main>
         </>

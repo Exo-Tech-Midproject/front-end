@@ -1,10 +1,17 @@
-import * as React from 'react';
+import React from 'react';
 import { styled } from '@mui/material/styles';
 
-import Profile from '../Profile/Profile';
+// import Profile from '../Profile/Profile';
 import { Route, Routes } from 'react-router-dom';
-import Vitals from '../../pages/Vitals';
+
 import PatientHistory from '../MedicalHistory/MedicalHistory'; 
+
+
+// import Vitals from '../../pages/Vitals';
+import Loading from '../Loading/Loading';
+const Profile = React.lazy(() => import('../Profile/Profile'));
+const Vitals = React.lazy(() => import('../../pages/Vitals'));
+const Prescriptions = React.lazy(() => import('../../pages/Prescriptions'));
 
 
 const drawerWidth = 240;
@@ -34,11 +41,15 @@ export default function DBMain({ open }) {
         <>
             <Main open={open}   >
                 <Routes>
-                    <Route path='/' element={<Profile />} />
-                    <Route path='/profile' element={<Profile />} />
-                    <Route path='/vitals' element={<Vitals />} />
-                    <Route path='/medical-history' element={<PatientHistory />} />
+
                     
+                    
+
+                    <Route path='/' element={<React.Suspense fallback={<Loading />}><Profile /></React.Suspense>} />
+                    <Route path='/profile' element={<React.Suspense fallback={<Loading />}><Profile /></React.Suspense>} />
+                    <Route path='/vitals' element={<React.Suspense fallback={<Loading />}><Vitals /></React.Suspense>} />
+                    <Route path='/prescriptions' element={<React.Suspense fallback={<Loading />}><Prescriptions /></React.Suspense>} />
+                      <Route path='/medical-history' element={<PatientHistory />} />
                 </Routes>
             </Main>
         </>

@@ -20,7 +20,7 @@ export default function SideBarList() {
                 {
                     ListData1.map(element => (
 
-                        <ListItem disablePadding>
+                        <ListItem key={element.items} disablePadding>
                             <ListItemButton component={Link} to={`${element.path}`} sx={{ ":hover": { bgcolor: '#4B6477B0' }, color: "white" }} >
                                 <ListItemIcon>
                                     {element.icon}

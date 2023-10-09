@@ -5,7 +5,7 @@ import Typography from "@mui/material/Typography";
 // import { DotLottiePlayer, Controls } from '@dotlottie/react-player';
 // import { BsHeartPulseFill } from 'react-icons/bs';
 import Lottie from "lottie-react";
-import heartLottieAnimation from "../../assets/lottie/Animation - 1696083322490 (1).json";
+import heartLottieAnimation from "../../assets/lottie/heartRate.json";
 // import dotHeartAnimation from '../../assets/lottie/dotlottie/Animation - 1696083322490.lottie'
 
 export default function HeartRateChip({ parameter, value, toAnimate }) {

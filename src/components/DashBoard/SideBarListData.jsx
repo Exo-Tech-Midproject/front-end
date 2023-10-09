@@ -43,7 +43,7 @@ export let ListData2 = [
     {
         items: 'Prescription',
         icon: <MedicationLiquidOutlinedIcon sx={{ color: `white` }} />,
-        path: '/dashboard/prescription'
+        path: '/dashboard/prescriptions'
 
     },
     {

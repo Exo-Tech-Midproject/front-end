@@ -1,8 +1,9 @@
 import { Box, Typography } from '@mui/material'
-import React from 'react'
+import React, { useState } from 'react'
 import ChatContactShip from './ChatContactShip'
 
 export default function ChatContactList() {
+  const [activeChat, setActiveChat]= useState('')
   return (
     <Box display={{ xs: 'none', sm: 'none', md: 'block' }} width='300px' bgcolor='white' py={3} px={1.5} sx={{ borderTopLeftRadius: '8px', borderBottomLeftRadius: '8px' }}  >
       <Box textAlign='center' marginBottom={4} borderBottom='1.5px solid #1F485B' pb={2} maxWidth='300px' display='flex' gap={1} justifyContent='center' alignItems='center' >
@@ -29,17 +30,13 @@ export default function ChatContactList() {
           },
         }}
       >
-        <ChatContactShip />
-        <ChatContactShip />
-        <ChatContactShip />
-        <ChatContactShip />
-        <ChatContactShip />
-        <ChatContactShip />
-        <ChatContactShip />
-        <ChatContactShip />
-        <ChatContactShip />
-        <ChatContactShip />
-        <ChatContactShip />
+        {}
+        <ChatContactShip name={'Hasan tommalieh'} setActiveChat={setActiveChat} activeChat={activeChat}  />
+        <ChatContactShip name={'Anas Nemrawi'} setActiveChat={setActiveChat} activeChat={activeChat}  />
+        <ChatContactShip name={'Abdullah Aljoulani'} setActiveChat={setActiveChat} activeChat={activeChat}  />
+        <ChatContactShip name={'Tasneem Hassassneh'} setActiveChat={setActiveChat} activeChat={activeChat}  />
+
+        
       </Box>
     </Box>
   )

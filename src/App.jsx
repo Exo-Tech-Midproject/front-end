@@ -15,6 +15,7 @@ const Dashboard = lazy(() => import("./pages/Dashboard"))
 const Signup = lazy(() => import("./pages/signUp"))
 const Contact = lazy(() => import("./pages/Contact"))
 const AboutUs = lazy(() => import("./pages/AboutUs"))
+const Group = lazy(() => import("./pages/Group"))
 
 
 const App = () => {
@@ -28,6 +29,7 @@ const App = () => {
         <Route path='/Contact' element={<Contact />} />
         <Route path='/About' element={<AboutUs />} />
         <Route path='/dashboard/*' element={<Dashboard />} />
+        <Route path='/Group' element={<Group />} />
       </Routes>
     </div>
   )

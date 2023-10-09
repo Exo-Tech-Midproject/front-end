@@ -5,6 +5,8 @@ import QueueOutlinedIcon from '@mui/icons-material/QueueOutlined';
 import MedicationLiquidOutlinedIcon from '@mui/icons-material/MedicationLiquidOutlined';
 import MonitorHeartOutlinedIcon from '@mui/icons-material/MonitorHeartOutlined';
 import DateRangeOutlinedIcon from '@mui/icons-material/DateRangeOutlined';
+import Chat from '@mui/icons-material/Chat';
+
 export let ListData1 = [
     {
         items: 'Profile',
@@ -56,6 +58,12 @@ export let ListData2 = [
         items: 'Appointment',
         icon: <DateRangeOutlinedIcon sx={{ color: `white` }} />,
         path: '/dashboard/appointment'
+
+    },
+    {
+        items: 'Chat',
+        icon: <Chat sx={{ color: `white` }} />,
+        path: '/dashboard/chat'
 
     }
 

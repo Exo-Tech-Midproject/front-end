@@ -8,6 +8,7 @@ import Appointment from '../../pages/appointment';
 
 
 import PatientHistory from '../MedicalHistory/MedicalHistory'; 
+import Groups from '../../pages/Groups';
 
 
 // import Vitals from '../../pages/Vitals';
@@ -47,15 +48,14 @@ export default function DBMain({ open }) {
                 <Routes>
 
 
-                    
-                    
-
                     <Route path='/' element={<React.Suspense fallback={<Loading />}><Profile /></React.Suspense>} />
                     <Route path='/profile' element={<React.Suspense fallback={<Loading />}><Profile /></React.Suspense>} />
                     <Route path='/vitals' element={<React.Suspense fallback={<Loading />}><Vitals /></React.Suspense>} />
                     <Route path='/prescriptions' element={<React.Suspense fallback={<Loading />}><Prescriptions /></React.Suspense>} />
                       <Route path='/medical-history' element={<PatientHistory />} />
                         <Route path='/appointment' element={<Appointment />} />
+                           <Route path='/groups' element={<Groups />} />
+
                 </Routes>
             </Main>
         </>

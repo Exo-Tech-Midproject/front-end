@@ -62,6 +62,7 @@ export default function VitalsChart({ data }) {
             width='100%'
             height='600px'
             marginTop='30px'
+            marginBottom='30px'
             bgcolor={'white'}
             py={10}
             justifyContent='center'
@@ -73,11 +74,11 @@ export default function VitalsChart({ data }) {
             {charType === 'Bar' && <VitalBarChart data={obj} />}
             {/* <VitalLineChart data={obj} /> */}
 
-            <Box display='flex' justifyContent='center'>
-                <ButtonGroup variant='outlined' size='large' color='medical'  >
-                    <Button onClick={() => setCharType('Bar')} sx={{ width: '33%', paddingX: 8 }}>Bar</Button>
-                    <Button onClick={() => setCharType('Line')} sx={{ width: '33%', paddingX: 8 }}>Line</Button>
-                    <Button onClick={() => setCharType('Composed')} sx={{ width: '33%', paddingX: 8 }}>Composed</Button>
+            <Box display='flex' justifyContent='center' width='100%'>
+                <ButtonGroup variant='outlined' size='large' color='medical' sx={{ width: '80%' }}  >
+                    <Button onClick={() => setCharType('Bar')} sx={{ width: '33%', }}>Bar</Button>
+                    <Button onClick={() => setCharType('Line')} sx={{ width: '33%', }}>Line</Button>
+                    <Button onClick={() => setCharType('Composed')} sx={{ width: '33%', }}>Composed</Button>
                 </ButtonGroup>
             </Box>
         </Box>

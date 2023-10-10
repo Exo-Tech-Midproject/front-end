@@ -14,7 +14,7 @@ The application's focus is on providing seamless communication between patients 
 
 ## Wireframe
 
-[Wireframe](https://miro.com/app/board/uXjVMx2wquE=/)
+[Wireframe](https://www.figma.com/file/TG4YCKliBiHpiJ9ZvFUK7Q/HEALTHK?type=design&node-id=0-1&mode=design&t=gELnhniljkwklhR7-0)
 
 ## Features
 

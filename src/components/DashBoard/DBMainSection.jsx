@@ -4,11 +4,6 @@ import { styled } from '@mui/material/styles';
 // import Profile from '../Profile/Profile';
 import { Route, Routes } from 'react-router-dom';
 
-import Appointment from '../../pages/appointment';
-
-
-import PatientHistory from '../MedicalHistory/MedicalHistory'; 
-import Groups from '../../pages/Groups';
 
 
 // import Vitals from '../../pages/Vitals';
@@ -18,6 +13,10 @@ const Profile = React.lazy(() => import('../Profile/Profile'));
 const Vitals = React.lazy(() => import('../../pages/Vitals'));
 const Prescriptions = React.lazy(() => import('../../pages/Prescriptions'));
 const Chat = React.lazy(() => import('../../pages/Chat'));
+const Group = React.lazy(() => import('../../pages/Group'));
+const Groups = React.lazy(() => import('../../pages/Groups'));
+const Appointment = React.lazy(() => import('../../pages/appointment'));
+const PatientHistory = React.lazy(() => import('../MedicalHistory/MedicalHistory'));
 
 
 
@@ -56,10 +55,12 @@ export default function DBMain({ open }) {
                     <Route path='/vitals' element={<React.Suspense fallback={<Loading />}><Vitals /></React.Suspense>} />
                     <Route path='/prescriptions' element={<React.Suspense fallback={<Loading />}><Prescriptions /></React.Suspense>} />
 
-                      <Route path='/medical-history' element={<PatientHistory />} />
-                        <Route path='/appointment' element={<Appointment />} />
-                           <Route path='/groups' element={<Groups />} />
+                      <Route path='/medical-history' element={<React.Suspense fallback={<Loading />}><PatientHistory /></React.Suspense>} />
+                      <Route path='/appointment' element={<React.Suspense fallback={<Loading />}><Appointment /></React.Suspense>} />
+                           <Route path='/groups' element={<React.Suspense fallback={<Loading />}><Groups /></React.Suspense>} />
                              <Route path='/chat' element={<React.Suspense fallback={<Loading />}><Chat /></React.Suspense>} />
+                             <Route path='/group' element={<React.Suspense fallback={<Loading />}><Group /></React.Suspense>} />
+
 
 
                 </Routes>

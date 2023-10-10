@@ -17,14 +17,13 @@ export default function CardGroups(props) {
     setImageSrc("URL_OF_YOUR_FALLBACK_IMAGE_HERE");
   };
   return (
-    <Link to="/Group" style={{ textDecoration: 'none' }}>
+    <Link to="/dashboard/group" style={{ textDecoration: 'none' }}>
       <Card sx={{
         bgcolor: "#062942",
-        width: '100%',
-        maxWidth: 345,
-        margin: '1%',
+        width: '350px',
+        margin: '15px',
         display: 'flex',
-        minHeight:"55vh",
+        height:"60vh",
         alignItems: 'center',
         borderRadius: '25px',
         '&:hover': {

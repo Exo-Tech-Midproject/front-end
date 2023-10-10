@@ -2,7 +2,7 @@ import React from 'react'
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import Slider from "react-slick";
-import recipePic from '../../assets/images/prescriptions/Recipe.svg'
+// import recipePic from '../../assets/images/prescriptions/Recipe.svg'
 import recipePicjpg from '../../assets/images/prescriptions/7944895.jpg'
 import { Box, Typography } from '@mui/material';
 import DrugTable from './DrugsTable';

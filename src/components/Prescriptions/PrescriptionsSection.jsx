@@ -1,9 +1,9 @@
 import React from 'react'
 import Box from "@mui/material/Box";
-import Container from "@mui/material/Container";
+// import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
-import Divider from "@mui/material/Divider";
-import Grid from "@mui/material/Grid";
+// import Divider from "@mui/material/Divider";
+// import Grid from "@mui/material/Grid";
 
 import prescriptionCoverImg from '../../assets/images/prescriptions/pillscover.jpg'
 import PrescriptionCard from './PrescriptionCard';

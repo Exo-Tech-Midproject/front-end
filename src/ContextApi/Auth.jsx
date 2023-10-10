@@ -1,11 +1,11 @@
-import { TrainRounded, Try } from "@mui/icons-material";
+
 import axios from "axios";
 import jwtDecode from "jwt-decode";
 import { createContext, useEffect, useState } from "react";
 import cookie from 'react-cookies'
 
 export const LoginContext = createContext()
-let DBRUL = process.env.REACT_APP_DBURL
+let DBRUL = process.env.REACT_APP_BASE_URL
 export default function LoginProvider({ children }) {
     const [loggedIn, setLoggedIn] = useState(false);
     const [user, setUser] = useState({});
@@ -21,7 +21,7 @@ export default function LoginProvider({ children }) {
     const loginPatient = async (username, password) => {
         try {
 
-            let response = await axios.post(`https://healthak.onrender.com/login/patient`, {},
+            let response = await axios.post(`${DBRUL}/login/patient`, {},
                 {
                     headers: { Authorization: `Basic ${btoa(`${username}:${password}`)}` }
                 })

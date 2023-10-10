@@ -1,7 +1,11 @@
-import { Avatar, Badge, Button, Typography } from '@mui/material'
+// import { Avatar, Badge, Button, Typography } from '@mui/material'
+import Typography from "@mui/material/Typography";
+import Badge from "@mui/material/Badge";
+import Button from "@mui/material/Button";
+import Avatar from "@mui/material/Avatar";
 import Box from '@mui/material/Box'
 import React from 'react'
-import profileImg from '../../assets/images/prescriptions/7944895.jpg'
+// import profileImg from '../../assets/images/prescriptions/7944895.jpg'
 export default function ChatContactShip({ setActiveChat, activeChat, name }) {
 
     let number = 9

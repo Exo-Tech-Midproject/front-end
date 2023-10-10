@@ -6,12 +6,20 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import Typography from "@mui/material/Typography";
-import React from 'react'
+import React, { useContext } from 'react'
 import { ListData1, ListData2 } from './SideBarListData'
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { LoginContext } from "../../ContextApi/Auth";
+
 
 export default function SideBarList() {
+    const { logout } = useContext(LoginContext)
+    const redirection = useNavigate()
+    const handleLogout =  () => {
+         logout()
+         redirection('/')
+    }
     return (
         <>
             <List>
@@ -56,7 +64,7 @@ export default function SideBarList() {
                 {
 
                     <ListItem disablePadding>
-                        <ListItemButton sx={{ ":hover": { bgcolor: '#4B6477B0' }, color: "	#b23b3b" }}>
+                        <ListItemButton sx={{ ":hover": { bgcolor: '#4B6477B0' }, color: "	#b23b3b" }} onClick={handleLogout}>
                             <ListItemIcon>
                                 <LogoutOutlinedIcon sx={{ color: '	#b23b3b' }} />
                             </ListItemIcon>

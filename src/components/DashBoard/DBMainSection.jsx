@@ -3,6 +3,14 @@ import { styled } from '@mui/material/styles';
 
 // import Profile from '../Profile/Profile';
 import { Route, Routes } from 'react-router-dom';
+
+import Appointment from '../../pages/appointment';
+
+
+import PatientHistory from '../MedicalHistory/MedicalHistory'; 
+import Groups from '../../pages/Groups';
+
+
 // import Vitals from '../../pages/Vitals';
 import Loading from '../Loading/Loading';
 // import Chat from '../../pages/Chat';
@@ -10,6 +18,8 @@ const Profile = React.lazy(() => import('../Profile/Profile'));
 const Vitals = React.lazy(() => import('../../pages/Vitals'));
 const Prescriptions = React.lazy(() => import('../../pages/Prescriptions'));
 const Chat = React.lazy(() => import('../../pages/Chat'));
+
+
 
 
 const drawerWidth = 240;
@@ -39,11 +49,19 @@ export default function DBMain({ open }) {
         <>
             <Main open={open}   >
                 <Routes>
+
+
                     <Route path='/' element={<React.Suspense fallback={<Loading />}><Profile /></React.Suspense>} />
                     <Route path='/profile' element={<React.Suspense fallback={<Loading />}><Profile /></React.Suspense>} />
                     <Route path='/vitals' element={<React.Suspense fallback={<Loading />}><Vitals /></React.Suspense>} />
                     <Route path='/prescriptions' element={<React.Suspense fallback={<Loading />}><Prescriptions /></React.Suspense>} />
-                    <Route path='/chat' element={<React.Suspense fallback={<Loading />}><Chat /></React.Suspense>} />
+
+                      <Route path='/medical-history' element={<PatientHistory />} />
+                        <Route path='/appointment' element={<Appointment />} />
+                           <Route path='/groups' element={<Groups />} />
+                             <Route path='/chat' element={<React.Suspense fallback={<Loading />}><Chat /></React.Suspense>} />
+
+
                 </Routes>
             </Main>
         </>

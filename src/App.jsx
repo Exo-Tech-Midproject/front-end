@@ -18,7 +18,11 @@ const Dashboard = lazy(() => import("./pages/Dashboard"))
 const Signup = lazy(() => import("./pages/signUp"))
 const Contact = lazy(() => import("./pages/Contact"))
 const AboutUs = lazy(() => import("./pages/AboutUs"))
+
 const Loading = lazy(() => import("./components/Loading/Loading"))
+
+
+const Group = lazy(() => import("./pages/Group"))
 
 
 // const Chat = lazy(() => import('../src/pages/Chat'));
@@ -28,7 +32,9 @@ const App = () => {
     <div>
       {/* <Profile /></React.Suspense> */}
       <Routes>
-        <Route path='/' element={<Suspense fallback={<Loading />}><Home /></Suspense>} />
+
+
+   <Route path='/' element={<Suspense fallback={<Loading />}><Home /></Suspense>} />
         <Route path='/Login' element={<Suspense fallback={<Loading />}><Login /></Suspense>} />
         <Route path='/testlogin' element={<Suspense fallback={<Loading />}><LoginPatientTestingForm /></Suspense>} />
         <Route path='/Signup' element={<Suspense fallback={<Loading />}><Signup /></Suspense>} />
@@ -36,6 +42,9 @@ const App = () => {
         <Route path='/About' element={<Suspense fallback={<Loading />}><AboutUs /></Suspense>} />
         <Route path='/dashboard/*' element={<AuthPatient><Suspense fallback={<Loading />}><Dashboard /></Suspense></AuthPatient>} />
         {/* <Route path='/dashboard/chat' element={<Suspense fallback={<Loading />}><Chat /></Suspense>} /> */}
+
+        <Route path='/Group' element={<Group />} />
+
       </Routes>
     </div>
   )

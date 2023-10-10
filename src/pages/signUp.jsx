@@ -1,5 +1,5 @@
 import SignupSection from "../containers/SignupSection"
-const Login = () => {
+const Signup = () => {
   return (
     <div>
       <SignupSection  />
@@ -7,4 +7,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Signup;

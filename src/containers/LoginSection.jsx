@@ -1,14 +1,7 @@
 import React, { useState } from "react";
-// import { Container, Grid, Stack, Box, Typography, Button } from "@mui/material";
-import Box from "@mui/material/Box";
-import Container from "@mui/material/Container";
-import Typography from "@mui/material/Typography";
-import Stack from "@mui/material/Stack";
-import Grid from "@mui/material/Grid";
-import Button from "@mui/material/Button";
+import { Container, Grid, Stack, Box, Typography, Button } from "@mui/material";
 import Title from "../components/Title";
 import { logincontent } from "../utils/content";
-// import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import DoctorForm from "../components/LoginForm/DoctorForm";
 import PatientForm from "../components/LoginForm/PatientForm";
 import BackHome from '../components/Buttons/BackHome'
@@ -35,12 +28,11 @@ const CustomButton = ({ children, onClick, active }) => (
 
 const LoginSection = () => {
   const [activeForm, setActiveForm] = useState("doctor");
-
   return (
-    <Container sx={{ mt: { xs: 0, md: 5, lg: 10 }, width: "60%" }}>
+    <Container sx={{ mt: { xs: 0, md: 5, lg: 10 }, }}>
       <Grid
         container
-        flexWrap="wrap-reverse"
+        flexWrap="wrap"
         sx={{
           mt: { xs: 0, md: 5 },
           height: "80vh",
@@ -53,21 +45,18 @@ const LoginSection = () => {
         <Grid item xs={6} md={4}>
           <Box
             sx={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "left",
-              px: 2,
+              
               height: "100%",
               borderRadius: "30px",
             }}
           >
-            <Stack sx={{ maxWidth: 400 }}>
+            <Stack alignItems="center" p={5} spacing={4} >
               <BackHome />
-              <Typography color="white" variant="body1" sx={{ py: 1 }}>
+              <Typography color="white" variant="body1">
                 Login to your account
               </Typography>
               <img alt="doctorLogin" src={Image} style={{ width: "100%" }} />
-              <Typography variant="body2" sx={{ py: 1, color: "#F1EFEF" }}>
+              <Typography variant="body2" sx={{  color: "#F1EFEF" }}>
                 Join us today and take the first step towards a healthier, happier you.
               </Typography>
             </Stack>
@@ -86,29 +75,30 @@ const LoginSection = () => {
               justifyContent: "center",
             }}
           >
-            <Stack spacing={5} alignItems="center" sx={{ maxWidth: 400 }}>
-              <Title color="black" variant={{ xs: "h4", md: "h5", py: 1 }}>
+            <Stack spacing={5} alignItems="center" p={2}>
+              <Title color="black" variant={{ xs: "h4", md: "h5" }}>
                 {title}
               </Title>
-              <Stack direction="row" spacing={5} alignItems="center" sx={{ height: "40px" }}>
+              <Stack direction="row" spacing={5} alignItems="center" >
                 <CustomButton onClick={() => setActiveForm("doctor")} active={activeForm === "doctor"} sx={{ border: "1px solid #B4B4B3", width: "150px" }}>
-                  <Typography sx={{ color: "black", fontSize: "15px", py: 1 }}>Login as a doctor</Typography>
+                  <Typography sx={{ color: "black", fontSize: "15px", }}>Login as a doctor</Typography>
                 </CustomButton>
                 <CustomButton onClick={() => setActiveForm("patient")} active={activeForm === "patient"} sx={{ border: "1px solid #B4B4B3", width: "150px" }}>
-                  <Typography sx={{ color: "black", fontSize: "15px", py: 1 }}>Login as a patient</Typography>
+                  <Typography sx={{ color: "black", fontSize: "15px",}}>Login as a patient</Typography>
                 </CustomButton>
               </Stack>
-              {activeForm === "doctor" ? <DoctorForm /> : <PatientForm />}
+             { activeForm === "doctor" ? <DoctorForm /> : <PatientForm />}
               <Stack direction="column" spacing={2} alignItems="center">
-                        <CustomLink1 href="/ForgotPassword">
-                            Forgot password?
-                        </CustomLink1>
-                        <Stack direction="row" spacing={1}>
-                            <Typography variant="body2" color="#B4B4B3">Don't have an account?</Typography>
-                            <CustomLink1 href="/Signup">Sign Up</CustomLink1>
-                        </Stack>
-
-                    </Stack>
+        <CustomLink1 href="/ForgotPassword">
+          Forgot password?
+        </CustomLink1>
+        <Stack direction="row" spacing={1}>
+          <Typography variant="body2" color="#B4B4B3">
+            Don't have an account?
+          </Typography>
+          <CustomLink1 href="/Signup">Sign Up</CustomLink1>
+        </Stack>
+      </Stack>       
             </Stack>
           </Box>
         </Grid>

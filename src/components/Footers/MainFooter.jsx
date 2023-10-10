@@ -1,25 +1,20 @@
-// import {
-//   Box,
-//   Container,
-//   Divider,
-//   Grid,
-//   IconButton,
-//   Typography,
-//   Link
-// } from "@mui/material";
-import Box from "@mui/material/Box";
-import Container from "@mui/material/Container";
-import Divider from "@mui/material/Divider";
-import Grid from "@mui/material/Grid";
-import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
-import Link from "@mui/material/Link";
+import {
+  Box,
+  Container,
+  Divider,
+  Grid,
+  IconButton,
+  Typography,
+  Link
+} from "@mui/material";
 import { Stack } from "@mui/system";
 import React from "react";
 import { footerContent } from "../../utils/content";
 import OutlinedButton from "../Buttons/OutlinedButton";
 import Title from "../Title";
-
+import { useEffect, useRef } from 'react';
+import Lottie from "lottie-react";
+import animation from "./animation_lnixerue.json"
 const {
   subscribe,
   protocols,
@@ -53,6 +48,7 @@ const LinkSection = ({ title, links }) => (
 );
 
 const Footer = () => {
+  
   return (
     <Box sx={{bgcolor:"white", color:"#1F485B"}}>
       <Divider color="#1F485B" sx={{ mb: 10 }} />
@@ -85,34 +81,8 @@ const Footer = () => {
           </Grid>
 
           {/* Subscribe */}
-          <Grid item xs={12} md={6} lg={5} xl={4}>
-            <Stack>
-              <Title sx={{ mb: 1, color:"#1F485B" }}>{subscribe.title}</Title>
-
-              <Typography variant="body2" color="#1F485B">
-                {subscribe.subtitle}
-              </Typography>
-
-              <OutlinedButton sx={{my:3}}>
-                <Link href="/Contact"  sx={{textDecoration:"none",color:"#1F485B"}}>
-                Contact
-              </Link>
-              </OutlinedButton>
-
-              <Stack
-                direction="row"
-                spacing={1}
-                alignItems="center"
-                justifyContent="space-between"
-                flexWrap="wrap"
-              >
-                {socials.map((item, i) => (
-                  <IconButton sx={{color:"#1F485B"}} key={i}>
-                    <item.icon />
-                  </IconButton>
-                ))}
-              </Stack>
-            </Stack>
+          <Grid item xs={12} md={12} lg={5} xl={4}>
+          <Lottie  animationData={animation} style={{ width: '50%' }} />
           </Grid>
         </Grid>
 

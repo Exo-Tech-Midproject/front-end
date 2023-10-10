@@ -22,6 +22,8 @@ import image4 from "../assets/images/section5/image4.webp"
 import sec6img from "../assets/images/section6/sec-6-img.png"
 import sec6imgBottom from "../assets/images/section6/sec-6-bottom.png"
 
+//QASection
+import Sec9Image1 from "../assets/images/qaSection/dao.webp";
 //login section
 import doctorLogin from "../assets/images/loginSection/doctorLogin.png"
 
@@ -51,7 +53,6 @@ export const Aboutus2 = {
 export const Aboutus3 = {
   PorImg
 };
-
 export const section1Content = {
   MainVed,
   title: "Your well-being is our mission.",
@@ -67,12 +68,6 @@ export const section2Content = {
 };
 
 export const section3Content = {
-  title: "About us",
-  subtitle1: "At Healthak, we are more than just a healthcare facility; we are a pillar of support and healing within our community. ",
-  subtitle2: "Our dedicated team of highly skilled doctors, nurses, and healthcare professionals is driven by a shared mission: to provide the highest quality healthcare services with empathy and excellence. We believe that every patient deserves personalized care and attention, and we are committed to tailoring our treatments to meet individual needs.and healing within our community"
-};
-
-export const section4Content = {
   title: "Our Services",
   subtitle1: "How we can help",
   subtitle2: "Online care is growing and so is our list of services and conditions.",
@@ -88,7 +83,7 @@ export const section4Content = {
   ],
 };
 
-export const section5Content = {
+export const section4Content = {
   sec5Ved,
   top: {
     title: "Why to use our website ",
@@ -123,7 +118,7 @@ export const section5Content = {
   },
 };
 
-export const section6Content = {
+export const section5Content = {
   sec6img,
   top: {
     title: "Meet Our Dedicated Team of Doctors",
@@ -137,6 +132,54 @@ export const section6Content = {
     subtitle: "Always a human connection",
     body: " Board-certified nurse practitioners are at the heart of every visit. They create a custom treatment plan you can trust. And, they are available to answer any questions about your plan for free."
   },
+};
+
+export const section6Content = {
+  title: "About us",
+  subtitle1: "At Healthak, we are more than just a healthcare facility; we are a pillar of support and healing within our community. ",
+  subtitle2: "Our dedicated team of highly skilled doctors, nurses, and healthcare professionals is driven by a shared mission: to provide the highest quality healthcare services with empathy and excellence. We believe that every patient deserves personalized care and attention, and we are committed to tailoring our treatments to meet individual needs.and healing within our community"
+};
+
+export const QASectionContent = {
+  title: "Categories",
+  ITEMS: [
+    {
+      title: "Categort1",
+      subtitle:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation u",
+      image: Sec9Image1,
+    },
+    {
+      title: "Categort2",
+      subtitle:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation u",
+      image: Sec9Image1,
+    },
+    {
+      title: "Categort3",
+      subtitle:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation u",
+      image: Sec9Image1,
+    },
+    {
+      title: "Categort4",
+      subtitle:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation u",
+      image: Sec9Image1,
+    },
+    {
+      title: "Categort5",
+      subtitle:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation u",
+      image: Sec9Image1,
+    },
+    {
+      title: "Categort6",
+      subtitle:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation u",
+      image: Sec9Image1,
+    },
+  ],
 };
 
 export const logincontent = {
@@ -170,7 +213,7 @@ export const footerContent = {
     title: "Governance",
     links: [
       { title: "HEALTHAK" },
-      { title: "HEALTHAK2" },
+      { title: "HEALTHAK" },
       { title: "Forum" },
     ],
   },

@@ -1,6 +1,4 @@
-import Typography from "@mui/material/Typography";
-import Link from "@mui/material/Link";
-import Stack from "@mui/material/Stack";
+import { Link, Stack, Typography } from "@mui/material";
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 const CustomLink = ({ sx = {}, ...props }) => {
   return (

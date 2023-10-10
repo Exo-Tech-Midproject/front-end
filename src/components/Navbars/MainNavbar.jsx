@@ -1,20 +1,11 @@
-// import {
-//   AppBar,
-//   Container,
-//   Stack,
-//   Typography,
-//   useMediaQuery,
-//   useTheme
-// } from "@mui/material";
-
-import AppBar from "@mui/material/AppBar";
-import Container from "@mui/material/Container";
-import Stack from "@mui/material/Stack";
-import Typography from "@mui/material/Typography";
-import useMediaQuery from "@mui/material/useMediaQuery";
-import { useTheme } from '@mui/material/styles';
-// import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
-import { NAVBAR_HEIGHT } from "../../constants";
+import {
+  AppBar,
+  Container,
+  Stack,
+  Typography,
+  useMediaQuery,
+  useTheme,
+} from "@mui/material";
 import useScrollPosition from "../../hooks/useScrollPosition";
 import CustomLink from "../Buttons/CustomLink";
 import SignupLink from "../Buttons/SignupLink";
@@ -46,7 +37,7 @@ const Navbar = () => {
       elevation={0}
       sx={{
         py: 1,
-        height: NAVBAR_HEIGHT,
+        height: 60,
         bgcolor: scrollPosition > 10 ? "#1F485B" : "transparent",
         backdropFilter: scrollPosition > 10 && "blur(60px)",
       }}
@@ -65,7 +56,7 @@ const Navbar = () => {
           flexWrap="wrap"
         >
           {/* Logo */}
-          <text style={{ height: "100%", objectFit: "contain" }} >HEALTHAK</text>
+          <CustomLink href="/" >HEALTHAK</CustomLink>
 
           {/* Links */}
           {!isMobile && (
@@ -81,8 +72,8 @@ const Navbar = () => {
                 <Typography variant="body2">Home</Typography>
               </CustomLink>
 
-              <CustomLink href="/About">
-                <Typography variant="body2">About</Typography>
+              <CustomLink href="/QA">
+                <Typography variant="body2">Q/A</Typography>
               </CustomLink>
 
               <LinkButton>
@@ -97,9 +88,9 @@ const Navbar = () => {
                 <Typography variant="body2">Doctors</Typography>
               </LinkButton>
 
-              <LinkButton spacing={0.5}>
+              <CustomLink  spacing={0.5}>
                 <Typography variant="body2">Contact us</Typography>
-              </LinkButton>
+              </CustomLink>
             </Stack>
           )}
 
@@ -108,7 +99,7 @@ const Navbar = () => {
             <CustomLink href="/Login" spacing={1}>
               Login
             </CustomLink>
-            <SignupLink href="/Signup" spacing={1} />
+          <SignupLink href="/Signup" spacing={1}/>
           </Stack>
 
         </Stack>

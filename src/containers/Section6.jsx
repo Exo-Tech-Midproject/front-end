@@ -1,77 +1,55 @@
-// import { Container, Grid, Stack, Typography, Box } from "@mui/material";
-import Box from "@mui/material/Box";
-import Container from "@mui/material/Container";
-import Typography from "@mui/material/Typography";
-import Stack from "@mui/material/Stack";
-import Grid from "@mui/material/Grid";
 
+import React from "react";
+import { Container, Grid, Stack, Box, Typography,  } from "@mui/material";
 import Title from "../components/Title";
-import { section6Content } from "../utils/content";
+import { Contactcontent } from "../utils/content";
 
+import ContactForm from "../components/contactForm/ContactForm";
+const { top,  } = Contactcontent;
 
-const { top, bottom } = section6Content;
 
 const Section6 = () => {
   return (
-    <Box sx={{ bgcolor: "#1F485B", height: "140vh" }}>
-      <Container sx={{ mt: { xs: 0, md: 5, lg: 10 }, color: "#1F485B" }}>
-        {/* TOP */}
-        <Grid container spacing={10} flexWrap="wrap-reverse" alignItems="center">
-          {/* Left */}
-          <Grid item xs={12} md={6}>
-            <Stack spacing={2} sx={{ maxWidth: 480 }}>
-              <Title variant={{ xs: "h3", md: "h2" }} color="white">{top.title}</Title>
+    <Box sx={{
+    background: '#112731B0',
+    py:2,
+    backgroundImage: 'url("https://images.pexels.com/photos/4039921/pexels-photo-4039921.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1")',
+    backgroundSize: '100%',
+    backgroundRepeat: 'no-repeat',
+    objectFit: 'cover',
+    backgroundPosition: 'center',
+    backgroundBlendMode: 'overlay'}}>
+    <Container flexWrap="wrap" alignItems="center">
 
-              <Typography variant="body2" color="white" sx={{ pb: 2 }}>
-                {top.subtitle}
-              </Typography>
-            </Stack>
-          </Grid>
-          {/* Right */}
+      {/* TOP */}
+      <Grid >
+    
+        <Stack  direction="column" alignItems="center" spacing={2}>
+      
+          <Title variant={{ xs: "h4", md: "h3" }} color="white">{top.title}</Title>
 
-          <Grid item xs={12} md={6}>
-            <img
-              alt="doctor-pic"
-              src={top.image}
-              style={{ width: "100%", objectFit: "contain", height: "100%" }}
-            />
-          </Grid>
-
-          {/*Bottom */}
+          <Typography variant="body2" color="white"  sx={{ textAlign: "center" }}>
+            {top.body}
+          </Typography>
+        </Stack>
+       
+        
+      </Grid>
+      {/* BOTTOM */}
+      <Grid
+        container
+        flexWrap="wrap"
+        alignItems="center"
+        justifyContent="center"
+        sx={{ mt: { xs: 0, md: 5 }}}
+      >
+        {/* Right */}
+        <Grid item xs={12} md={6}>
+          <ContactForm />
         </Grid>
-        <Grid
-          container
-          spacing={0}
-          flexWrap="wrap-reverse"
-          sx={{ mt: { xs: 0, md: 5 }, bgcolor: "white", borderRadius: "30px" }}
-        >
-          {/* Left */}
-          <Grid item xs={12} md={6}>
-            <img
-              alt="img-section6"
-              src={bottom.Image}
-              style={{
-                width: "100%", height: "100%",
-                borderRadius: "30px",
-                boxShadow: "2px 2px 5px rgba(0, 0, 0, 0.3)",
-              }}
-            />
-          </Grid>
-
-          {/* Right */}
-          <Grid item xs={12} md={6} sx={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
-            <Stack spacing={2} sx={{ maxWidth: 400 }}>
-              <Title variant={{ xs: "h4", md: "h5" }}>{bottom.title}</Title>
-              <Title variant={{ xs: "h3", md: "h2" }}>{bottom.subtitle}</Title>
-              <Typography variant="body1">{bottom.body}</Typography>
-            </Stack>
-          </Grid>
-        </Grid>
-
-
-
-      </Container>
-    </Box>
+      </Grid>
+    </Container>
+  </Box>
 
   );
 };

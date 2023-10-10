@@ -1,4 +1,4 @@
-import Link from "@mui/material/Link";
+import { Link,} from "@mui/material";
 
 const CustomLink1 = ({ sx = {}, ...props }) => {
   return (

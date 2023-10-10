@@ -1,9 +1,4 @@
-// import { Box, Container, Grid, Stack, Typography } from "@mui/material";
-import Box from "@mui/material/Box";
-import Container from "@mui/material/Container";
-import Typography from "@mui/material/Typography";
-import Stack from "@mui/material/Stack";
-import Grid from "@mui/material/Grid";
+import { Box, Container, Grid, Stack, Typography } from "@mui/material";
 import React from "react";
 // import CountUp from "react-countup";
 import Title from "../components/Title";
@@ -16,13 +11,13 @@ const CustomCounter = ({
   title,
   subtitle,
 }) => (
-  <Stack spacing={{ xs: 1, md: 2 }} alignItems="center">
-    <Diversity1OutlinedIcon sx={{ color: "#1F485B" }} />
-    <Title color="#1F485B" variant={{ xs: "h6", md: "h5" }} >
-      <span>{title}</span>
+  <Stack spacing={{ xs: 1, md: 2 }} alignItems="center" >
+    <Diversity1OutlinedIcon sx={{ color: "white" }} />
+    <Title color="white" variant={{ xs: "h6", md: "h5" }} >
+      {title}
     </Title>
 
-    <Typography variant="body2" color="gray">
+    <Typography variant="body2" color="white" sx={{pb:1}}>
       {subtitle}
     </Typography>
   </Stack>
@@ -30,12 +25,12 @@ const CustomCounter = ({
 
 const Section2 = () => {
   return (
-    <Container sx={{ mt: 5 }}>
+    <Container >
       <Box
         sx={(theme) => ({
           position: "relative",
-          py: 1,
-          bgcolor: "white",
+          top:50,
+          bgcolor: "#1F485B",
           borderRadius: "40px",
           [theme.breakpoints.up("sm")]: {
             "&::before": {
@@ -55,7 +50,7 @@ const Section2 = () => {
       >
         <Grid container spacing={3} justifyContent="space-around">
           {items.map((item) => (
-            <Grid item xs={6} md={3} key={item.subtitle}>
+            <Grid item xs={12} md={3} key={item.subtitle}>
               <CustomCounter {...item} />
             </Grid>
           ))}

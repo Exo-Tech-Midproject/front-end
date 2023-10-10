@@ -1,35 +1,59 @@
 import React from 'react'
-import Container from "@mui/material/Container";
-import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
-import Stack from "@mui/material/Stack";
-import TextField from "@mui/material/TextField";
+import { Container, TextField, Typography, Button, Box, Stack ,Link,IconButton,} from '@mui/material'
+import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
+import EmailIcon from '@mui/icons-material/Email';
 import Title from "../Title/index";
-
-
+import OutlinedButton from "../Buttons/OutlinedButton";
+import { footerContent } from "../../utils/content";
+const {
+  subscribe,
+  protocols,
+  governance,
+  support,
+  developers,
+  copyright,
+  socials,
+} = footerContent;
 function ContactForm() {
-
-
+  
+  
   return (
-
-    <Container sx={{
-      py: 2, minHeight: 70, alignItems: "left", boxShadow: "1px 1px 5px #FFFFFF", bgcolor: "white",
+   
+    <Container sx={{py:2, minHeight: 70 , alignItems:"left",boxShadow: "1px 1px 5px #FFFFFF",  bgcolor:"white", 
     }}>
 
-      <Stack direction="column" spacing={3} alignItems="center">
-
+        <Stack direction="column" spacing={3} alignItems="center">
+       
         <Title color="black" variant={{ xs: "h5", md: "h6" }}>Send Feedback</Title>
 
-        <Typography variant="body2" color="black">
-          Fill out our convenient online contact form below, and we'll respond to your message as soon as possible. Fields marked with an asterisk (*) are required.
+        <Typography variant="body2"  color="black">
+            Fill out our convenient online contact form below, and we'll respond to your message as soon as possible. Fields marked with an asterisk (*) are required.
         </Typography>
-        <TextField fullWidth placeholder="Full Name" />
-        <TextField fullWidth placeholder="Email" />
-        <TextField fullWidth placeholder="Your Feedback" multiline maxRows={4} variant="outlined" />
+        <TextField fullWidth  placeholder="Full Name"  />
+        <TextField fullWidth  placeholder="Email"  />
+        <TextField fullWidth  placeholder="Your Feedback" multiline maxRows={4} variant="outlined"/>
+      
+            <Stack width="100%">
+              <OutlinedButton fullWidth sx={{my:3}}>
+                Send     
+            </OutlinedButton>
 
-        <Button fullWidth type="submit" variant="contained" sx={{ bgcolor: "blue" }} >Send</Button>
+              <Stack
+                direction="row"
+                spacing={1}
+                alignItems="center"
+                justifyContent="space-between"
+                flexWrap="wrap"
+              >
+                {socials.map((item, i) => (
+                  <IconButton sx={{color:"#1F485B"}} key={i}>
+                    <item.icon />
+                  </IconButton>
+                ))}
+              </Stack>
+            </Stack>
 
-      </Stack>
+        </Stack>
     </Container>
 
   )

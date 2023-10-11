@@ -20,9 +20,17 @@ function ThirdStep() {
         placeholder="Mobile Number"
         autoFocus
       />
+          <TextField
+        required
+        name="Birthday"
+        placeholder="Birthday"
+        type="Date"
+        id="Birthday"
+        autoComplete="Birthday"
+      />
  
       <FormControl sx={{color:"black"}}>
-      <FormLabel sx={{color:"black"}} id="demo-row-radio-buttons-group-label">maritalStatus</FormLabel>
+      <FormLabel sx={{color:"black"}} id="demo-row-radio-buttons-group-label">Marital Status</FormLabel>
       <RadioGroup
         row
         aria-labelledby="demo-row-radio-buttons-group-label"

@@ -18,7 +18,6 @@ function PatientForm() {
         <Box>
             <Container>
                 <Stack direction="column" spacing={3} alignItems="center">
-                    <Typography variant="body2" sx={{ color: "#B4B4B3", textAlign: "center" }}>- Login as a Patient -</Typography>
                     <TextField
                         id="input-with-icon-textfield"
                         size="small"

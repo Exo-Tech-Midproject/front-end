@@ -27,14 +27,7 @@ function SecondStep() {
         placeholder="User Name"
         autoFocus
       />
-      <TextField
-        required
-        name="Birthday"
-        placeholder="Birthday"
-        type="Date"
-        id="Birthday"
-        autoComplete="Birthday"
-      />
+  
 
       <FormControl sx={{ m: 1, minWidth: 120 }}>
         <Select

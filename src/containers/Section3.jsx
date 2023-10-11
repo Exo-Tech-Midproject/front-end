@@ -31,7 +31,6 @@ const Section3 = () => {
                 src={logo}
                 style={{ height: "80px", objectFit: "contain" }}
               />
-
               <Typography variant="body2" color="#1F485B">
                 {name}
               </Typography>

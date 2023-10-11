@@ -213,7 +213,6 @@ export default function DoctorForm() {
 
   return (
     <Box sx={{ width: {md:'500px', xs:'300px'} }}>
-      <Typography variant="body2" sx={{ color: "#B4B4B3", textAlign: "center" ,py:1}}>-Doctor Account-</Typography>
       <Stepper  activeStep={activeStep} alternativeLabel connector={<ColorlibConnector />}>
         {steps.map((label, index) => (
           <Step key={steps.label} >

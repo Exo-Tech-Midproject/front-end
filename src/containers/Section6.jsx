@@ -21,27 +21,14 @@ const Section6 = () => {
     backgroundBlendMode: 'overlay'}}>
     <Container flexWrap="wrap" alignItems="center">
 
-      {/* TOP */}
-      <Grid >
     
-        <Stack  direction="column" alignItems="center" spacing={2}>
-      
-          <Title variant={{ xs: "h4", md: "h3" }} color="white">{top.title}</Title>
-
-          <Typography variant="body2" color="white"  sx={{ textAlign: "center" }}>
-            {top.body}
-          </Typography>
-        </Stack>
-       
-        
-      </Grid>
       {/* BOTTOM */}
       <Grid
         container
         flexWrap="wrap"
         alignItems="center"
         justifyContent="center"
-        sx={{ mt: { xs: 0, md: 5 }}}
+        
       >
         {/* Right */}
         <Grid item xs={12} md={6}>

@@ -73,7 +73,7 @@ const SignupSection = () => {
             
             <Stack  alignItems="center" p={2}>
 
-              <Title color="black" variant={{ xs: "h4", md: "h5",  }}>{title}</Title>
+              <Title py={2} color="black" variant={{ xs: "h4", md: "h5",  }} >{title}</Title>
               {activeForm === "doctor" ? <DoctorForm /> : <PatientForm />}
               <Stack direction="row" spacing={1}>
                   <Typography variant="body2" color="#B4B4B3">Alraedy have an account?</Typography>

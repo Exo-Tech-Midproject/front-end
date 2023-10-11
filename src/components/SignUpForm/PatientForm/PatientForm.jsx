@@ -213,7 +213,6 @@ export default function PatientForm() {
 
   return (
     <Box sx={{ width: '500px' }}>
-      <Typography variant="body2" sx={{ color: "#B4B4B3", textAlign: "center" ,py:1}}>-Patient Account-</Typography>
       <Stepper  activeStep={activeStep} alternativeLabel connector={<ColorlibConnector />}>
         {steps.map((label, index) => (
           <Step key={steps.label} completed={completed[index]}>

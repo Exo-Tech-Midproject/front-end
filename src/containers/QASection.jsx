@@ -95,12 +95,16 @@ function QASection() {
 
       <Box sx={{ position: "relative", top: 100, bgcolor: "white", width: "100%" }}>
         <Container spacing={2} sx={{ my: { xs: 5, md: 3, lg: 3 } }}>
-          <Title variant={{ xs: "h3", md: "h2" }} sx={{ mb: { xs: 2, md: 0 }, color: "#1F485B", textAlign: { xs: "center", md: "left" } }}>
-            <Link href="/QACategories" sx={{ cursor: "pointer", color: "#1F485B" }}><ArrowBackIcon /></Link> Qusetions
+          <Stack direction="row" alignItems="center"  spacing={2}>
+          <Link href="/QACategories" sx={{ cursor: "pointer", color: "#1F485B" }}><ArrowBackIcon /></Link>
+          <Title variant={{ xs: "h3", md: "h2" }} sx={{ color: "#1F485B", textAlign: { xs: "center", md: "left" } }}>
+             Qusetions
           </Title>
+          </Stack>
+        
           <Grid container spacing={5}>
             <Grid spacing={2} item xs={12} md={12} >
-              <Card sx={{ width: "100%", bgcolor: "#DFCCFB", my:2 }}>
+              <Card sx={{ width: "100%", bgcolor: "#67ABCB", color:"white", my:2 }}>
                 <CardHeader
                   avatar={
                     <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
@@ -113,7 +117,7 @@ function QASection() {
                     </IconButton>
                   }
                   title="Shrimp and Chorizo Paella"
-                  subheader="September 14, 2016"
+                  subheader="October 11, 2023"
                 />
                 <CardContent>
                   <Typography variant="body2" color="black">
@@ -138,8 +142,8 @@ function QASection() {
                 </CardActions>
 
               </Card>
-              <Card sx={{ width: "100%", bgcolor: "#DFCCFB" }}>
-                <CardHeader
+              <Card sx={{ width: "100%", bgcolor: "#67ABCB", color:"white" }}>
+                <CardHeader 
                   avatar={
                     <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
                       R
@@ -151,7 +155,7 @@ function QASection() {
                     </IconButton>
                   }
                   title="Shrimp and Chorizo Paella"
-                  subheader="September 14, 2016"
+                  subheader="October 10, 2023"
                 />
 
                 <CardContent>

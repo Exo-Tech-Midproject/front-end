@@ -23,7 +23,7 @@ export default function CardGroups(props) {
         width: '350px',
         margin: '15px',
         display: 'flex',
-        height:"60vh",
+        minHeight: 350,
         alignItems: 'center',
         borderRadius: '25px',
         '&:hover': {
@@ -56,12 +56,13 @@ export default function CardGroups(props) {
           <CardContent>
             <Typography gutterBottom variant="h3" component="div"
               sx={{
-                color: "#f8f8ff"
+                color: "#f8f8ff",
               }}>
               {groupName}
             </Typography>
             <Typography variant="body1" color="text.secondary" sx={{
                   lineHeight: '1.5',
+                  padding:"5px"
             }}>
               {description}
             </Typography>

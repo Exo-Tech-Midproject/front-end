@@ -17,6 +17,7 @@ const Group = React.lazy(() => import('../../pages/Group'));
 const Groups = React.lazy(() => import('../../pages/Groups'));
 const Appointment = React.lazy(() => import('../../pages/appointment'));
 const PatientHistory = React.lazy(() => import('../MedicalHistory/MedicalHistory'));
+const Physician = React.lazy(() => import('../../pages/Physician'));
 
 
 
@@ -60,6 +61,7 @@ export default function DBMain({ open }) {
                            <Route path='/groups' element={<React.Suspense fallback={<Loading />}><Groups /></React.Suspense>} />
                              <Route path='/chat' element={<React.Suspense fallback={<Loading />}><Chat /></React.Suspense>} />
                              <Route path='/group' element={<React.Suspense fallback={<Loading />}><Group /></React.Suspense>} />
+                             <Route path='/Physicians' element={<React.Suspense fallback={<Loading />}><Physician /></React.Suspense>} />
 
 
 

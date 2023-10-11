@@ -114,7 +114,7 @@ const ServiceCard = ({ title, subtitle, image }) => {
             {subtitle}
           </Typography>
           
-          <Link className="hidden-text" sx={{
+          <Link href="/QA" className="hidden-text" sx={{
             position: "absolute",
             opacity: 0,
             transition: "opacity .3s ease-out",

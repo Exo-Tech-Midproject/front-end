@@ -12,7 +12,7 @@ const Section4 = () => {
 
   return (
     <Box sx={{bgcolor:"white", }}>
-       <Container sx={{ mt: { xs: 0, md: 5, lg: 10}, color:"#1F485B" }}>
+       <Container sx={{ mt: { xs: 0, md: 5, lg: 5}, color:"#1F485B" }}>
       {/* TOP */}
       <Grid container spacing={10} flexWrap="wrap-reverse" alignItems="center">
         {/* Left */}
@@ -32,7 +32,7 @@ const Section4 = () => {
             src={sec5Ved}
             style={{ width:"100%", objectFit: "contain" ,
             position: "relative",
-            p: 4,
+            //p: 4,
             borderRadius: "30px",
             boxShadow: "2px 2px 5px rgba(0, 0, 0, 0.3)",
             "&::before": {
@@ -59,7 +59,7 @@ const Section4 = () => {
         spacing={10}
         flexWrap="wrap-reverse"
         alignItems="center"
-        sx={{ mt: { xs: 0, md: 5, alignItems:"center" } }}
+        sx={{py:2, mt: { xs: 0, md: 5, alignItems:"center" } }}
       >
         {/* Left */}
         <Grid item xs={12} md={6}>
@@ -85,7 +85,7 @@ const Section4 = () => {
         </Grid>
 
         {/* Right */}
-        <Grid sx={{width:"100%"}} item xs={12} md={6}>
+        <Grid  item xs={12} md={6}>
           <Stack spacing={2} sx={{ maxWidth: 480,
         }}>
             <Tabs

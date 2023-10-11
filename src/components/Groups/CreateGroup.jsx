@@ -103,7 +103,7 @@ export default function CreateGroup() {
             }
           }}
           onClick={() => setShowForm(!showForm)}
-        >{showForm ? " Close " : "+ Create New Group"}</Button>
+        >{showForm ? " < Go Back " : "+ Create New Group"}</Button>
       </Container>
       {showForm && (
         <Box sx={{

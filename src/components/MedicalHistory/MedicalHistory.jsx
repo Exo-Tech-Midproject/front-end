@@ -102,7 +102,7 @@ return (
                 minHeight: "40vh",
                 width: "100%",
                 bgcolor:'white',
-                margin:"10px",
+                margin:"5px auto",
                 borderRadius: "5px",
                 backgroundPosition: "center",
                 display: "flex",

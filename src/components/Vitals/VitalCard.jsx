@@ -8,20 +8,49 @@ import TemperatureChip from './TemperatureChip'
 import BloodPreassureChip from './BloodPreassureChip'
 import OxygenChip from './OxygenChip'
 import CalendarMonthOutlinedIcon from '@mui/icons-material/CalendarMonthOutlined';
+// import RemoveCircleOutlineOutlinedIcon from '@mui/icons-material/RemoveCircleOutlineOutlined';
+import HighlightOffOutlinedIcon from '@mui/icons-material/HighlightOffOutlined';
+import { Alert, AlertTitle, Backdrop, Button, IconButton, Modal, Tooltip } from '@mui/material';
+import DeleteCardModal from './DeleteCardModal';
+import axios from 'axios';
+import cookie from 'react-cookies'
+import jwtDecode from 'jwt-decode';
+let DBRUL = process.env.REACT_APP_BASE_URL
 
 
 
-export default function VitalsCard() {
-    let obj = {
-        "heartRate": 88,
-        "oxygenSat": 97,
-        "bloodGlucose": 70,
-        "temperature": 36.9,
-        "systolicBP": 120,
-        "diastolicBP": 80
-    }
+
+
+
+export default function VitalsCard({ dataObj, setVitals, vitals }) {
 
     const [toAnimate, setToAnimate] = useState(false)
+    const [showModal, setShowModal] = useState(false)
+
+    function handleShowDeleteModal() {
+        setShowModal(true)
+    }
+    function handleCloseDeleteModal() {
+        setShowModal(false)
+    }
+    // console.log(vitals,'from create function 2222')
+    async function handleDeleteCard(id) {
+        try {
+            let token = cookie.load('auth')
+            const payload = await jwtDecode(token)
+            let userVitals = await axios.delete(`${DBRUL}/patient/${payload.username}/vitals/${id}`,
+                {
+                    headers: { Authorization: `Bearer ${token}` }
+                })
+            console.log(userVitals.data)
+            setVitals(vitals.filter(element => element.id !== id))
+            console.log(vitals, 'from delete function')
+
+        } catch (err) {
+            console.log(err)
+        }
+    }
+
 
     return (
         <div
@@ -71,23 +100,27 @@ export default function VitalsCard() {
                     className="sub-box"
                 >
                     <CalendarMonthOutlinedIcon sx={{ color: '#1F485B' }} color='white' className='icon-card' />
-                    <Typography className='text-card' color={'#1F485B'} variant='h5' margin='0 auto' textAlign='center'> Date 2023-09-30</Typography>
+                    <Typography className='text-card' color={'#1F485B'} variant='h5' margin='0 auto' textAlign='center'> Date {`${new Date(dataObj.createdAt).toDateString()}`}</Typography>
+                    <Tooltip componentsProps={{ tooltip: { sx: { bgcolor: 'white', color: 'black', '& .MuiTooltip-arrow': { color: 'white' } } } }} title="Delete" placement='right' sx={{ '.MuiTooltip-tooltip': { backgroundColor: 'white' } }} arrow>
+                        <IconButton onClick={handleShowDeleteModal} color='warning'> <HighlightOffOutlinedIcon /></IconButton>
+                    </Tooltip>
 
                 </Box>
 
                 <Box width='100%' display='flex' gap={1}>
-                    {obj.heartRate ? <HeartRateChip value={obj.heartRate} toAnimate={toAnimate} /> : null}
-                    {obj.diastolicBP && obj.systolicBP ? <BloodPreassureChip value={obj.systolicBP} value2={obj.diastolicBP} toAnimate={toAnimate} /> : null}
+                    {dataObj.heartRate ? <HeartRateChip value={dataObj.heartRate} toAnimate={toAnimate} /> : null}
+                    {dataObj.diastolicBP && dataObj.systolicBP ? <BloodPreassureChip value={dataObj.systolicBP} value2={dataObj.diastolicBP} toAnimate={toAnimate} /> : null}
                 </Box>
                 <Box width='100%' display='flex' gap={1}>
-                    {obj.bloodGlucose ? <BloodGlucoseChip value={obj.bloodGlucose} toAnimate={toAnimate} /> : null}
-                    {obj.temperature ? <TemperatureChip value={obj.temperature} toAnimate={toAnimate} /> : null}
+                    {dataObj.bloodGlucose ? <BloodGlucoseChip value={dataObj.bloodGlucose} toAnimate={toAnimate} /> : null}
+                    {dataObj.temperature ? <TemperatureChip value={dataObj.temperature} toAnimate={toAnimate} /> : null}
                 </Box>
-                {obj.oxygenSat ? <OxygenChip value={obj.oxygenSat} toAnimate={toAnimate} /> : null}
+                {dataObj.oxygenSat ? <OxygenChip value={dataObj.oxygenSat} toAnimate={toAnimate} /> : null}
 
 
-
+                <DeleteCardModal showModal={showModal} handleCloseDeleteModal={handleCloseDeleteModal} handleDeleteCard={handleDeleteCard} cardId={dataObj.id} />
             </Box >
+
         </div>
     )
 }

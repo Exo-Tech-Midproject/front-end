@@ -7,54 +7,11 @@ import VitalLineChart from './VitalLineChart';
 import VitalComposedChart from './VitalComposedChart';
 import VitalBarChart from './VitalBarChart';
 
-export default function VitalsChart({ data }) {
+export default function VitalsChart({ dataArr }) {
     const [charType, setCharType] = useState('Composed')
 
 
-    let obj = [{
-        "heartRate": 88,
-        "oxygenSat": 97,
-        "bloodGlucose": 120,
-        "temperature": 36.9,
-        "systolicBP": 120,
-        "diastolicBP": 80
-    },
-    {
-        "heartRate": 120,
-        "oxygenSat": 87,
-        "bloodGlucose": 270,
-        "temperature": 37.9,
-        "systolicBP": 131,
-        "diastolicBP": 100
-    }, {
-        "heartRate": 93,
-        "oxygenSat": 79,
-        "bloodGlucose": 120,
-        "temperature": 39.9,
-        "systolicBP": 127,
-        "diastolicBP": 90
-    }, {
-        "heartRate": 155,
-        "oxygenSat": 77,
-        "bloodGlucose": 350,
-        "temperature": 38.9,
-        "systolicBP": 140,
-        "diastolicBP": 110
-    }, {
-        "heartRate": 123,
-        "oxygenSat": 87,
-        "bloodGlucose": 130,
-        "temperature": 37.9,
-        "systolicBP": 190,
-        "diastolicBP": 120
-    }, {
-        "heartRate": 57,
-        "oxygenSat": 92,
-        "bloodGlucose": 230,
-        "temperature": 36.9,
-        "systolicBP": 110,
-        "diastolicBP": 70
-    }]
+    
     return (
         <Box
             display='flex'
@@ -69,9 +26,9 @@ export default function VitalsChart({ data }) {
             borderRadius='20px'
             boxShadow='0px 2px 1px -1px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 1px 3px 0px rgba(0,0,0,0.12)'
         >
-            {charType === 'Composed' && <VitalComposedChart data={obj} />}
-            {charType === 'Line' && <VitalLineChart data={obj} />}
-            {charType === 'Bar' && <VitalBarChart data={obj} />}
+            {charType === 'Composed' && <VitalComposedChart data={dataArr} />}
+            {charType === 'Line' && <VitalLineChart data={dataArr} />}
+            {charType === 'Bar' && <VitalBarChart data={dataArr} />}
             {/* <VitalLineChart data={obj} /> */}
 
             <Box display='flex' justifyContent='center' width='100%'>

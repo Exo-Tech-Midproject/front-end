@@ -27,7 +27,7 @@ export default function HeartRateChip({ parameter, value, toAnimate }) {
                 <Lottie loop={toAnimate} animationData={heartLottieAnimation} style={{ width: '70px' }} />
                 <Typography variant='subtitle2' textTransform='capitalize'>Heart Rate</Typography>
             </Box>
-            <Typography variant='h6' fontWeight='700' color='green' >{value} BPM</Typography>
+            <Typography variant='h6' fontWeight='700' color={value <= 100 && value >= 60 ? 'green' : 'red'} >{value} BPM</Typography>
         </Box>
 
 

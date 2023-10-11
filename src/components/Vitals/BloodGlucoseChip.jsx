@@ -23,7 +23,7 @@ export default function BloodGlucoseChip({ parameter, value, toAnimate }) {
                 />
                 <Typography variant='subtitle2'>Blood Glucose</Typography>
             </Box>
-            <Typography variant='h6' fontWeight='700' color='green' >{value} mg/dL</Typography>
+            <Typography variant='h6' fontWeight='700' color={value <= 100 && value >= 70 ? 'green' : 'red'} >{value} mg/dL</Typography>
         </Box>
 
 

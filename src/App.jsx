@@ -50,7 +50,7 @@ const App = () => {
         
         {/* <Route path='/dashboard/chat' element={<Suspense fallback={<Loading />}><Chat /></Suspense>} /> */}
 
-        <Route path='/Group' element={<Suspense fallback={<Loading />}><Group /></Suspense>} />
+        {/* <Route path='/Group' element={<Suspense fallback={<Loading />}><Group /></Suspense>} /> */}
 
       </Routes>
     </div>

@@ -16,7 +16,7 @@ export default function BloodPreassureChip({ parameter, value, value2, toAnimate
                 <Lottie loop={toAnimate} animationData={bloodPreassureAnimation} style={{ width: '70px' }} />
                 <Typography variant='subtitle2' textTransform='capitalize'>BP</Typography>
             </Box>
-            <Typography variant='h6' fontWeight='700' color='green' >{value}/{value2} mmHg</Typography>
+            <Typography variant='h6' fontWeight='700' color={value < 130 && value > 90 && value2 < 90 && value2 > 60 ? 'green' : 'red'} >{value}/{value2} mmHg</Typography>
 
         </Box>
 

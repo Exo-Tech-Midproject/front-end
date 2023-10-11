@@ -18,7 +18,7 @@ export default function OxygenChip({ parameter, value, toAnimate }) {
                 <Lottie loop={toAnimate} animationData={oximeterAnimation} style={{ width: '70px' }} />
                 <Typography variant='subtitle2' textTransform='capitalize'>Oxygen Saturation</Typography>
             </Box>
-            <Typography variant='h6' fontWeight='700' color='green' >{value}%</Typography>
+            <Typography variant='h6' fontWeight='700' color={value <= 100 && value >= 75 ? 'green' : 'red'} >{value}%</Typography>
         </Box>
 
 

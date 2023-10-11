@@ -3,11 +3,40 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import Lottie from 'lottie-react'
-import React from 'react'
+import React, { useState } from 'react'
 import doctorAnimation from '../../assets/lottie/doctorVital.json'
 import VitalsRangesBanner from './VitalsRangesBanner'
+import AddVitalsModal from './AddVitalsModal';
+import axios from 'axios';
+import cookie from 'react-cookies'
+import jwtDecode from 'jwt-decode';
+let DBRUL = process.env.REACT_APP_BASE_URL
+export default function VitalsCreateSection({ vitals, setVitals }) {
+    const [showCreateModal, setShowCreateModal] = useState(false)
 
-export default function VitalsCreateSection() {
+    function handleShowCreateModal() {
+        setShowCreateModal(true)
+    }
+    function handleCloseCreateModal() {
+        setShowCreateModal(false)
+    }
+
+    async function handleCreateCard(obj) {
+        try {
+            let token = cookie.load('auth')
+            const payload = await jwtDecode(token)
+            let userVitals = await axios.post(`${DBRUL}/patient/${payload.username}/vitals`, obj,
+                {
+                    headers: { Authorization: `Bearer ${token}` }
+                })
+            console.log(userVitals.data, '2323231')
+            setVitals([...vitals, userVitals.data])
+            console.log(vitals, 'from create function')
+            handleCloseCreateModal()
+        } catch (err) {
+            console.log(err)
+        }
+    }
     return (
         <>
             <Box width='100%' height={{ xs: '200px', sm: '350px', md: '500px' }} display='flex' justifyContent={'center'} bgcolor='white' borderRadius={'20px'} padding={2}>
@@ -31,27 +60,10 @@ export default function VitalsCreateSection() {
 
             </Box >
             <Box display='flex' justifyContent={'center'} position='relative'>
-                <Button variant='contained' color='medical' sx={{ alignSelf: 'center', position: 'relative', bottom: { xs: '15px', sm: '25px', md: '35px' }, width: { xs: '50%', md: '50%' }, height: { xs: '30px', sm: '50px', md: '70px' }, fontSize: { xs: '0.7rem', sm: '1rem', md: '2rem' } }}>Add New Record</Button>
-                {/* <Box
-                    borderRadius={'22px'}
-                    position='relative'
-                    bottom='30px'
-                    width={'60%'}
-                    height='100%'
-                    bgcolor='#1F485B'
-                    m="0 auto"
-                    sx={{
-                        ':hover': {
-                            boxShadow: '1px 3px 1px',
-                            transition: '1s ease-in-out',
-                            cursor: 'pointer',
+                <Button onClick={handleShowCreateModal} variant='contained' color='medical' sx={{ alignSelf: 'center', position: 'relative', bottom: { xs: '15px', sm: '25px', md: '35px' }, width: { xs: '50%', md: '50%' }, height: { xs: '30px', sm: '50px', md: '70px' }, fontSize: { xs: '0.7rem', sm: '1rem', md: '2rem' } }}>Add New Record</Button>
 
-                        }
-                    }}
-                >
-                    <Typography textAlign='center' color='white' variant='h4' lineHeight='100px'>Add New Record</Typography>
-                </Box> */}
             </Box >
+            <AddVitalsModal showCreateModal={showCreateModal} setShowCreateModal={setShowCreateModal} handleCloseCreateModal={handleCloseCreateModal} handleCreateCard={handleCreateCard} />
         </>
     )
 }

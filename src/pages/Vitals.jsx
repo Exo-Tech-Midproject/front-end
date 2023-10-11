@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import VitalCard from '../components/Vitals/VitalCard'
 // import { Box, Container, Divider, Grid, Typography } from '@mui/material'
 import Box from "@mui/material/Box";
@@ -6,7 +6,7 @@ import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
 import Grid from "@mui/material/Grid";
-
+import cookie from 'react-cookies'
 // import oximeterAnimation from '../assets/lottie/oximeter.json'
 import vitalsCoverImg from '../assets/images/vitalsPage/VitalsCover.jpg'
 // import Lottie from "lottie-react";
@@ -14,10 +14,45 @@ import vitalsCoverImg from '../assets/images/vitalsPage/VitalsCover.jpg'
 import VitalsPagination from '../components/Vitals/VitalsPagination';
 import VitalsChart from '../components/Vitals/VitalsChart';
 import VitalsCreateSection from '../components/Vitals/VitalsCreateSection';
+import axios from 'axios';
+import jwtDecode from "jwt-decode";
+
+let DBRUL = process.env.REACT_APP_BASE_URL
+
 
 
 export default function Vitals() {
+    const [vitals, setVitals] = useState(null)
+    const [currentPage, setCurrentPage] = useState(1)
+    console.log(currentPage)
+    let descending = vitals?.sort((a, b) => b.id - a.id)
+    console.log(descending)
+    console.log(vitals)
+    let startIndex = 4 * (currentPage - 1)
+    let endIndex = startIndex + 4
+    let currentPageRender = vitals ? vitals.slice(startIndex, endIndex) : []
+    let PaginationPages = Math.ceil(vitals?.length / 4)
 
+    async function fetchUserVitals() {
+        try {
+            let token = cookie.load('auth')
+            const payload = await jwtDecode(token)
+            let userVitals = await axios.get(`${DBRUL}/patient/${payload.username}/vitals`,
+                {
+                    headers: { Authorization: `Bearer ${token}` }
+                })
+            console.log(userVitals.data)
+            setVitals(userVitals.data)
+
+        } catch (err) {
+            console.log(err)
+        }
+    }
+
+    useEffect(() => {
+        fetchUserVitals()
+
+    }, [])
 
     return (
         <>
@@ -27,11 +62,11 @@ export default function Vitals() {
             </Box >
 
 
-            <VitalsCreateSection />
+            <VitalsCreateSection vitals={vitals} setVitals={setVitals} />
 
             <Divider sx={{ marginBottom: '50px' }} />
             <Box
-                width={{ xs: '100%', sm: '80%', md: '75%' }}
+                width={{ xs: '100%', sm: '80%', md: '95%' }}
                 // bgcolor={'green'}
 
                 py={8}
@@ -53,46 +88,23 @@ export default function Vitals() {
             <Box px={3} mb='30px'>
                 {/* <Divider /> */}
                 <Grid container padding={2} marginTop={2} rowGap={3}>
-                    <Grid item xs={12} sm={6} md={4} lg={3} px={1} py={1}>
-                        <VitalCard />
-                    </Grid>
-                    <Grid item xs={12} sm={6} md={4} lg={3} px={1} py={1}>
-                        <VitalCard />
-                    </Grid>
-                    <Grid item xs={12} sm={6} md={4} lg={3} px={1} py={1}>
-                        <VitalCard />
-                    </Grid>
-                    <Grid item xs={12} sm={6} md={4} lg={3} px={1} py={1}>
-                        <VitalCard />
-                    </Grid>
-                    {/* <Grid item xs={12} sm={6} md={4} lg={3} px={1} py={1}>
-                        <VitalCard />
-                    </Grid>
-                    <Grid item xs={12} sm={6} md={4} lg={3} px={1} py={1}>
-                        <VitalCard />
-                    </Grid>
-                    <Grid item xs={12} sm={6} md={4} lg={3} px={1} py={1}>
-                        <VitalCard />
-                    </Grid>
-                    <Grid item xs={12} sm={6} md={4} lg={3} px={1} py={1}>
-                        <VitalCard />
-                    </Grid> */}
+                    {currentPageRender?.map(element => (<Grid key={element.id} item xs={12} sm={6} md={4} lg={3} px={1} py={1}>
+                        <VitalCard dataObj={element} setVitals={setVitals} vitals={vitals} />
+                    </Grid>))}
+
 
 
                 </Grid >
             </Box>
             <Container sx={{ marginBottom: '30px' }}>
-                <VitalsPagination />
-                {/* <Box width='100px'>
-                    <Lottie animationData={heartLottieAnimation} />
-                    <Lottie animationData={oximeterAnimation} />
+                <VitalsPagination setCurrentPage={setCurrentPage} PaginationPages={PaginationPages} />
 
-                </Box> */}
             </Container>
 
             <Divider />
 
-            <VitalsChart data={'data'} />
+            <VitalsChart dataArr={vitals} />
+
         </>
     )
 }

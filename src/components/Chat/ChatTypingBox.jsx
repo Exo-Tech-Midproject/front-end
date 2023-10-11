@@ -1,5 +1,9 @@
-import { Send } from '@mui/icons-material'
-import { Box, IconButton, TextField, TextareaAutosize } from '@mui/material'
+import  Send  from '@mui/icons-material/Send'
+// import { Box, IconButton, TextField } from '@mui/material'
+import Box from "@mui/material/Box";
+import TextField from "@mui/material/TextField";
+import IconButton from "@mui/material/IconButton";
+
 import React from 'react'
 
 

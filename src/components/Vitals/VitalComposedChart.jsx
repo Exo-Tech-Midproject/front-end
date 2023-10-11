@@ -1,12 +1,13 @@
 import React from 'react'
 import { Area, Bar, CartesianGrid, ComposedChart, Legend, Line, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
 
+
 export default function VitalComposedChart({ data }) {
     return (
         <>
             <ResponsiveContainer width='45%' height='80%' debounce={50} >
                 <ComposedChart width={730} height={250} data={data}>
-                    <XAxis dataKey="name" />
+                    <XAxis  />
                     <YAxis />
                     <Tooltip />
                     <Legend />
@@ -20,7 +21,7 @@ export default function VitalComposedChart({ data }) {
             </ResponsiveContainer  >
             <ResponsiveContainer width='45%' height='80%' debounce={50} >
                 <ComposedChart width={730} height={250} data={data}>
-                    <XAxis dataKey="name" />
+                    <XAxis  />
                     <YAxis />
                     <Tooltip />
                     <Legend />

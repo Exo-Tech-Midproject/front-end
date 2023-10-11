@@ -18,7 +18,7 @@ export default function TemperatureChip({ parameter, value, toAnimate }) {
                 <Lottie loop={toAnimate} animationData={ThermostatAnimation} style={{ width: '70px' }} />
                 <Typography variant='subtitle2' textTransform='capitalize'>Temperature</Typography>
             </Box>
-            <Typography variant='h6' fontWeight='700' color='green' >{value}°C</Typography>
+            <Typography variant='h6' fontWeight='700' color={value <= 37.1 && value >= 36 ? 'green' : 'red'} >{value}°C</Typography>
         </Box>
 
 

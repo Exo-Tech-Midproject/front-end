@@ -1,5 +1,9 @@
-import { Avatar, Box, Typography } from '@mui/material'
+// import { Avatar, Box, Typography } from '@mui/material'
 import React from 'react'
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import Avatar from "@mui/material/Avatar";
+
 
 export default function Message({ name }) {
     const style1 = {

@@ -1,4 +1,8 @@
-import { Avatar, Badge, Box, IconButton, Typography } from '@mui/material'
+// import { Avatar,  Box, IconButton, Typography } from '@mui/material'
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import Avatar from "@mui/material/Avatar";
+import IconButton from "@mui/material/IconButton";
 import React from 'react'
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import CallOutlinedIcon from '@mui/icons-material/CallOutlined';

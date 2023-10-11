@@ -3,26 +3,20 @@ import {
   Container,
   Divider,
   Grid,
-  IconButton,
   Typography,
-  Link
 } from "@mui/material";
 import { Stack } from "@mui/system";
 import React from "react";
 import { footerContent } from "../../utils/content";
-import OutlinedButton from "../Buttons/OutlinedButton";
+
 import Title from "../Title";
-import { useEffect, useRef } from 'react';
-import Lottie from "lottie-react";
-import animation from "./animation_lnixerue.json"
+
 const {
-  subscribe,
   protocols,
   governance,
   support,
   developers,
   copyright,
-  socials,
 } = footerContent;
 
 const LinkSection = ({ title, links }) => (
@@ -48,9 +42,9 @@ const LinkSection = ({ title, links }) => (
 );
 
 const Footer = () => {
-  
+
   return (
-    <Box sx={{bgcolor:"white", color:"#1F485B"}}>
+    <Box sx={{ bgcolor: "white", color: "#1F485B" }}>
       <Divider color="#1F485B" sx={{ mb: 10 }} />
 
       <Container>
@@ -80,9 +74,22 @@ const Footer = () => {
             </Grid>
           </Grid>
 
-          {/* Subscribe */}
+          {/* Map */}
           <Grid item xs={12} md={12} lg={5} xl={4}>
-          <Lottie  animationData={animation} style={{ width: '50%' }} />
+            <Title>Our Location</Title>
+            <Typography variant="body2" sx={{fontSize:"15px", py:1}}>Find us on the map and explore our location to plan your visit</Typography>
+            <iframe
+              title="This is a descriptive and unique title"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d13539.779386182174!2d35.83035835791401!3d31.962392934231353!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x151ca17027399b3d%3A0x47daa3f5a2309002!2sAl%20Jandawil%2C%20Amman!5e0!3m2!1sen!2sjo!4v1696936029682!5m2!1sen!2sjo"
+              width="400"
+              height="200"
+              style={{ border: "1px solid transparent",borderRadius: "30px",
+              boxShadow: "2px 2px 5px rgba(0, 0, 0, 0.3)", }}
+              allowFullScreen=""
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade">
+
+            </iframe>
           </Grid>
         </Grid>
 
@@ -93,7 +100,7 @@ const Footer = () => {
           justifyContent="space-between"
           alignItems="center"
           spacing={1}
-          sx={{ pb: 6}}
+          sx={{ pb: 6 }}
         >
           <Typography variant="body2" color="#1F485B">
             {copyright.left}

@@ -73,15 +73,15 @@ const ColorlibConnector = styled(StepConnector)(({ theme }) => ({
   [`&.${stepConnectorClasses.active}`]: {
     [`& .${stepConnectorClasses.line}`]: {
       backgroundImage:
-      'linear-gradient( 95deg,black 0%,#1F485B 50%,#67ABCB 100%)',  
-      //'linear-gradient( 95deg,rgb(242,113,33) 0%,rgb(233,64,87) 50%,rgb(138,35,135) 100%)',
+        // 'linear-gradient( 95deg,rgb(242,113,33) 0%,rgb(233,64,87) 50%,rgb(138,35,135) 100%)',
+        'linear-gradient( 95deg,black 0%,#1F485B 50%,#67ABCB 100%)',
     },
   },
   [`&.${stepConnectorClasses.completed}`]: {
     [`& .${stepConnectorClasses.line}`]: {
       backgroundImage:
-      'linear-gradient( 95deg,black 0%,#1F485B 50%,#67ABCB 100%)',  
-      //'linear-gradient( 95deg,rgb(242,113,33) 0%,rgb(233,64,87) 50%,rgb(138,35,135) 100%)',
+        //'linear-gradient( 95deg,rgb(242,113,33) 0%,rgb(233,64,87) 50%,rgb(138,35,135) 100%)',
+        'linear-gradient( 95deg,black 0%,#1F485B 50%,#67ABCB 100%)',
     },
   },
   [`& .${stepConnectorClasses.line}`]: {
@@ -105,14 +105,14 @@ const ColorlibStepIconRoot = styled('div')(({ theme, ownerState }) => ({
   alignItems: 'center',
   ...(ownerState.active && {
     backgroundImage:
-    'linear-gradient( 95deg,black 0%,#1F485B 50%,#67ABCB 100%)',  
-    //'linear-gradient( 136deg, rgb(242,113,33) 0%, rgb(233,64,87) 50%, rgb(138,35,135) 100%)',
+      //'linear-gradient( 136deg, rgb(242,113,33) 0%, rgb(233,64,87) 50%, rgb(138,35,135) 100%)',
+      'linear-gradient( 95deg,black 0%,#1F485B 50%,#67ABCB 100%)',
     boxShadow: '0 4px 10px 0 rgba(0,0,0,.25)',
   }),
   ...(ownerState.completed && {
     backgroundImage:
-    'linear-gradient( 95deg,black 0%,#1F485B 50%,#67ABCB 100%)',  
-    //'linear-gradient( 136deg, rgb(242,113,33) 0%, rgb(233,64,87) 50%, rgb(138,35,135) 100%)',
+      //'linear-gradient( 136deg, rgb(242,113,33) 0%, rgb(233,64,87) 50%, rgb(138,35,135) 100%)',
+      'linear-gradient( 95deg,black 0%,#1F485B 50%,#67ABCB 100%)',
   }),
 }));
 
@@ -151,20 +151,20 @@ ColorlibStepIcon.propTypes = {
 };
 const steps = [
   {
-    label: 'Select campaign settings',
+    label: 'Information',
     description: <FirstStep />,
   },
   {
-    label: 'Create an ad group',
+    label: 'Information',
     description:<SecondStep />,
   },
   {
-    label: 'Create an ad',
+    label: 'Information',
     description: <ThirdStep />,
   },
 ];
 
-export default function PatientForm() {
+export default function UpdatePasswordForm() {
   const [activeStep, setActiveStep] = React.useState(0);
   const [completed, setCompleted] = React.useState({});
 
@@ -212,11 +212,10 @@ export default function PatientForm() {
   };
 
   return (
-    <Box sx={{ width: '500px' }}>
-      <Typography variant="body2" sx={{ color: "#B4B4B3", textAlign: "center" ,py:1}}>-Patient Account-</Typography>
+    <Box sx={{ width: {md:'500px', xs:'300px'} }}>
       <Stepper  activeStep={activeStep} alternativeLabel connector={<ColorlibConnector />}>
         {steps.map((label, index) => (
-          <Step key={steps.label} completed={completed[index]}>
+          <Step key={steps.label} >
             <StepLabel StepIconComponent={ColorlibStepIcon}>{steps.label}</StepLabel>
           </Step>
         ))}

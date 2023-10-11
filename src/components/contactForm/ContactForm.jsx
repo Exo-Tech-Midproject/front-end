@@ -6,12 +6,7 @@ import Title from "../Title/index";
 import OutlinedButton from "../Buttons/OutlinedButton";
 import { footerContent } from "../../utils/content";
 const {
-  subscribe,
-  protocols,
-  governance,
-  support,
-  developers,
-  copyright,
+
   socials,
 } = footerContent;
 function ContactForm() {

@@ -24,10 +24,10 @@ let DBRUL = process.env.REACT_APP_BASE_URL
 export default function Vitals() {
     const [vitals, setVitals] = useState(null)
     const [currentPage, setCurrentPage] = useState(1)
-    console.log(currentPage)
+    // console.log(currentPage)
     let descending = vitals?.sort((a, b) => b.id - a.id)
-    console.log(descending)
-    console.log(vitals)
+    // console.log(descending)
+    // console.log(vitals)
     let startIndex = 4 * (currentPage - 1)
     let endIndex = startIndex + 4
     let currentPageRender = vitals ? vitals.slice(startIndex, endIndex) : []
@@ -41,7 +41,7 @@ export default function Vitals() {
                 {
                     headers: { Authorization: `Bearer ${token}` }
                 })
-            console.log(userVitals.data)
+            // console.log(userVitals.data)
             setVitals(userVitals.data)
 
         } catch (err) {

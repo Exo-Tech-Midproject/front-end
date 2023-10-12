@@ -2,6 +2,7 @@ import { Routes, Route } from "react-router-dom"
 import { lazy, Suspense } from "react"
 import LoginPatientTestingForm from "./components/LoginForm/LoginPatientTestingForm"
 import AuthPatient from "./components/Auths/AuthPatient"
+import LoginPhysicianTestingForm from "./components/LoginForm/LoginDoctorTestingForm"
 // import Loading from "./components/Loading/Loading"
 
 // import Home from "./pages/Home"
@@ -40,14 +41,16 @@ const App = () => {
         <Route path='/' element={<Suspense fallback={<Loading />}><Home /></Suspense>} />
         <Route path='/Login' element={<Suspense fallback={<Loading />}><Login /></Suspense>} />
         <Route path='/testlogin' element={<Suspense fallback={<Loading />}><LoginPatientTestingForm /></Suspense>} />
+        <Route path='/testlogin2' element={<Suspense fallback={<Loading />}><LoginPhysicianTestingForm /></Suspense>} />
         <Route path='/Signup' element={<Suspense fallback={<Loading />}><Signup /></Suspense>} />
         <Route path='/Contact' element={<Suspense fallback={<Loading />}><Contact /></Suspense>} />
         <Route path='/About' element={<Suspense fallback={<Loading />}><AboutUs /></Suspense>} />
-        <Route path='/dashboard/*' element={<AuthPatient><Suspense fallback={<Loading />}><Dashboard /></Suspense></AuthPatient>} />
+        {/* <Route path='/dashboard/*' element={<AuthPatient><Suspense fallback={<Loading />}><Dashboard /></Suspense></AuthPatient>} /> */}
+        <Route path='/dashboard/*' element={<Suspense fallback={<Loading />}><Dashboard /></Suspense>} />
         <Route path='/QA' element={<Suspense fallback={<Loading />}><QA /></Suspense>} />
         <Route path='/ForgotPassword' element={<Suspense fallback={<Loading />}><ForgotPassword /></Suspense>} />
 
-        
+
         {/* <Route path='/dashboard/chat' element={<Suspense fallback={<Loading />}><Chat /></Suspense>} /> */}
 
         {/* <Route path='/Group' element={<Suspense fallback={<Loading />}><Group /></Suspense>} /> */}

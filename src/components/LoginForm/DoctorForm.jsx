@@ -19,7 +19,6 @@ function DoctorForm() {
         <Box>
             <Container>
                 <Stack direction="column" spacing={3} alignItems="center">
-                    <Typography variant="body2" sx={{ color: "#B4B4B3", textAlign: "center" }}>- Login as a Doctor -</Typography>
                     <TextField
                         id="input-with-icon-textfield"
                         placeholder="Email"

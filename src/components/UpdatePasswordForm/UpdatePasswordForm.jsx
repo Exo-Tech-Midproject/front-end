@@ -164,7 +164,7 @@ const steps = [
   },
 ];
 
-export default function DoctorForm() {
+export default function UpdatePasswordForm() {
   const [activeStep, setActiveStep] = React.useState(0);
   const [completed, setCompleted] = React.useState({});
 

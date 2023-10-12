@@ -8,8 +8,8 @@ const { top, bottom } = section5Content;
 
 const Section5 = () => {
   return (
-    <Box sx={{ bgcolor: "#1F485B",py:4 }}>
-      <Container sx={{ mt: { xs: 0, md: 5, lg: 10 }, color: "#1F485B" }}>
+    <Box sx={{ bgcolor: "#1F485B",py:10 }}>
+      <Container sx={{ color: "#1F485B" }}>
         {/* TOP */}
         <Grid container spacing={10} flexWrap="wrap-reverse" alignItems="center">
           {/* Left */}

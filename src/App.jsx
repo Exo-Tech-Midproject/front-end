@@ -17,9 +17,10 @@ const Home = lazy(() => import("./pages/Home"))
 const Login = lazy(() => import("./pages/Login"))
 const Dashboard = lazy(() => import("./pages/Dashboard"))
 const Signup = lazy(() => import("./pages/signUp"))
-const Contact = lazy(() => import("./pages/Contact"))
 const AboutUs = lazy(() => import("./pages/AboutUs"))
-const QA = lazy(() => import("./pages/QA"))
+const QACategories= lazy(() => import("./pages/QACategories"))
+const QA= lazy(() => import("./pages/QA"))
+
 const ForgotPassword = lazy(() => import("./pages/ForgotPassword"))
 
 
@@ -43,10 +44,13 @@ const App = () => {
         <Route path='/testlogin' element={<Suspense fallback={<Loading />}><LoginPatientTestingForm /></Suspense>} />
         <Route path='/testlogin2' element={<Suspense fallback={<Loading />}><LoginPhysicianTestingForm /></Suspense>} />
         <Route path='/Signup' element={<Suspense fallback={<Loading />}><Signup /></Suspense>} />
-        <Route path='/Contact' element={<Suspense fallback={<Loading />}><Contact /></Suspense>} />
         <Route path='/About' element={<Suspense fallback={<Loading />}><AboutUs /></Suspense>} />
-        {/* <Route path='/dashboard/*' element={<AuthPatient><Suspense fallback={<Loading />}><Dashboard /></Suspense></AuthPatient>} /> */}
-        <Route path='/dashboard/*' element={<Suspense fallback={<Loading />}><Dashboard /></Suspense>} />
+
+
+
+        <Route path='/dashboard/*' element={<AuthPatient><Suspense fallback={<Loading />}><Dashboard /></Suspense></AuthPatient>} />
+        <Route path='/QACategories' element={<Suspense fallback={<Loading />}><QACategories /></Suspense>} />
+
         <Route path='/QA' element={<Suspense fallback={<Loading />}><QA /></Suspense>} />
         <Route path='/ForgotPassword' element={<Suspense fallback={<Loading />}><ForgotPassword /></Suspense>} />
 

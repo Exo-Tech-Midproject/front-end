@@ -14,10 +14,10 @@ const CustomButton = ({ children, onClick, active }) => (
     variant="outlined"
     sx={{
       borderRadius: 4,
-      borderColor: "black",
+     
       height: 58,
       px: 2,
-      backgroundColor: active ? "#F1EFEF" : "transparent",
+      backgroundColor: active ? "#67ABCB" : "transparent",
     }}
     onClick={onClick}
   >
@@ -81,10 +81,10 @@ const LoginSection = () => {
               </Title>
               <Stack direction="row" spacing={5} alignItems="center" >
                 <CustomButton onClick={() => setActiveForm("doctor")} active={activeForm === "doctor"} sx={{ border: "1px solid #B4B4B3", width: "150px" }}>
-                  <Typography sx={{ color: "black", fontSize: "15px", }}>Login as a doctor</Typography>
+                  <Typography sx={{ color: "black", fontSize: "15px", }}>As a doctor</Typography>
                 </CustomButton>
                 <CustomButton onClick={() => setActiveForm("patient")} active={activeForm === "patient"} sx={{ border: "1px solid #B4B4B3", width: "150px" }}>
-                  <Typography sx={{ color: "black", fontSize: "15px",}}>Login as a patient</Typography>
+                  <Typography sx={{ color: "black", fontSize: "15px",}}>As a patient</Typography>
                 </CustomButton>
               </Stack>
              { activeForm === "doctor" ? <DoctorForm /> : <PatientForm />}

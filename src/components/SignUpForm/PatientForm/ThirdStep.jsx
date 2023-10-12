@@ -3,6 +3,11 @@ import * as React from 'react';
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 import { Stack } from '@mui/material';
+import Radio from '@mui/material/Radio';
+import RadioGroup from '@mui/material/RadioGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import FormControl from '@mui/material/FormControl';
+import FormLabel from '@mui/material/FormLabel';
 function ThirdStep() {
   return (
     <Box component="form" noValidate >
@@ -15,23 +20,26 @@ function ThirdStep() {
         placeholder="Mobile Number"
         autoFocus
       />
-      <TextField
+          <TextField
         required
-        id="nationalID"
-        placeholder="National ID"
-        name="nationalID"
-        type='number'
-        autoComplete="nationalID"
+        name="Birthday"
+        placeholder="Birthday"
+        type="Date"
+        id="Birthday"
+        autoComplete="Birthday"
       />
-
-      <TextField
-        required
-        name="department"
-        placeholder="department"
-        type="department"
-        id="department"
-        autoComplete="department"
-      />
+ 
+      <FormControl sx={{color:"black"}}>
+      <FormLabel sx={{color:"black"}} id="demo-row-radio-buttons-group-label">Marital Status</FormLabel>
+      <RadioGroup
+        row
+        aria-labelledby="demo-row-radio-buttons-group-label"
+        name="row-radio-buttons-group"
+      >
+        <FormControlLabel value="female" control={<Radio sx={{color:"black"}} />} label="single" />
+        <FormControlLabel  value="male" control={<Radio sx={{color:"black"}}/>} label="married" />
+      </RadioGroup>
+    </FormControl>
     </Stack>
   </Box>
   )

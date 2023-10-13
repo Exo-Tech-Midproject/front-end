@@ -50,17 +50,14 @@ export default function CreatePost({createdPost,setCreatedPost}) {
                 const newPost = {
                     postTitle,
                     postContent,
-                    //   groupImage: groupImageUrl,
                 };
 
                 setCreatedPost([...createdPost, newPost]);
                 setPostTitle("");
                 setPostContent("");
-                // setGroupImageUrl(DefaultImg);
-                // setSuccess("Post created successfully.");
+                setShowForm(false);
             }
         } else {
-            // setSuccess(null);
             setSnackbarOpen(true);
         }
     };
@@ -80,7 +77,7 @@ return (
         <Button variant="contained"
           sx={{
             bgcolor: '#062942',
-            borderRadius: "10px",
+            borderRadius: "5px",
             margin: "2% ",
             fontSize: "1.3rem",
             "&:hover": {

@@ -5,13 +5,8 @@ import TextField from "@mui/material/TextField";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import {useState, useEffect} from "react";
-import Breadcrumbs from '@mui/material/Breadcrumbs';
-import Link from '@mui/material/Link';
-import HomeIcon from '@mui/icons-material/Home';
-import WhatshotIcon from '@mui/icons-material/Whatshot';
-import GrainIcon from '@mui/icons-material/Grain';
-import Lottie from "lottie-react";
-import medicalHistoryAnimation from '../../assets/lottie/medicalHistory.json'
+import HeroHistory from "./HeroHistory";
+
 
 export default function PatientHistory() {
     
@@ -24,8 +19,6 @@ export default function PatientHistory() {
         familyHistory: "",
         socialHistory: "",
     });
-
-    // const imageURL = "https://t3.ftcdn.net/jpg/02/96/80/04/360_F_296800484_onKDmccm8QnudSeq4rkpcLIBItS8UEd8.jpg";
 
     const handleAllergiesChange = (e) => {
         setFormData({...formData, allergies: e.target.value});
@@ -57,92 +50,13 @@ export default function PatientHistory() {
         }
     };
 
+    
+
 return (
     <Box>
-        <Box
-            sx={{
-                margin: "2%",
-                marginTop:'0'
-            }}
-        >
-        <div role="presentation">
-        <Breadcrumbs aria-label="breadcrumb">
-        <Link
-            underline="hover"
-            sx={{ display: 'flex',
-            alignItems: 'center'
-        }}
-            color="#062942"
-            href="/"
-        >
-            <HomeIcon sx={{ mr: 0.5 }} fontSize="inherit" />
-                Home
-        </Link>
-        <Link
-          underline="hover"
-          sx={{ display: 'flex', alignItems: 'center' }}
-          color="#062942"
-          href="/dashboard/Profile"
-        >
-          <WhatshotIcon sx={{ mr: 0.5 }} fontSize="inherit" />
-          Profile
-        </Link>
-        <Typography
-          sx={{ display: 'flex', alignItems: 'center' }}
-          color="#4070f4"
-        >
-          <GrainIcon sx={{ mr: 0.5 }} fontSize="inherit" />
-          Medical history
-        </Typography>
-      </Breadcrumbs>
-    </div>
-        </Box>
-        <Container
-            sx={{
-                minHeight: "40vh",
-                width: "100%",
-                bgcolor:'white',
-                margin:"5px auto",
-                borderRadius: "5px",
-                backgroundPosition: "center",
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                color: "#00222E",
-                boxShadow:'0px 1px 2px 0px rgba(0,0,0,0.4), 0px -1px 1px 0px rgba(0,0,0,0.14), 0px 1px 2px 0px rgba(0,0,0,0.12)',
-            }}
-        >
-            <Container sx={{
-                    marginLeft: '3%',
-                    paddingRight: '0',
-                    display:"flex",
-                    flexDirection:"column",
-                    alignItems:"center"
-            }}>
-            <Typography
-                gutterBottom
-                sx={{
-                    fontSize: "4rem",
-                }}
-            >
-                Guardians of Your Health
-            </Typography>
-            <Typography
-                gutterBottom
-                sx={{
-                    textAlign: 'center',
-                    fontSize: "1.5rem",
-                }}
-            >
-                Empowering Health Consciousness: A Comprehensive Approach to Keeping a Watchful Eye on Your Well-being
-            </Typography>
-            </Container>
-            <Lottie animationData={medicalHistoryAnimation} style={{
-                width:"40%" , 
-                height:"100%" ,
-                marginLeft:"2%"
-        }}/>
-        </Container>
+        <HeroHistory />
+    
+        
         <Container
             component="main"
             sx={{

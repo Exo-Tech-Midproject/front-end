@@ -11,6 +11,7 @@ import GrainIcon from '@mui/icons-material/Grain';
 import Breadcrumbs from '@mui/material/Breadcrumbs';
 import Link from '@mui/material/Link';
 
+
 export default function GroupHero() {
 
     const [isVisible, setIsVisible] = useState(false);
@@ -25,7 +26,8 @@ export default function GroupHero() {
     }, []);
   
     return (
-        <>
+        <Box sx={{
+        }}>
         <Box
             sx={{
                 margin: "2%",
@@ -68,10 +70,10 @@ export default function GroupHero() {
         <Container
             // width={"80%"}
             sx={{
-                marginTop:"2%",
+                // marginTop:"2%",
                 display:'flex',
                 justifyContent:"center",
-                minHeight: "25vh",
+                minHeight: "30vh",
                 alignItems:"center",
                 width:"100%"
             }}
@@ -85,7 +87,7 @@ export default function GroupHero() {
                 marginBottom:'3%',
                 color:'#062942'
             }}>
-                    Your Groups
+                    Get Better Health
                 </Typography>
                 <Typography
                     variant="h3"
@@ -102,9 +104,9 @@ export default function GroupHero() {
                         Where Your Wellness Takes Center Stage
     </Typography>
                 </Container>
-                <Lottie animationData={groupHeroAnimation} style={{width:"50%"}}/>
+                <Lottie animationData={groupHeroAnimation} style={{width:"60%"}}/>
             
         </Container>
-        </>
+        </ Box>
     )
 }

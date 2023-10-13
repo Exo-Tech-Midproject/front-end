@@ -3,10 +3,13 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import Slider from "react-slick";
 // import recipePic from '../../assets/images/prescriptions/Recipe.svg'
-import recipePicjpg from '../../assets/images/prescriptions/7944895.jpg'
+// import recipePicjpg from '../../assets/images/prescriptions/7944895.jpg'
 import PrescriptionSingleCard from './PrescriptionSingleCard';
 export default function PrescriptionCard({ prescription, setPrescription }) {
     
+    // eslint-disable-next-line no-unused-vars
+    let descending = prescription?.sort((a, b) => b.id - a.id)
+
     const settings = {
         dots: true,
         infinite: true,
@@ -55,7 +58,7 @@ export default function PrescriptionCard({ prescription, setPrescription }) {
 
             <Slider {...settings} >
                 {prescription?.map((slide, index) => (
-                    <PrescriptionSingleCard slide={slide} index={index} />
+                    <PrescriptionSingleCard slide={slide} index={index} setPrescription={setPrescription} prescription={prescription} />
                 ))}
             </Slider>
         </>

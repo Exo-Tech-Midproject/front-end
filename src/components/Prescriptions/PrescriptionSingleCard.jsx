@@ -1,11 +1,45 @@
-import React from 'react'
+import React, { useState } from 'react'
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 // import recipePic from '../../assets/images/prescriptions/Recipe.svg'
 import recipePicjpg from '../../assets/images/prescriptions/7944895.jpg'
-import { Box, Typography } from '@mui/material';
+import { Box, IconButton, Typography } from '@mui/material';
 import DrugTable from './DrugsTable';
-export default function PrescriptionSingleCard({ slide, index }) {
+import DeletePrescriptionModal from './DeletePrescriptionModal';
+import ClearOutlinedIcon from '@mui/icons-material/ClearOutlined';
+import RemoveCircleOutlineOutlinedIcon from '@mui/icons-material/RemoveCircleOutlineOutlined';
+import axios from 'axios';
+import cookie from 'react-cookies'
+import jwtDecode from 'jwt-decode';
+let DBRUL = process.env.REACT_APP_BASE_URL
+
+
+export default function PrescriptionSingleCard({ slide, index, setPrescription, prescription }) {
+    const [showModal, setShowModal] = useState(false)
+
+    function handleShowDeleteModal() {
+        setShowModal(true)
+    }
+    function handleCloseDeleteModal() {
+        setShowModal(false)
+    }
+    async function handleDeleteCard(id) {
+        try {
+            let token = cookie.load('auth')
+            // let token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Imhhc2FuIiwiYWNjb3VudFR5cGUiOiJwaHlzaWNpYW4iLCJpYXQiOjE2OTcxNzUzMjN9.xGG53_pQA-c8Uq10dELXS6GMJ2VP9SmJKE-ykQ2KEGo'
+            const payload = await jwtDecode(token)
+            let userVitals = await axios.delete(`${DBRUL}/physician/${payload.username}/patients/${'anas0'}/prescriptions/${id}`,
+                {
+                    headers: { Authorization: `Bearer ${token}` }
+                })
+            console.log(userVitals.data)
+            setPrescription(prescription.filter(element => element.id !== id))
+            // console.log(vitals, 'from delete function')
+            handleCloseDeleteModal()
+        } catch (err) {
+            console.log(err)
+        }
+    }
     return (
         <div key={index} >
             <Box height='90%' display='flex' alignContent='center' justifyContent='center' py={3}>
@@ -30,6 +64,9 @@ export default function PrescriptionSingleCard({ slide, index }) {
                         },
                     }}
                 >
+                    <IconButton onClick={handleShowDeleteModal} color='white' sx={{ position: 'absolute', top: '45px', right: '0px' }} >
+                        <RemoveCircleOutlineOutlinedIcon sx={{ color: '#ed6c02' }} />
+                    </IconButton>
                     <Typography color='white' position='absolute' top='20px' left='10px' variant="h5" component="div">
                         HEALTHAK
                     </Typography>
@@ -78,6 +115,7 @@ export default function PrescriptionSingleCard({ slide, index }) {
                     <DrugTable recipe={slide.medicines} />
                 </Box>
             </Box>
+            <DeletePrescriptionModal showModal={showModal} handleCloseDeleteModal={handleCloseDeleteModal} handleDeleteCard={handleDeleteCard} prescId={slide.id} />
         </div>
     )
 }

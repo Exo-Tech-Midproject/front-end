@@ -13,6 +13,7 @@ import CreatePost from './GroupPost/CreatePost';
 import PostContent from './GroupPost/PostContent';
 import PostHeader from './GroupPost/PostHeader';
 import { useState } from 'react';
+import AddMembers from './GroupPost/AddMembers';
 
 
 
@@ -29,6 +30,11 @@ export default function Group() {
           marginTop:'0'
         }}
       >
+        <Box sx={{
+          display:"flex",
+          alignItems:"center",
+          justifyContent:"space-between"
+        }}>
         <div role="presentation">
           <Breadcrumbs aria-label="breadcrumb">
             <Link
@@ -58,6 +64,10 @@ export default function Group() {
             </Typography>
           </Breadcrumbs>
         </div>
+        <Box>
+        <AddMembers />
+        </Box>
+        </Box>
         <Container
           sx={{
             minHeight: "20vh",

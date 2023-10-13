@@ -12,6 +12,7 @@ import MuiAlert from "@mui/material/Alert";
 
 const DefaultImg = 'https://media.istockphoto.com/id/1413129950/vector/avatar-of-woman-doctor-with-brown-hair-doctor-with-stethoscope-vector-illustration.jpg?s=612x612&w=0&k=20&c=J62PxR-p5QeTpqgk-5C8naTrbZdBUnhuxh6sub1YpBg='
 
+const imageURL = 'https://upload.wikimedia.org/wikipedia/commons/2/2c/Background_Colors_by_Peak_Hora26.jpg'
 export default function CreateGroup() {
 
   const [groupName, setGroupName] = useState('');
@@ -19,7 +20,6 @@ export default function CreateGroup() {
   const [groupImageUrl, setGroupImageUrl] = useState(DefaultImg);
   const [groupNameError, setGroupNameError] = useState(null);
   const [descriptionError, setDescriptionError] = useState(null);
-  const [success, setSuccess] = useState(null);
   const [createdGroups, setCreatedGroups] = useState([]);
   const [showForm, setShowForm] = useState(false);
 
@@ -37,8 +37,8 @@ export default function CreateGroup() {
     const inputValue = e.target.value;
     setDescription(inputValue);
 
-    if (inputValue.length < 50 || inputValue.length > 150) {
-      setDescriptionError('Description must be between 50 and 200 characters.');
+    if (inputValue.length < 5 || inputValue.length > 100) {
+      setDescriptionError('Description must be between 5 and 100 characters.');
     } else {
       setDescriptionError(null);
     }
@@ -59,7 +59,7 @@ export default function CreateGroup() {
     e.preventDefault();
 
     if (groupName && description && !groupNameError && !descriptionError) {
-      if (description.length >= 50 && description.length <= 150) {
+      if (description.length >= 5 && description.length <= 100) {
         const newGroup = {
           groupName,
           description,
@@ -70,10 +70,10 @@ export default function CreateGroup() {
         setGroupName('');
         setDescription('');
         setGroupImageUrl(DefaultImg);
-        setSuccess('Group created successfully.');
+
+        setShowForm(false);
       }
     } else {
-      setSuccess(null);
       setSnackbarOpen(true); // Open the Snackbar for errors
     }
   };
@@ -81,6 +81,7 @@ export default function CreateGroup() {
   const handleCloseSnackbar = () => {
     setSnackbarOpen(false); // Close the Snackbar when the user closes it
   };
+
 
   return (
     <>
@@ -93,7 +94,7 @@ export default function CreateGroup() {
         <Button variant="contained"
           sx={{
             bgcolor: '#062942',
-            borderRadius: "10px",
+            borderRadius: "5px",
             margin: "3%",
             fontSize: "1.3rem",
             "&:hover": {
@@ -107,6 +108,9 @@ export default function CreateGroup() {
       </Container>
       {showForm && (
         <Box sx={{
+          // backgroundImage: `url(${imageURL})`,
+          // backgroundPosition: 'center',
+          // backgroundSize: 'cover',
           border: "0.01px solid #1F485B7f",
           bgcolor: "white",
           borderRadius: "4px",
@@ -145,7 +149,8 @@ export default function CreateGroup() {
 
               <label htmlFor="image-upload">
                 <Button variant="contained" component="span" sx={{
-                  bgcolor: "#062942"
+                  bgcolor: "#062942",
+                  marginTop:"10px"
                 }}>
                   Upload Image
                 </Button>
@@ -154,7 +159,7 @@ export default function CreateGroup() {
                 accept="image/*"
                 id="image-upload"
                 type="file"
-                style={{ display: 'none' }}
+                style={{ display: 'none'}}
                 onChange={handleImageUpload}
               />
             </Container>
@@ -162,7 +167,6 @@ export default function CreateGroup() {
               width: "70%",
               paddingRight: "10%",
             }} >
-              {success && <p className="success">{success}</p>}
               <form onSubmit={handleSubmit} spacing={2}>
                 <Box sx={{
                   margin: "3%",
@@ -224,11 +228,25 @@ export default function CreateGroup() {
         </Box>
       )}
       <Divider sx={{ margin: '20px' }} />
+      <Box sx={{
+        display:"flex",
+        justifyContent:"center",
+        alignItems:"center",
+        // height:"50px"
+      }}>
+      <Typography variant="h1" textTransform="capitalize" sx={{
+                marginBottom:'3%',
+                color:'#062942'
+            }}>
+                    Your Groups
+                </Typography>
+      </Box>
       <Container
         sx={{
-          margin: '1%',
+          margin: '2%',
           flexWrap: 'wrap',
-          display: 'flex'
+          display: 'flex',
+          minHeight:"30vh"
         }}
       >
         {createdGroups.map((group, index) => (

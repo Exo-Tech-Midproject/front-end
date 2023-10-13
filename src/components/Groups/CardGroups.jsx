@@ -21,8 +21,10 @@ export default function CardGroups(props) {
   };
   return (
     <Link to="/dashboard/group" style={{ textDecoration: 'none' }}>
-      <Card sx={{
-        bgcolor: "#062942",
+      <Card 
+      sx={{
+        // bgcolor: "#062942",
+        bgcolor: "#1F485B",
         width: '350px',
         margin: '15px',
         padding:"30px 30px",
@@ -32,7 +34,8 @@ export default function CardGroups(props) {
         maxHeight:430,
         alignItems: 'center',
         borderRadius: '10px',
-        justifyContent:"center",
+        // justifyContent:"center",
+        alignContent:"space-between",
         boxShadow:"0 0 10px rgba(0, 0, 0, 0.1);",
         '&:hover': {
           borderRadius: '15px',
@@ -59,10 +62,11 @@ export default function CardGroups(props) {
               height: '175px',
               borderRadius: '50%',
               // margin: "10px auto",
-              border: '0.3rem solid #4070f4'
+              border: '0.3rem solid black'
             }}
             onError={handleImageError}
           />
+          
           <CardContent sx={{
             width:"300px",
             padding:"auto"
@@ -73,6 +77,7 @@ export default function CardGroups(props) {
                 color: "#f8f8ff",
                 
               }}>
+                
               {groupName}
             </Typography>
             <Typography variant="body1" color="text.secondary" sx={{
@@ -84,21 +89,19 @@ export default function CardGroups(props) {
             }}>
               {description}
             </Typography>
-      <Button variant="outlined" color="error" sx={{
-        bgcolor:"red",
-        color:"black",
+          </CardContent>
+      <Button variant="contained" color="error" 
+      sx={{
         fontSize:"1.2rem",
-        fontWeight:"bold",
         marginTop:"15px",
         "&:hover": {
           transform: "scale(1.1) ",
           transition: 'transform 0.5s ease',
-          background: "red"
         }
-      }}>
+      }}
+      >
         Delete Group
       </Button>
-          </CardContent>
         </CardActionArea>
       </Card>
       </Link>

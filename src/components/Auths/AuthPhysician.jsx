@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { LoginContext } from '../../ContextApi/'
+import { LoginContext } from '../../ContextApi/Auth'
 
 function AuthPhysician({children}) {
   const loginContext = useContext(LoginContext);

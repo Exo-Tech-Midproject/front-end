@@ -1,0 +1,121 @@
+@import url("https://fonts.googleapis.com/css?family=Roboto:400,400i,700");
+
+body {
+	font-family: Roboto, sans-serif;
+	margin: 0;
+	height: 100vh;
+	display: grid;
+	align-items: center;
+	justify-items: center;
+	background-image: linear-gradient(to top, #ffffff 0%, #ffffff 100%);
+}
+
+.mainP {
+	min-Height: 50vh;
+	margin: 5px 10px 0 10px;
+	display: flex;
+	justify-content: space-between;
+	flex-wrap: wrap;
+}
+
+
+.card {
+	background: #fff;
+	border-radius: 4px;
+	box-shadow: 0px 14px 80px rgba(34, 35, 58, 0.5);
+	height: 300px;
+	width: 450px;
+	display: flex;
+	flex-direction: row;
+	border-radius: 25px;
+	position: relative;
+	margin-top: 20px;
+}
+
+.card h3 {
+	margin: 0;
+	padding: 0 1rem;
+}
+
+.card .title {
+	padding: 1rem;
+	text-align: right;
+	color: green;
+	font-weight: bold;
+	font-size: 12px;
+}
+
+.card .desc {
+	padding: 0.5rem 1rem;
+	font-size: 12px;
+	justify-content: space-between;
+	min-height: max-content;
+}
+
+.card .actions {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	align-items: center;
+	padding: 0.5rem 1rem;
+	font-Size: 16px;
+}
+
+.card svg {
+	width: 85px;
+	height: 85px;
+	margin: 0 auto;
+}
+
+.card-text {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	margin: 0;
+}
+
+.title-total {
+	align-items: center;
+	width: 100%;
+	justify-content: space-between;
+
+}
+
+path {
+	fill: white;
+}
+
+.img-portada {
+	width: 100%;
+}
+
+.portada {
+	width: 100%;
+	min-height: fit-content;
+	border-top-left-radius: 20px;
+	border-bottom-left-radius: 20px;
+	background-image: url("https://img.freepik.com/free-photo/pleased-young-female-doctor-wearing-medical-robe-stethoscope-around-neck-standing-with-closed-posture_409827-254.jpg");
+	background-position: bottom center;
+	background-size: cover;
+}
+
+.card .rating {
+	background: #ffd500;
+	display: flex;
+	width: 80%;
+	height: 20px;
+	margin: 10%;
+}
+
+button {
+	color: #4CAF50;
+	border: black;
+	background: red;
+	font-size: 24px;
+	color: #8bc34a;
+	cursor: pointer;
+	transition: .5s;
+
+	&:hover {
+		color: #4CAF50;
+		transform: rotate(22deg)
+	}
+}

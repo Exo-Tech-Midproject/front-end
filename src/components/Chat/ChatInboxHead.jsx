@@ -8,27 +8,27 @@ import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import CallOutlinedIcon from '@mui/icons-material/CallOutlined';
 import ReportGmailerrorredOutlinedIcon from '@mui/icons-material/ReportGmailerrorredOutlined';
 
-export default function ChatInboxHead() {
+export default function ChatInboxHead({ withWho }) {
   return (
-    <Box width='100%' height='70px' display='flex' justifyContent='space-between' alignItems={'center'} bgcolor='white' sx={{ borderTopRightRadius: '7px' }}>
-      <Box display='flex' justifyContent='center' alignContent='center' padding={3} gap={3} >
-        <Avatar sx={{ width: '50px', height: '50px' }} src='https://wallpapers.com/images/hd/cool-profile-picture-awled9dwo4qq2yv2.jpg' />
-        <Box display='flex' flexDirection='column' justifyContent='center'>
-          <Typography fontWeight='700'>Anas Nemrawi</Typography>
+    <Box width='100%' p={4} height='70px' display='flex' justifyContent='space-between' alignItems={'center'} bgcolor='white' sx={{ borderTopRightRadius: '7px' }}>
+      <Box display='flex' alignItems='center' gap={2} minWidth={'20%'}>
+        <Avatar sx={{ width: { xs: '40px', sm: '40px', md: '50px' }, height: { xs: '40px', sm: '40px', md: '50px' } }} src='https://wallpapers.com/images/hd/cool-profile-picture-awled9dwo4qq2yv2.jpg' />
+        {/* <Box > */}
+        <Typography fontSize={{ xs: '0.8rem', sm: '1', md: '1.25rem' }} fontWeight='700'>{withWho?.fullName}</Typography>
+        {/* </Box> */}
+      </Box>
+      <Box display='flex'>
+        <Box paddingY={1} px={3} borderRadius='30px' display='flex' bgcolor='green' alignItems='center'>
+          <Typography textAlign='center' sx={{ fontSize: { xs: '0.7rem', md: '1.25rem' } }} color='white' fontWeight='700' fontSize={'0.95rem'}>Online</Typography>
         </Box>
-      </Box>
-      <Box bgcolor='#2EEDAE' textAlign='center' paddingY={1} px={3} borderRadius='30px' alignSelf='center'>
-        <Typography fontWeight='700' fontSize={'0.95rem'}>Online</Typography>
-      </Box>
-      <Box display='flex' padding={3} gap={3}>
         <IconButton>
-          <CallOutlinedIcon />
+          <CallOutlinedIcon sx={{ fontSize: { xs: '0.8rem', sm: '1.25rem', md: '2.00rem' } }} />
         </IconButton>
         <IconButton>
-          <InfoOutlinedIcon />
+          <InfoOutlinedIcon sx={{ fontSize: { xs: '0.8rem', sm: '1.25rem', md: '2.00rem' } }} />
         </IconButton>
         <IconButton>
-          <ReportGmailerrorredOutlinedIcon />
+          <ReportGmailerrorredOutlinedIcon sx={{ fontSize: { xs: '0.8rem', sm: '1.25rem', md: '2.00rem' } }} />
         </IconButton>
       </Box>
       {/* <Box></Box> */}

@@ -21,7 +21,6 @@ export default function Group() {
 
   const [createdPost, setCreatedPost] = useState([]);
 
-
   return (
     <div>
       <Box

@@ -7,7 +7,7 @@ import {Box, Container} from "@mui/material";
 import * as React from "react";
 import Typography from "@mui/material/Typography";
 
-const imageURL = "https://accessclinics.org/wp-content/uploads/2015/01/homeparallax.jpg";
+const imageURL = "https://img.freepik.com/premium-photo/medical-history-with-stethoscope-clipboard-black-desk_512283-640.jpg?size=626&ext=jpg&uid=R33434868&ga=GA1.2.2039131302.1685617875&semt=ais";
 
 export default function HeroHistory() {
   return (
@@ -53,6 +53,7 @@ export default function HeroHistory() {
                 backgroundImage: `url(${imageURL})`,
                 backgroundPosition: "center",
                 backgroundRepeat: "no-repeat",
+                backgroundSize: "cover",
                 minHeight: "50vh",
                 width: "100%",
                 bgcolor:'white',
@@ -87,16 +88,19 @@ export default function HeroHistory() {
                 sx={{
                     textAlign: 'center',
                     fontSize: "1.5rem",
+                    color:"white",
+                    paddingLeft:"10px",
+                    paddingRight:"10px",
                     
                 }}
             >
-                Empowering Health Consciousness: A Comprehensive Approach to Keeping a Watchful Eye on Your Well-being
+                Empowering Health Consciousness: A Comprehensive Approach to Keeping a Watchful Eye on Your Well being
             </Typography>
             </Box>
-            <Box sx={{
+            {/* <Box sx={{
                 width:"30%"
             }}>
-            </Box>
+            </Box> */}
         </Container>
     </div>
   )

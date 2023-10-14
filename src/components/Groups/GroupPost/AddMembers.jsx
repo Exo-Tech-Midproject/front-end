@@ -9,6 +9,7 @@ import DialogTitle from "@mui/material/DialogTitle";
 import {useState} from "react";
 import Box from "@mui/material/Box";
 
+
 export default function AddMembers() {
     const [open, setOpen] = useState(false);
     const [patientList, setPatientList] = useState("");
@@ -87,13 +88,20 @@ export default function AddMembers() {
                     sx={{
                         display: "flex",
                         flexDirection: "column",
-                        // justifyContent:"center",
+                        justifyContent:"center",
                         alignItems: "center",
+                        margin:"auto"
                     }}
                 >
                     <DialogTitle
                         sx={{
-                            fontSize: "2rem",
+                            fontSize: "2.2rem",
+                            bgcolor:"#1F485B",
+                            color:'white',
+                            width:"100%",
+                            display:"flex",
+                            justifyContent:"center",
+                            fontWeight:"600"
                         }}
                     >
                         Add Members
@@ -106,8 +114,9 @@ export default function AddMembers() {
                     >
                         <DialogContentText
                             sx={{
-                                color: "red",
-                                margin: "10px auto",
+                                color: "#1F485B",
+                                margin: "20px auto",
+                                fontWeight:"600",
                             }}
                         >
                             Enter a list of patient usernames (one per line)
@@ -122,8 +131,14 @@ export default function AddMembers() {
                         />
                     </DialogContent>
                     <DialogActions>
-                        <Button onClick={handleClose}>Cancel</Button>
-                        <Button onClick={handleAddPatients}>Add</Button>
+                    {/* <Box display='flex' gap={1} width='100%' justifyContent='center'> */}
+                        <Button color='medical' onClick={handleAddPatients} sx={{
+                            fontSize:"1.5rem"
+                        }}>Add</Button>
+                        <Button color='error' onClick={handleClose} sx={{
+                            fontSize:"1.5rem"
+                        }}>Cancel</Button>
+                        {/* </ Box> */}
                     </DialogActions>
                 </Box>
             </Dialog>

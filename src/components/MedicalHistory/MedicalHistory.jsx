@@ -6,9 +6,15 @@ import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import {useState, useEffect} from "react";
 import HeroHistory from "./HeroHistory";
-
+import AuthPhysician from '../Auths/AuthPhysician';
+import axios from 'axios';
+import cookie from 'react-cookies'
+import jwtDecode from 'jwt-decode';
+let DBRUL = process.env.REACT_APP_BASE_URL
 
 export default function PatientHistory() {
+
+    const [medicalHistory , setMedicalHistory] = useState('')
     
     const [formData, setFormData] = useState({
         patientUN: "",
@@ -20,15 +26,30 @@ export default function PatientHistory() {
         socialHistory: "",
     });
 
-    const handleAllergiesChange = (e) => {
-        setFormData({...formData, allergies: e.target.value});
-    };
+    async function fetchHistory (){
+        try{
+            let token = cookie.load('auth')
+            const payload = await jwtDecode(token)
+            let history = await axios.get(`${DBRUL}/physician/${payload.username}/patients/${payload.username}/disease`,
+                {
+                    headers: { Authorization: `Bearer ${token}` }
+                })
+            console.log(history.data)
+            setMedicalHistory(history.data)
+            console.log(history, 'from history function')
+        }
+        catch (error){
+          console.log(error)
+        }
+      }
 
-    useEffect(() => {
-        console.log("Form data saved:", formData);
-    }, [formData]);
 
-    const handleSubmit = (e) => {
+      useEffect(() => {
+        fetchHistory()
+    
+    }, [])
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
         if (
@@ -40,12 +61,24 @@ export default function PatientHistory() {
             formData.familyHistory &&
             formData.socialHistory
         ) {
-            // All fields are filled
-            // You can handle the submission logic here
-            console.log("Form submitted with data:", formData);
+            const newHistory = {
+                historyPI:formData.historyPI,
+                presentILL:formData.presentILL,
+                allergies:formData.allergies,
+                familyHistory:formData.familyHistory,
+                socialHistory:formData.socialHistory,
+                patientUN:formData.patientUN,
+                physicianUN:formData.physicianUN
+            }
+            let token = cookie.load('auth')
+            const payload = await jwtDecode(token)
+            let history = await axios.post(`${DBRUL}/physician/${payload.username}/patients/${payload.username}/disease`,newHistory,
+            {
+                headers: { Authorization: `Bearer ${token}` }
+            })
+        console.log(history.data)
+        setMedicalHistory(history)
         } else {
-            // Some fields are missing
-            // Handle the error state or display an error message
             console.error("Please fill in all fields.");
         }
     };
@@ -64,6 +97,7 @@ return (
                 width: "80%",
                 display: "flex",
                 alignItems: "center",
+                
             }}
         >
             <Box
@@ -71,30 +105,58 @@ return (
                 sx={{
                     marginTop: "5%",
                     marginBottom: "5%",
-                    border: "0.5px solid #1F485B",
+                    // border: "0.5px solid #1F485B",
                     boxShadow: "0px 0px 1px 1px #888888",
-                    borderRadius: "15px",
+                    // borderRadius: "15px",
                     bgcolor: "white",
+                    border:"15px solid #062942"
                 }}
                 onSubmit={handleSubmit}
             >
+                <Box sx={{
+                    // bgcolor:"#00222E",
+                    // borderTopRightRadius: '15px',
+                    // borderTopLeftRadius: '15px',
+                    // boxShadow: "0px 0px 1px 1px #888888",
+                    height:"115px",
+                    display:"flex",
+                    alignItems:"center",
+                    justifyContent:"center"
+                }}>
+                    <Box 
+                    sx={{
+                        bgcolor:"#ECF3F8",
+                        height:"100%",
+                        width:"60%",
+                        display:"flex",
+                        alignItems:"center",
+                    justifyContent:"center",
+                    border:"10px solid #062942",
+                    borderTop:"none",
+                    }}>
                 <Typography
                     component="h1"
                     variant="h2"
                     sx={{
-                        margin: "3%",
+                    // border:"10px solid #1F485B",
+                    // bgcolor:"#00222E",
+                    // borderTopRightRadius: '15px',
+                    // borderTopLeftRadius: '15px',
+                    // boxShadow: "0px 0px 1px 1px #888888",
                         color: "#00222E",
                     }}
                 >
                     Medical History
                 </Typography>
+                </Box>
+                </Box>
                 <Box
                     sx={{
                         marginTop: 8,
                         display: "flex",
                         flexDirection: "column",
                         alignItems: "center",
-                        margin: "3%",
+                        margin: "1% 3% 3% 3%",
                     }}
                 >
                     <Box component="form" noValidate sx={{mt: 3}}>
@@ -188,9 +250,8 @@ return (
                                     id="allergies"
                                     label="Allergies"
                                     value={formData.allergies}
-                                    onChange={handleAllergiesChange}
-                                    multiline // Enable multiline input
-                                    rows={3} // Set the number of visible rows
+                                    multiline
+                                    rows={3} 
                                     sx={{
                                         bgcolor: "#ECF3F8",
                                         "& label": {
@@ -246,6 +307,7 @@ return (
                             </Grid>
                             <Grid item xs={12}></Grid>
                         </Grid>
+                        <AuthPhysician>
                         <Button
                             type="submit"
                             fullWidth
@@ -259,6 +321,7 @@ return (
                         >
                             submit
                         </Button>
+                        </AuthPhysician>
                         <Grid container justifyContent="flex-end">
                             <Grid item></Grid>
                         </Grid>

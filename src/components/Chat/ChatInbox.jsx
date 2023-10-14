@@ -24,13 +24,13 @@ export default function ChatInbox({ withWho }) {
   const [messages, setMessages] = useState([])
   let token = cookie.load('auth')
   let payload = jwtDecode(token)
+  const [roomName, setRoomName] = useState(null)
 
-
-  let userData = {
-    username: payload.username,
-    target: 'someone',
-    roomName: 'hasan'
-  }
+  // let userData = {
+  //   username: payload.username,
+  //   target: 'someone',
+  //   roomName: 'hasan'
+  // }
 
 
 
@@ -99,14 +99,21 @@ export default function ChatInbox({ withWho }) {
     }
   }, [messages]);
   useEffect(() => {
-    getAllMessagesFromDb(payload.accountType)
+    // getAllMessagesFromDb(payload.accountType)
+    if (withWho && payload) {
+
+      setRoomName(`${payload.username}+${withWho.username}`.split('').sort().join(''))
+    }
   }, [withWho]);
 
 
 
   useEffect(() => {
-    connectSocket(userData);
-    getAllMessagesFromDb(payload.accountType)
+    if (roomName) {
+
+      connectSocket(roomName);
+      getAllMessagesFromDb(payload.accountType)
+    }
     const handleChatMessage = (payload) => {
 
       setMessages(prevMessages => [...prevMessages, payload]);
@@ -115,10 +122,10 @@ export default function ChatInbox({ withWho }) {
     socket.on('chat message', handleChatMessage);
 
     return () => {
-      disconnectSocket();
+      disconnectSocket(roomName);
       socket.off('chat message', handleChatMessage);
     };
-  }, [])
+  }, [roomName])
 
 
   const handleSubmit = async (e) => {
@@ -126,7 +133,7 @@ export default function ChatInbox({ withWho }) {
 
     let sentMsg = await addMessagesToDb(currentMsg)
 
-    socket.emit('chat message', sentMsg.data)
+    socket.emit('chat message', sentMsg?.data)
     setCurrentMsg('')
   }
   return (

@@ -20,6 +20,7 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.5.1",
+    "framer-motion": "^10.16.4",
     "jwt-decode": "^3.1.2",
     "lord-icon-element": "^4.1.1",
     "lottie-react": "^2.4.0",

@@ -20,6 +20,7 @@ const Signup = lazy(() => import("./pages/signUp"))
 const AboutUs = lazy(() => import("./pages/AboutUs"))
 const QACategories= lazy(() => import("./pages/QACategories"))
 const QA= lazy(() => import("./pages/QA"))
+const NotFound= lazy(() => import("./pages/NotFound"))
 
 const ForgotPassword = lazy(() => import("./pages/ForgotPassword"))
 
@@ -53,6 +54,11 @@ const App = () => {
 
         <Route path='/QA' element={<Suspense fallback={<Loading />}><QA /></Suspense>} />
         <Route path='/ForgotPassword' element={<Suspense fallback={<Loading />}><ForgotPassword /></Suspense>} />
+
+        <Route path='/404' element={<Suspense fallback={<Loading />}><NotFound /></Suspense>} />
+        
+
+
 
 
         {/* <Route path='/dashboard/chat' element={<Suspense fallback={<Loading />}><Chat /></Suspense>} /> */}

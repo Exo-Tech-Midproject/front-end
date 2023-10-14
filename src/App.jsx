@@ -1,9 +1,9 @@
-import { Routes, Route } from "react-router-dom"
+import { Routes, Route, useLocation } from "react-router-dom"
 import { lazy, Suspense } from "react"
 import LoginPatientTestingForm from "./components/LoginForm/LoginPatientTestingForm"
 import AuthPatient from "./components/Auths/AuthPatient"
 // import Loading from "./components/Loading/Loading"
-
+import { AnimatePresence } from "framer-motion"
 // import Home from "./pages/Home"
 
 // import Login from "./pages/Login"
@@ -32,28 +32,32 @@ const Group = lazy(() => import("./pages/Group"))
 // const Chat = lazy(() => import('../src/pages/Chat'));
 
 const App = () => {
+  const location = useLocation() 
   return (
     <div>
+      <AnimatePresence>
+      <Routes location={location} key={location.pathname}>
+
+
+<Route path='/' element={<Suspense fallback={<Loading />}><Home /></Suspense>} />
+<Route path='/Login' element={<Suspense fallback={<Loading />}><Login /></Suspense>} />
+<Route path='/testlogin' element={<Suspense fallback={<Loading />}><LoginPatientTestingForm /></Suspense>} />
+<Route path='/Signup' element={<Suspense fallback={<Loading />}><Signup /></Suspense>} />
+<Route path='/About' element={<Suspense fallback={<Loading />}><AboutUs /></Suspense>} />
+<Route path='/dashboard/*' element={<AuthPatient><Suspense fallback={<Loading />}><Dashboard /></Suspense></AuthPatient>} />
+<Route path='/QACategories' element={<Suspense fallback={<Loading />}><QACategories /></Suspense>} />
+<Route path='/QA' element={<Suspense fallback={<Loading />}><QA /></Suspense>} />
+<Route path='/ForgotPassword' element={<Suspense fallback={<Loading />}><ForgotPassword /></Suspense>} />
+
+
+{/* <Route path='/dashboard/chat' element={<Suspense fallback={<Loading />}><Chat /></Suspense>} /> */}
+
+{/* <Route path='/Group' element={<Suspense fallback={<Loading />}><Group /></Suspense>} /> */}
+
+</Routes>
+      </AnimatePresence>
       {/* <Profile /></React.Suspense> */}
-      <Routes>
-
-
-        <Route path='/' element={<Suspense fallback={<Loading />}><Home /></Suspense>} />
-        <Route path='/Login' element={<Suspense fallback={<Loading />}><Login /></Suspense>} />
-        <Route path='/testlogin' element={<Suspense fallback={<Loading />}><LoginPatientTestingForm /></Suspense>} />
-        <Route path='/Signup' element={<Suspense fallback={<Loading />}><Signup /></Suspense>} />
-        <Route path='/About' element={<Suspense fallback={<Loading />}><AboutUs /></Suspense>} />
-        <Route path='/dashboard/*' element={<AuthPatient><Suspense fallback={<Loading />}><Dashboard /></Suspense></AuthPatient>} />
-        <Route path='/QACategories' element={<Suspense fallback={<Loading />}><QACategories /></Suspense>} />
-        <Route path='/QA' element={<Suspense fallback={<Loading />}><QA /></Suspense>} />
-        <Route path='/ForgotPassword' element={<Suspense fallback={<Loading />}><ForgotPassword /></Suspense>} />
-
-        
-        {/* <Route path='/dashboard/chat' element={<Suspense fallback={<Loading />}><Chat /></Suspense>} /> */}
-
-        {/* <Route path='/Group' element={<Suspense fallback={<Loading />}><Group /></Suspense>} /> */}
-
-      </Routes>
+      
     </div>
   )
 }

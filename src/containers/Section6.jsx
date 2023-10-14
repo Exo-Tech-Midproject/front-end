@@ -12,7 +12,7 @@ const Section6 = () => {
   return (
     <Box sx={{
     background: '#112731B0',
-    py:2,
+    py:5,
     backgroundImage: 'url("https://images.pexels.com/photos/4039921/pexels-photo-4039921.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1")',
     backgroundSize: '100%',
     backgroundRepeat: 'no-repeat',

@@ -6,10 +6,14 @@ import Section3 from "../containers/Section3"
 import Section4 from "../containers/Section4"
 import Section5 from "../containers/Section5"
 import Section6 from "../containers/Section6"
-
+import { motion } from "framer-motion"
 export default function Home() {
     return (
-        <div>
+        <motion.div 
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.2, duration: 0.2 }}
+        >
             {/* navbar */}
             <Navbar />
             {/* sections */}
@@ -21,6 +25,6 @@ export default function Home() {
             <Section6 />
             {/* footer */}
             <Footer />
-        </div>
+        </motion.div>
     )
 }

@@ -44,9 +44,7 @@ const LinkSection = ({ title, links }) => (
 const Footer = () => {
 
   return (
-    <Box sx={{ bgcolor: "white", color: "#1F485B" }}>
-      <Divider color="#1F485B" sx={{ mb: 10 }} />
-
+    <Box sx={{ bgcolor: "white", color: "#1F485B" ,py:5}}>
       <Container>
         <Grid container spacing={8} flexWrap="wrap-reverse">
           {/* Links */}
@@ -93,14 +91,13 @@ const Footer = () => {
           </Grid>
         </Grid>
 
-        <Divider color="#1F485B" sx={{ mt: 6, mb: 5 }} />
+        <Divider color="#1F485B" sx={{ my:3 }} />
 
         <Stack
           direction={{ xs: "column", md: "row" }}
           justifyContent="space-between"
           alignItems="center"
           spacing={1}
-          sx={{ pb: 6 }}
         >
           <Typography variant="body2" color="#1F485B">
             {copyright.left}

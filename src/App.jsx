@@ -1,10 +1,10 @@
-import { Routes, Route } from "react-router-dom"
+import { Routes, Route, useLocation } from "react-router-dom"
 import { lazy, Suspense } from "react"
 import LoginPatientTestingForm from "./components/LoginForm/LoginPatientTestingForm"
 import AuthPatient from "./components/Auths/AuthPatient"
 import LoginPhysicianTestingForm from "./components/LoginForm/LoginDoctorTestingForm"
 // import Loading from "./components/Loading/Loading"
-
+import { AnimatePresence } from "framer-motion"
 // import Home from "./pages/Home"
 
 // import Login from "./pages/Login"
@@ -34,10 +34,12 @@ const Group = lazy(() => import("./pages/Group"))
 // const Chat = lazy(() => import('../src/pages/Chat'));
 
 const App = () => {
+  const location = useLocation() 
   return (
     <div>
-      {/* <Profile /></React.Suspense> */}
-      <Routes>
+      <AnimatePresence>
+      <Routes location={location} key={location.pathname}>
+
 
 
         <Route path='/' element={<Suspense fallback={<Loading />}><Home /></Suspense>} />
@@ -63,9 +65,15 @@ const App = () => {
 
         {/* <Route path='/dashboard/chat' element={<Suspense fallback={<Loading />}><Chat /></Suspense>} /> */}
 
-        {/* <Route path='/Group' element={<Suspense fallback={<Loading />}><Group /></Suspense>} /> */}
 
-      </Routes>
+{/* <Route path='/dashboard/chat' element={<Suspense fallback={<Loading />}><Chat /></Suspense>} /> */}
+
+{/* <Route path='/Group' element={<Suspense fallback={<Loading />}><Group /></Suspense>} /> */}
+
+</Routes>
+      </AnimatePresence>
+      {/* <Profile /></React.Suspense> */}
+      
     </div>
   )
 }

@@ -11,16 +11,15 @@ const Section4 = () => {
   const [tabValue, setTabValue] = useState(0);
 
   return (
-    <Box sx={{bgcolor:"white", }}>
-       <Container sx={{ mt: { xs: 0, md: 5, lg: 5}, color:"#1F485B" }}>
+    <Box sx={{bgcolor:"white",py:5 }}>
+       <Container sx={{color:"#1F485B" }} spacing={2}>
       {/* TOP */}
-      <Grid container spacing={10} flexWrap="wrap-reverse" alignItems="center">
+      <Grid container flexWrap="wrap-reverse" alignItems="center">
         {/* Left */}
         <Grid item xs={12} md={6}>
-          <Stack spacing={2} sx={{ maxWidth: 480 }}>
+          <Stack  sx={{ maxWidth: 480 }}>
             <Title variant={{ xs: "h3", md: "h2",color:"#1F485B" }}>{top.title}</Title>
-
-            <Typography variant="body2" color="#1F485B" sx={{ pb: 2 }}>
+            <Typography variant="body2" color="#1F485B">
               {top.subtitle}
             </Typography>
           </Stack>
@@ -32,7 +31,6 @@ const Section4 = () => {
             src={sec5Ved}
             style={{ width:"100%", objectFit: "contain" ,
             position: "relative",
-            //p: 4,
             borderRadius: "30px",
             boxShadow: "2px 2px 5px rgba(0, 0, 0, 0.3)",
             "&::before": {
@@ -56,10 +54,9 @@ const Section4 = () => {
 
       <Grid
         container
-        spacing={10}
         flexWrap="wrap-reverse"
+        spacing={5}
         alignItems="center"
-        sx={{py:2, mt: { xs: 0, md: 5, alignItems:"center" } }}
       >
         {/* Left */}
         <Grid item xs={12} md={6}>

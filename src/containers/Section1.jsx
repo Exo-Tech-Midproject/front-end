@@ -6,6 +6,7 @@ import {
   Typography,
   useMediaQuery,
   useTheme,
+  Link
 } from "@mui/material";
 import { section1Content } from "../utils/content";
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
@@ -13,7 +14,7 @@ import Title from "../components/Title";
 import useMeasure from "react-use-measure";
 
 import LaunchButton from "../components/Buttons/LaunchButton";
-
+import { motion } from 'framer-motion';
 
 const {
   MainVed,
@@ -22,23 +23,25 @@ const {
 } = section1Content;
 
 const CustomButton = ({ children, ...props }) => (
+  <Link href="/AboutUs">
   <Button
     variant="outlined"
     sx={{
       borderRadius: 4,
-      color: {xs:"#1F485B", md:"white"},
-      borderColor: {xs:"#1F485B", md:"white"},
+      color: {xs:"#296079", md:"white"},
+      borderColor: {xs:"#296079", md:"white"},
       height: 58,
       px: 2,
       "&:hover":{
-        color: "blue",
-        borderColor: "blue",
+        color: "white",
+        borderColor: "#296079",
+        bgcolor:"#296079",
       }
     }}
     {...props}
   >
     {children}
-  </Button>
+  </Button></Link>
 );
 
 const Section1 = () => {
@@ -48,7 +51,7 @@ const Section1 = () => {
 
 
   return (
-    <Box sx={{ width: "100%" }}>
+    <Box sx={{ width: "100%" }}  >
       {/* Main Background */}
       <Box sx={{ position: "fixed", zIndex: -1, top: 0, left: 0, right: 0 }}>
         <video style={{ width: "100%" }} src={MainVed} autoPlay loop muted />
@@ -103,7 +106,7 @@ const Section1 = () => {
         }}
       >
 
-        <Stack sx={{ height: "100%" }} justifyContent="center">
+        <Stack sx={{ height: "100%" }} justifyContent="center" alignItems="center">
 
           <Title
             variant={{ xs: "h3", sm: "h2", md: "h1" }}
@@ -124,9 +127,9 @@ const Section1 = () => {
             alignItems="center"
             spacing={4}
           >
-            <LaunchButton/>
+            <LaunchButton />
 
-            <CustomButton fullWidth={isSmallScreen} >
+            <CustomButton fullWidth={isSmallScreen}>
               <InfoOutlinedIcon sx={{ fontSize: 30, ml: -1 }} />
               <Stack sx={{ textAlign: "left", ml: 1 }}>
                 <Typography variant="h6">Learn More</Typography>

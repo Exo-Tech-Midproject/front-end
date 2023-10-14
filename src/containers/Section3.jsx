@@ -8,7 +8,7 @@ const { title ,subtitle1,subtitle2, ITEMS } = section3Content;
 
 const Section3 = () => {
   return (
-    <Box sx={{bgcolor:"white",py:10 }}>
+    <Box sx={{bgcolor:"white",py:5 }}>
         <Container >
       <Container maxWidth="md">
         <Title variant={{ xs: "h4", md: "h5" }} sx={{ textAlign: "center" , color:"#1F485B", py:1}}>
@@ -23,6 +23,7 @@ const Section3 = () => {
       </Container>
 
       <Grid container spacing={5} sx={{ mt: 4 }} justifyContent="center">
+        
         {ITEMS.map(({ name, logo }) => (
           <Grid item xs={4} md={3} lg={2.4} key={name}>
             <Stack alignItems="center">

@@ -8,7 +8,7 @@ const { top, bottom } = section5Content;
 
 const Section5 = () => {
   return (
-    <Box sx={{ bgcolor: "#1F485B",py:10 }}>
+    <Box sx={{ bgcolor: "#1F485B",py:5 }}>
       <Container sx={{ color: "#1F485B" }}>
         {/* TOP */}
         <Grid container spacing={10} flexWrap="wrap-reverse" alignItems="center">
@@ -28,7 +28,7 @@ const Section5 = () => {
             <img
             alt=""
               src={top.image}
-              style={{ width: "100%", objectFit: "contain", height: "100%" }}
+              style={{ width: "100%",height: "300px",borderRadius: "30px"}}
             />
           </Grid>
 
@@ -47,7 +47,7 @@ const Section5 = () => {
               src={bottom.Image}
               style={{
                 width: "100%", height: "100%",
-                borderRadius: "30px",
+                borderRadius: "30px 0 0 30px",
                 boxShadow: "2px 2px 5px rgba(0, 0, 0, 0.3)",
               }}
             />

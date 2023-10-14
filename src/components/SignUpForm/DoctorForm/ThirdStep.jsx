@@ -3,9 +3,13 @@ import * as React from 'react';
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 import { Stack } from '@mui/material';
+import { motion } from "framer-motion"
+
 function ThirdStep() {
   return (
-    <Box component="form" noValidate >
+    <motion.Box component="form" noValidate initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    exit={{ opacity: 0 }}>
     <Stack direction="column" spacing={2} sx={{ width: "100%" }}>
       <TextField
         name="mobileNumber"
@@ -33,7 +37,7 @@ function ThirdStep() {
         autoComplete="department"
       />
     </Stack>
-  </Box>
+  </motion.Box>
   )
 }
 

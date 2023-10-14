@@ -7,7 +7,7 @@ import Typography from "@mui/material/Typography";
 
 import prescriptionCoverImg from '../../assets/images/prescriptions/pillscover.jpg'
 import PrescriptionCard from './PrescriptionCard';
-export default function PrescriptionsSection() {
+export default function PrescriptionsSection({prescription, setPrescription}) {
     return (
         <>
             <Box
@@ -34,7 +34,7 @@ export default function PrescriptionsSection() {
 
             <Box width={{ xs: '95%', sm: '80%', md: '85%' }} m='0 auto' bgcolor='white' borderRadius='20px' px={1} sx={{ boxShadow: '0px 2px 3px 0px rgba(0,0,0,0.4), 0px -1px 1px 0px rgba(0,0,0,0.14), 0px 1px 3px 0px rgba(0,0,0,0.12)' }}>
                 {/* <Box width='90%' m='0 auto' height='80%' bgcolor='white'> */}
-                <PrescriptionCard />
+                <PrescriptionCard prescription={prescription} setPrescription={setPrescription}/>
             </Box>
 
             {/* </Box> */}

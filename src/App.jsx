@@ -2,6 +2,7 @@ import { Routes, Route, useLocation } from "react-router-dom"
 import { lazy, Suspense } from "react"
 import LoginPatientTestingForm from "./components/LoginForm/LoginPatientTestingForm"
 import AuthPatient from "./components/Auths/AuthPatient"
+import LoginPhysicianTestingForm from "./components/LoginForm/LoginDoctorTestingForm"
 // import Loading from "./components/Loading/Loading"
 import { AnimatePresence } from "framer-motion"
 // import Home from "./pages/Home"
@@ -19,6 +20,7 @@ const Signup = lazy(() => import("./pages/signUp"))
 const AboutUs = lazy(() => import("./pages/AboutUs"))
 const QACategories= lazy(() => import("./pages/QACategories"))
 const QA= lazy(() => import("./pages/QA"))
+const NotFound= lazy(() => import("./pages/NotFound"))
 
 const ForgotPassword = lazy(() => import("./pages/ForgotPassword"))
 
@@ -39,15 +41,29 @@ const App = () => {
       <Routes location={location} key={location.pathname}>
 
 
-<Route path='/' element={<Suspense fallback={<Loading />}><Home /></Suspense>} />
-<Route path='/Login' element={<Suspense fallback={<Loading />}><Login /></Suspense>} />
-<Route path='/testlogin' element={<Suspense fallback={<Loading />}><LoginPatientTestingForm /></Suspense>} />
-<Route path='/Signup' element={<Suspense fallback={<Loading />}><Signup /></Suspense>} />
-<Route path='/About' element={<Suspense fallback={<Loading />}><AboutUs /></Suspense>} />
-<Route path='/dashboard/*' element={<AuthPatient><Suspense fallback={<Loading />}><Dashboard /></Suspense></AuthPatient>} />
-<Route path='/QACategories' element={<Suspense fallback={<Loading />}><QACategories /></Suspense>} />
-<Route path='/QA' element={<Suspense fallback={<Loading />}><QA /></Suspense>} />
-<Route path='/ForgotPassword' element={<Suspense fallback={<Loading />}><ForgotPassword /></Suspense>} />
+
+        <Route path='/' element={<Suspense fallback={<Loading />}><Home /></Suspense>} />
+        <Route path='/Login' element={<Suspense fallback={<Loading />}><Login /></Suspense>} />
+        <Route path='/testlogin' element={<Suspense fallback={<Loading />}><LoginPatientTestingForm /></Suspense>} />
+        <Route path='/testlogin2' element={<Suspense fallback={<Loading />}><LoginPhysicianTestingForm /></Suspense>} />
+        <Route path='/Signup' element={<Suspense fallback={<Loading />}><Signup /></Suspense>} />
+        <Route path='/About' element={<Suspense fallback={<Loading />}><AboutUs /></Suspense>} />
+
+
+
+        <Route path='/dashboard/*' element={<Suspense fallback={<Loading />}><Dashboard /></Suspense>} />
+        <Route path='/QACategories' element={<Suspense fallback={<Loading />}><QACategories /></Suspense>} />
+
+        <Route path='/QA' element={<Suspense fallback={<Loading />}><QA /></Suspense>} />
+        <Route path='/ForgotPassword' element={<Suspense fallback={<Loading />}><ForgotPassword /></Suspense>} />
+
+        <Route path='/404' element={<Suspense fallback={<Loading />}><NotFound /></Suspense>} />
+        
+
+
+
+
+        {/* <Route path='/dashboard/chat' element={<Suspense fallback={<Loading />}><Chat /></Suspense>} /> */}
 
 
 {/* <Route path='/dashboard/chat' element={<Suspense fallback={<Loading />}><Chat /></Suspense>} /> */}

@@ -56,13 +56,13 @@ export default function DBMain({ open }) {
                     <Route path='/profile' element={<React.Suspense fallback={<Loading />}><Profile /></React.Suspense>} />
                     <Route path='/vitals' element={<React.Suspense fallback={<Loading />}><Vitals /></React.Suspense>} />
                     <Route path='/prescriptions' element={<React.Suspense fallback={<Loading />}><Prescriptions /></React.Suspense>} />
-                      <Route path='/medical-history' element={<React.Suspense fallback={<Loading />}><PatientHistory /></React.Suspense>} />
-                      <Route path='/appointment' element={<React.Suspense fallback={<Loading />}><Appointment /></React.Suspense>} />
-                           <Route path='/groups' element={<React.Suspense fallback={<Loading />}><Groups /></React.Suspense>} />
-                             <Route path='/chat' element={<React.Suspense fallback={<Loading />}><Chat /></React.Suspense>} />
-                             <Route path='/group' element={<React.Suspense fallback={<Loading />}><Group /></React.Suspense>} />
-                             <Route path='/Physicians' element={<React.Suspense fallback={<Loading />}><Physician /></React.Suspense>} />
-							 <Route path='/subscriptions' element={<React.Suspense fallback={<Loading />}><Subscription /></React.Suspense>} />
+                    <Route path='/medical-history' element={<React.Suspense fallback={<Loading />}><PatientHistory /></React.Suspense>} />
+                    <Route path='/appointment' element={<React.Suspense fallback={<Loading />}><Appointment /></React.Suspense>} />
+                    <Route path='/groups' element={<React.Suspense fallback={<Loading />}><Groups /></React.Suspense>} />
+                    <Route path='/chat' element={<React.Suspense fallback={<Loading />}><Chat /></React.Suspense>} />
+                    <Route path='/group' element={<React.Suspense fallback={<Loading />}><Group /></React.Suspense>} />
+                    <Route path='/Physicians' element={<React.Suspense fallback={<Loading />}><Physician /></React.Suspense>} />
+                    <Route path='/subscriptions' element={<React.Suspense fallback={<Loading />}><Subscription /></React.Suspense>} />
 
 
 

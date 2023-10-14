@@ -26,6 +26,7 @@
     "lord-icon-element": "^4.1.1",
     "lottie-react": "^2.4.0",
     "lottie-web": "^5.12.2",
+    "moment": "^2.29.4",
     "react": "^18.2.0",
     "react-cookies": "^0.1.1",
     "react-countup": "^6.4.2",
@@ -37,6 +38,7 @@
     "react-use-measure": "^2.1.1",
     "recharts": "^2.8.0",
     "slick-carousel": "^1.8.1",
+    "socket.io-client": "^4.7.2",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

@@ -3,6 +3,7 @@ import { lazy, Suspense } from "react"
 import LoginPatientTestingForm from "./components/LoginForm/LoginPatientTestingForm"
 import AuthPatient from "./components/Auths/AuthPatient"
 import LoginPhysicianTestingForm from "./components/LoginForm/LoginDoctorTestingForm"
+import { io } from "socket.io-client"
 // import Loading from "./components/Loading/Loading"
 import { AnimatePresence } from "framer-motion"
 // import Home from "./pages/Home"
@@ -31,6 +32,18 @@ const Loading = lazy(() => import("./components/Loading/Loading"))
 const Group = lazy(() => import("./pages/Group"))
 
 
+const socket = io('http://localhost:5000/');
+
+const connectSocket = (userData) => {
+    socket.connect();
+    socket.emit('enter chat', userData);
+};
+
+const disconnectSocket = () => {
+    socket.disconnect();
+};
+
+export { socket, connectSocket, disconnectSocket };
 // const Chat = lazy(() => import('../src/pages/Chat'));
 
 const App = () => {

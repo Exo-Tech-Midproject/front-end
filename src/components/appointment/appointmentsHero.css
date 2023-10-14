@@ -1,0 +1,56 @@
+/* Reset some default styles */
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+
+
+.Appointmenthero {
+	background-image: url("sss3.png");
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center center;
+	height: 100vh;
+	color: #fff;
+	text-align: center;
+	display: flex;
+	flex-direction: column;
+}
+
+.Appointmenthero-content {
+	max-width: 1000px;
+	margin: 0 auto;
+	text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+	margin-bottom: 70px;
+	position: absolute;
+	top: 85%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+
+.AppointmentH1 {
+	font-size: 80px;
+}
+
+.AppointmentP1 {
+	font-size: 36px;
+	margin-bottom: 30px;
+}
+
+.Appointmentbtn {
+	display: inline-block;
+	padding: 15px 30px;
+	background-color: #1F485B;
+	color: #fff;
+	text-decoration: none;
+	border-radius: 5px;
+	font-size: 35px;
+	transition: background-color 0.4s;
+}
+
+.Appointmentbtn:hover {
+	background-color: green;
+}

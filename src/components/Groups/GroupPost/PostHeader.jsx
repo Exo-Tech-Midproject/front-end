@@ -2,6 +2,7 @@ import { Box,  Stack,  Typography } from '@mui/material'
 import React from 'react'
 import Avatar from '@mui/material/Avatar'
 
+
 export default function PostHeader() {
 
   return (

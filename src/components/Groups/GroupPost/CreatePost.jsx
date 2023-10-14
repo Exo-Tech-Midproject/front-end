@@ -1,24 +1,50 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
-// import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
 import Container from "@mui/material/Container";
-import PostContent from "./PostContent";
-// import Divider from "@mui/material/Divider";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
+import axios from 'axios';
+import cookie from 'react-cookies'
+import jwtDecode from 'jwt-decode';
+import { useParams } from "react-router-dom";
+let DBRUL = process.env.REACT_APP_BASE_URL
 
 export default function CreatePost({createdPost,setCreatedPost}) {
 
-    const [postTitle, setPostTitle] = useState("");
-    const [postContent, setPostContent] = useState("");
+    const [title, setPostTitle] = useState("");
+    const [textContent, setPostContent] = useState("");
     const [postTitleError, setPostTitleError] = useState(null);
     const [postContentError, setPostContentError] = useState(null);
     const [showForm, setShowForm] = useState(false);
-
+    const {id} = useParams()
     const [snackbarOpen, setSnackbarOpen] = useState(false);
+
+    async function fetchPosts (){
+        try{
+            let token = cookie.load('auth')
+            const payload = await jwtDecode(token)
+            
+            let allPosts = await axios.get(`${DBRUL}/${payload.accountType}/${payload.username}/groups/${id}/posts`,
+            {
+                headers: { Authorization: `Bearer ${token}` }
+            })
+        console.log('aaaaaaaaaaaaaaaaaaa',allPosts.data)
+        setCreatedPost(allPosts.data)
+
+    }
+    catch (error){
+      console.log(error)
+    }
+  }
+
+  useEffect(() => {
+    fetchPosts()
+
+// eslint-disable-next-line react-hooks/exhaustive-deps
+}, [])
 
     const handlePostContentChange = (e) => {
         const inputValue = e.target.value;
@@ -42,17 +68,26 @@ export default function CreatePost({createdPost,setCreatedPost}) {
         }
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
-        if (postTitle && postContent && !postTitleError && !postContentError) {
-            if (postContent.length >= 50) {
+        if (title && textContent && !postTitleError && !postContentError) {
+            if (textContent.length >= 50) {
                 const newPost = {
-                    postTitle,
-                    postContent,
+                    title:title,
+                    textContent:textContent,
                 };
 
-                setCreatedPost([...createdPost, newPost]);
+                let token = cookie.load('auth')
+        const payload = await jwtDecode(token)
+        let allPosts = await axios.post(
+            `${DBRUL}/physician/${payload.username}/groups/${id}/posts`
+            ,newPost,
+            {
+                headers: { Authorization: `Bearer ${token}` }
+            })
+        console.log(allPosts.data)
+                setCreatedPost([...createdPost, allPosts.data]);
                 setPostTitle("");
                 setPostContent("");
                 setShowForm(false);
@@ -62,6 +97,7 @@ export default function CreatePost({createdPost,setCreatedPost}) {
         }
     };
 
+    
     const handleCloseSnackbar = () => {
         setSnackbarOpen(false);
     };
@@ -70,7 +106,7 @@ return (
     <>
     <Container sx={{
         display: 'flex',
-        justifyContent: 'start',
+        justifyContent: 'center',
         alignItems: 'center',
         margin: '1%',
       }}>
@@ -78,8 +114,9 @@ return (
           sx={{
             bgcolor: '#062942',
             borderRadius: "5px",
-            margin: "2% ",
-            fontSize: "1.3rem",
+            margin: "2% auto",
+            fontSize: "1.8rem",
+            width:"25%",
             "&:hover": {
               transform: "scale(1.1) ",
               transition: 'transform 0.5s ease',
@@ -113,7 +150,6 @@ return (
                         width: "100%",
                     }}
                 >
-                    {/* {success && <p className="success">{success}</p>} */}
                     <form onSubmit={handleSubmit} spacing={2}>
                         <Box
                             sx={{
@@ -124,7 +160,7 @@ return (
                                 label="Post Title"
                                 variant="outlined"
                                 fullWidth
-                                value={postTitle}
+                                value={title}
                                 onChange={handlePostTitleChange}
                                 required
                                 sx={{
@@ -146,7 +182,7 @@ return (
                                 fullWidth
                                 multiline
                                 rows={3}
-                                value={postContent}
+                                value={textContent}
                                 onChange={handlePostContentChange}
                                 required
                                 sx={{
@@ -185,21 +221,6 @@ return (
             </Box>
         </Box>
         )}
-        {/* <Container
-            sx={{
-                margin: "1%",
-                flexWrap: "wrap",
-                display: "flex",
-            }}
-        > */}
-            {/* {createdPost.map((post, index) => (
-                <PostContent
-                    key={index}
-                    postTitle={post.postTitle}
-                    postContent={post.postContent}
-                />
-            ))} */}
-        {/* </Container> */}
         <Snackbar open={snackbarOpen} autoHideDuration={6000} onClose={handleCloseSnackbar}>
             <MuiAlert elevation={6} variant="filled" severity="error" onClose={handleCloseSnackbar}>
                 {postTitleError || postContentError}

@@ -39,8 +39,9 @@ const connectSocket = (userData) => {
     socket.emit('enter chat', userData);
 };
 
-const disconnectSocket = () => {
+const disconnectSocket = (roomName) => {
     socket.disconnect();
+    socket.emit('leave-room', roomName)
 };
 
 export { socket, connectSocket, disconnectSocket };

@@ -26,12 +26,16 @@ export default function LoginProvider({ children }) {
                     headers: { Authorization: `Basic ${btoa(`${username}:${password}`)}` }
                 })
 
-
-            let token = response.data.token
-            let user = response.data.user
-            let authenticated = ValidateTokenPatient(token, user)
-            console.log(authenticated)
-            if (authenticated) return true
+            if (response) {
+                let token = response.data.token
+                let loggedUserData = await axios.get(`${DBRUL}/patient/${username}/profile`, {
+                    headers: { Authorization: `Bearer ${token}` }
+                })
+                let user = loggedUserData.data
+                let authenticated = await ValidateTokenPatient(token, user)
+                console.log(authenticated)
+                if (authenticated) return true
+            }
 
 
         } catch (e) {
@@ -40,14 +44,26 @@ export default function LoginProvider({ children }) {
         }
 
     }
-    const loginphysician = async (username, password) => {
-        let response = axios.post(`${DBRUL}/login/physician`, {},
-            {
-                headers: { Authorization: `Basic ${btoa(`${username}:${password}`)}` }
-            })
-        let token = response.data.token
-        let user = response.data.username
-        ValidateTokenPhysician(token, user)
+    const loginPhysician = async (username, password) => {
+        try {
+            let response = await axios.post(`${DBRUL}/login/physician`, {},
+                {
+                    headers: { Authorization: `Basic ${btoa(`${username}:${password}`)}` }
+                })
+            if (response) {
+                let token = response.data.token
+                let loggedUserData = await axios.get(`${DBRUL}/physician/${username}/profile`, {
+                    headers: { Authorization: `Bearer ${token}` }
+                })
+                let user = loggedUserData.data
+                let authenticated = await ValidateTokenPhysician(token, user)
+                console.log(authenticated)
+                if (authenticated) return true
+            }
+        } catch (e) {
+            console.log(e)
+            return false
+        }
     }
 
     const ValidateTokenPatient = async (token, user) => {
@@ -56,30 +72,55 @@ export default function LoginProvider({ children }) {
             const tokenChecker = await jwtDecode(token);
             console.log(tokenChecker, '2222')
             if (tokenChecker && tokenChecker.accountType === 'patient') {
-                setUser(user);
-                setLoggedIn(true);
-                setUserType(tokenChecker.accountType);
+                if (user) {
+
+                    setUser(user);
+                    setLoggedIn(true);
+                    setUserType(tokenChecker.accountType);
+                } else {
+                    let loggedUserData = await axios.get(`${DBRUL}/patient/${tokenChecker.username}/profile`, {
+                        headers: { Authorization: `Bearer ${token}` }
+                    })
+                    console.log(loggedUserData.data, 'saved data patient form in validate')
+                    setUser(loggedUserData.data);
+                    setLoggedIn(true);
+                    setUserType(tokenChecker.accountType);
+                }
 
                 cookie.save('auth', token)
                 return true
             }
         } catch (e) {
             console.log(e)
+            return false
         }
     }
-    const ValidateTokenPhysician = (token, user) => {
+    const ValidateTokenPhysician = async (token, user) => {
         try {
-            const tokenChecker = jwtDecode(token);
-            // console.log(tokenChecker)
-            if (tokenChecker.accountType === 'physician') {
-                setUser(user);
-                setLoggedIn(true);
-                setUserType(tokenChecker.accountType);
+            const tokenChecker = await jwtDecode(token);
+            console.log(tokenChecker, 'physicianSide')
+            if (tokenChecker && tokenChecker.accountType === 'physician') {
+                if (user) {
+                    console.log('aaaaaaasd')
+                    setUser(user);
+                    setLoggedIn(true);
+                    setUserType(tokenChecker.accountType);
+                } else {
+                    let loggedUserData = await axios.get(`${DBRUL}/physician/${tokenChecker.username}/profile`, {
+                        headers: { Authorization: `Bearer ${token}` }
+                    })
+                    console.log(loggedUserData.data, 'saved data physician form in validate')
+                    setUser(loggedUserData.data);
+                    setLoggedIn(true);
+                    setUserType(tokenChecker.accountType);
+                }
 
                 cookie.save('auth', token)
+                return true
             }
         } catch (e) {
             console.log(e)
+            return false
         }
     }
 
@@ -87,19 +128,19 @@ export default function LoginProvider({ children }) {
         setLoggedIn(false);
         setUser({})
         cookie.remove('auth')
-        
+
     }
     useEffect(() => {
         const authCookie = cookie.load('auth');
         if (authCookie) {
-            ValidateTokenPatient(authCookie)
+            ValidateTokenPatient(authCookie) || ValidateTokenPhysician(authCookie)
         } else {
             setLoggedIn(false)
         }
     }, [])
 
     return (
-        <LoginContext.Provider value={{ logout, loginphysician, isPatient, isPhysician, loginPatient, loggedIn, user, userType }}>
+        <LoginContext.Provider value={{ logout, loginPhysician, isPatient, isPhysician, loginPatient, loggedIn, user, userType }}>
             {children}
         </LoginContext.Provider>
     )

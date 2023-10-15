@@ -19,7 +19,7 @@ import image3 from "../assets/images/section5/image3.webp"
 import image4 from "../assets/images/section5/image4.webp"
 
 // Section6
-import sec6img from "../assets/images/section6/sec-6-img.png"
+import sec6img from "../assets/images/section6/sec-6-img.gif"
 import sec6imgBottom from "../assets/images/section6/sec-6-bottom.png"
 
 //QASection
@@ -61,9 +61,10 @@ export const section1Content = {
 
 export const section2Content = {
   items: [
-    { title: "Peace of Mind", subtitle: "the quick fox jumps over the lazy dog" },
-    { title: "Set For Life", subtitle: "the quick fox jumps over the lazy dog" },
-    { title: "100% Satisfaction", subtitle: "the quick fox jumps over the lazy dog" },
+    { counter: 345, subtitle: "Lorem ipsum dolor" },
+    { counter: 345, before: "$", after: "B+", subtitle: "Lorem ipsum dolor" },
+    { counter: 4.4, after: "M+", subtitle: "Lorem ipsum dolor", decimals: true },
+    { counter: 28.7, after: "M+", subtitle: "Lorem ipsum dolor", decimals: true },
   ],
 };
 

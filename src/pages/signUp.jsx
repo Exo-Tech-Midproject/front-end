@@ -1,9 +1,14 @@
 import SignupSection from "../containers/SignupSection"
+import { motion } from "framer-motion"
+
 const Signup = () => {
   return (
-    <div>
+    <motion.div
+    initial={{width:0}}
+    exit={{x:window.innerWidth}}
+    animate={{width:"100%"}}>
       <SignupSection  />
-    </div>
+    </motion.div>
   );
 };
 

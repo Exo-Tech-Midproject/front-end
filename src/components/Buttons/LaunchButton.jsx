@@ -1,12 +1,17 @@
-import { Button } from "@mui/material";
+import { Button, Link } from "@mui/material";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 
 const LaunchButton = ({ sx = {}, ...props }) => {
   return (
-    <Button variant="contained" sx={{height:"60px", borderRadius: 4, ...sx }} {...props}>
+    <Link href="/Signup">
+    <Button variant="contained" sx={{height:"60px", borderRadius: 4, bgcolor:"white", color:"#296079",
+    "&:hover":{
+      bgcolor:"#296079",
+      color:"white",
+    },...sx }} {...props}>
         Get Start
         <KeyboardArrowRightIcon />
-    </Button>
+    </Button></Link>
   );
 };
 

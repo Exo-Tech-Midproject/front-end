@@ -1,23 +1,28 @@
 import { Box, Container, Grid, Stack, Typography } from "@mui/material";
 import React from "react";
-// import CountUp from "react-countup";
+import CountUp from "react-countup";
 import Title from "../components/Title";
-import Diversity1OutlinedIcon from '@mui/icons-material/Diversity1Outlined';
 import { section2Content } from "../utils/content";
 
 const { items } = section2Content;
 
 const CustomCounter = ({
-  title,
+  before = "",
+  after = "",
+  counter,
   subtitle,
+  decimals = false,
 }) => (
-  <Stack spacing={{ xs: 1, md: 2 }} alignItems="center" >
-    <Diversity1OutlinedIcon sx={{ color: "white" }} />
-    <Title color="white" variant={{ xs: "h6", md: "h5" }} >
-      {title}
-    </Title>
+  <Stack spacing={{ xs: 1, md: 2 }} alignItems="center">
+    <CountUp prefix={before} suffix={after} end={counter} decimals={decimals}>
+      {({ countUpRef }) => (
+        <Title variant={{ xs: "h4", md: "h2" }} sx={{ fontWeight: 300 }}>
+          <span ref={countUpRef} />
+        </Title>
+      )}
+    </CountUp>
 
-    <Typography variant="body2" color="white" sx={{pb:1}}>
+    <Typography variant="body2" color="white">
       {subtitle}
     </Typography>
   </Stack>
@@ -25,21 +30,22 @@ const CustomCounter = ({
 
 const Section2 = () => {
   return (
-    <Container >
+    <Container sx={{ }}>
       <Box
         sx={(theme) => ({
+          color:"white",
           position: "relative",
-          top:50,
-          bgcolor: "#1F485B",
-          borderRadius: "40px",
+          py: 2,
+          bgcolor: "#296079",
+          borderRadius: "50px",
           [theme.breakpoints.up("sm")]: {
             "&::before": {
               content: '""',
               position: "absolute",
               inset: 0,
               border: "2px solid transparent",
-              borderRadius: "40px",
-              background: "linear-gradient(180deg,#1F485B,transparent) border-box",
+              borderRadius: "50px",
+              background: "linear-gradient(180deg,#296079,transparent) border-box",
               WebkitMask:
                 "linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0)",
               WebkitMaskComposite: "xor",
@@ -48,9 +54,9 @@ const Section2 = () => {
           },
         })}
       >
-        <Grid container spacing={3} justifyContent="space-around">
+        <Grid container spacing={3} justifyContent="space-between">
           {items.map((item) => (
-            <Grid item xs={12} md={3} key={item.subtitle}>
+            <Grid item xs={6} md={3} key={item.subtitle}>
               <CustomCounter {...item} />
             </Grid>
           ))}

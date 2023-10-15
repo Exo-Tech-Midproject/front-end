@@ -1,7 +1,5 @@
 import React from 'react'
-import { Container, TextField, Typography, Button, Box, Stack ,Link,IconButton,} from '@mui/material'
-import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
-import EmailIcon from '@mui/icons-material/Email';
+import { Container, TextField, Typography,  Stack ,IconButton,} from '@mui/material'
 import Title from "../Title/index";
 import OutlinedButton from "../Buttons/OutlinedButton";
 import { footerContent } from "../../utils/content";
@@ -16,9 +14,8 @@ function ContactForm() {
    
     <Container sx={{py:2, minHeight: 70 , alignItems:"left",boxShadow: "1px 1px 5px #FFFFFF",  bgcolor:"white", 
     }}>
-
         <Stack direction="column" spacing={3} alignItems="center">
-       
+
         <Title color="black" variant={{ xs: "h5", md: "h6" }}>Send Feedback</Title>
 
         <Typography variant="body2"  color="black">

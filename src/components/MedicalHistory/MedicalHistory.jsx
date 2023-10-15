@@ -79,7 +79,7 @@ export default function PatientHistory() {
             {
                 headers: { Authorization: `Bearer ${token}` }
             })
-        console.log(history.data)
+        console.log("hhhhhhhhhhhhhhhhhhhhhhh",history.data)
         setFormData(history)
         } else {
             console.error("Please fill in all fields.");
@@ -108,21 +108,14 @@ return (
                 sx={{
                     marginTop: "5%",
                     marginBottom: "5%",
-                    // border: "0.5px solid #1F485B",
                     boxShadow: "0px 0px 1px 1px #888888",
-                    // borderRadius: "15px",
                     bgcolor: "white",
                     border:"10px solid #00222E"
-                    // border:"10px solid #1F485B"
                 }}
                 onSubmit={handleSubmit}
             >
                 <Box sx={{
                     bgcolor:"#00222E",
-                    // border:"1px solid #00222E",
-                    // borderTopRightRadius: '15px',
-                    // borderTopLeftRadius: '15px',
-                    // boxShadow: "0px 0px 1px 1px #888888",
                     height:"120px",
                     display:"flex",
                     alignItems:"center",
@@ -130,7 +123,6 @@ return (
                 }}>
                     <Box 
                     sx={{
-                        // bgcolor:"white",
                         height:"100%",
                         width:"60%",
                         display:"flex",
@@ -148,11 +140,6 @@ return (
                     component="h1"
                     variant="h2"
                     sx={{
-                    // border:"10px solid #1F485B",
-                    // bgcolor:"#00222E",
-                    // borderTopRightRadius: '15px',
-                    // borderTopLeftRadius: '15px',
-                    // boxShadow: "0px 0px 1px 1px #888888",
                         color: "white",
                     }}
                 >
@@ -176,7 +163,6 @@ return (
                                     variant="outlined"
                                     required
                                     fullWidth
-                                    id="patientUN"
                                     label="Patient username"
                                     value={formData.patientUN}
                                     onChange={(e) => setFormData({...formData, patientUN: e.target.value})}
@@ -261,6 +247,7 @@ return (
                                     label="Allergies"
                                     value={formData.allergies}
                                     multiline
+                                    onChange={(e) => setFormData({...formData, allergies: e.target.value})}
                                     rows={3} 
                                     sx={{
                                         bgcolor: "#ECF3F8",

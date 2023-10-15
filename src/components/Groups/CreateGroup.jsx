@@ -146,9 +146,6 @@ export default function CreateGroup() {
       </Container>
       {showForm && (
         <Box sx={{
-          // backgroundImage: `url(${imageURL})`,
-          // backgroundPosition: 'center',
-          // backgroundSize: 'cover',
           border: "0.01px solid #1F485B7f",
           bgcolor: "white",
           borderRadius: "4px",

@@ -97,7 +97,7 @@ export default function HeroHistory() {
                     margin:"0 50px 50px 70px"
                 }}
             >
-                Empowering Health Consciousness: A Comprehensive Approach to Keeping a Watchful Eye on Your Well being
+                Empowering Health Consciousness A Comprehensive Approach to Keeping a Watchful Eye on Your Well being
             </Typography>
             </Box>
             {/* <Box sx={{

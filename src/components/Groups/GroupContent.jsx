@@ -12,7 +12,7 @@ import Container from "@mui/material/Container";
 import CreatePost from './GroupPost/CreatePost';
 import PostContent from './GroupPost/PostContent';
 import PostHeader from './GroupPost/PostHeader';
-import { useState } from 'react';
+import  { useState} from "react";
 import AddMembers from './GroupPost/AddMembers';
 
 
@@ -20,6 +20,13 @@ import AddMembers from './GroupPost/AddMembers';
 export default function Group() {
 
   const [createdPost, setCreatedPost] = useState([]);
+
+
+  function UpdateCreatedPost (array){
+
+    setCreatedPost(array)
+
+  }
 
   return (
     <div>
@@ -127,10 +134,11 @@ export default function Group() {
                 <PostContent
                 PostId={post.id}
                 createdPost={createdPost}
-                setCreatedPost={setCreatedPost}
+                UpdateCreatedPost={UpdateCreatedPost}
                     key={index}
                     postTitle={post.title}
                     postContent={post.textContent}
+                    postImage={post.postImage}
                 />
             ))}
           </Box>

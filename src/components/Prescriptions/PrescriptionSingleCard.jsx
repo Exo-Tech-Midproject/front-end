@@ -28,7 +28,7 @@ export default function PrescriptionSingleCard({ slide, index, setPrescription, 
             let token = cookie.load('auth')
             // let token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Imhhc2FuIiwiYWNjb3VudFR5cGUiOiJwaHlzaWNpYW4iLCJpYXQiOjE2OTcxNzUzMjN9.xGG53_pQA-c8Uq10dELXS6GMJ2VP9SmJKE-ykQ2KEGo'
             const payload = await jwtDecode(token)
-            let userVitals = await axios.delete(`${DBRUL}/physician/${payload.username}/patients/${'anas0'}/prescriptions/${id}`,
+            let userVitals = await axios.delete(`${DBRUL}/physician/${payload.username}/patients/${'anas'}/prescriptions/${id}`,
                 {
                     headers: { Authorization: `Bearer ${token}` }
                 })

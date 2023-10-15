@@ -13,14 +13,14 @@ import axios from 'axios';
 let DBRUL = process.env.REACT_APP_BASE_URL
 export default function PrescriptionContainer() {
     const [prescription, setPrescription] = useState(null)
-
+let temptoken= 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFuYXMiLCJhY2NvdW50VHlwZSI6InBhdGllbnQiLCJpYXQiOjE2OTczMjk3OTR9.ZvTnDX-lUnQ2hOboC5iPbjjtNK0Zk8rekstBF2Q_Z1w'
     async function fetchUserPrescriptions() {
         try {
             let token = cookie.load('auth')
             const payload = await jwtDecode(token)
-            let userPresc = await axios.get(`${DBRUL}/patient/${payload.username}/prescriptions`,
+            let userPresc = await axios.get(`${DBRUL}/patient/${'anas'}/prescriptions`,
                 {
-                    headers: { Authorization: `Bearer ${token}` }
+                    headers: { Authorization: `Bearer ${temptoken}` }
                 })
             console.log(userPresc.data)
             setPrescription(userPresc.data)

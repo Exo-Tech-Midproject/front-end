@@ -7,6 +7,9 @@ import Typography from "@mui/material/Typography";
 import {useState, useEffect} from "react";
 import HeroHistory from "./HeroHistory";
 import AuthPhysician from '../Auths/AuthPhysician';
+import MedicalSection from "./MedicalSection";
+// import EventNoteIcon from '@mui/icons-material/EventNote';
+import EventNoteOutlinedIcon from '@mui/icons-material/EventNoteOutlined';
 import axios from 'axios';
 import cookie from 'react-cookies'
 import jwtDecode from 'jwt-decode';
@@ -14,7 +17,7 @@ let DBRUL = process.env.REACT_APP_BASE_URL
 
 export default function PatientHistory() {
 
-    const [medicalHistory , setMedicalHistory] = useState('')
+    // const [medicalHistory , setMedicalHistory] = useState('')
     
     const [formData, setFormData] = useState({
         patientUN: "",
@@ -35,7 +38,7 @@ export default function PatientHistory() {
                     headers: { Authorization: `Bearer ${token}` }
                 })
             console.log(history.data)
-            setMedicalHistory(history.data)
+            setFormData(history.data)
             console.log(history, 'from history function')
         }
         catch (error){
@@ -77,7 +80,7 @@ export default function PatientHistory() {
                 headers: { Authorization: `Bearer ${token}` }
             })
         console.log(history.data)
-        setMedicalHistory(history)
+        setFormData(history)
         } else {
             console.error("Please fill in all fields.");
         }
@@ -109,31 +112,38 @@ return (
                     boxShadow: "0px 0px 1px 1px #888888",
                     // borderRadius: "15px",
                     bgcolor: "white",
-                    border:"15px solid #062942"
+                    border:"10px solid #00222E"
+                    // border:"10px solid #1F485B"
                 }}
                 onSubmit={handleSubmit}
             >
                 <Box sx={{
-                    // bgcolor:"#00222E",
+                    bgcolor:"#00222E",
+                    // border:"1px solid #00222E",
                     // borderTopRightRadius: '15px',
                     // borderTopLeftRadius: '15px',
                     // boxShadow: "0px 0px 1px 1px #888888",
-                    height:"115px",
+                    height:"120px",
                     display:"flex",
                     alignItems:"center",
                     justifyContent:"center"
                 }}>
                     <Box 
                     sx={{
-                        bgcolor:"#ECF3F8",
+                        // bgcolor:"white",
                         height:"100%",
                         width:"60%",
                         display:"flex",
                         alignItems:"center",
                     justifyContent:"center",
-                    border:"10px solid #062942",
                     borderTop:"none",
                     }}>
+                        <EventNoteOutlinedIcon sx={{
+                            width:"10%",
+                            height:"40%",
+                            color:"white",
+                            fontSize:"large"
+                        }}/>
                 <Typography
                     component="h1"
                     variant="h2"
@@ -143,7 +153,7 @@ return (
                     // borderTopRightRadius: '15px',
                     // borderTopLeftRadius: '15px',
                     // boxShadow: "0px 0px 1px 1px #888888",
-                        color: "#00222E",
+                        color: "white",
                     }}
                 >
                     Medical History
@@ -312,11 +322,15 @@ return (
                             type="submit"
                             fullWidth
                             variant="contained"
+                            // color='medical'
                             sx={{
                                 mt: 3,
                                 mb: 2,
                                 fontSize: "2rem",
                                 bgcolor: "#00222E",
+                                "&:hover": {
+                                    background: "#1F485B"
+                                }
                             }}
                         >
                             submit
@@ -329,6 +343,7 @@ return (
                 </Box>
             </Box>
         </Container>
+        <MedicalSection />
     </Box>
 );
 }

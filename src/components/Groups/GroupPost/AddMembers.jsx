@@ -8,6 +8,7 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import {useState} from "react";
 import Box from "@mui/material/Box";
+import AuthPhysician from '../../Auths/AuthPhysician';
 
 
 export default function AddMembers() {
@@ -33,7 +34,7 @@ export default function AddMembers() {
         .filter((patient) => patient !== "");
 
         try {
-            // Make a POST request to your server with the list of patients
+            
             const response = await fetch("/api/addMembersToGroups", {
                 method: "POST",
                 headers: {
@@ -64,6 +65,7 @@ export default function AddMembers() {
 
     return (
         <Box>
+            {/* <AuthPhysician> */}
             <Button
                 variant="outlined"
                 onClick={handleClickOpen}
@@ -83,6 +85,7 @@ export default function AddMembers() {
             >
                 + Add Members
             </Button>
+            {/* </AuthPhysician> */}
             <Dialog open={open} onClose={handleClose}>
                 <Box
                     sx={{

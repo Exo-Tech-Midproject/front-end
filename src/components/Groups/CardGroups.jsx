@@ -1,26 +1,52 @@
 import * as React from 'react';
 import { useState } from "react";
 import Card from '@mui/material/Card';
-import { Link } from 'react-router-dom';
+import {  useNavigate } from 'react-router-dom';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
 import Button from '@mui/material/Button';
-import Box from "@mui/material/Box";
+import AuthPhysician from '../Auths/AuthPhysician';
+import axios from 'axios';
+import cookie from 'react-cookies'
+import jwtDecode from 'jwt-decode';
+let DBRUL = process.env.REACT_APP_BASE_URL
+
+// import Box from "@mui/material/Box";
 
 export default function CardGroups(props) {
   
+  const navigator = useNavigate()
 
-  const { groupName, description, groupImage } = props;
+  const { groupName, description, groupImage , createdGroups , id ,setCreatedGroups} = props;
 
   const [imageSrc, setImageSrc] = useState(groupImage);
+
+  async function handleDeleteCard(id) {
+    try {
+      let token = cookie.load('auth')
+      const payload = await jwtDecode(token)
+      await axios.delete(`${DBRUL}/physician/${payload.username}/groups/${id}`,
+          {
+              headers: { Authorization: `Bearer ${token}` }
+          })
+          setCreatedGroups(createdGroups.filter(element => element.id !== id))
+    } catch (err) {
+        console.error(err);
+    }
+};
+
+function handelClick(){
+  navigator(`/dashboard/group/${id}`)
+}
+
 
   const handleImageError = () => {
     setImageSrc("URL_OF_YOUR_FALLBACK_IMAGE_HERE");
   };
+  
   return (
-    <Link to="/dashboard/group" style={{ textDecoration: 'none' }}>
       <Card 
       sx={{
         // bgcolor: "#062942",
@@ -46,6 +72,7 @@ export default function CardGroups(props) {
       }}>
       
         <CardActionArea
+        onClick={handelClick}
           sx={{
             display: 'flex',
             textAlign: 'center',
@@ -90,6 +117,8 @@ export default function CardGroups(props) {
               {description}
             </Typography>
           </CardContent>
+        </CardActionArea>
+          <AuthPhysician >
       <Button variant="contained" color="error" 
       sx={{
         fontSize:"1.2rem",
@@ -99,12 +128,12 @@ export default function CardGroups(props) {
           transition: 'transform 0.5s ease',
         }
       }}
+      onClick={ () => {handleDeleteCard(id)}}
       >
         Delete Group
       </Button>
-        </CardActionArea>
+      </AuthPhysician>
       </Card>
-      </Link>
   );
 }
 

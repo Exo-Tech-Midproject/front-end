@@ -108,7 +108,7 @@ export default function Group() {
         </Container>
       </Box>
       <Container>
-      <CreatePost createdPost={createdPost} setCreatedPost={setCreatedPost}/>
+      <CreatePost createdPost={createdPost} setCreatedPost={setCreatedPost} />
       </Container>
       <Box
         minHeight='80vh'
@@ -125,9 +125,12 @@ export default function Group() {
           <Box>
           {createdPost.map((post, index) => (
                 <PostContent
+                PostId={post.id}
+                createdPost={createdPost}
+                setCreatedPost={setCreatedPost}
                     key={index}
-                    postTitle={post.postTitle}
-                    postContent={post.postContent}
+                    postTitle={post.title}
+                    postContent={post.textContent}
                 />
             ))}
           </Box>

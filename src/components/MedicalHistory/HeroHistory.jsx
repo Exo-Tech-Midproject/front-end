@@ -3,18 +3,19 @@ import Link from '@mui/material/Link';
 import HomeIcon from '@mui/icons-material/Home';
 import WhatshotIcon from '@mui/icons-material/Whatshot';
 import GrainIcon from '@mui/icons-material/Grain';
+import imageURL from '../../assets/images/History/HeroHistory.jpg'
 import {Box, Container} from "@mui/material";
 import * as React from "react";
 import Typography from "@mui/material/Typography";
 
-const imageURL = "https://img.freepik.com/premium-photo/medical-history-with-stethoscope-clipboard-black-desk_512283-640.jpg?size=626&ext=jpg&uid=R33434868&ga=GA1.2.2039131302.1685617875&semt=ais";
+// const imageURL = "https://img.freepik.com/premium-photo/medical-history-with-stethoscope-clipboard-black-desk_512283-640.jpg?size=626&ext=jpg&uid=R33434868&ga=GA1.2.2039131302.1685617875&semt=ais";
 
 export default function HeroHistory() {
   return (
-    <div>
+    <Box>
       <Box sx={{
             paddingLeft:"15px",
-            marginBottom:"10px"
+            marginBottom:"20px",
         }}>
         <div role="presentation">
         <Breadcrumbs aria-label="breadcrumb">
@@ -71,6 +72,7 @@ export default function HeroHistory() {
                     flexDirection:"column",
                     alignItems:"center",
                     justifyContent:"center",
+                    margin:"50px"
 
             }}>
             <Typography
@@ -87,11 +89,12 @@ export default function HeroHistory() {
                 gutterBottom
                 sx={{
                     textAlign: 'center',
-                    fontSize: "1.5rem",
+                    fontSize: "1.7rem",
                     color:"white",
                     paddingLeft:"10px",
                     paddingRight:"10px",
-                    
+                    lineHeight: '1.7',
+                    margin:"0 50px 50px 70px"
                 }}
             >
                 Empowering Health Consciousness: A Comprehensive Approach to Keeping a Watchful Eye on Your Well being
@@ -102,6 +105,6 @@ export default function HeroHistory() {
             }}>
             </Box> */}
         </Container>
-    </div>
+    </Box>
   )
 }

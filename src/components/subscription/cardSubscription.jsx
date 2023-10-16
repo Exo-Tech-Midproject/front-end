@@ -3,7 +3,38 @@ import './cardSubscription.css';
 import doc from "./doc.png"
 import Rating from '@mui/material/Rating';
 
+import { useEffect, useState } from 'react'
+
+import axios from 'axios';
+import jwtDecode from "jwt-decode";
+import cookie from 'react-cookies'
+let DBURL = process.env.REACT_APP_BASE_URL
+
 export default function CardSubscription() {
+
+
+	const [subs, setSubs] = useState(null)
+
+	async function fetchUserSubscrptions() {
+		try {
+			let token = cookie.load("auth")
+			let payload = await jwtDecode(token)
+			let userSub = await axios.get(`${DBURL}/physician/${payload.username}/patients/subscribers`,
+				{
+					headers: { Authorization: `Bearer ${token}` }
+				})
+			console.log("data=> ", userSub.data)
+			setSubs(userSub.data)
+
+		} catch (err) {
+			console.log(err)
+		}
+	}
+	useEffect(() => {
+		fetchUserSubscrptions()
+
+	}, [])
+
 	const cardsData = [
 		{
 			id: 1,
@@ -85,7 +116,7 @@ export default function CardSubscription() {
 							<h3>{card.name}</h3>
 							<div className="Subdesc">{card.bio}</div>
 							{/* <div className="rating">{renderStars(card.rating)}</div> */}
-							<Rating sx={{marginLeft:"20px"}} name="half-rating-read" defaultValue={card.rating} precision={0.5} size="small" readOnly />
+							<Rating sx={{ marginLeft: "20px" }} name="half-rating-read" defaultValue={card.rating} precision={0.5} size="small" readOnly />
 						</div>
 					</div>
 				</div>

@@ -1,6 +1,5 @@
 import * as React from "react";
 import Button from "@mui/material/Button";
-import TextareaAutosize from "@mui/material/TextareaAutosize";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
@@ -8,12 +7,61 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import {useState} from "react";
 import Box from "@mui/material/Box";
-import AuthPhysician from '../../Auths/AuthPhysician';
+// import AuthPhysician from '../../Auths/AuthPhysician';
+import {useTheme} from "@mui/material/styles";
+import OutlinedInput from "@mui/material/OutlinedInput";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
+import Chip from "@mui/material/Chip";
 
+const ITEM_HEIGHT = 48;
+const ITEM_PADDING_TOP = 8;
+const MenuProps = {
+    PaperProps: {
+        style: {
+            maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+            width: 250,
+        },
+    },
+};
+
+const names = [
+    "Oliver Hansen",
+    "Van Henry",
+    "April Tucker",
+    "Ralph Hubbard",
+    "Omar Alexander",
+    "Carlos Abbott",
+    "Miriam Wagner",
+    "Bradley Wilkerson",
+    "Virginia Andrews",
+    "Kelly Snyder",
+];
+
+function getStyles(name, personName, theme) {
+    return {
+        fontWeight:
+            personName.indexOf(name) === -1 ? theme.typography.fontWeightRegular : theme.typography.fontWeightMedium,
+    };
+}
 
 export default function AddMembers() {
+
+    const theme = useTheme();
+  const [personName, setPersonName] = React.useState([]);
+
+  const handleChange = (event) => {
+    const {
+      target: { value },
+    } = event;
+    setPersonName(
+      typeof value === 'string' ? value.split(',') : value,
+    );
+  };
+
     const [open, setOpen] = useState(false);
-    const [patientList, setPatientList] = useState("");
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -21,46 +69,6 @@ export default function AddMembers() {
 
     const handleClose = () => {
         setOpen(false);
-    };
-
-    const handlePatientListChange = (event) => {
-        setPatientList(event.target.value);
-    };
-
-    const handleAddPatients = async () => {
-        const patients = patientList
-        .split("\n")
-        .map((line) => line.trim())
-        .filter((patient) => patient !== "");
-
-        try {
-            
-            const response = await fetch("/api/addMembersToGroups", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    username: "your_username", // Replace with your actual data
-                    patients: patients, // Send the list of patients
-                    groupName: "your_group_name", // Replace with your actual data
-                }),
-            });
-
-            if (response.ok) {
-                // Subscription successful, you can handle the success case here
-                // You may also want to handle potential errors
-                console.log("Patients added successfully");
-            } else {
-                // Handle errors, such as invalid patient usernames or server issues
-                console.error("Failed to add patients");
-            }
-        } catch (error) {
-            console.error("Error:", error);
-        }
-
-        // Close the dialog
-        handleClose();
     };
 
     return (
@@ -91,20 +99,20 @@ export default function AddMembers() {
                     sx={{
                         display: "flex",
                         flexDirection: "column",
-                        justifyContent:"center",
+                        justifyContent: "center",
                         alignItems: "center",
-                        margin:"auto"
+                        margin: "auto",
                     }}
                 >
                     <DialogTitle
                         sx={{
                             fontSize: "2.2rem",
-                            bgcolor:"#1F485B",
-                            color:'white',
-                            width:"100%",
-                            display:"flex",
-                            justifyContent:"center",
-                            fontWeight:"600"
+                            bgcolor: "#1F485B",
+                            color: "white",
+                            width: "100%",
+                            display: "flex",
+                            justifyContent: "center",
+                            fontWeight: "600",
                         }}
                     >
                         Add Members
@@ -113,34 +121,78 @@ export default function AddMembers() {
                         sx={{
                             width: "500px",
                             height: "100%",
+                            display:"flex",
+                            flexDirection:"column",
+                            justifyContent:"center",
+                            alignItems:"center"
                         }}
                     >
                         <DialogContentText
                             sx={{
                                 color: "#1F485B",
                                 margin: "20px auto",
-                                fontWeight:"600",
+                                fontWeight: "600",
                             }}
                         >
-                            Enter a list of patient usernames (one per line)
+                            Select your patient usernames
                         </DialogContentText>
-                        <TextareaAutosize
-                            style={{width: "350px", margin: "10px", lineHeight: "2", fontSize: "1.2rem"}}
-                            minRows={3}
-                            maxRows={12}
-                            placeholder="Patient usernames..."
-                            value={patientList}
-                            onChange={handlePatientListChange}
-                        />
+                        <div>
+                            <FormControl sx={{m: 1, width: 300}}>
+                            <InputLabel id="demo-multiple-chip-label" 
+                                sx={{
+                                    color: "#062942",
+                                    "& label": {
+                                        color: "#00222E",
+                                    },
+                                }}
+                            >
+                                Add
+                            </InputLabel>
+                                <Select
+                                    labelId="demo-multiple-chip-label"
+                                    id="demo-multiple-chip"
+                                    fullWidth
+                                    multiple
+                                    value={personName}
+                                    onChange={handleChange}
+                                    input={<OutlinedInput id="select-multiple-chip" label="Chip" />}
+                                    renderValue={(selected) => (
+                                        <Box sx={{display: "flex", flexWrap: "wrap", gap: 0.5}}>
+                                            {selected.map((value) => (
+                                                <Chip key={value} label={value} />
+                                            ))}
+                                        </Box>
+                                    )}
+                                    MenuProps={MenuProps}
+                                >
+                                    {names.map((name) => (
+                                        <MenuItem key={name} value={name} style={getStyles(name, personName, theme)}>
+                                            {name}
+                                        </MenuItem>
+                                    ))}
+                                </Select>
+                            </FormControl>
+                        </div>
                     </DialogContent>
                     <DialogActions>
-                    {/* <Box display='flex' gap={1} width='100%' justifyContent='center'> */}
-                        <Button color='medical' onClick={handleAddPatients} sx={{
-                            fontSize:"1.5rem"
-                        }}>Add</Button>
-                        <Button color='error' onClick={handleClose} sx={{
-                            fontSize:"1.5rem"
-                        }}>Cancel</Button>
+                        <Button
+                            color="medical"
+                            // onClick={handleAddPatients}
+                            sx={{
+                                fontSize: "1.5rem",
+                            }}
+                        >
+                            Add
+                        </Button>
+                        <Button
+                            color="error"
+                            onClick={handleClose}
+                            sx={{
+                                fontSize: "1.5rem",
+                            }}
+                        >
+                            Cancel
+                        </Button>
                         {/* </ Box> */}
                     </DialogActions>
                 </Box>

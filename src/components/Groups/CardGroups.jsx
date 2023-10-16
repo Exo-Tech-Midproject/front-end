@@ -23,6 +23,7 @@ export default function CardGroups(props) {
 
   const [imageSrc, setImageSrc] = useState(groupImage);
 
+  
   async function handleDeleteCard(id) {
     try {
       let token = cookie.load('auth')
@@ -38,7 +39,7 @@ export default function CardGroups(props) {
 };
 
 function handelClick(){
-  navigator(`/dashboard/group/${id}`)
+    navigator(`/dashboard/group/${id}`)
 }
 
 
@@ -112,7 +113,6 @@ function handelClick(){
                   textAlign:"center",
                   // margin:"10px auto",
                   color:"#f8f8ff",
-
             }}>
               {description}
             </Typography>

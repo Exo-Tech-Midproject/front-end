@@ -17,7 +17,7 @@ export default function MedicalSection() {
         <img src="https://images.freeimages.com/images/large-previews/1ce/medical-doctor-1236728.jpg?fmt=webp&w=350" 
         alt="section-img"
         style={{
-            width:"60%"
+            width:"350px"
         }} 
         />
         <Box 

@@ -1,15 +1,10 @@
-import React, { useState, useRef } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import listPlugin from "@fullcalendar/list";
 
-import HomeIcon from '@mui/icons-material/Home';
-import WhatshotIcon from '@mui/icons-material/Whatshot';
-import GrainIcon from '@mui/icons-material/Grain';
-import Breadcrumbs from '@mui/material/Breadcrumbs';
-import Link from '@mui/material/Link';
 import Box from "@mui/material/Box";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
@@ -19,6 +14,12 @@ import Modal from "@mui/material/Modal";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import "./appointmentsHero.css"
+
+import cookie from 'react-cookies'
+import axios from 'axios';
+import jwtDecode from 'jwt-decode';
+let DBURL = process.env.REACT_APP_BASE_URL;
+
 
 const Appointment = () => {
 	const [currentEvents, setCurrentEvents] = useState([]);
@@ -38,28 +39,63 @@ const Appointment = () => {
 		setOpen(false);
 	};
 
-	const handleAddEvent = () => {
+	const handleAddEvent = async () => {
 		const calendarApi = calendarRef.current.getApi();
-
 		const { event, patientName, time } = eventDetails;
 
+		let token = cookie.load('auth')
+		const payload = await jwtDecode(token)
+		let createdEvent = await axios.post(`${DBURL}/physician/${payload.username}/patients/${'anas'}/appointments`, eventDetails, {
+			headers: { Authorization: `Bearer ${token}` }
+		})
+		console.log("createdEvent ", createdEvent)
 		if (event && time) {
-			calendarApi.addEvent({
-				title: event,
-				start: time,
-				extendedProps: {
+			fetch(`${DBURL}/physician/${payload.username}/patients/${'anas0'}/appointments`, {
+				method: 'POST',
+				headers: { Authorization: `Bearer ${token}` },
+				body: JSON.stringify({
+					title: event,
+					start: time,
 					patientName,
-				},
-			});
-
-			setOpen(false);
-			setEventDetails({
-				event: "",
-				patientName: "",
-				time: "",
-			});
+				}),
+			})
+				.then((response) => response.json())
+				.then((newEvent) => {
+					calendarApi.addEvent(newEvent);
+					setOpen(false);
+					setEventDetails({
+						event: "",
+						patientName: "",
+						time: "",
+					});
+				})
+				.catch((error) => {
+					// Handle error
+				});
 		}
 	};
+	async function fetchEvents() {
+		try {
+			let token = cookie.load('auth')
+			const payload = await jwtDecode(token)
+			let Events = await axios.get(`${DBURL}/physician/${payload.username}/patients/${payload.username}/appointments`,
+				{
+					headers: { Authorization: `Bearer ${token}` }
+				})
+			console.log("Events.data ", Events.data)
+			setEventDetails(Events.data)
+			console.log(Events, 'from Events function')
+		}
+		catch (error) {
+			console.log(error)
+		}
+	}
+
+
+	useEffect(() => {
+		fetchEvents()
+
+	}, [])
 
 	const handleInputChange = (e) => {
 		const { id, value } = e.target;
@@ -73,7 +109,7 @@ const Appointment = () => {
 			day: "numeric",
 		}).format(date);
 	};
-	console.log(currentEvents)
+	console.log("currentEvents ", currentEvents)
 
 	const boxRef = useRef();
 
@@ -84,47 +120,6 @@ const Appointment = () => {
 	};
 	return (
 		<>
-			<Box
-				sx={{
-					margin: "2%",
-					marginTop: '0'
-				}}
-			>
-				<div role="presentation">
-					<Breadcrumbs aria-label="breadcrumb">
-						<Link
-							underline="hover"
-							sx={{
-								display: 'flex',
-								alignItems: 'center'
-							}}
-							color="#062942"
-							href="/"
-						>
-							<HomeIcon sx={{ mr: 0.5 }} fontSize="inherit" />
-							Home
-						</Link>
-						<Link
-							underline="hover"
-							sx={{ display: 'flex', alignItems: 'center' }}
-							color="#062942"
-							href="/dashboard/Profile"
-						>
-							<WhatshotIcon sx={{ mr: 0.5 }} fontSize="inherit" />
-							Profile
-						</Link>
-						<Link
-							underline="hover"
-							sx={{ display: 'flex', alignItems: 'center', textDecoration: "none", }}
-							color="#4070f4"
-							href="/dashboard/appointment"
-						>
-							<GrainIcon sx={{ mr: 0.5 }} fontSize="inherit" />
-							Appointments
-						</Link>
-					</Breadcrumbs>
-				</div>
-			</Box>
 			<div className="Appointmenthero">
 				<div className="Appointmenthero-content">
 					<h1 className="AppointmentH1">Book Your Appointment</h1>
@@ -133,7 +128,7 @@ const Appointment = () => {
 
 				</div>
 			</div>
-			<Box m="20px" marginTop={10} ref={boxRef}>
+			<Box m="20px" ref={boxRef}>
 
 				<Box
 					display="flex"
@@ -190,12 +185,12 @@ const Appointment = () => {
 							initialEvents={[
 								{
 									id: "1",
-									title: "2 PM",
-									date: "2023-10-22",
+									title: "Appointment at 2 PM",
+									date: "2023-10-14",
 								},
 								{
 									id: "2",
-									title: "4 PM - 6 PM",
+									title: "Appointment from 2 PM to 6 PM",
 									date: "2023-10-28",
 								},
 							]}

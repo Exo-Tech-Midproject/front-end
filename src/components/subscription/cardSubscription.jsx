@@ -1,6 +1,7 @@
 import React from 'react';
 import './cardSubscription.css';
 import doc from "./doc.png"
+import Rating from '@mui/material/Rating';
 
 export default function CardSubscription() {
 	const cardsData = [
@@ -38,7 +39,7 @@ export default function CardSubscription() {
 			department: "Doctor",
 			img: doc,
 			profile: "http://localhost:3000/dashboard/subscriptions",
-			rating: 5,
+			rating: 3.5,
 		},
 		{
 			id: 4,
@@ -47,7 +48,7 @@ export default function CardSubscription() {
 			department: "Doctor",
 			img: doc,
 			profile: "http://localhost:3000/dashboard/subscriptions",
-			rating: 5,
+			rating: 2.5,
 		},
 		{
 			id: 4,
@@ -56,37 +57,38 @@ export default function CardSubscription() {
 			department: "Doctor",
 			img: doc,
 			profile: "http://localhost:3000/dashboard/subscriptions",
-			rating: 5,
+			rating: 1,
 		},
 
 
 	];
 
-	const renderStars = (rating) => {
-		const stars = [];
-		for (let i = 1; i <= 5; i++) {
-			const starClass = i <= rating ? 'star filled' : 'star';
-			stars.push(<span key={i} className={starClass}>&#9733;</span>);
-		}
-		return stars;
-	};
+	// const renderStars = (rating) => {
+	// 	const stars = [];
+	// 	for (let i = 1; i <= 5; i++) {
+	// 		const starClass = i <= rating ? 'star filled' : 'star';
+	// 		stars.push(<span key={i} className={starClass}>&#9733;</span>);
+	// 	}
+	// 	return stars;
+	// };
 
 	return (
 		<div className="mainP">
 			{cardsData.map((card) => (
 				// <a key={card.id} href={card.profile}>
-					<div className="Subcard">
-						<div className="Subcard-text">
-							<div className="Subportada" style={{ backgroundImage: `url(${card.img})` }}></div>
+				<div className="Subcard">
+					<div className="Subcard-text">
+						<div className="Subportada" style={{ backgroundImage: `url(${card.img})` }}></div>
 
-							<div className="Subtitle-total">
-								<div className="Subtitle">{card.department}</div>
-								<h3>{card.name}</h3>
-								<div className="Subdesc">{card.bio}</div>
-								<div className="rating">{renderStars(card.rating)}</div>
-							</div>
+						<div className="Subtitle-total">
+							<div className="Subtitle">{card.department}</div>
+							<h3>{card.name}</h3>
+							<div className="Subdesc">{card.bio}</div>
+							{/* <div className="rating">{renderStars(card.rating)}</div> */}
+							<Rating sx={{marginLeft:"20px"}} name="half-rating-read" defaultValue={card.rating} precision={0.5} size="small" readOnly />
 						</div>
 					</div>
+				</div>
 				// </a>
 			))}
 		</div>

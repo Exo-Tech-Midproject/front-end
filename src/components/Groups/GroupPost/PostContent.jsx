@@ -108,8 +108,8 @@ const handleImageError = () => {
       width:"100%",
       backgroundOrigin: "border-box",
       backgroundPosition: "center",
-      // backgroundImage:`url(${imageSrc})`,
-      backgroundImage:"url('https://img.freepik.com/premium-photo/healthcare-medical-doctor-working-with-professional-team-physician-nursing-assistant_34200-767.jpg')",
+      backgroundImage:`url(${imageSrc})`,
+      // backgroundImage:"url('https://img.freepik.com/premium-photo/healthcare-medical-doctor-working-with-professional-team-physician-nursing-assistant_34200-767.jpg')",
       backgroundSize: "cover",
     }}
     >

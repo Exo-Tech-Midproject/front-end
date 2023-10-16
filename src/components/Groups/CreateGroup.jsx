@@ -16,18 +16,49 @@ import cookie from 'react-cookies'
 import jwtDecode from 'jwt-decode';
 let DBRUL = process.env.REACT_APP_BASE_URL
 
+// const DefaultImg = ('https://img.freepik.com/premium-vector/avatar-bearded-doctor-doctor-with-stethoscope-vector-illustrationxa_276184-31.jpg')
+
+  let defaultFormData = new FormData();
+
+  defaultFormData.append('image', DefaultImg);
+
 
 export default function CreateGroup() {
 
   const [groupName, setGroupName] = useState('');
   const [description, setDescription] = useState('');
-  const [groupImageUrl, setGroupImageUrl] = useState(DefaultImg);
+  // const [groupImageUrl, setGroupImageUrl] = useState(DefaultImg);
   const [groupNameError, setGroupNameError] = useState(null);
   const [descriptionError, setDescriptionError] = useState(null);
   const [createdGroups, setCreatedGroups] = useState([]);
   const [showForm, setShowForm] = useState(false);
+  const [temp, setTemp] = useState(DefaultImg);
+  const [selectedFile, setSelectedFile] = useState('')
+
+
 
   const [snackbarOpen, setSnackbarOpen] = useState(false);
+
+  const handleImageChange = (event) => {
+    setSelectedFile(event.target.files[0]);
+    const imageUrl = URL.createObjectURL(event.target.files[0]);
+    setTemp(imageUrl)
+    // setGroupImageUrl(imageUrl)
+
+};
+
+
+// const handleImageUpload = (e) => {
+//   const file = e.target.files[0];
+//   if (file) {
+//     const imageUrl = URL.createObjectURL(file);
+//     setDeflautImg(imageUrl)
+//     setGroupImageUrl(file);
+//     console.log('iiiiiiiiiiiiiiiiiiiiiiiii',file)
+//   }
+// };
+
+
 
   async function fetchGroups (){
     try{
@@ -52,13 +83,7 @@ export default function CreateGroup() {
 
 }, [])
 
-  const handleImageUpload = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      const imageUrl = URL.createObjectURL(file);
-      setGroupImageUrl(imageUrl);
-    }
-  };
+
 
   const handleDescriptionChange = (e) => {
     const inputValue = e.target.value;
@@ -82,29 +107,47 @@ export default function CreateGroup() {
     }
   };
 
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (groupName && description && !groupNameError && !descriptionError) {
       if (description.length >= 5 && description.length <= 100) {
+        
         const newGroup = {
                 groupName:groupName,
                 description:description,
-                groupImage:groupImageUrl,
+                groupImage:'https://img.freepik.com/premium-vector/avatar-bearded-doctor-doctor-with-stethoscope-vector-illustrationxa_276184-31.jpg'
               };
 
         let token = cookie.load('auth')
         const payload = await jwtDecode(token)
         let allGroups = await axios.post(`${DBRUL}/physician/${payload.username}/groups`,newGroup,
+        {
+          headers: { Authorization: `Bearer ${token}` }
+      })
+      let imgId = allGroups.data.id
+      const formData = new FormData();
+      if(!selectedFile){
+        
+      }else{
+        formData.append('image',  selectedFile );
+      }
+        
+        let imgGroup = await axios.post(`${DBRUL}/physician/${payload.username}/groups/${imgId}/groupImg`,formData,
             {
-                headers: { Authorization: `Bearer ${token}` }
+                headers: {
+                Authorization: `Bearer ${token}`, 
+                'Content-Type': 'multipart/form-data'
+              }
             })
         console.log(allGroups.data)
+        console.log(imgGroup)
 
         setCreatedGroups([...createdGroups, allGroups.data]);
         setGroupName('');
         setDescription('');
-        setGroupImageUrl(DefaultImg);
+        setSelectedFile(DefaultImg);
 
         setShowForm(false);
       }
@@ -179,7 +222,7 @@ export default function CreateGroup() {
                   borderRadius: '50%',
                 }}
                 alt="Group img"
-                src={groupImageUrl}
+                src={temp}
               />
 
               <label htmlFor="image-upload">
@@ -195,7 +238,7 @@ export default function CreateGroup() {
                 id="image-upload"
                 type="file"
                 style={{ display: 'none'}}
-                onChange={handleImageUpload}
+                onChange={handleImageChange}
               />
             </Container>
             <Stack spacing={3} sx={{

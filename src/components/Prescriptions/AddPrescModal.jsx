@@ -51,7 +51,7 @@ export default function AddPrescModal({ showModal, handleClosePrescModal, handle
         diagnosis: "",
         medicines: [...drugsList],
         signature: "",
-        username:'anas0'
+        username: 'anas0'
 
     });
 
@@ -63,11 +63,12 @@ export default function AddPrescModal({ showModal, handleClosePrescModal, handle
 
             let token = cookie.load('auth')
             const payload = await jwtDecode(token)
-            let createdPres = await axios.post(`${DBRUL}/physician/${payload.username}/patients/${'anas0'}/prescriptions`, requestData, {
+            let createdPres = await axios.post(`${DBRUL}/physician/${payload.username}/patients/${'anas'}/prescriptions`, requestData, {
                 headers: { Authorization: `Bearer ${token}` }
             })
             console.log(createdPres)
             handleClosePrescModal()
+            handleResetList()
         } catch (err) {
             console.log(err)
         }

@@ -11,6 +11,7 @@ import RemoveCircleOutlineOutlinedIcon from '@mui/icons-material/RemoveCircleOut
 import axios from 'axios';
 import cookie from 'react-cookies'
 import jwtDecode from 'jwt-decode';
+import AuthPhysician from '../Auths/AuthPhysician';
 let DBRUL = process.env.REACT_APP_BASE_URL
 
 
@@ -28,7 +29,7 @@ export default function PrescriptionSingleCard({ slide, index, setPrescription, 
             let token = cookie.load('auth')
             // let token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Imhhc2FuIiwiYWNjb3VudFR5cGUiOiJwaHlzaWNpYW4iLCJpYXQiOjE2OTcxNzUzMjN9.xGG53_pQA-c8Uq10dELXS6GMJ2VP9SmJKE-ykQ2KEGo'
             const payload = await jwtDecode(token)
-            let userVitals = await axios.delete(`${DBRUL}/physician/${payload.username}/patients/${'anas0'}/prescriptions/${id}`,
+            let userVitals = await axios.delete(`${DBRUL}/physician/${payload.username}/patients/${'anas'}/prescriptions/${id}`,
                 {
                     headers: { Authorization: `Bearer ${token}` }
                 })
@@ -64,9 +65,11 @@ export default function PrescriptionSingleCard({ slide, index, setPrescription, 
                         },
                     }}
                 >
-                    <IconButton onClick={handleShowDeleteModal} color='white' sx={{ position: 'absolute', top: '45px', right: '0px' }} >
-                        <RemoveCircleOutlineOutlinedIcon sx={{ color: '#ed6c02' }} />
-                    </IconButton>
+                    <AuthPhysician>
+                        <IconButton onClick={handleShowDeleteModal} color='white' sx={{ position: 'absolute', top: '45px', right: '0px' }} >
+                            <RemoveCircleOutlineOutlinedIcon sx={{ color: '#ed6c02' }} />
+                        </IconButton>
+                    </AuthPhysician>
                     <Typography color='white' position='absolute' top='20px' left='10px' variant="h5" component="div">
                         HEALTHAK
                     </Typography>

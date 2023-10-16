@@ -15,7 +15,10 @@ import DeleteCardModal from './DeleteCardModal';
 import axios from 'axios';
 import cookie from 'react-cookies'
 import jwtDecode from 'jwt-decode';
+import AuthPhysician from '../Auths/AuthPhysician';
+import AuthPatient from '../Auths/AuthPatient';
 let DBRUL = process.env.REACT_APP_BASE_URL
+
 
 
 
@@ -102,7 +105,9 @@ export default function VitalsCard({ dataObj, setVitals, vitals }) {
                     <CalendarMonthOutlinedIcon sx={{ color: '#1F485B' }} color='white' className='icon-card' />
                     <Typography className='text-card' color={'#1F485B'} variant='h5' margin='0 auto' textAlign='center'> Date {`${new Date(dataObj.createdAt).toDateString()}`}</Typography>
                     <Tooltip componentsProps={{ tooltip: { sx: { bgcolor: 'white', color: 'black', '& .MuiTooltip-arrow': { color: 'white' } } } }} title="Delete" placement='right' sx={{ '.MuiTooltip-tooltip': { backgroundColor: 'white' } }} arrow>
-                        <IconButton onClick={handleShowDeleteModal} color='warning'> <HighlightOffOutlinedIcon /></IconButton>
+                        <AuthPatient>
+                            <IconButton onClick={handleShowDeleteModal} color='warning'> <HighlightOffOutlinedIcon /></IconButton>
+                        </AuthPatient>
                     </Tooltip>
 
                 </Box>

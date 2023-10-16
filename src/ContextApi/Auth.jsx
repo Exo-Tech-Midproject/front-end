@@ -132,18 +132,20 @@ export default function LoginProvider({ children }) {
     }
     useEffect(() => {
         const authCookie = cookie.load('auth');
-        if(authCookie){
-            let decodedToken = jwtDecode(authCookie) 
 
-            if (decodedToken.accountType === 'patient') {
-                ValidateTokenPatient(authCookie) 
-            } else if (decodedToken.accountType === 'physician'){
+        if (authCookie) {
+            let decoded = jwtDecode(authCookie)
+            if (decoded.accountType === 'patient') {
+                ValidateTokenPatient(authCookie)
+            } else if (decoded.accountType === 'patient') {
                 ValidateTokenPhysician(authCookie)
-            }
-            else {
+
+            } else {
+
                 setLoggedIn(false)
             }
         }
+
     }, [])
 
     return (

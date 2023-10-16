@@ -132,6 +132,7 @@ export default function LoginProvider({ children }) {
     }
     useEffect(() => {
         const authCookie = cookie.load('auth');
+
         if (authCookie) {
             let decoded = jwtDecode(authCookie)
             if (decoded.accountType === 'patient') {
@@ -140,6 +141,7 @@ export default function LoginProvider({ children }) {
                 ValidateTokenPhysician(authCookie)
 
             } else {
+
                 setLoggedIn(false)
             }
         }

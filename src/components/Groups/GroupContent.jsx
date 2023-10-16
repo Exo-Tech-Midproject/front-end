@@ -21,6 +21,8 @@ export default function Group() {
 
   const [createdPost, setCreatedPost] = useState([]);
 
+  let ordered = createdPost.sort((a , b) => b.id - a.id)
+
 
   function UpdateCreatedPost (array){
 

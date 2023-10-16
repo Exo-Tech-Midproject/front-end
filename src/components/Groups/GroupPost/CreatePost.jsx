@@ -83,6 +83,7 @@ export default function CreatePost({createdPost, setCreatedPost}) {
                 const newPost = {
                     title: title,
                     textContent: textContent,
+                    postImage:postImageUrl,
                 };
 
                 let token = cookie.load("auth");

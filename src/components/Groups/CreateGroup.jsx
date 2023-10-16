@@ -10,17 +10,17 @@ import Divider from "@mui/material/Divider";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
 import AuthPhysician from '../Auths/AuthPhysician';
-import DefaultImg from '../../assets/images/Group-img/istockphoto-1413129950-612x612.jpg'
+// import DefaultImg from '../../assets/images/Group-img/istockphoto-1413129950-612x612.jpg'
 import axios from 'axios';
 import cookie from 'react-cookies'
 import jwtDecode from 'jwt-decode';
 let DBRUL = process.env.REACT_APP_BASE_URL
 
-// const DefaultImg = ('https://img.freepik.com/premium-vector/avatar-bearded-doctor-doctor-with-stethoscope-vector-illustrationxa_276184-31.jpg')
+const DefaultImg = ('https://img.freepik.com/premium-vector/avatar-bearded-doctor-doctor-with-stethoscope-vector-illustrationxa_276184-31.jpg')
 
-  let defaultFormData = new FormData();
+let defaultFormData = new FormData();
 
-  defaultFormData.append('image', DefaultImg);
+defaultFormData.append('image', DefaultImg);
 
 
 export default function CreateGroup() {
@@ -33,7 +33,7 @@ export default function CreateGroup() {
   const [createdGroups, setCreatedGroups] = useState([]);
   const [showForm, setShowForm] = useState(false);
   const [temp, setTemp] = useState(DefaultImg);
-  const [selectedFile, setSelectedFile] = useState('')
+  const [selectedFile, setSelectedFile] = useState(DefaultImg)
 
 
 
@@ -43,36 +43,38 @@ export default function CreateGroup() {
     setSelectedFile(event.target.files[0]);
     const imageUrl = URL.createObjectURL(event.target.files[0]);
     setTemp(imageUrl)
-    // setGroupImageUrl(imageUrl)
+    // setSelectedFile(imageUrl)
 
-};
+  };
+
+  console.log(selectedFile, '22222222222222222abdu')
+  // const handleImageUpload = (e) => {
+  //   const file = e.target.files[0];
+  //   if (file) {
+  //     const imageUrl = URL.createObjectURL(file);
+  //     setDeflautImg(imageUrl)
+  //     setGroupImageUrl(file);
+  //     console.log('iiiiiiiiiiiiiiiiiiiiiiiii',file)
+  //   }
+  // };
 
 
-// const handleImageUpload = (e) => {
-//   const file = e.target.files[0];
-//   if (file) {
-//     const imageUrl = URL.createObjectURL(file);
-//     setDeflautImg(imageUrl)
-//     setGroupImageUrl(file);
-//     console.log('iiiiiiiiiiiiiiiiiiiiiiiii',file)
-//   }
-// };
 
+  async function fetchGroups() {
+    try {
+      let token = cookie.load('auth')
+      const payload = await jwtDecode(token)
+      let allGroups = await axios.get(`${DBRUL}/${payload.accountType}/${payload.username}/groups`,
+        {
+          headers: { Authorization: `Bearer ${token}` }
+        })
+      console.log(allGroups.data)
+      setCreatedGroups(allGroups.data)
+      console.log(allGroups, 'from delete function')
 
-
-  async function fetchGroups (){
-    try{
-        let token = cookie.load('auth')
-        const payload = await jwtDecode(token)
-        let allGroups = await axios.get(`${DBRUL}/${payload.accountType}/${payload.username}/groups`,
-            {
-                headers: { Authorization: `Bearer ${token}` }
-            })
-        console.log(allGroups.data)
-        setCreatedGroups(allGroups.data)
-        console.log(allGroups, 'from delete function')
+      return allGroups.data
     }
-    catch (error){
+    catch (error) {
       console.log(error)
     }
   }
@@ -81,7 +83,8 @@ export default function CreateGroup() {
   useEffect(() => {
     fetchGroups()
 
-}, [])
+  }, [])
+
 
 
 
@@ -113,41 +116,48 @@ export default function CreateGroup() {
 
     if (groupName && description && !groupNameError && !descriptionError) {
       if (description.length >= 5 && description.length <= 100) {
-        
-        const newGroup = {
-                groupName:groupName,
-                description:description,
-                groupImage:'https://img.freepik.com/premium-vector/avatar-bearded-doctor-doctor-with-stethoscope-vector-illustrationxa_276184-31.jpg'
-              };
+        let newGroup = {
+          groupName: groupName,
+          description: description,
+
+        };
+        if (selectedFile === DefaultImg) {
+          newGroup = {
+            groupName: groupName,
+            description: description,
+            groupImage: DefaultImg,
+
+          }
+        }
 
         let token = cookie.load('auth')
         const payload = await jwtDecode(token)
-        let allGroups = await axios.post(`${DBRUL}/physician/${payload.username}/groups`,newGroup,
-        {
-          headers: { Authorization: `Bearer ${token}` }
-      })
-      let imgId = allGroups.data.id
-      const formData = new FormData();
-      if(!selectedFile){
-        
-      }else{
-        formData.append('image',  selectedFile );
-      }
-        
-        let imgGroup = await axios.post(`${DBRUL}/physician/${payload.username}/groups/${imgId}/groupImg`,formData,
+        let allGroups = await axios.post(`${DBRUL}/physician/${payload.username}/groups`, newGroup,
+          {
+            headers: { Authorization: `Bearer ${token}` }
+          })
+        let imgId = allGroups.data.id
+        const formData = new FormData();
+        formData.append('image', selectedFile);
+        if (selectedFile !== DefaultImg) {
+          console.log('aaaaaaaaaaaaaaaaaaaaaa32323i')
+          let imgGroup = await axios.post(`${DBRUL}/physician/${payload.username}/groups/${imgId}/groupImg`, formData,
             {
-                headers: {
-                Authorization: `Bearer ${token}`, 
+              headers: {
+                Authorization: `Bearer ${token}`,
                 'Content-Type': 'multipart/form-data'
               }
             })
-        console.log(allGroups.data)
-        console.log(imgGroup)
-
-        setCreatedGroups([...createdGroups, allGroups.data]);
+          console.log(imgGroup, 'aaaaaaaaaaaaaaaaaaaaaai')
+        }
+        console.log(allGroups.data, 'after Working')
+        let banana = await fetchGroups()
+        console.log(banana, 'asdasd')
+        setCreatedGroups(banana);
         setGroupName('');
         setDescription('');
         setSelectedFile(DefaultImg);
+        setTemp(DefaultImg)
 
         setShowForm(false);
       }
@@ -171,20 +181,20 @@ export default function CreateGroup() {
         margin: '1%',
       }}>
         <AuthPhysician>
-        <Button variant="contained"
-          sx={{
-            bgcolor: '#062942',
-            borderRadius: "5px",
-            margin: "3%",
-            fontSize: "1.3rem",
-            "&:hover": {
-              transform: "scale(1.1) ",
-              transition: 'transform 0.5s ease',
-              background: "#1F485B"
-            }
-          }}
-          onClick={() => setShowForm(!showForm)}
-        >{showForm ? " < Go Back " : "+ Create New Group"}</Button>
+          <Button variant="contained"
+            sx={{
+              bgcolor: '#062942',
+              borderRadius: "5px",
+              margin: "3%",
+              fontSize: "1.3rem",
+              "&:hover": {
+                transform: "scale(1.1) ",
+                transition: 'transform 0.5s ease',
+                background: "#1F485B"
+              }
+            }}
+            onClick={() => setShowForm(!showForm)}
+          >{showForm ? " < Go Back " : "+ Create New Group"}</Button>
         </AuthPhysician>
       </Container>
       {showForm && (
@@ -228,7 +238,7 @@ export default function CreateGroup() {
               <label htmlFor="image-upload">
                 <Button variant="contained" component="span" sx={{
                   bgcolor: "#062942",
-                  marginTop:"10px"
+                  marginTop: "10px"
                 }}>
                   Upload Image
                 </Button>
@@ -237,7 +247,7 @@ export default function CreateGroup() {
                 accept="image/*"
                 id="image-upload"
                 type="file"
-                style={{ display: 'none'}}
+                style={{ display: 'none' }}
                 onChange={handleImageChange}
               />
             </Container>
@@ -307,31 +317,31 @@ export default function CreateGroup() {
       )}
       <Divider sx={{ margin: '20px' }} />
       <Box sx={{
-        display:"flex",
-        justifyContent:"center",
-        alignItems:"center",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
         // height:"50px"
       }}>
-      <Typography variant="h1" textTransform="capitalize" sx={{
-                marginBottom:'3%',
-                color:'#062942'
-            }}>
-                    Your Groups
-                </Typography>
+        <Typography variant="h1" textTransform="capitalize" sx={{
+          marginBottom: '3%',
+          color: '#062942'
+        }}>
+          Your Groups
+        </Typography>
       </Box>
       <Container
         sx={{
           margin: '2%',
           flexWrap: 'wrap',
           display: 'flex',
-          minHeight:"30vh"
+          minHeight: "30vh"
         }}
       >
         {createdGroups.map((group, index) => (
           <CardGroups key={index}
-          id={group.id}
-          createdGroups={createdGroups}
-          setCreatedGroups={setCreatedGroups}
+            id={group.id}
+            createdGroups={createdGroups}
+            setCreatedGroups={setCreatedGroups}
             groupName={group.groupName}
             description={group.description}
             groupImage={group.groupImage}

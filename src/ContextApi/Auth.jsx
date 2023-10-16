@@ -137,7 +137,7 @@ export default function LoginProvider({ children }) {
             let decoded = jwtDecode(authCookie)
             if (decoded.accountType === 'patient') {
                 ValidateTokenPatient(authCookie)
-            } else if (decoded.accountType === 'patient') {
+            } else if (decoded.accountType === 'physician') {
                 ValidateTokenPhysician(authCookie)
 
             } else {

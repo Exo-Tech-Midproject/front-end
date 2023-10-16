@@ -17,12 +17,19 @@ let DBRUL = process.env.REACT_APP_BASE_URL;
 export default function CreatePost({createdPost, setCreatedPost}) {
     const [title, setPostTitle] = useState("");
     const [textContent, setPostContent] = useState("");
-    const [postImageUrl, setPostImageUrl] = useState("");
     const [postTitleError, setPostTitleError] = useState(null);
     const [postContentError, setPostContentError] = useState(null);
     const [showForm, setShowForm] = useState(false);
     const {id} = useParams();
     const [snackbarOpen, setSnackbarOpen] = useState(false);
+    const [temp, setTemp] = useState('');
+    const [selectedFile, setSelectedFile] = useState(null)
+
+    const handleImageChange = (event) => {
+      setSelectedFile(event.target.files[0]);
+      const imageUrl = URL.createObjectURL(event.target.files[0]);
+      setTemp(imageUrl)
+  };
 
     async function fetchPosts() {
         try {
@@ -34,6 +41,8 @@ export default function CreatePost({createdPost, setCreatedPost}) {
             });
             console.log("aaaaaaaaaaaaaaaaaaa", allPosts.data);
             setCreatedPost(allPosts.data);
+
+            return allPosts.data
         } catch (error) {
             console.log(error);
         }
@@ -44,14 +53,6 @@ export default function CreatePost({createdPost, setCreatedPost}) {
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
-
-    const handleImageUpload = (e) => {
-        const file = e.target.files[0];
-        if (file) {
-            const imageUrl = URL.createObjectURL(file);
-            setPostImageUrl(imageUrl);
-        }
-    };
 
     const handlePostContentChange = (e) => {
         const inputValue = e.target.value;
@@ -80,23 +81,40 @@ export default function CreatePost({createdPost, setCreatedPost}) {
 
         if (title && textContent && !postTitleError && !postContentError) {
             if (textContent.length >= 50) {
-                const newPost = {
+
+                let newPost = {
                     title: title,
                     textContent: textContent,
-                    postImage:postImageUrl,
                 };
+                
 
                 let token = cookie.load("auth");
                 const payload = await jwtDecode(token);
                 let allPosts = await axios.post(`${DBRUL}/physician/${payload.username}/groups/${id}/posts`, newPost, {
                     headers: {Authorization: `Bearer ${token}`},
                 });
-                console.log(allPosts.data);
-                setCreatedPost([...createdPost, allPosts.data]);
+                let postId = allPosts.data.id
+                console.log('pppppppppppppppppppppp',postId)
+                const formData = new FormData();
+                formData.append('image', selectedFile);
+                if (selectedFile !== null) {
+                  let imgPost = await axios.post(`${DBRUL}/physician/${payload.username}/groups/${id}/posts/${postId}/postImg`, formData,
+                    {
+                      headers: {
+                        Authorization: `Bearer ${token}`,
+                        'Content-Type': 'multipart/form-data'
+                      }
+                      })
+                      console.log(imgPost)
+                    }
+                // console.log(allPosts.data);
+                let banana = await fetchPosts()
+                setCreatedPost(banana);
                 setPostTitle("");
-                setPostImageUrl('')
                 setPostContent("");
                 setShowForm(false);
+                setTemp('');
+                setSelectedFile(null);
             }
         } else {
             setSnackbarOpen(true);
@@ -106,7 +124,7 @@ export default function CreatePost({createdPost, setCreatedPost}) {
     const handleCloseSnackbar = () => {
         setSnackbarOpen(false);
     };
-
+    
     return (
         <>
             <Container
@@ -189,8 +207,8 @@ export default function CreatePost({createdPost, setCreatedPost}) {
                         bgcolor:"gray",
                   marginTop:"25px"
                       }}
-                      alt="Group img"
-                      src={postImageUrl}
+                      alt="Post img"
+                      src={temp}
                     />
       
                     <label htmlFor="image-upload">
@@ -206,7 +224,7 @@ export default function CreatePost({createdPost, setCreatedPost}) {
                       id="image-upload"
                       type="file"
                       style={{ display: 'none'}}
-                      onChange={handleImageUpload}
+                      onChange={handleImageChange}
                     />
                   </Container>
                   <Stack spacing={3} sx={{

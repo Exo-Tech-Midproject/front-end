@@ -21,7 +21,11 @@ export default function ProfileHeadSection({ getProfileInfo, profileInfo, setPro
     const [showModal, setShowModal] = useState(false)
     const [showModal2, setShowModal2] = useState(false)
     let token = cookie.load('auth')
-    const payload = jwtDecode(token)
+    let payload
+    if (token) {
+
+        payload = jwtDecode(token)
+    }
     const handleImageChange = (event) => {
         setSelectedFile(event.target.files[0]);
 
@@ -49,16 +53,18 @@ export default function ProfileHeadSection({ getProfileInfo, profileInfo, setPro
         const formData = new FormData();
         formData.append('image', selectedFile);
         try {
-            const response = await axios.post(`${DBRUL}/${payload.accountType}/${payload.username}/uploadpfp`, formData, {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                    'Content-Type': 'multipart/form-data'
-                },
+            if (payload) {
+                const response = await axios.post(`${DBRUL}/${payload.accountType}/${payload.username}/uploadpfp`, formData, {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                        'Content-Type': 'multipart/form-data'
+                    },
 
-            });
-            setProfileInfo(getProfileInfo())
-            console.log('Image uploaded successfully:', response.data);
-            handleCloseModal()
+                });
+                setProfileInfo(getProfileInfo())
+                console.log('Image uploaded successfully:', response.data);
+                handleCloseModal()
+            }
         } catch (error) {
             console.error('Error uploading image:', error);
         }
@@ -67,16 +73,19 @@ export default function ProfileHeadSection({ getProfileInfo, profileInfo, setPro
         const formData = new FormData();
         formData.append('image', selectedCover);
         try {
-            const response = await axios.post(`${DBRUL}/${payload.accountType}/${payload.username}/uploadcover`, formData, {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                    'Content-Type': 'multipart/form-data'
-                },
+            if (payload) {
 
-            });
-            setProfileInfo(getProfileInfo())
-            console.log('Image uploaded successfully:', response.data);
-            handleCloseModal2()
+                const response = await axios.post(`${DBRUL}/${payload.accountType}/${payload.username}/uploadcover`, formData, {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                        'Content-Type': 'multipart/form-data'
+                    },
+
+                });
+                setProfileInfo(getProfileInfo())
+                console.log('Image uploaded successfully:', response.data);
+                handleCloseModal2()
+            }
         } catch (error) {
             console.error('Error uploading image:', error);
         }

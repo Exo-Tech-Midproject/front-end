@@ -7,13 +7,21 @@ import React, { useContext, useState } from 'react'
 import AddPrescModal from "./AddPrescModal";
 import AuthPhysician from "../Auths/AuthPhysician";
 import { LoginContext } from "../../ContextApi/Auth";
-
+import cookie from 'react-cookies'
+import jwtDecode from 'jwt-decode';
 // import doctorAnimation from '../../assets/lottie/doctorVital.json'
 // import VitalsRangesBanner from './VitalsRangesBanner'
 
 export default function IntroSection() {
-    const {user} = useContext(LoginContext)
+    const { user } = useContext(LoginContext)
     const [showPresModal, setShowPrescModal] = useState(false)
+
+    let token = cookie.load('auth')
+    let payload
+    if(token){
+
+         payload = jwtDecode(token)
+    }
 
     function handleShowOrescModal() {
         setShowPrescModal(true)
@@ -23,7 +31,7 @@ export default function IntroSection() {
     }
     return (
         <>
-            <Box width='100%' height={{ xs: '200px', sm: '350px', md: '500px' }} display='flex' justifyContent={'center'} bgcolor='white' borderRadius={'20px'} padding={2} mb='30px'>
+            <Box width='100%' height={{ xs: '200px', sm: '350px', md: '500px' }} display='flex' justifyContent={'center'} bgcolor='white' borderRadius={'20px'} padding={2} mb={payload?.accountType === 'physician' ? '0px' : '30px'}>
                 <Box width={{ xs: '50%', sm: '45%', md: '55%' }} alignItems='center' justifyContent='center'>
                     <iframe style={{ width: '100%', height: '100%', border: 'none' }} title="doctor-a" src="https://lottie.host/?file=bdd0ec42-6ed1-4ac9-b4b1-2d8a17e779e7/leJvXymMZL.lottie"></iframe>
 

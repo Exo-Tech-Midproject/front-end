@@ -3,32 +3,36 @@ import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import React, { useContext, useEffect, useRef, useState } from 'react'
 import ProfileHeadSection from './ProfileHeadSection';
-import SidePageSection from './SidePageSection';
 import InfoSection from './InfoSection';
 import PrescriptionsSection from './PrescriptionsSection';
-import { LoginContext } from "../../ContextApi/Auth";
+
 import axios from "axios";
 import cookie from 'react-cookies'
 import jwtDecode from 'jwt-decode';
-import FullCalendar from "@fullcalendar/react";
-import dayGridPlugin from "@fullcalendar/daygrid";
+
 import ProfileCalendar from "./ProfileCalendar";
 let DBRUL = process.env.REACT_APP_BASE_URL
 
 export default function Profile() {
     const [profileInfo, setProfileInfo] = useState(null)
     let token = cookie.load('auth')
-    const payload = jwtDecode(token)
+    let payload
+    if (token) {
+
+        payload = jwtDecode(token)
+    }
     const containerRef = useRef(null);
     const getProfileInfo = async () => {
         try {
-            const response = await axios.get(`${DBRUL}/${payload.accountType}/${payload.username}/profile`, {
-                headers: { Authorization: `Bearer ${token}` }
-            });
+            if (payload) {
+                const response = await axios.get(`${DBRUL}/${payload.accountType}/${payload.username}/profile`, {
+                    headers: { Authorization: `Bearer ${token}` }
+                });
 
-            let data = response.data
-            setProfileInfo(data)
-            return data
+                let data = response.data
+                setProfileInfo(data)
+                return data
+            }
         } catch (error) {
             console.error('Error uploading image:', error);
         }

@@ -25,19 +25,25 @@
 	text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 	margin-bottom: 70px;
 	position: absolute;
-	top: 85%;
-	left: 50%;
+	top: 43%;
+	left: 30%;
 	transform: translate(-50%, -50%);
-}
+	    text-align: left;
+  }
+  
 
 
 .AppointmentH1 {
-	font-size: 80px;
+	font-size: 70px;
+	text-align: left;
+	color: #1F485B;
 }
 
 .AppointmentP1 {
-	font-size: 36px;
+	font-size: 30px;
 	margin-bottom: 30px;
+	text-align: left;
+	color: #1F485B;
 }
 
 .Appointmentbtn {
@@ -47,10 +53,10 @@
 	color: #fff;
 	text-decoration: none;
 	border-radius: 5px;
-	font-size: 35px;
-	transition: background-color 0.4s;
+	font-size: 25px;
+	transition: background-color 0.3s;
 }
 
 .Appointmentbtn:hover {
-	background-color: green;
+	background-color: #143140;
 }

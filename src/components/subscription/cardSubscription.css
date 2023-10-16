@@ -1,6 +1,7 @@
 @import url("https://fonts.googleapis.com/css?family=Roboto:400,400i,700");
 
 .mainP {
+	margin-top: 100px;
 	min-Height: 50vh;
 	margin: 5px 10px 0 10px;
 	display: flex;
@@ -53,12 +54,6 @@
 	min-height: max-content;
 }
 
-.Subcard svg {
-	width: 85px;
-	height: 85px;
-	margin: 0 auto;
-}
-
 .Subcard-text {
 	display: grid;
 	grid-template-columns: 1fr 1.2fr;
@@ -72,10 +67,6 @@
 
 }
 
-path {
-	fill: white;
-}
-
 .img-Subportada {
 	width: 100%;
 }
@@ -84,7 +75,7 @@ path {
 .Subportada {
 	width: 100%;
 	min-height: 150px;
-	/* Adjust the height */
+
 	border-top-left-radius: 20px;
 	border-bottom-left-radius: 20px;
 

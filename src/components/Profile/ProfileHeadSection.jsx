@@ -49,7 +49,7 @@ export default function ProfileHeadSection({ getProfileInfo, profileInfo, setPro
         const formData = new FormData();
         formData.append('image', selectedFile);
         try {
-            const response = await axios.post(`http://localhost:5000/${payload.accountType}/${payload.username}/uploadpfp`, formData, {
+            const response = await axios.post(`${DBRUL}/${payload.accountType}/${payload.username}/uploadpfp`, formData, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                     'Content-Type': 'multipart/form-data'
@@ -67,7 +67,7 @@ export default function ProfileHeadSection({ getProfileInfo, profileInfo, setPro
         const formData = new FormData();
         formData.append('image', selectedCover);
         try {
-            const response = await axios.post(`http://localhost:5000/${payload.accountType}/${payload.username}/uploadcover`, formData, {
+            const response = await axios.post(`${DBRUL}/${payload.accountType}/${payload.username}/uploadcover`, formData, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                     'Content-Type': 'multipart/form-data'

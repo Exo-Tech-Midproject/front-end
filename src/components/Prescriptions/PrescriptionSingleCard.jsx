@@ -11,6 +11,7 @@ import RemoveCircleOutlineOutlinedIcon from '@mui/icons-material/RemoveCircleOut
 import axios from 'axios';
 import cookie from 'react-cookies'
 import jwtDecode from 'jwt-decode';
+import AuthPhysician from '../Auths/AuthPhysician';
 let DBRUL = process.env.REACT_APP_BASE_URL
 
 
@@ -64,9 +65,11 @@ export default function PrescriptionSingleCard({ slide, index, setPrescription, 
                         },
                     }}
                 >
-                    <IconButton onClick={handleShowDeleteModal} color='white' sx={{ position: 'absolute', top: '45px', right: '0px' }} >
-                        <RemoveCircleOutlineOutlinedIcon sx={{ color: '#ed6c02' }} />
-                    </IconButton>
+                    <AuthPhysician>
+                        <IconButton onClick={handleShowDeleteModal} color='white' sx={{ position: 'absolute', top: '45px', right: '0px' }} >
+                            <RemoveCircleOutlineOutlinedIcon sx={{ color: '#ed6c02' }} />
+                        </IconButton>
+                    </AuthPhysician>
                     <Typography color='white' position='absolute' top='20px' left='10px' variant="h5" component="div">
                         HEALTHAK
                     </Typography>

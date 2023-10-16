@@ -22,7 +22,7 @@ export default function Profile() {
     const containerRef = useRef(null);
     const getProfileInfo = async () => {
         try {
-            const response = await axios.get(`http://localhost:5000/${payload.accountType}/${payload.username}/profile`, {
+            const response = await axios.get(`${DBRUL}/${payload.accountType}/${payload.username}/profile`, {
                 headers: { Authorization: `Bearer ${token}` }
             });
 

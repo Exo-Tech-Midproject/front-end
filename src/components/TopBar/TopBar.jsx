@@ -8,7 +8,9 @@ import SpaceDashboardOutlinedIcon from '@mui/icons-material/SpaceDashboardOutlin
 import NotificationsActiveOutlinedIcon from '@mui/icons-material/NotificationsActiveOutlined';
 import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
 import QuestionAnswerOutlinedIcon from '@mui/icons-material/QuestionAnswerOutlined';
+import { LoginContext } from "../../ContextApi/Auth";
 export default function TopBar({ openDrawer, open }) {
+    const { user } = React.useContext(LoginContext)
     return (
         <Box display='flex' p={2} justifyContent={'space-between'}>
             <Box display='flex' justifyContent='center' alignItems={'center'}>
@@ -31,7 +33,7 @@ export default function TopBar({ openDrawer, open }) {
                 <IconButton sx={{ ":hover": { bgcolor: '#4B6477B0' }, color: "white" }}>
                     <SettingsOutlinedIcon />
                 </IconButton>
-                <Avatar alt="username" src="https://image.winudf.com/v2/image1/bmV0LndsbHBwci5ib3lzX3Byb2ZpbGVfcGljdHVyZXNfc2NyZWVuXzBfMTY2NzUzNzYxN18wOTk/screen-0.webp?fakeurl=1&type=.webp" />
+                <Avatar alt="username" src={user.profileImg || "https://image.winudf.com/v2/image1/bmV0LndsbHBwci5ib3lzX3Byb2ZpbGVfcGljdHVyZXNfc2NyZWVuXzBfMTY2NzUzNzYxN18wOTk/screen-0.webp?fakeurl=1&type=.webp"} />
 
             </Box>
 

@@ -12,7 +12,7 @@ export default function ChatInboxHead({ withWho }) {
   return (
     <Box width='100%' p={4} height='70px' display='flex' justifyContent='space-between' alignItems={'center'} bgcolor='white' sx={{ borderTopRightRadius: '7px' }}>
       <Box display='flex' alignItems='center' gap={2} minWidth={'20%'}>
-        <Avatar sx={{ width: { xs: '40px', sm: '40px', md: '50px' }, height: { xs: '40px', sm: '40px', md: '50px' } }} src='https://wallpapers.com/images/hd/cool-profile-picture-awled9dwo4qq2yv2.jpg' />
+        <Avatar sx={{ width: { xs: '40px', sm: '40px', md: '50px' }, height: { xs: '40px', sm: '40px', md: '50px' } }} src={withWho?.profileImg || 'https://cdn5.vectorstock.com/i/1000x1000/27/89/user-account-flat-icon-vector-14992789.jpg'} />
         {/* <Box > */}
         <Typography fontSize={{ xs: '0.8rem', sm: '1', md: '1.25rem' }} fontWeight='700'>{withWho?.fullName}</Typography>
         {/* </Box> */}

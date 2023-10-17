@@ -12,15 +12,15 @@ import jwtDecode from 'jwt-decode';
 // import doctorAnimation from '../../assets/lottie/doctorVital.json'
 // import VitalsRangesBanner from './VitalsRangesBanner'
 
-export default function IntroSection() {
+export default function IntroSection({ setPrescription, prescription, fetchUserPrescriptions }) {
     const { user } = useContext(LoginContext)
     const [showPresModal, setShowPrescModal] = useState(false)
 
     let token = cookie.load('auth')
     let payload
-    if(token){
+    if (token) {
 
-         payload = jwtDecode(token)
+        payload = jwtDecode(token)
     }
 
     function handleShowOrescModal() {
@@ -80,7 +80,7 @@ export default function IntroSection() {
                     </Button>
                 </Box >
             </AuthPhysician>
-            <AddPrescModal showModal={showPresModal} handleClosePrescModal={handleClosePrescModal} />
+            <AddPrescModal fetchUserPrescriptions={fetchUserPrescriptions} showModal={showPresModal} prescription={prescription} handleClosePrescModal={handleClosePrescModal} setPrescription={setPrescription} />
 
         </>
     )

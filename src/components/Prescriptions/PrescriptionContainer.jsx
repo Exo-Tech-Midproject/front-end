@@ -18,18 +18,19 @@ export default function PrescriptionContainer() {
     if (token) {
 
         payload = jwtDecode(token)
+        console.log(payload, 'zzzzzzzzzzzz')
     }
 
     // let temptoken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFuYXMiLCJhY2NvdW50VHlwZSI6InBhdGllbnQiLCJpYXQiOjE2OTczMjk3OTR9.ZvTnDX-lUnQ2hOboC5iPbjjtNK0Zk8rekstBF2Q_Z1w'
     async function fetchUserPrescriptions() {
         try {
-            if (payload?.accountType === 'pateint') {
+            if (payload?.accountType === 'patient') {
 
                 let userPresc = await axios.get(`${DBRUL}/patient/${payload?.username}/prescriptions`,
                     {
                         headers: { Authorization: `Bearer ${token}` }
                     })
-                console.log(userPresc.data)
+                console.log(userPresc.data, 'from Anas side prescriptions')
                 setPrescription(userPresc.data)
             }
             if (payload?.accountType === 'physician') {
@@ -40,6 +41,7 @@ export default function PrescriptionContainer() {
                     })
                 console.log(userPresc.data, 'loooook here')
                 setPrescription(userPresc.data)
+                return userPresc.data
             }
 
 
@@ -60,7 +62,7 @@ export default function PrescriptionContainer() {
                 <Typography variant='h5' fontWeight={'700'} sx={{ opacity: 0.8 }}>Prescription</Typography>
                 <Typography variant='subtitle2' sx={{ opacity: 0.4 }}>The recipe to get better.</Typography>
             </Box >
-            <IntroSection />
+            <IntroSection setPrescription={setPrescription} prescription={prescription} fetchUserPrescriptions={fetchUserPrescriptions} />
             <PrescriptionsSection prescription={prescription} setPrescription={setPrescription} />
             <VitalsChart />
         </>

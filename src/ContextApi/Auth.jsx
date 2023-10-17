@@ -7,7 +7,7 @@ import cookie from 'react-cookies'
 export const LoginContext = createContext()
 let DBRUL = process.env.REACT_APP_BASE_URL
 export default function LoginProvider({ children }) {
-    const [loggedIn, setLoggedIn] = useState(true);
+    const [loggedIn, setLoggedIn] = useState(false);
     const [user, setUser] = useState({});
     const [userType, setUserType] = useState('')
 

@@ -49,6 +49,7 @@ export default function PrescriptionSingleCard({ slide, index, setPrescription, 
                     height='600px'
                     borderRadius={1}
                     width={'95%'}
+                    maxWidth='420px'
                     display='flex'
                     justifyContent='center'
                     alignItems='center'

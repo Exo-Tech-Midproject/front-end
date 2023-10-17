@@ -34,7 +34,7 @@ const style = {
 
 };
 
-export default function AddPrescModal({ showModal, handleClosePrescModal, handleCreateCard }) {
+export default function AddPrescModal({ fetchUserPrescriptions, showModal, handleClosePrescModal, handleCreateCard, setPrescription, prescription }) {
     const { user } = React.useContext(LoginContext)
     const [drugsList, setDrugsList] = React.useState([])
     console.log(user)
@@ -69,6 +69,7 @@ export default function AddPrescModal({ showModal, handleClosePrescModal, handle
             console.log(createdPres)
             handleClosePrescModal()
             handleResetList()
+            setPrescription(await fetchUserPrescriptions())
         } catch (err) {
             console.log(err)
         }

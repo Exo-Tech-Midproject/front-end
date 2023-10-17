@@ -35,14 +35,25 @@ export default function Vitals() {
 
     async function fetchUserVitals() {
         try {
+
             let token = cookie.load('auth')
             const payload = await jwtDecode(token)
-            let userVitals = await axios.get(`${DBRUL}/patient/${payload.username}/vitals`,
-                {
-                    headers: { Authorization: `Bearer ${token}` }
-                })
-            // console.log(userVitals.data)
-            setVitals(userVitals.data)
+            if (payload?.accountType === 'patient') {
+
+                let userVitals = await axios.get(`${DBRUL}/patient/${payload.username}/vitals`,
+                    {
+                        headers: { Authorization: `Bearer ${token}` }
+                    })
+                setVitals(userVitals.data)
+            } else if (payload?.accountType === 'physician') {
+                let userVitals = await axios.get(`${DBRUL}/physician/${payload.username}/patients/${'anas'}/vitals`,
+                    {
+                        headers: { Authorization: `Bearer ${token}` }
+                    })
+                console.log(userVitals.data.VitalsRecord, 'asdasdd')
+                setVitals(userVitals.data.VitalsRecord)
+            }
+
 
         } catch (err) {
             console.log(err)

@@ -6,15 +6,15 @@ import Slider from "react-slick";
 // import recipePicjpg from '../../assets/images/prescriptions/7944895.jpg'
 import PrescriptionSingleCard from './PrescriptionSingleCard';
 export default function PrescriptionCard({ prescription, setPrescription }) {
-    
+
     // eslint-disable-next-line no-unused-vars
     let descending = prescription?.sort((a, b) => b.id - a.id)
-
+    console.log(prescription, 'the length of pres')
     const settings = {
         dots: true,
         infinite: true,
         speed: 500,
-        slidesToShow: 3,
+        slidesToShow: prescription?.length < 3 ? prescription?.length : 3,
         slidesToScroll: 3,
         // adaptiveHeight: true,
         lazyLoad: true,
@@ -31,14 +31,14 @@ export default function PrescriptionCard({ prescription, setPrescription }) {
             {
                 breakpoint: 1920,
                 settings: {
-                    slidesToShow: 3,
+                    slidesToShow: prescription?.length < 3 ? prescription?.length : 3,
                     slidesToScroll: 3
                 }
             },
             {
                 breakpoint: 1200,
                 settings: {
-                    slidesToShow: 2,
+                    slidesToShow: prescription?.length < 2 ? prescription?.length : 2,
                     slidesToScroll: 2,
                     initialSlide: 2
                 }

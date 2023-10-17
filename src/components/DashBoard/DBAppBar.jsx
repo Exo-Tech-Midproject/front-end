@@ -23,6 +23,7 @@ const AppBar = styled(MuiAppBar, {
 }));
 
 export default function DBAppBar({ open, handleDrawerOpen }) {
+    
     return (
         <AppBar open={open} sx={{ bgcolor: '#1F485B', justifyContent: 'space-between' }} >
             <TopBar openDrawer={handleDrawerOpen} open={open} />

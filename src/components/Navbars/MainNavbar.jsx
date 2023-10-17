@@ -76,9 +76,9 @@ const Navbar = () => {
                 <Typography variant="body2">Q/A</Typography>
               </CustomLink>
 
-              <LinkButton>
-                <Typography variant="body2">Services</Typography>
-              </LinkButton>
+              <CustomLink href="/AboutUs">
+                <Typography variant="body2">About us</Typography>
+              </CustomLink>
 
               <LinkButton>
                 <Typography variant="body2">Why to use</Typography>

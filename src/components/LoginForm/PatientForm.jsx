@@ -20,7 +20,7 @@ function PatientForm() {
                 <Stack direction="column" spacing={3} alignItems="center">
                     <TextField
                         id="input-with-icon-textfield"
-                        size="small"
+                       
                         placeholder="Email"
                         InputProps={{
                             startAdornment: (
@@ -29,16 +29,16 @@ function PatientForm() {
                                 </InputAdornment>
                             ),
                         }}
-                        variant="standard"
+                       
                         sx={{ color: "black", width: "300px" }}
                     />
                     <TextField
                         sx={{ width: "300px" }}
                         id="standard-adornment-password"
                         type={showPassword ? 'text' : 'password'}
-                        size="small"
+                      
                         placeholder="Password"
-                        variant="standard"
+                      
                         InputProps={{
                             startAdornment: (
                                 <InputAdornment position="start">

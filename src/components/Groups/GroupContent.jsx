@@ -76,30 +76,39 @@ export default function Group() {
         <AddMembers />
         </Box>
         </Box>
-        <Container
+        
+        <Box
           sx={{
-            minHeight: "20vh",
+            minHeight: "50vh",
             marginTop: "2%",
             width: "100%",
-            bgcolor: 'white',
+            bgcolor: '#062942',
+            // bgcolor: 'white',
             borderRadius: "3px",
-            backgroundPosition: "center",
+            // backgroundPosition: "center",
             display: "flex",
-            justifyContent: "center",
             alignItems: "center",
             color: "#00222E",
             boxShadow: '0px 1px 2px 0px rgba(0,0,0,0.4), 0px -1px 1px 0px rgba(0,0,0,0.14), 0px 1px 2px 0px rgba(0,0,0,0.12)',
           }}
         >
-          <Lottie animationData={groupAnimation} style={{ width: "35%" }} />
-          <Container sx={{
+          <Box sx={{
+            width:"30%",
+            margin:"auto"
+          }}>
+          <Lottie animationData={groupAnimation} style={{ width: "100%" }} />
+          </Box>
+          <Box sx={{
             display: 'flex',
             flexDirection: 'column',
-            alignItems: 'center'
+            alignItems: 'center',
+            maxWidth:"60%",
+            margin:"auto"
           }}>
             <Typography variant="h2" textTransform="capitalize" sx={{
-              marginBottom: '3%',
-              color: '#062942'
+              marginBottom: '5%',
+              color: 'white'
+              // color: '#062942'
             }}>
               Healing Caring Leading
             </Typography>
@@ -107,14 +116,15 @@ export default function Group() {
               variant="h3"
               textTransform="capitalize"
               sx={{
-                color: '#1F485B',
+                // color: '#1F485B',
+                color: 'white',
                 textAlign: 'center',
               }}
             >
               Transforming Lives Through Comprehensive Medical Care
             </Typography>
-          </Container>
-        </Container>
+          </Box>
+        </Box>
       </Box>
       <Container>
       <CreatePost createdPost={createdPost} setCreatedPost={setCreatedPost} />
@@ -130,7 +140,7 @@ export default function Group() {
           borderRadius: "5px",
           flexDirection: "column"
         }}>
-          <PostHeader />
+          <PostHeader  />
           <Box>
           {createdPost.map((post, index) => (
                 <PostContent

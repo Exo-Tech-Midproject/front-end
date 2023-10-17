@@ -201,13 +201,12 @@ export default function CreatePost({createdPost, setCreatedPost}) {
                     <Box
                       component="img"
                       sx={{
-                        width: "150px",
-                        height: '150px',
+                        width: "175px",
+                        height: '175px',
                         // borderRadius: '50%',
                         bgcolor:"gray",
-                  marginTop:"25px"
+                        marginTop:"35px"
                       }}
-                      alt="Post img"
                       src={temp}
                     />
       

@@ -1,18 +1,18 @@
 // import { Box, Button, Divider, Typography } from '@mui/material'
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
+// import Button from "@mui/material/Button";   
 import Divider from "@mui/material/Divider";
 import React from 'react'
-import PhoneOutlinedIcon from '@mui/icons-material/PhoneOutlined';
-import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
-import FamilyRestroomOutlinedIcon from '@mui/icons-material/FamilyRestroomOutlined';
-import FemaleOutlinedIcon from '@mui/icons-material/FemaleOutlined';
-import MaleOutlinedIcon from '@mui/icons-material/MaleOutlined';
-import ContactPhoneOutlinedIcon from '@mui/icons-material/ContactPhoneOutlined';
-import ConnectWithoutContactOutlinedIcon from '@mui/icons-material/ConnectWithoutContactOutlined';
-import CakeOutlinedIcon from '@mui/icons-material/CakeOutlined';
-import ManageAccountsOutlinedIcon from '@mui/icons-material/ManageAccountsOutlined';
+// import PhoneOutlinedIcon from '@mui/icons-material/PhoneOutlined';
+// import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
+// import FamilyRestroomOutlinedIcon from '@mui/icons-material/FamilyRestroomOutlined';
+// import FemaleOutlinedIcon from '@mui/icons-material/FemaleOutlined';
+// import MaleOutlinedIcon from '@mui/icons-material/MaleOutlined';
+// import ContactPhoneOutlinedIcon from '@mui/icons-material/ContactPhoneOutlined';
+// import ConnectWithoutContactOutlinedIcon from '@mui/icons-material/ConnectWithoutContactOutlined';
+// import CakeOutlinedIcon from '@mui/icons-material/CakeOutlined';
+// import ManageAccountsOutlinedIcon from '@mui/icons-material/ManageAccountsOutlined';
 export default function InfoSection({ profileInfo }) {
     return (
         <>

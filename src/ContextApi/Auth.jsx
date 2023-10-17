@@ -7,7 +7,7 @@ import cookie from 'react-cookies'
 export const LoginContext = createContext()
 let DBRUL = process.env.REACT_APP_BASE_URL
 export default function LoginProvider({ children }) {
-    const [loggedIn, setLoggedIn] = useState(false);
+    const [loggedIn, setLoggedIn] = useState(true);
     const [user, setUser] = useState({});
     const [userType, setUserType] = useState('')
 
@@ -32,6 +32,7 @@ export default function LoginProvider({ children }) {
                     headers: { Authorization: `Bearer ${token}` }
                 })
                 let user = loggedUserData.data
+                cookie.save('auth', token)
                 let authenticated = await ValidateTokenPatient(token, user)
                 console.log(authenticated)
                 if (authenticated) return true
@@ -56,6 +57,7 @@ export default function LoginProvider({ children }) {
                     headers: { Authorization: `Bearer ${token}` }
                 })
                 let user = loggedUserData.data
+                cookie.save('auth', token)
                 let authenticated = await ValidateTokenPhysician(token, user)
                 console.log(authenticated)
                 if (authenticated) return true
@@ -87,7 +89,7 @@ export default function LoginProvider({ children }) {
                     setUserType(tokenChecker.accountType);
                 }
 
-                cookie.save('auth', token)
+
                 return true
             }
         } catch (e) {
@@ -115,7 +117,7 @@ export default function LoginProvider({ children }) {
                     setUserType(tokenChecker.accountType);
                 }
 
-                cookie.save('auth', token)
+
                 return true
             }
         } catch (e) {
@@ -145,6 +147,7 @@ export default function LoginProvider({ children }) {
                 setLoggedIn(false)
             }
         }
+        console.log(user)
 
     }, [])
 

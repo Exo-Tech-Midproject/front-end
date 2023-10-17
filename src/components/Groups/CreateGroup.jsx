@@ -47,16 +47,6 @@ export default function CreateGroup() {
 
   };
 
-  console.log(selectedFile, '22222222222222222abdu')
-  // const handleImageUpload = (e) => {
-  //   const file = e.target.files[0];
-  //   if (file) {
-  //     const imageUrl = URL.createObjectURL(file);
-  //     setDeflautImg(imageUrl)
-  //     setGroupImageUrl(file);
-  //     console.log('iiiiiiiiiiiiiiiiiiiiiiiii',file)
-  //   }
-  // };
 
 
 
@@ -68,9 +58,7 @@ export default function CreateGroup() {
         {
           headers: { Authorization: `Bearer ${token}` }
         })
-      console.log(allGroups.data)
       setCreatedGroups(allGroups.data)
-      console.log(allGroups, 'from delete function')
 
       return allGroups.data
     }
@@ -92,8 +80,8 @@ export default function CreateGroup() {
     const inputValue = e.target.value;
     setDescription(inputValue);
 
-    if (inputValue.length < 5 || inputValue.length > 100) {
-      setDescriptionError('Description must be between 5 and 100 characters.');
+    if (inputValue.length < 5 || inputValue.length > 25) {
+      setDescriptionError('Description must be between 5 and 25 characters.');
     } else {
       setDescriptionError(null);
     }
@@ -103,8 +91,8 @@ export default function CreateGroup() {
     const inputValue = e.target.value;
     setGroupName(inputValue);
 
-    if (inputValue.length < 5) {
-      setGroupNameError('Group name must be at least 5 characters.');
+    if (inputValue.length < 5 || inputValue.length > 25) {
+      setGroupNameError('Group name must be between 5 and 25 characters.');
     } else {
       setGroupNameError(null);
     }
@@ -115,7 +103,7 @@ export default function CreateGroup() {
     e.preventDefault();
 
     if (groupName && description && !groupNameError && !descriptionError) {
-      if (description.length >= 5 && description.length <= 100) {
+      if (description.length >= 5 && description.length <= 25 && groupName.length >= 5 && groupName.length <= 25) {
         let newGroup = {
           groupName: groupName,
           description: description,
@@ -140,7 +128,6 @@ export default function CreateGroup() {
         const formData = new FormData();
         formData.append('image', selectedFile);
         if (selectedFile !== DefaultImg) {
-          console.log('aaaaaaaaaaaaaaaaaaaaaa32323i')
           let imgGroup = await axios.post(`${DBRUL}/physician/${payload.username}/groups/${imgId}/groupImg`, formData,
             {
               headers: {
@@ -150,9 +137,7 @@ export default function CreateGroup() {
             })
           console.log(imgGroup, 'aaaaaaaaaaaaaaaaaaaaaai')
         }
-        console.log(allGroups.data, 'after Working')
         let banana = await fetchGroups()
-        console.log(banana, 'asdasd')
         setCreatedGroups(banana);
         setGroupName('');
         setDescription('');
@@ -162,7 +147,7 @@ export default function CreateGroup() {
         setShowForm(false);
       }
     } else {
-      setSnackbarOpen(true); // Open the Snackbar for errors
+      setSnackbarOpen(true);
     }
   };
 

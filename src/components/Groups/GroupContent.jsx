@@ -143,6 +143,7 @@ export default function Group() {
                     postImage={post.postImage}
                 />
             ))}
+            
           </Box>
       </Box>
     </div>

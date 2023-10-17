@@ -71,7 +71,7 @@ export default function CardSubscription() {
 			});
 
 			return response
-			console.log("Rating response:", response.data);
+			console.log("response:", response.data);
 		} catch (err) {
 			console.error("Error rating physician:", err);
 		}

@@ -1,10 +1,9 @@
-import React, { useState, useRef } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import listPlugin from "@fullcalendar/list";
-
 import HomeIcon from '@mui/icons-material/Home';
 import WhatshotIcon from '@mui/icons-material/Whatshot';
 import GrainIcon from '@mui/icons-material/Grain';
@@ -18,17 +17,34 @@ import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-import "./appointmentsHero.css"
+import "./appointmentsHero.css";
+import axios from 'axios';
+import jwtDecode from "jwt-decode";
+import cookie from 'react-cookies';
+let DBURL = process.env.REACT_APP_BASE_URL;
 
-const Appointment = () => {
+export default function Appointment() {
 	const [currentEvents, setCurrentEvents] = useState([]);
 	const [open, setOpen] = useState(false);
 	const [eventDetails, setEventDetails] = useState({
 		event: "",
 		patientName: "",
-		time: "",
+		date: "",
 	});
+
 	const calendarRef = useRef(null);
+
+	function handleIsSelectable() {
+		let token = cookie.load('auth');
+		const payload = jwtDecode(token);
+
+		if (payload?.accountType === 'physician') {
+			return true;
+		} else if (payload?.accountType === 'Patient') {
+			return false;
+		}
+		return false;
+	}
 
 	const handleDateClick = (selected) => {
 		setOpen(true);
@@ -38,28 +54,83 @@ const Appointment = () => {
 		setOpen(false);
 	};
 
-	const handleAddEvent = () => {
-		const calendarApi = calendarRef.current.getApi();
+	async function handleGetEvent() {
+		let token = cookie.load('auth')
+		const payload = await jwtDecode(token)
+		try {
+			if (payload?.accountType === 'physician') {
+				let Events = await axios.get(
+					`${DBURL}/physician/${payload.username}/appointments`,
+					{
+						headers: { Authorization: `Bearer ${token}` }
+					})
+				console.log("Events.data => ", Events.data);
+				return Events.data;
+			} else if (payload?.accountType === 'patient') {
+				let Events = await axios.get(
+					`${DBURL}/patient/${payload.username}/appointments`,
+					{
+						headers: { Authorization: `Bearer ${token}` }
+					})
+				console.log("Events.data => ", Events.data);
+				return Events.data;
+			}
 
-		const { event, patientName, time } = eventDetails;
 
-		if (event && time) {
-			calendarApi.addEvent({
-				title: event,
-				start: time,
-				extendedProps: {
-					patientName,
-				},
-			});
-
-			setOpen(false);
-			setEventDetails({
-				event: "",
-				patientName: "",
-				time: "",
-			});
+		} catch (err) {
+			console.log(err);
 		}
-	};
+	}
+
+	useEffect(() => {
+		async function fetchEvents() {
+			const eventsData = await handleGetEvent();
+			if (eventsData) {
+				setCurrentEvents(eventsData);
+			}
+		}
+
+		fetchEvents();
+	}, []);
+
+	async function handleAddEvent() {
+		try {
+			const calendarApi = calendarRef.current.getApi();
+			console.log("calendarApi ", calendarApi);
+
+			let { event, patientName, time } = eventDetails;
+			let token = cookie.load('auth');
+			const payload = await jwtDecode(token);
+
+			console.log("eventDetails ", eventDetails);
+			if (payload?.accountType === 'physician') {
+				let createdEvent = await axios.post(`${DBURL}/physician/${payload.username}/patients/${'anas'}/appointments`, eventDetails, {
+					headers: { Authorization: `Bearer ${token}` }
+				});
+				console.log("createdEvent", createdEvent)
+				return createdEvent;
+			}
+
+			if (event && time) {
+				calendarApi.addEvent({
+					title: event,
+					start: time,
+					extendedProps: {
+						patientName,
+					},
+				});
+
+				setEventDetails({
+					event: "",
+					patientName: "",
+					time: "",
+				});
+			}
+			setOpen(false);
+		} catch (err) {
+			console.log(err);
+		}
+	}
 
 	const handleInputChange = (e) => {
 		const { id, value } = e.target;
@@ -69,11 +140,10 @@ const Appointment = () => {
 	const formatDate = (date) => {
 		return new Intl.DateTimeFormat("en-US", {
 			year: "numeric",
-			month: "short",
 			day: "numeric",
+			month: "numeric",
 		}).format(date);
 	};
-	console.log(currentEvents)
 
 	const boxRef = useRef();
 
@@ -82,6 +152,21 @@ const Appointment = () => {
 			boxRef.current.scrollIntoView({ behavior: "smooth" });
 		}
 	};
+
+
+	const formattedEvents = currentEvents?.map(appointment => {
+		const eventDate = new Date(appointment.date);
+		// Format the date in the required format 'YYYY-MM-DD'
+		const formattedDate = `${eventDate.getFullYear()}-${(eventDate.getMonth() + 1)
+			.toString()
+			.padStart(2, '0')}-${eventDate.getDate().toString().padStart(2, '0')}`;
+		return {
+			title: `Patient: ${appointment.patientUsername} - Physician: ${appointment.physicianUsername}`,
+			start: formattedDate,
+		};
+	});
+	console.log("currentEvents", currentEvents)
+	console.log('formattedEvents', formattedEvents)
 	return (
 		<>
 			<Box
@@ -130,11 +215,9 @@ const Appointment = () => {
 					<h1 className="AppointmentH1">Book Your Appointment</h1>
 					<p className="AppointmentP1 ">Professional and personalized care for your health</p>
 					<a href="#scrollToBox" className="Appointmentbtn" onClick={scrollToBox}>Schedule</a>
-
 				</div>
 			</div>
 			<Box m="20px" marginTop={10} ref={boxRef}>
-
 				<Box
 					display="flex"
 					justifyContent="space-between"
@@ -151,7 +234,16 @@ const Appointment = () => {
 						>
 							Events
 						</Typography>
-						<List>
+						<List sx={{
+							maxHeight: "70vh",
+							overflow: "auto", // Add this line to enable a hidden scrollbar
+							'&::-webkit-scrollbar': {
+								width: '0.3em', // Width of the scrollbar
+							},
+							'&::-webkit-scrollbar-thumb': {
+								backgroundColor: 'rgba(0, 0, 0, 0.2)', // Color of the scrollbar thumb
+							},
+						}}>
 							{currentEvents.map((event) => (
 								<ListItem
 									key={event.id}
@@ -162,14 +254,13 @@ const Appointment = () => {
 									}}
 								>
 									<ListItemText
-										primary={event.title}
-										secondary={<Typography> {formatDate(event.start)} </Typography>}
+										primary={event.patientUsername}
+										secondary={<Typography> {new Date(event.date).toDateString()} </Typography>}
 									/>
 								</ListItem>
 							))}
 						</List>
 					</Box>
-
 					<Box flex="1 9 100%" ml="15px" sx={{ padding: "5px" }}>
 						<FullCalendar
 							height="80vh"
@@ -181,28 +272,19 @@ const Appointment = () => {
 							}}
 							initialView="dayGridMonth"
 							editable={true}
-							selectable={true}
+							selectable={handleIsSelectable()}
 							selectMirror={true}
 							dayMaxEvents={true}
 							select={handleDateClick}
 							eventsSet={(events) => setCurrentEvents(events)}
 							ref={calendarRef}
-							initialEvents={[
-								{
-									id: "1",
-									title: "2 PM",
-									date: "2023-10-22",
-								},
-								{
-									id: "2",
-									title: "4 PM - 6 PM",
-									date: "2023-10-28",
-								},
-							]}
+							initialEvents={formattedEvents
+								// [{ title: 'event 1', date: '2023-10-01' },
+								// { title: 'event 2', date: '2023-10-02' }]
+							}
 						/>
 					</Box>
 				</Box>
-
 				<Modal open={open} onClose={handleModalClose}>
 					<Box
 						sx={{
@@ -249,12 +331,12 @@ const Appointment = () => {
 								}}
 							/>
 							<TextField
-								id="time"
+								id="date"
 								label="Time"
 								fullWidth
 								type="datetime-local"
 								required
-								value={eventDetails.time}
+								value={eventDetails.date}
 								onChange={handleInputChange}
 								sx={{
 									marginBottom: 2,
@@ -294,6 +376,4 @@ const Appointment = () => {
 			</Box>
 		</>
 	);
-};
-
-export default Appointment;
+}

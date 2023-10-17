@@ -14,7 +14,7 @@ import Title from "../components/Title";
 import useMeasure from "react-use-measure";
 
 import LaunchButton from "../components/Buttons/LaunchButton";
-import { motion } from 'framer-motion';
+// import { motion } from 'framer-motion';
 
 const {
   MainVed,

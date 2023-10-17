@@ -13,44 +13,85 @@ let DBURL = process.env.REACT_APP_BASE_URL
 
 export default function CardSubscription() {
 	const [subs, setSubs] = useState(null);
+	const [rating, setRating] = useState(0);
+	const [showRatingForm, setShowRatingForm] = useState(false);
+	const [selectedPhysicianUsername, setSelectedPhysicianUsername] = useState(null);
+	console.log("rating", rating)
+
+
+	async function fetchUserSubscriptions() {
+		try {
+			let token = cookie.load("auth");
+			let payload = await jwtDecode(token);
+
+			if (payload?.accountType === 'patient') {
+				let userSub = await axios.get(
+					`${DBURL}/patient/${payload.username}/physicians/subscriptions`,
+					{
+						headers: { Authorization: `Bearer ${token}` }
+					}
+				);
+				console.log("data for patients => ", userSub.data);
+				console.log("data=> ", userSub.data)
+				setSubs(userSub.data)
+
+				return (userSub.data)
+			}
+
+			if (payload?.accountType === 'physician') {
+				let userSub = await axios.get(
+					`${DBURL}/physician/${payload.username}/patients/subscribers`,
+					{
+						headers: { Authorization: `Bearer ${token}` }
+					}
+				);
+				console.log("data for physicians => ", userSub.data);
+				setSubs(userSub.data);
+
+				return (userSub.data)
+			}
+		} catch (err) {
+			console.log(err);
+		}
+	}
 
 	useEffect(() => {
-		// Define the function as an async function within the useEffect to properly use state
-		async function fetchUserSubscriptions() {
-			try {
-				let token = cookie.load("auth");
-				let payload = await jwtDecode(token);
-
-				if (payload?.accountType === 'patient') {
-					let userSub = await axios.get(
-						`${DBURL}/patient/${payload.username}/physicians/subscriptions`,
-						{
-							headers: { Authorization: `Bearer ${token}` }
-						}
-					);
-					console.log("data for patients => ", userSub.data);
-					console.log("data=> ", userSub.data)
-					setSubs(userSub.data)
-					console.log()
-				}
-
-				if (payload?.accountType === 'physician') {
-					let userSub = await axios.get(
-						`${DBURL}/physician/${payload.username}/patients/subscribers`,
-						{
-							headers: { Authorization: `Bearer ${token}` }
-						}
-					);
-					console.log("data for physicians => ", userSub.data);
-					setSubs(userSub.data);
-				}
-			} catch (err) {
-				console.log(err);
-			}
-		}
 
 		fetchUserSubscriptions();
 	}, []);
+	const handleRatePhysician = async (physicianUsername) => {
+		try {
+			let token = cookie.load("auth");
+			let payload = await jwtDecode(token);
+
+			const response = await axios.post(`${DBURL}/patient/${payload.username}/rating/${physicianUsername}`, {
+				rating: rating
+			}, {
+				headers: { Authorization: `Bearer ${token}` }
+			});
+
+			return response
+			console.log("Rating response:", response.data);
+		} catch (err) {
+			console.error("Error rating physician:", err);
+		}
+	};
+	const openRatingForm = (physicianUsername) => {
+		setSelectedPhysicianUsername(physicianUsername);
+		setShowRatingForm(true);
+	};
+
+	const submitRating = async () => {
+		if (selectedPhysicianUsername) {
+			let res = await handleRatePhysician(selectedPhysicianUsername);
+			console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", res.data)
+			setSubs(await fetchUserSubscriptions())
+			setShowRatingForm(false);
+		}
+
+		setRating(0)
+	};
+
 
 	let img = doc
 	return (
@@ -59,8 +100,7 @@ export default function CardSubscription() {
 				subs.map((user, index) => (
 					<div className="Subcard" key={index}>
 						<div className="Subcard-text">
-
-							<div className="Subportada" style={{ backgroundImage: `url(${user.profileImg})` }} ></div>
+							<div className="Subportada" style={{ backgroundImage: `url(${img})` }}></div>
 							<div className="Subtitle-total">
 								<AuthPhysician>
 									<h3>{user.insurance}</h3>
@@ -71,13 +111,25 @@ export default function CardSubscription() {
 								<AuthPatient>
 									<div className="Subtitle">{user.department}</div>
 									<Rating sx={{ marginLeft: "25px" }} name="half-rating-read" defaultValue={user.rating} precision={0.5} size="medium" readOnly />
+									<button className='subrateB' onClick={() => openRatingForm(user.username)}>Rate Physician</button>
 								</AuthPatient>
 							</div>
 						</div>
 					</div>
-				))
-			}
-		</div >
+				))}
+			{showRatingForm && (
+				<div className="rating14-form">
+					<label>Rate the Physician:</label>
+					<Rating
+						name="rating14-input"
+						value={rating}
+						precision={0.5}
+						onChange={(event, newValue) => setRating(newValue)}
+					/>
+					<button className='subButton14' onClick={submitRating}>Submit</button>
+				</div>
+			)}
+		</div>
 
 	);
 }

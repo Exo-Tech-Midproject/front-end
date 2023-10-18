@@ -1,197 +1,288 @@
 import React from 'react'
 import Title from '../components/Title';
 import Navbar from '../components/Navbars/MainNavbar'
-import { Container, Stack, Grid, Box, Link, Button } from "@mui/material"
-import { styled, alpha } from '@mui/material/styles';
+import { Stack, Box, Button, } from "@mui/material"
 import Typography from '@mui/material/Typography';
-import InputBase from '@mui/material/InputBase';
-import SearchIcon from '@mui/icons-material/Search';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import Avatar from '@mui/material/Avatar';
-import CardContent from '@mui/material/CardContent';
-import CardHeader from '@mui/material/CardHeader';
-import CardMedia from '@mui/material/CardMedia';
-import Collapse from '@mui/material/Collapse';
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import IconButton from '@mui/material/IconButton';
-import { red } from '@mui/material/colors';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import ShareIcon from '@mui/icons-material/Share';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
-const ExpandMore = styled((props) => {
-  const { expand, ...other } = props;
-  return <IconButton {...other} />;
-})(({ theme, expand }) => ({
-  transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
-  marginLeft: 'auto',
-  transition: theme.transitions.create('transform', {
-    duration: theme.transitions.duration.shortest,
-  }),
-}));
-const Search = styled('div')(({ theme }) => ({
-  position: 'relative',
-  borderRadius: 4,
-  backgroundColor: alpha(theme.palette.common.white, 1),
-  '&:hover': {
-    backgroundColor: alpha(theme.palette.common.white, 0.75),
-  }
-}));
+import Footer from '../components/Footers/MainFooter'
+import Breadcrumbs from '@mui/material/Breadcrumbs';
+import HomeIcon from '@mui/icons-material/Home';
+import PanoramaFishEyeIcon from '@mui/icons-material/PanoramaFishEye';
+import Link from '@mui/material/Link';
+import ContactSupportOutlinedIcon from '@mui/icons-material/ContactSupportOutlined';
+import TextField from '@mui/material/TextField';
+import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
+import FormatBoldIcon from '@mui/icons-material/FormatBold';
+import FormatItalicIcon from '@mui/icons-material/FormatItalic';
+import FormatUnderlinedIcon from '@mui/icons-material/FormatUnderlined';
+import FormatColorFillIcon from '@mui/icons-material/FormatColorFill';
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+import ToggleButton from '@mui/material/ToggleButton';
+import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
+import ArrowCircleUpIcon from '@mui/icons-material/ArrowCircleUp';
 
-const SearchIconWrapper = styled('div')(({ theme }) => ({
-  padding: theme.spacing(0, 2),
-  height: '100%',
-  position: 'absolute',
-  pointerEvents: 'none',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-}));
-
-const StyledInputBase = styled(InputBase)(({ theme }) => ({
-  color: 'inherit',
-  '& .MuiInputBase-input': {
-    padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
-    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-    transition: theme.transitions.create('width'),
-    width: '100%',
-    [theme.breakpoints.up('sm')]: {
-      width: '12ch',
-      '&:focus': {
-        width: '20ch',
-      },
-    },
-  },
-}));
-
+const CustomToggleButton = ({ children, ...props }) => (
+ 
+  <ToggleButton
+    sx={{
+      width: "30px",
+      height: "30px",
+      position: "relative",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      backgroundColor: "transparent",
+      borderRadius: "50%",
+      border: "0",
+      outline: "none",
+      "&:hover":{
+       backgroundColor: "#f1f1f1",
+      }
+    }} 
+    {...props}
+  >
+    {children}
+  </ToggleButton>
+);
 function QASection() {
-  const [expanded, setExpanded] = React.useState(false);
+  const [formats, setFormats] = React.useState(() => ['bold', 'italic']);
 
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
-  };
+  const handleFormat = (event, newFormats) => {
+    setFormats(newFormats);
+  }
   return (
-    <Stack alignItems="center" direction="column" spacing={10}>
-      <Stack alignItems="center" direction="column" >
-        <Navbar />
-        <Box sx={{ position: "fixed", zIndex: 1, top: 60, left: 0, right: 0, width: "100%", bgcolor: "#1F485B" }}>
-          <Stack spacing={2} direction="column" alignItems="center" py={2}>
-            <Typography sx={{ textAlign: "center", color: "white" }}>We're here to help</Typography>
-            <Search sx={{ width: { xs: "300px", md: "600px" }, }}>
-              <SearchIconWrapper>
-                <SearchIcon />
-              </SearchIconWrapper>
-              <StyledInputBase
-                placeholder="Search…"
-                inputProps={{ 'aria-label': 'search' }}
-              />
-            </Search>
-          </Stack>
-        </Box>
-      </Stack>
-
-
-      <Box sx={{ position: "relative", top: 100, bgcolor: "white", width: "100%" }}>
-        <Container spacing={2} sx={{ my: { xs: 5, md: 3, lg: 3 } }}>
-          <Stack direction="row" alignItems="center"  spacing={2}>
-          <Link href="/QACategories" sx={{ cursor: "pointer", color: "#1F485B" }}><ArrowBackIcon /></Link>
-          <Title variant={{ xs: "h3", md: "h2" }} sx={{ color: "#1F485B", textAlign: { xs: "center", md: "left" } }}>
-             Qusetions
+    <Stack direction="column" >
+      <Navbar />
+      <Box sx={{
+        mt: 8,
+        height: "250px",
+        background: "#112731",
+        backgroundImage: 'url("https://images.pexels.com/photos/3652097/pexels-photo-3652097.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1")',
+        backgroundSize: '100%',
+        backgroundRepeat: 'no-repeat',
+        objectFit: 'cover',
+        backgroundPosition: 'center',
+        backgroundBlendMode: 'overlay'
+      }}
+      >
+        <Stack sx={{ height: "100%" }} alignItems="center" justifyContent="center">
+          <Title
+            variant={{ xs: "h3", sm: "h2", md: "h1" }}
+            sx={{ letterSpacing: "0.02em", mb: 1, color: "white" }}
+          >
+            Questions
           </Title>
-          </Stack>
-        
-          <Grid container spacing={5}>
-            <Grid spacing={2} item xs={12} md={12} >
-              <Card sx={{ width: "100%", bgcolor: "#67ABCB", color:"white", my:2 }}>
-                <CardHeader
-                  avatar={
-                    <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-                      R
-                    </Avatar>
-                  }
-                  action={
-                    <IconButton aria-label="settings">
-                      <MoreVertIcon />
-                    </IconButton>
-                  }
-                  title="Shrimp and Chorizo Paella"
-                  subheader="October 11, 2023"
-                />
-                <CardContent>
-                  <Typography variant="body2" color="black">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation .
-                  </Typography>
-                </CardContent>
-                <CardActions disableSpacing>
-                  <IconButton aria-label="add to favorites">
-                    <FavoriteIcon />
-                  </IconButton>
-                  <IconButton aria-label="share">
-                    <ShareIcon />
-                  </IconButton>
-                  <ExpandMore
-                    expand={expanded}
-                    onClick={handleExpandClick}
-                    aria-expanded={expanded}
-                    aria-label="show more"
-                  >
-                    <ExpandMoreIcon />
-                  </ExpandMore>
-                </CardActions>
 
-              </Card>
-              <Card sx={{ width: "100%", bgcolor: "#67ABCB", color:"white" }}>
-                <CardHeader 
-                  avatar={
-                    <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-                      R
-                    </Avatar>
-                  }
-                  action={
-                    <IconButton aria-label="settings">
-                      <MoreVertIcon />
-                    </IconButton>
-                  }
-                  title="Shrimp and Chorizo Paella"
-                  subheader="October 10, 2023"
-                />
+          <Breadcrumbs aria-label="breadcrumb">
+            <Link
+              href="/"
+              underline="hover"
+              sx={{
+                display: 'flex',
+                alignItems: 'center'
+              }}
+              color="white"
 
-                <CardContent>
-                  <Typography variant="body2" color="black">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation .
-                  </Typography>
-                </CardContent>
-                <CardActions disableSpacing>
-                  <IconButton aria-label="add to favorites">
-                    <FavoriteIcon />
-                  </IconButton>
-                  <IconButton aria-label="share">
-                    <ShareIcon />
-                  </IconButton>
-                  <ExpandMore
-                    expand={expanded}
-                    onClick={handleExpandClick}
-                    aria-expanded={expanded}
-                    aria-label="show more"
-                  >
-                    <ExpandMoreIcon />
-                  </ExpandMore>
-                </CardActions>
+            >
+              <HomeIcon sx={{ mr: 0.5 }} fontSize="inherit" />
+              Home
+            </Link>
+            <Link
+              href="/QACategories"
+              underline="hover"
+              sx={{
+                display: 'flex',
+                alignItems: 'center'
+              }}
+              color="white"
 
-              </Card>
-            </Grid>
+            >
+              <ContactSupportOutlinedIcon sx={{ mr: 0.5 }} fontSize="inherit" />
+              Category
+            </Link>
+            <Typography
+              sx={{ display: 'flex', alignItems: 'center', textDecoration: "underline" }}
+              color="#67ABCB"
+            >
+              <PanoramaFishEyeIcon sx={{ mr: 0.5 }} fontSize="inherit" />
+              Questions
+            </Typography>
+          </Breadcrumbs>
 
-          </Grid>
-
-
-
-        </Container>
+        </Stack>
       </Box>
-
-    </Stack>
-  )
+      <Box  sx={{ width:"100%", height:"70vh", bgcolor: "white" }}>
+        {/* <Box sx={{
+          position: "relative",
+          height: "140px",
+          width: "240px",
+          padding: "20px",
+          backgroundColor: "#FFF",
+          borderRadius: "4px",
+          color: "#333",
+          boxShadow: "0px 0px 60px 5px rgba(0, 0, 0, 0.4)",
+          "&:after": {
+            position: "absolute",
+            content: "''",
+            right: "-10px",
+            bottom: "18px",
+            width: "0",
+            height: "0",
+            borderLeft: "0px solid transparent",
+            borderRight: "10px solid transparent",
+            borderBottom: "10px solid #1a044e",
+          }
+        }}>
+          <Typography sx={{
+            fontSize: "20px",
+            textAlign: "center",
+            fontWeight: "bold",
+            letterSpacing: "4px",
+            lineHeight: "28px",
+          }}>Question
+          </Typography>
+          <TextField placeholder="Your Question" variant='standard' sx={{
+            position: "absolute",
+            bottom: "30px",
+            padding: "10px",
+            width: "82%",
+            background: "transparent",
+            transition: "all .25s ease",
+            "&:focus": {
+              outline: "none",
+              borderBottom: "1px solid #0d095e",
+              fontFamily: "'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', 'sans-serif'",
+            }
+          }} />
+          <Button sx={{
+            position: "absolute",
+            borderRadius: "30px",
+            borderBottomRightRadius: "0",
+            borderTopRightRadius: "0",
+            backgroundColor: "#0f0092",
+            color: "#FFF",
+            padding: "12px 25px",
+            display: "inline-block",
+            fontSize: "12px",
+            fontWeight: "bold",
+            letterSpacing: "5px",
+            right: "-10px",
+            bottom: "-20px",
+            cursor: "pointer",
+            transition: "all .25s ease",
+            boxShadow: "-5px 6px 20px 0px rgba(26, 26, 26, 0.4)",
+            "&:hover": {
+              backgroundColor: "#07013d",
+              boxShadow: "-5px 6px 20px 0px rgba(88, 88, 88, 0.569)",
+            }
+          }}>SEND</Button>
+        </Box> */}
+        <Box px={5} m="auto" sx={{
+          width: "450px",
+          height: "fit-content",
+          backgroundColor: "white",
+          boxShadow: "0px 187px 75px rgba(0, 0, 0, 0.01), 0px 105px 63px rgba(0, 0, 0, 0.05), 0px 47px 47px rgba(0, 0, 0, 0.09), 0px 12px 26px rgba(0, 0, 0, 0.1), 0px 0px 0px rgba(0, 0, 0, 0.1)",
+          borderRadius: "17px 17px 27px 27px",
+        }}>
+          <Typography sx={{
+             width: "100%",
+             height: "50px",
+             position: "relative",
+             display: "flex",
+             alignItems: "center",
+             paddingLleft: "20px",
+             borderBottom: "1px solid #f1f1f1",
+             fontWeight: "700",
+             fontSize: "13px",
+             color: "#47484b",
+             "&:after":{
+              content: "''",
+  width: "8ch",
+  height: "1px",
+  position: "absolute",
+  bottom: "-1px",
+  backgroundColor: "#47484b",
+             }
+          }}>
+            Question
+            </Typography>
+        
+            <Box p={2}  class="comment-container">
+              <Stack direction="row">
+                <AccountCircleOutlinedIcon />
+                <Stack direction="column" >
+                  <Typography sx={{ fontSize: "18px",
+  lineHeight: "16px",
+  fontWeight: 600,
+  color: "#5f6064" }}>Tasneem Hassasneh</Typography>
+                  <Typography sx={{ fontSize: "12px", p:1 }}>Wednesday, March 13th at 2:45pm</Typography>
+                </Stack>
+              </Stack>
+              <Typography sx={{ 
+                fontSize: "12px",
+  lineHeight: "16px",
+  fontWeight: 600,
+  color: "#5f6064", }}>
+                I've been using this product for a few days now and I'm really impressed! The interface is intuitive and easy to
+                use, and the features are exactly what I need to streamline my workflow.
+              </Typography>
+            </Box>
+          <Box sx={{
+            width: "100%",
+            height: "fit-content",
+            backgroundColor: "#f1f1f1",
+            padding: "8px",
+          }}>
+            <Box sx={{
+              backgroundColor: "#ffffff",
+              borderRadius: "8px 8px 21px 21px",
+              padding: "8px",
+            }} class="box-container">
+              <textarea sx={{
+                 width: "100%",
+                 height: "40px",
+                 resize: "none",
+                 border: "0",
+                 borderRadius: "6px",
+                 padding: "12px 12px 10px 12px",
+                 fontSize: "13px",
+                 outline: "none",
+                 caretColor: "#0a84ff",
+              }} placeholder="Reply"></textarea>
+              <Box>
+                <ToggleButtonGroup
+                  value={formats}
+                  onChange={handleFormat}
+                  aria-label="text formatting"
+                >
+                  <CustomToggleButton value="bold" aria-label="bold">
+                    <FormatBoldIcon />
+                  </CustomToggleButton>
+                  <CustomToggleButton value="italic" aria-label="italic">
+                    <FormatItalicIcon />
+                  </CustomToggleButton>
+                  <CustomToggleButton value="underlined" aria-label="underlined">
+                    <FormatUnderlinedIcon />
+                  </CustomToggleButton>
+                </ToggleButtonGroup>
+                <Button sx={{
+                  width: "30px",
+                  height: "30px",
+                  backgroundColor: "#0a84ff",
+                  margin: "0 0 0 auto",
+                  "&:hover":{
+                    backgroundColor: "#026eda",
+                  }
+                }} type="submit" class="send" title="Send">
+                  <ArrowCircleUpIcon />
+                </Button>
+              </Box>
+            </Box>
+          </Box>
+        </Box>
+      </Box>
+      <Footer />
+    </Stack >
+  );
 }
 
 export default QASection

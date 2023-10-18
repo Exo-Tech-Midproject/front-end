@@ -3,14 +3,13 @@ import Title from '../components/Title';
 import Navbar from '../components/Navbars/MainNavbar'
 import Typography from '@mui/material/Typography';
 import ServiceCard from "../components/Cards/ServiceCard";
-import { QASectionContent } from "../utils/content";
 import Footer from '../components/Footers/MainFooter'
-import { Box, Container, Grid, Stack } from '@mui/material';
+import { Box,  Stack } from '@mui/material';
 import Breadcrumbs from '@mui/material/Breadcrumbs';
 import HomeIcon from '@mui/icons-material/Home';
-import PanoramaFishEyeIcon from '@mui/icons-material/PanoramaFishEye'; import Link from '@mui/material/Link';
+import PanoramaFishEyeIcon from '@mui/icons-material/PanoramaFishEye'; 
+import Link from '@mui/material/Link';
 
-const { ITEMS } = QASectionContent;
 
 function QACategoriesSection() {
 

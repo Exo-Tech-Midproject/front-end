@@ -1,197 +1,248 @@
 import React from 'react'
 import Title from '../components/Title';
 import Navbar from '../components/Navbars/MainNavbar'
-import { Container, Stack, Grid, Box, Link, Button } from "@mui/material"
-import { styled, alpha } from '@mui/material/styles';
+import { Stack, Box, Button, } from "@mui/material"
 import Typography from '@mui/material/Typography';
-import InputBase from '@mui/material/InputBase';
-import SearchIcon from '@mui/icons-material/Search';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import Avatar from '@mui/material/Avatar';
-import CardContent from '@mui/material/CardContent';
-import CardHeader from '@mui/material/CardHeader';
-import CardMedia from '@mui/material/CardMedia';
-import Collapse from '@mui/material/Collapse';
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import IconButton from '@mui/material/IconButton';
-import { red } from '@mui/material/colors';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import ShareIcon from '@mui/icons-material/Share';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
-const ExpandMore = styled((props) => {
-  const { expand, ...other } = props;
-  return <IconButton {...other} />;
-})(({ theme, expand }) => ({
-  transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
-  marginLeft: 'auto',
-  transition: theme.transitions.create('transform', {
-    duration: theme.transitions.duration.shortest,
-  }),
-}));
-const Search = styled('div')(({ theme }) => ({
-  position: 'relative',
-  borderRadius: 4,
-  backgroundColor: alpha(theme.palette.common.white, 1),
-  '&:hover': {
-    backgroundColor: alpha(theme.palette.common.white, 0.75),
-  }
-}));
-
-const SearchIconWrapper = styled('div')(({ theme }) => ({
-  padding: theme.spacing(0, 2),
-  height: '100%',
-  position: 'absolute',
-  pointerEvents: 'none',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-}));
-
-const StyledInputBase = styled(InputBase)(({ theme }) => ({
-  color: 'inherit',
-  '& .MuiInputBase-input': {
-    padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
-    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-    transition: theme.transitions.create('width'),
-    width: '100%',
-    [theme.breakpoints.up('sm')]: {
-      width: '12ch',
-      '&:focus': {
-        width: '20ch',
-      },
-    },
-  },
-}));
-
+import Footer from '../components/Footers/MainFooter'
+import Breadcrumbs from '@mui/material/Breadcrumbs';
+import HomeIcon from '@mui/icons-material/Home';
+import PanoramaFishEyeIcon from '@mui/icons-material/PanoramaFishEye';
+import Link from '@mui/material/Link';
+import ContactSupportOutlinedIcon from '@mui/icons-material/ContactSupportOutlined';
+import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
+import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 function QASection() {
-  const [expanded, setExpanded] = React.useState(false);
-
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
-  };
   return (
-    <Stack alignItems="center" direction="column" spacing={10}>
-      <Stack alignItems="center" direction="column" >
-        <Navbar />
-        <Box sx={{ position: "fixed", zIndex: 1, top: 60, left: 0, right: 0, width: "100%", bgcolor: "#1F485B" }}>
-          <Stack spacing={2} direction="column" alignItems="center" py={2}>
-            <Typography sx={{ textAlign: "center", color: "white" }}>We're here to help</Typography>
-            <Search sx={{ width: { xs: "300px", md: "600px" }, }}>
-              <SearchIconWrapper>
-                <SearchIcon />
-              </SearchIconWrapper>
-              <StyledInputBase
-                placeholder="Search…"
-                inputProps={{ 'aria-label': 'search' }}
-              />
-            </Search>
-          </Stack>
-        </Box>
-      </Stack>
-
-
-      <Box sx={{ position: "relative", top: 100, bgcolor: "white", width: "100%" }}>
-        <Container spacing={2} sx={{ my: { xs: 5, md: 3, lg: 3 } }}>
-          <Stack direction="row" alignItems="center"  spacing={2}>
-          <Link href="/QACategories" sx={{ cursor: "pointer", color: "#1F485B" }}><ArrowBackIcon /></Link>
-          <Title variant={{ xs: "h3", md: "h2" }} sx={{ color: "#1F485B", textAlign: { xs: "center", md: "left" } }}>
-             Qusetions
+    <Stack direction="column" >
+      <Navbar />
+      <Box sx={{
+        mt: 8,
+        height: "250px",
+        background: "#112731",
+        backgroundImage: 'url("https://images.pexels.com/photos/3652097/pexels-photo-3652097.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1")',
+        backgroundSize: '100%',
+        backgroundRepeat: 'no-repeat',
+        objectFit: 'cover',
+        backgroundPosition: 'center',
+        backgroundBlendMode: 'overlay'
+      }}
+      >
+        <Stack sx={{ height: "100%" }} alignItems="center" justifyContent="center">
+          <Title
+            variant={{ xs: "h3", sm: "h2", md: "h1" }}
+            sx={{ letterSpacing: "0.02em", mb: 1, color: "white" }}
+          >
+            Questions
           </Title>
-          </Stack>
-        
-          <Grid container spacing={5}>
-            <Grid spacing={2} item xs={12} md={12} >
-              <Card sx={{ width: "100%", bgcolor: "#67ABCB", color:"white", my:2 }}>
-                <CardHeader
-                  avatar={
-                    <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-                      R
-                    </Avatar>
-                  }
-                  action={
-                    <IconButton aria-label="settings">
-                      <MoreVertIcon />
-                    </IconButton>
-                  }
-                  title="Shrimp and Chorizo Paella"
-                  subheader="October 11, 2023"
-                />
-                <CardContent>
-                  <Typography variant="body2" color="black">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation .
-                  </Typography>
-                </CardContent>
-                <CardActions disableSpacing>
-                  <IconButton aria-label="add to favorites">
-                    <FavoriteIcon />
-                  </IconButton>
-                  <IconButton aria-label="share">
-                    <ShareIcon />
-                  </IconButton>
-                  <ExpandMore
-                    expand={expanded}
-                    onClick={handleExpandClick}
-                    aria-expanded={expanded}
-                    aria-label="show more"
-                  >
-                    <ExpandMoreIcon />
-                  </ExpandMore>
-                </CardActions>
 
-              </Card>
-              <Card sx={{ width: "100%", bgcolor: "#67ABCB", color:"white" }}>
-                <CardHeader 
-                  avatar={
-                    <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-                      R
-                    </Avatar>
-                  }
-                  action={
-                    <IconButton aria-label="settings">
-                      <MoreVertIcon />
-                    </IconButton>
-                  }
-                  title="Shrimp and Chorizo Paella"
-                  subheader="October 10, 2023"
-                />
+          <Breadcrumbs aria-label="breadcrumb">
+            <Link
+              href="/"
+              underline="hover"
+              sx={{
+                display: 'flex',
+                alignItems: 'center'
+              }}
+              color="white"
 
-                <CardContent>
-                  <Typography variant="body2" color="black">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation .
-                  </Typography>
-                </CardContent>
-                <CardActions disableSpacing>
-                  <IconButton aria-label="add to favorites">
-                    <FavoriteIcon />
-                  </IconButton>
-                  <IconButton aria-label="share">
-                    <ShareIcon />
-                  </IconButton>
-                  <ExpandMore
-                    expand={expanded}
-                    onClick={handleExpandClick}
-                    aria-expanded={expanded}
-                    aria-label="show more"
-                  >
-                    <ExpandMoreIcon />
-                  </ExpandMore>
-                </CardActions>
+            >
+              <HomeIcon sx={{ mr: 0.5 }} fontSize="inherit" />
+              Home
+            </Link>
+            <Link
+              href="/QACategories"
+              underline="hover"
+              sx={{
+                display: 'flex',
+                alignItems: 'center'
+              }}
+              color="white"
 
-              </Card>
-            </Grid>
+            >
+              <ContactSupportOutlinedIcon sx={{ mr: 0.5 }} fontSize="inherit" />
+              Category
+            </Link>
+            <Typography
+              sx={{ display: 'flex', alignItems: 'center', textDecoration: "underline" }}
+              color="#67ABCB"
+            >
+              <PanoramaFishEyeIcon sx={{ mr: 0.5 }} fontSize="inherit" />
+              Questions
+            </Typography>
+          </Breadcrumbs>
 
-          </Grid>
-
-
-
-        </Container>
+        </Stack>
       </Box>
+      <Box sx={{ width: "100%", bgcolor: "white", height: "80vh" }}>
+      <Stack direction="row" spacing={4} alignItems="center" justifyContent="center" sx={{ height: "100%" }} >
+      <Box sx={{
+          width: "450px",
+          height: "fit-content",
+          backgroundColor: "white",
+          boxShadow: "0px 187px 75px rgba(0, 0, 0, 0.01), 0px 105px 63px rgba(0, 0, 0, 0.05), 0px 47px 47px rgba(0, 0, 0, 0.09), 0px 12px 26px rgba(0, 0, 0, 0.1), 0px 0px 0px rgba(0, 0, 0, 0.1)",
+          borderRadius: "17px 17px 27px 27px",
+        }}>
+        <Box p={3}>
+          <Box>
+            <Stack spacing={1} direction="row" alignItems="center"  sx={{width: "100%", }}>
+              <AccountCircleOutlinedIcon sx={{ color: "black" }} />
+              <Stack direction="column" spacing={0.4}>
+                <Typography sx={{
+                  fontWeight: "700",
+                  fontSize: "12px",
+                  color: "#47484b",
+                }}>Tasneem Hassasneh</Typography>
+              </Stack>
+            </Stack>
+          </Box>
 
-    </Stack>
-  )
+        </Box>
+        <Box sx={{
+          width: "100%",
+          height: "fit-content",
+          backgroundColor: "#f1f1f1",
+          padding: "8px",
+        }}>
+          <Box sx={{
+            backgroundColor: "#ffffff",
+            borderRadius: "8px 8px 21px 21px",
+            padding: "8px",
+          }}>
+             <Box ><textarea style={{
+              width: "100%",
+              height: "40px",
+              resize: "none",
+              border: "0",
+              borderRadius: "6px",
+              padding: "12px 12px 10px 12px",
+              fontSize: "13px",
+              outline: "none",
+              caretColor: "#0a84ff",
+             }} placeholder='Ask Question'></textarea></Box>
+          <Box>
+            <Button sx={{
+              width: "30px",
+              height: "30px",
+              backgroundColor: "#0a84ff",
+              margin: "0 0 0 auto",
+              "&:hover": {
+                backgroundColor: "#026eda",
+              }
+            }}  variant="contained">
+              SEND
+            </Button>     
+          </Box>
+          </Box>
+         
+        </Box>
+    </Box>
+        <Box sx={{
+          width: "450px",
+          height: "fit-content",
+          backgroundColor: "white",
+          boxShadow: "0px 187px 75px rgba(0, 0, 0, 0.01), 0px 105px 63px rgba(0, 0, 0, 0.05), 0px 47px 47px rgba(0, 0, 0, 0.09), 0px 12px 26px rgba(0, 0, 0, 0.1), 0px 0px 0px rgba(0, 0, 0, 0.1)",
+          borderRadius: "17px 17px 27px 27px",
+        }}>
+          <Box>
+            <Typography sx={{
+              width: "100%",
+              height: "50px",
+              position: "relative",
+              display: "flex",
+              alignItems: "center",
+              paddingLeft: "20px",
+              borderBottom: "1px solid #f1f1f1",
+              fontWeight: 700,
+              fontSize: "13px",
+              color: "#47484b",
+              "&:after": {
+                content: "''",
+                width: "8ch",
+                height: "1px",
+                position: "absolute",
+                bottom: "-1px",
+                backgroundColor: "#47484b",
+            }
+          }}>Qusetion</Typography>
+        </Box>
+        <Box p={3}>
+          <Box>
+            <Stack spacing={1} direction="row" alignItems="center"  sx={{width: "100%", }}>
+              <AccountCircleOutlinedIcon sx={{ color: "black" }} />
+              <Stack direction="column" spacing={0.4}>
+                <Typography sx={{
+                  fontWeight: "700",
+                  fontSize: "12px",
+                  color: "#47484b",
+                }}>Tasneem Hassasneh</Typography>
+                <Typography sx={{
+                  fontWeight: "600",
+                  fontSize: "10px",
+                  color: "#acaeb4",
+                }}>Wednesday, Oct 18th at 2:45pm</Typography>
+              </Stack>
+            </Stack>
+          </Box>
+          <Box p={1}>
+            <Typography sx={{
+              fontSize: "12px",
+              lineHeight: "16px",
+              fontWeight: 600,
+              color: "#5f6064",
+            }}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</Typography>
+          </Box>
+
+        </Box>
+        <Box sx={{
+          width: "100%",
+          height: "fit-content",
+          backgroundColor: "#f1f1f1",
+          padding: "8px",
+        }}>
+          <Box sx={{
+            backgroundColor: "#ffffff",
+            borderRadius: "8px 8px 21px 21px",
+            padding: "8px",
+          }}>
+             <Box ><textarea style={{
+              width: "100%",
+              height: "40px",
+              resize: "none",
+              border: "0",
+              borderRadius: "6px",
+              padding: "12px 12px 10px 12px",
+              fontSize: "13px",
+              outline: "none",
+              caretColor: "#0a84ff",
+             }} placeholder='Reply'></textarea></Box>
+          <Box>
+    
+            
+            <Button sx={{
+              width: "30px",
+              height: "30px",
+              backgroundColor: "#0a84ff",
+              margin: "0 0 0 auto",
+              "&:hover": {
+                backgroundColor: "#026eda",
+              }
+            }}  variant="contained">
+              <ArrowUpwardIcon />
+            </Button>
+            
+          </Box>
+          </Box>
+         
+        </Box>
+    </Box>
+
+
+      </Stack >
+     
+    </Box >
+      <Footer />
+    </Stack >
+  );
 }
 
 export default QASection

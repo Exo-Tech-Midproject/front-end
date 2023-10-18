@@ -27,13 +27,9 @@ export default function GroupHero() {
   
     return (
         <Box sx={{
+            paddingX:"36px"
         }}>
-        <Box
-            sx={{
-                // margin: "2%",
-                // marginTop:'0'
-            }}
-        >
+        <Box>
         <div role="presentation">
         <Breadcrumbs aria-label="breadcrumb">
         <Link

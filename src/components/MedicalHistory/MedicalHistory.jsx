@@ -9,17 +9,30 @@ import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
 import HeroHistory from "./HeroHistory";
 import AuthPhysician from "../Auths/AuthPhysician";
+import InputAdornment from '@mui/material/InputAdornment';
+// import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import MedicalSection from "./MedicalSection";
 import EventNoteOutlinedIcon from "@mui/icons-material/EventNoteOutlined";
 import axios from "axios";
 import cookie from "react-cookies";
 import jwtDecode from "jwt-decode";
 
+import { BsPersonSquare } from "react-icons/bs";
+import { FaUserDoctor } from "react-icons/fa6";
+import { FaNotesMedical } from "react-icons/fa";
+import { LiaNotesMedicalSolid } from "react-icons/lia";
+import { BsFileEarmarkMedicalFill } from "react-icons/bs";
+import { FaBookMedical } from "react-icons/fa";
+import { FaFileMedicalAlt } from "react-icons/fa";
+
+
+
 let DBRUL = process.env.REACT_APP_BASE_URL;
 
 export default function PatientHistory() {
     const [successMessage, setSuccessMessage] = useState("");
     const [openSnackbar, setOpenSnackbar] = useState(false);
+    const [view , setView] = useState(false)
 
     const [formData, setFormData] = useState({
         patientUN: "",
@@ -59,21 +72,29 @@ export default function PatientHistory() {
                 console.log("from get history", history.data);
                 setFormData(history.data);
                 console.log(history, "from history function");
+                
                 return history.data;
             }
 
+            
+            
             if (payload?.accountType === "patient") {
+                
                 let history = await axios.get(`${DBRUL}/patient/${payload.username}/disease`, {
                     headers: {Authorization: `Bearer ${token}`},
                 });
                 console.log("from get history", history.data);
                 setFormData(history.data);
+                setView(true)
                 console.log(history, "from history function");
                 return history.data;
             }
+            
         } catch (error) {
             console.log(error);
         }
+
+        
     }
 
     useEffect(() => {
@@ -144,255 +165,329 @@ export default function PatientHistory() {
         })
     };
 
-    return (
-        <Box>
-            <HeroHistory />
-
-            <Container
-                component="main"
+return (
+    <Box>
+        <HeroHistory />
+        <Container
+            component="main"
+            sx={{
+                minHeight: "100vh",
+                width: "80%",
+                display: "flex",
+                alignItems: "center",
+            }}
+        >
+            <Box
+                component="form"
                 sx={{
-                    minHeight: "100vh",
-                    width: "80%",
-                    display: "flex",
-                    alignItems: "center",
+                    marginTop: "5%",
+                    marginBottom: "5%",
+                    boxShadow: "0px 0px 1px 1px #888888",
+                    bgcolor: "white",
+                    border: "10px solid #00222E",
                 }}
+                onSubmit={handleSubmit}
             >
                 <Box
-                    component="form"
                     sx={{
-                        marginTop: "5%",
-                        marginBottom: "5%",
-                        boxShadow: "0px 0px 1px 1px #888888",
-                        bgcolor: "white",
-                        border: "10px solid #00222E",
+                        bgcolor: "#00222E",
+                        height: "120px",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
                     }}
-                    onSubmit={handleSubmit}
                 >
                     <Box
                         sx={{
-                            bgcolor: "#00222E",
-                            height: "120px",
+                            height: "100%",
+                            width: "60%",
                             display: "flex",
                             alignItems: "center",
                             justifyContent: "center",
+                            borderTop: "none",
                         }}
                     >
-                        <Box
+                        <EventNoteOutlinedIcon
                             sx={{
-                                height: "100%",
-                                width: "60%",
-                                display: "flex",
-                                alignItems: "center",
-                                justifyContent: "center",
-                                borderTop: "none",
+                                width: "10%",
+                                height: "40%",
+                                color: "white",
+                                fontSize: "large",
+                            }}
+                        />
+                        <Typography
+                            component="h1"
+                            variant="h2"
+                            sx={{
+                                color: "white",
                             }}
                         >
-                            <EventNoteOutlinedIcon
-                                sx={{
-                                    width: "10%",
-                                    height: "40%",
-                                    color: "white",
-                                    fontSize: "large",
-                                }}
-                            />
-                            <Typography
-                                component="h1"
-                                variant="h2"
-                                sx={{
-                                    color: "white",
-                                }}
-                            >
-                                Medical History
-                            </Typography>
-                        </Box>
-                    </Box>
-                    <Box
-                        sx={{
-                            marginTop: 8,
-                            display: "flex",
-                            flexDirection: "column",
-                            alignItems: "center",
-                            margin: "1% 3% 3% 3%",
-                        }}
-                    >
-                        <Box component="form" noValidate sx={{mt: 3}}>
-                            <Grid container spacing={2}>
-                                <Grid item xs={6}>
-                                    <TextField
-                                        name="patientUN"
-                                        variant="outlined"
-                                        required
-                                        fullWidth
-                                        label="Patient username"
-                                        value={formData.patientUN}
-                                        onChange={handleInputChange}
-                                        sx={{
-                                            bgcolor: "#ECF3F8",
-                                            "& label": {
-                                                color: "#00222E",
-                                            },
-                                        }}
-                                    />
-                                </Grid>
-                                <Grid item xs={6}>
-                                    <TextField
-                                        name="physicianUN"
-                                        required
-                                        fullWidth
-                                        id="physicianUN"
-                                        label="Physician username"
-                                        value={formData.physicianUN}
-                                        onChange={handleInputChange}
-                                        sx={{
-                                            bgcolor: "#ECF3F8",
-                                            "& label": {
-                                                color: "#00222E",
-                                            },
-                                        }}
-                                    />
-                                </Grid>
-                                <Grid item xs={12}>
-                                    <TextField
-                                        name="historyPI"
-                                        required
-                                        fullWidth
-                                        id="historyPI"
-                                        label="history PI"
-                                        value={formData.historyPI}
-                                        multiline
-                                        onChange={handleInputChange}
-                                        sx={{
-                                            bgcolor: "#ECF3F8",
-                                            "& label": {
-                                                color: "#00222E",
-                                            },
-                                        }}
-                                    />
-                                </Grid>
-                                <Grid item xs={12}>
-                                    <TextField
-                                        name="presentILL"
-                                        required
-                                        fullWidth
-                                        id="presentILL"
-                                        label="present ILL"
-                                        value={formData.presentILL}
-                                        multiline
-                                        onChange={handleInputChange}
-                                        sx={{
-                                            bgcolor: "#ECF3F8",
-                                            "& label": {
-                                                color: "#00222E",
-                                            },
-                                        }}
-                                    />
-                                </Grid>
-                                <Grid item xs={12}>
-                                    <TextField
-                                        name="allergies"
-                                        required
-                                        fullWidth
-                                        id="allergies"
-                                        label="Allergies"
-                                        value={formData.allergies}
-                                        multiline
-                                        onChange={handleInputChange}
-                                        rows={3}
-                                        sx={{
-                                            bgcolor: "#ECF3F8",
-                                            "& label": {
-                                                color: "#00222E",
-                                            },
-                                        }}
-                                    />
-                                </Grid>
-                                <Grid item xs={12}>
-                                    <TextField
-                                        name="familyHistory"
-                                        required
-                                        fullWidth
-                                        id="familyHistory"
-                                        label="Family History"
-                                        value={formData.familyHistory}
-                                        multiline
-                                        onChange={handleInputChange}
-                                        sx={{
-                                            bgcolor: "#ECF3F8",
-                                            "& label": {
-                                                color: "#00222E",
-                                            },
-                                        }}
-                                    />
-                                </Grid>
-                                <Grid item xs={12}>
-                                    <TextField
-                                        name="socialHistory"
-                                        required
-                                        fullWidth
-                                        id="socialHistory"
-                                        label="Social History"
-                                        value={formData.socialHistory}
-                                        multiline
-                                        onChange={handleInputChange}
-                                        sx={{
-                                            bgcolor: "#ECF3F8",
-                                            "& label": {
-                                                color: "#00222E",
-                                            },
-                                        }}
-                                    />
-                                </Grid>
-                                <Grid item xs={12}></Grid>
-                            </Grid>
-                            <AuthPhysician>
-                                {/* <Button
-                                    type="submit"
-                                    fullWidth
-                                    variant="contained"
-                                    sx={{
-                                        mt: 3,
-                                        mb: 2,
-                                        fontSize: "2rem",
-                                        bgcolor: "#00222E",
-                                        "&:hover": {
-                                            background: "#1F485B"
-                                        }
-                                    }}
-                                    onClick={handleSubmit}
-                                >
-                                    submit
-                                </Button> */}
-                                <Button
-                                    type="submit"
-                                    fullWidth
-                                    variant="contained"
-                                    sx={{
-                                        mt: 3,
-                                        mb: 2,
-                                        fontSize: "2rem",
-                                        bgcolor: "#00222E",
-                                        "&:hover": {
-                                            background: "#1F485B",
-                                        },
-                                    }}
-                                    onClick={handleSubmit}
-                                >
-                                    submit
-                                </Button>
-                                <Snackbar open={openSnackbar} autoHideDuration={6000} onClose={handleCloseSnackbar}>
-                                    <MuiAlert onClose={handleCloseSnackbar} severity="success" sx={{width: "100%"}}>
-                                        {successMessage}
-                                    </MuiAlert>
-                                </Snackbar>
-                            </AuthPhysician>
-                            <Grid container justifyContent="flex-end">
-                                <Grid item></Grid>
-                            </Grid>
-                        </Box>
+                            Medical History
+                        </Typography>
                     </Box>
                 </Box>
-            </Container>
-            <MedicalSection />
-        </Box>
-    );
+                <Box
+                    sx={{
+                        marginTop: 8,
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "center",
+                        margin: "1% 3% 3% 3%",
+                    }}
+                >
+                    <Box component="form" noValidate sx={{mt: 3}}>
+                        <Grid container spacing={2}>
+                            <Grid item xs={6}>
+                                <TextField
+                                    name="patientUN"
+                                    variant="outlined"
+                                    required
+                                    fullWidth
+                                    label="Patient username"
+                                    value={formData.patientUN}
+                                    onChange={handleInputChange}
+                                    sx={{
+                                        bgcolor: "#ECF3F8",
+                                        "& label": {
+                                            color: "#00222E",
+                                        },
+                                    }}
+                                    InputProps={{
+                                        readOnly:{view},
+                                startAdornment: <InputAdornment 
+                                sx={{
+                                    '& .MuiTypography-root': {
+                                        color: '#1F485B',
+                                    },
+                                    marginRight: '10px',
+                                }}
+                                position="end"
+                            >
+                                    <BsPersonSquare fontSize='30px' color='#1F485B' /></InputAdornment>,
+                            }}
+                                />
+                            </Grid>
+                            <Grid item xs={6}>
+                                <TextField
+                                    name="physicianUN"
+                                    required
+                                    fullWidth
+                                    id="physicianUN"
+                                    label="Physician username"
+                                    value={formData.physicianUN}
+                                    onChange={handleInputChange}
+                                    sx={{
+                                        bgcolor: "#ECF3F8",
+                                        "& label": {
+                                            color: "#00222E",
+                                        },
+                                    }}
+                                    InputProps={{
+                                        readOnly:{view},
+                                startAdornment: <InputAdornment 
+                                sx={{
+                                    '& .MuiTypography-root': {
+                                        color: '#1F485B',
+                                    },
+                                    marginRight: '10px',
+                                }}
+                                position="end"
+                            >
+                                    <FaUserDoctor fontSize='30px' color='#1F485B' /></InputAdornment>,
+                            }}
+                                />
+                            </Grid>
+                            <Grid item xs={12}>
+                                <TextField
+                                    name="historyPI"
+                                    required
+                                    fullWidth
+                                    id="historyPI"
+                                    label="History of Present Illness"
+                                    value={formData.historyPI}
+                                    multiline
+                                    onChange={handleInputChange}
+                                    sx={{
+                                        bgcolor: "#ECF3F8",
+                                        "& label": {
+                                            color: "#00222E",
+                                        },
+                                    }}
+                                    InputProps={{
+                                        readOnly:{view},
+                                startAdornment: <InputAdornment
+                                sx={{
+                                    '& .MuiTypography-root': {
+                                        color: '#1F485B',
+                                    },
+                                    marginRight: '10px',
+                                }}
+                                position="end"
+                            >
+                                    <FaNotesMedical fontSize='30px' color='#1F485B' /></InputAdornment>,
+                            }}
+                                />
+                            </Grid>
+                            <Grid item xs={12}>
+                                <TextField
+                                    name="presentILL"
+                                    required
+                                    fullWidth
+                                    id="presentILL"
+                                    label="Present Illness"
+                                    value={formData.presentILL}
+                                    multiline
+                                    onChange={handleInputChange}
+                                    sx={{
+                                        bgcolor: "#ECF3F8",
+                                        "& label": {
+                                            color: "#00222E",
+                                        },
+                                    }}
+                                    InputProps={{
+                                        readOnly:{view},
+                                        startAdornment: <InputAdornment 
+                                        sx={{
+                                            '& .MuiTypography-root': {
+                                                color: '#1F485B',
+                                            },
+                                            marginRight: '10px',
+                                        }}
+                                        position="end"
+                                    >
+                                            <LiaNotesMedicalSolid fontSize='30px' color='#1F485B' /></InputAdornment>,
+                                    }}
+                                />
+                            </Grid>
+                            <Grid item xs={12}>
+                                <TextField
+                                    name="allergies"
+                                    required
+                                    fullWidth
+                                    id="allergies"
+                                    label="Allergies"
+                                    value={formData.allergies}
+                                    multiline
+                                    onChange={handleInputChange}
+                                    rows={2}
+                                    sx={{
+                                        bgcolor: "#ECF3F8",
+                                        "& label": {
+                                            color: "#00222E",
+                                        },
+                                    }}
+                                    InputProps={{
+                                        readOnly:{view},
+                                        startAdornment: <InputAdornment 
+                                        sx={{
+                                            '& .MuiTypography-root': {
+                                                color: '#1F485B',
+                                            },
+                                            marginRight: '10px',
+                                        }}
+                                        position="end"
+                                    >
+                                            <BsFileEarmarkMedicalFill fontSize='40px' color='#1F485B' /></InputAdornment>,
+                                    }}
+                                />
+                            </Grid>
+                            <Grid item xs={12}>
+                                <TextField
+                                    name="familyHistory"
+                                    required
+                                    fullWidth
+                                    id="familyHistory"
+                                    label="Family History"
+                                    value={formData.familyHistory}
+                                    multiline
+                                    onChange={handleInputChange}
+                                    sx={{
+                                        bgcolor: "#ECF3F8",
+                                        "& label": {
+                                            color: "#00222E",
+                                        },
+                                    }}
+                                    InputProps={{
+                                        readOnly:{view},
+                                        startAdornment: 
+                                        <InputAdornment
+                                        sx={{
+                                            '& .MuiTypography-root': {
+                                                color: '#1F485B',
+                                            },
+                                            marginRight: '10px',
+                                        }}
+                                        position="end"
+                                    >
+                                        <FaBookMedical fontSize='30px' color='#1F485B' /></InputAdornment>,
+                                    }}
+                                />
+                            </Grid>
+                            <Grid item xs={12}>
+                                <TextField
+                                    name="socialHistory"
+                                    required
+                                    fullWidth
+                                    id="socialHistory"
+                                    label="Social History"
+                                    value={formData.socialHistory}
+                                    multiline
+                                    onChange={handleInputChange}
+                                    sx={{
+                                        bgcolor: "#ECF3F8",
+                                        "& label": {
+                                            color: "#00222E",
+                                        },
+                                    }}
+                                    InputProps={{
+                                        readOnly:{view},
+                                        startAdornment: <InputAdornment
+                                        sx={{
+                                            '& .MuiTypography-root': {
+                                                color: '#1F485B',
+                                            },
+                                            marginRight: '10px',
+                                        }}
+                                        position="end"
+                                    >
+                                            <FaFileMedicalAlt fontSize='30px' color='#1F485B' /></InputAdornment>,
+                                    }}
+                                />
+                            </Grid>
+                            <Grid item xs={12}></Grid>
+                        </Grid>
+                        <AuthPhysician>
+                            <Button
+                                type="submit"
+                                fullWidth
+                                variant="contained"
+                                sx={{
+                                    mt: 3,
+                                    mb: 2,
+                                    fontSize: "2rem",
+                                    bgcolor: "#00222E",
+                                    "&:hover": {
+                                        background: "#1F485B",
+                                    },
+                                }}
+                                onClick={handleSubmit}
+                            >
+                                submit
+                            </Button>
+                            <Snackbar open={openSnackbar} autoHideDuration={6000} onClose={handleCloseSnackbar}>
+                                <MuiAlert onClose={handleCloseSnackbar} severity="success" sx={{width: "100%"}}>
+                                    {successMessage}
+                                </MuiAlert>
+                            </Snackbar>
+                        </AuthPhysician>
+                        <Grid container justifyContent="flex-end">
+                            <Grid item></Grid>
+                        </Grid>
+                    </Box>
+                </Box>
+            </Box>
+        </Container>
+        <MedicalSection />
+    </Box>
+);
 }

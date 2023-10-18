@@ -9,22 +9,9 @@ import {
 import useScrollPosition from "../../hooks/useScrollPosition";
 import CustomLink from "../Buttons/CustomLink";
 import SignupLink from "../Buttons/SignupLink";
-
-const LinkButton = ({ children, ...props }) => (
-  <Stack
-    direction="row"
-    alignItems="center"
-    spacing={0.2}
-    sx={{
-      cursor: "pointer",
-      color: "text.secondary",
-      "&:hover": { color: "white" },
-    }}
-    {...props}
-  >
-    {children}
-  </Stack>
-);
+import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
+import ContactSupportOutlinedIcon from '@mui/icons-material/ContactSupportOutlined';
+import HomeIcon from '@mui/icons-material/Home';
 
 const Navbar = () => {
   const scrollPosition = useScrollPosition();
@@ -69,28 +56,27 @@ const Navbar = () => {
               flexWrap="wrap"
             >
               <CustomLink href="/">
+              <Stack direction="row" alignItems="center" justifyContent="center" spacing={1}>
+                  <HomeIcon fontSize="inherit"/>
                 <Typography variant="body2">Home</Typography>
+                </Stack>
               </CustomLink>
 
               <CustomLink href="/QACategories">
+              <Stack direction="row" alignItems="center" justifyContent="center" spacing={1}>
+                  <ContactSupportOutlinedIcon fontSize="inherit"/>
                 <Typography variant="body2">Q/A</Typography>
+                </Stack>
               </CustomLink>
 
               <CustomLink href="/AboutUs">
+                <Stack direction="row" alignItems="center" justifyContent="center" spacing={1}>
+                  <InfoOutlinedIcon fontSize="inherit"/>
                 <Typography variant="body2">About us</Typography>
+                </Stack>
+                
               </CustomLink>
 
-              <LinkButton>
-                <Typography variant="body2">Why to use</Typography>
-              </LinkButton>
-
-              <LinkButton spacing={0.5}>
-                <Typography variant="body2">Doctors</Typography>
-              </LinkButton>
-
-              <CustomLink  spacing={0.5}>
-                <Typography variant="body2">Contact us</Typography>
-              </CustomLink>
             </Stack>
           )}
 

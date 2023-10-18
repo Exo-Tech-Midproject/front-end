@@ -16,9 +16,8 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 function srcset(image, size, rows = 1, cols = 1) {
   return {
     src: `${image}?w=${size * cols}&h=${size * rows}&fit=crop&auto=format`,
-    srcSet: `${image}?w=${size * cols}&h=${
-      size * rows
-    }&fit=crop&auto=format&dpr=2 2x`,
+    srcSet: `${image}?w=${size * cols}&h=${size * rows
+      }&fit=crop&auto=format&dpr=2 2x`,
   };
 }
 const { ITEMS } = AboutUsSectionContent;
@@ -41,7 +40,7 @@ function AboutUs() {
         backgroundBlendMode: 'overlay'
       }}>
         <Container>
-          <Stack py={5} alignItems="left" justifyContent="center">
+          <Stack py={5} alignItems="center" justifyContent="center">
             <Title
               variant={{ xs: "h3", sm: "h2", md: "h1" }}
               sx={{ letterSpacing: "0.02em", mb: 1, color: "white" }}
@@ -75,81 +74,78 @@ function AboutUs() {
       </Box>
       <Box sx={{ bgcolor: "white", width: "100%", height: "100%", py: 5 }}>
         <Container>
-        <Grid container spacing={2}  >
-          {ITEMS.map((item) => (
-            <Grid item xs={12} md={3} key={item.title}>
-              <TeamCard {...item} />
-            </Grid>
-          ))}
-        </Grid>
+          <Grid container spacing={2}  >
+            {ITEMS.map((item) => (
+              <Grid item xs={12} md={3} key={item.title}>
+                <TeamCard {...item} />
+              </Grid>
+            ))}
+          </Grid>
         </Container>
-      
-      </Box>
-      <Box sx={{  bgcolor: "white", py: 5 }}>
-        <Container>
-        <Stack direction="row" spacing={5}>
-       
-        <Container maxWidth="md">
 
-        <Title variant={{ xs: "h3", md: "h2" }} sx={{ textAlign: "left" , color:"#1F485B", py:1}}>
-        HEALTHAK
-        </Title>
-        <Title variant={{ xs: "h5", md: "h6" }} sx={{ textAlign: "left" , color:"#1F485B", py:1}}>
-         About the Project
-        </Title>
-        <Typography variant="body2" sx={{ textAlign: "left" ,fontSize:"15px",  color:"gray", py:1}}>
-        Healthak is a portable Pharmacy/Clinic web application that aims to provide medical services, patient profiles, disease control, physician dashboards, patient groups, appointment scheduling, and communication channels. The application's focus is on providing seamless communication between patients and physicians, personalized patient health tracking, and educational resources for patients. Physicians can monitor their patients' health, receive alerts, and engage in real-time consultations.
-        </Typography>
-        <Title variant={{ xs: "h5", md: "h6" }} sx={{ textAlign: "left" , color:"#1F485B", py:1}}>
-         Emergancy Care
-        </Title>
-        <Typography
-              sx={{ display: 'flex', alignItems: 'center' ,color:"gray" ,py:1}}
-              
+      </Box>
+      <Box sx={{ bgcolor: "white", }}>
+        <Container>
+          <Stack direction="row" spacing={5}>
+
+            <Container maxWidth="md">
+
+              <Title variant={{ xs: "h3", md: "h2" }} sx={{ textAlign: "center", color: "#1F485B", py: 1 }}>
+                HEALTHAK
+              </Title>
+              <Title variant={{ xs: "h5", md: "h6" }} sx={{ textAlign: "center", color: "#1F485B", py: 1 }}>
+                About the Project
+              </Title>
+              <Typography variant="body2" sx={{ textAlign: "center", fontSize: "15px", color: "gray", py: 1 }}>
+                Healthak is a portable Pharmacy/Clinic web application that aims to provide medical services, patient profiles, disease control, physician dashboards, patient groups, appointment scheduling, and communication channels. The application's focus is on providing seamless communication between patients and physicians, personalized patient health tracking, and educational resources for patients. Physicians can monitor their patients' health, receive alerts, and engage in real-time consultations.
+              </Typography>
+              <Title variant={{ xs: "h5", md: "h6" }} sx={{ textAlign: "center", color: "#1F485B", py: 1 }}>
+                Emergancy Care
+              </Title>
+              <Stack direction="row" spacing={4} alignItems="center" justifyContent="center">
+                <Stack direction="column" spacing={2}> <Typography
+                  sx={{ display: 'flex', alignItems: 'center', color: "gray", py: 1 }}>
+                  <CheckCircleIcon sx={{ mr: 0.5, color: "green" }} fontSize="inherit" />
+                  Primary Care
+                </Typography>
+                  <Typography
+                    sx={{ display: 'flex', alignItems: 'center', color: "gray", py: 1 }}>
+                    <CheckCircleIcon sx={{ mr: 0.5, color: "green" }} fontSize="inherit" />
+                    Medicine
+                  </Typography>
+                  </Stack>
+                <Stack direction="column" spacing={2}>
+                  <Typography
+                    sx={{ display: 'flex', alignItems: 'center', color: "gray", py: 1 }}>
+                    <CheckCircleIcon sx={{ mr: 0.5, color: "green" }} fontSize="inherit" />
+                    Orthopedic
+                  </Typography>
+                  <Typography
+                    sx={{ display: 'flex', alignItems: 'center', color: "gray", py: 1 }}>
+                    <CheckCircleIcon sx={{ mr: 0.5, color: "green" }} fontSize="inherit" />
+                    Cardiology
+                  </Typography>
+                </Stack>
+              </Stack>
+            </Container>
+            <ImageList
+              sx={{ width: 800, height: 450 }}
+              variant="quilted"
+              cols={4}
+              rowHeight={121}
             >
-              <CheckCircleIcon sx={{ mr: 0.5, color:"green" }} fontSize="inherit" />
-              Primary Care
-            </Typography>
-            <Typography
-              sx={{ display: 'flex', alignItems: 'center' ,color:"gray", py:1}}
-              
-            >
-              <CheckCircleIcon sx={{ mr: 0.5, color:"green" }} fontSize="inherit" />
-              Medicine
-            </Typography>
-            <Typography
-              sx={{ display: 'flex', alignItems: 'center' ,color:"gray" ,py:1}}
-              
-            >
-              <CheckCircleIcon sx={{ mr: 0.5, color:"green" }} fontSize="inherit" />
-              Orthopedic
-            </Typography>
-            <Typography
-              sx={{ display: 'flex', alignItems: 'center' ,color:"gray" ,py:1}}
-              
-            >
-              <CheckCircleIcon sx={{ mr: 0.5, color:"green" }} fontSize="inherit" />
-              Cardiology
-            </Typography>
-      </Container>
-      <ImageList
-      sx={{ width: 800, height: 450 }}
-      variant="quilted"
-      cols={4}
-      rowHeight={121}
-    >
-      {itemData.map((item) => (
-        <ImageListItem key={item.img} cols={item.cols || 1} rows={item.rows || 1}>
-          <img
-            {...srcset(item.img, 121, item.rows, item.cols)}
-            alt={item.title}
-            loading="lazy"
-          />
-        </ImageListItem>
-      ))}
-    </ImageList>
-        </Stack>
-    
+              {itemData.map((item) => (
+                <ImageListItem key={item.img} cols={item.cols || 1} rows={item.rows || 1}>
+                  <img
+                    {...srcset(item.img, 121, item.rows, item.cols)}
+                    alt={item.title}
+                    loading="lazy"
+                  />
+                </ImageListItem>
+              ))}
+            </ImageList>
+          </Stack>
+
         </Container>
       </Box>
       {/* <Footer /> */}
@@ -196,7 +192,7 @@ const itemData = [
     title: 'Basketball',
   },
   {
-    
+
     img: 'https://images.pexels.com/photos/3873146/pexels-photo-3873146.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
     title: 'Fern',
   },

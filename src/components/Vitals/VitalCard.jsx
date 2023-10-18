@@ -29,7 +29,6 @@ export default function VitalsCard({ dataObj, setVitals, vitals }) {
 
     const [toAnimate, setToAnimate] = useState(false)
     const [showModal, setShowModal] = useState(false)
-
     function handleShowDeleteModal() {
         setShowModal(true)
     }

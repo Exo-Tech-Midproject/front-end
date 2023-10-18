@@ -65,7 +65,9 @@ export default function DBMain({ open }) {
                     <Route path='/group/:id' element={<React.Suspense fallback={<Loading />}><Group /></React.Suspense>} />
                     <Route path='/Physicians' element={<React.Suspense fallback={<Loading />}><Physician /></React.Suspense>} />
                     <Route path='/subscriptions' element={<React.Suspense fallback={<Loading />}><Subscription /></React.Suspense>} />
-                    <Route path='/doctor-control' element={<React.Suspense fallback={<Loading />}><PhysicianControlPage /></React.Suspense>} />
+                    <Route path='/patient-control' element={<React.Suspense fallback={<Loading />}><PhysicianControlPage /></React.Suspense>} />
+                    <Route path='/patient-control/vitals/:patientUN' element={<React.Suspense fallback={<Loading />}><Vitals /></React.Suspense>} />
+                    <Route path='/patient-control/prescription/:patientUN' element={<React.Suspense fallback={<Loading />}><Prescriptions /></React.Suspense>} />
 
 
 

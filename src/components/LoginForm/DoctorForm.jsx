@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Box, Container, TextField, Typography, Button, Link, Stack } from '@mui/material'
 import LockIcon from '@mui/icons-material/Lock';
 import EmailIcon from '@mui/icons-material/Email';
@@ -6,22 +6,47 @@ import InputAdornment from '@mui/material/InputAdornment';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import IconButton from '@mui/material/IconButton';
+import { LoginContext } from '../../ContextApi/Auth';
+import { useNavigate } from 'react-router-dom';
 
 function DoctorForm() {
     const [showPassword, setShowPassword] = React.useState(false);
-
+    const [username, setUsername] = React.useState('')
+    const [password, setPassword] = React.useState('')
     const handleClickShowPassword = () => setShowPassword((show) => !show);
+    const { loginPhysician } = useContext(LoginContext)
+    const navigator = useNavigate()
 
     const handleMouseDownPassword = (event) => {
         event.preventDefault();
     };
+    const handleSubmit = async (e) => {
+        console.log()
+        e.preventDefault()
+
+        try {
+            let logged = await loginPhysician(username, password)
+            console.log(logged)
+            if (logged) {
+                navigator('/dashboard/profile')
+            } else {
+                console.log('you are not authorized')
+            }
+
+
+        } catch (e) {
+            console.log(e)
+
+        }
+    }
     return (
         <Box>
             <Container>
-                <Stack direction="column" spacing={3} alignItems="center">
+                <Stack direction="column" spacing={3} alignItems="center" component={'form'}>
                     <TextField
                         id="input-with-icon-textfield"
-                        placeholder="Email"
+                        placeholder="Username"
+                        onChange={(e) => setUsername(e.target.value)}
                         InputProps={{
                             startAdornment: (
                                 <InputAdornment position="start">
@@ -29,16 +54,16 @@ function DoctorForm() {
                                 </InputAdornment>
                             ),
                         }}
-                        
+
                         sx={{ color: "black", width: "300px" }}
                     />
                     <TextField
                         sx={{ width: "300px" }}
                         id="standard-adornment-password"
                         type={showPassword ? 'text' : 'password'}
-                        
+                        onChange={(e) => setPassword(e.target.value)}
                         placeholder="Password"
-                 
+
                         InputProps={{
                             startAdornment: (
                                 <InputAdornment position="start">
@@ -60,12 +85,13 @@ function DoctorForm() {
                         }}
                     />
                     <Button
+                        onClick={handleSubmit}
                         type="submit"
                         fullWidth
                         variant="contained"
                         sx={{ mt: 3, mb: 2, bgcolor: "#1F485B" }}
                     >Login</Button>
-                
+
                 </Stack>
             </Container>
         </Box>

@@ -16,6 +16,7 @@ import VitalsChart from '../components/Vitals/VitalsChart';
 import VitalsCreateSection from '../components/Vitals/VitalsCreateSection';
 import axios from 'axios';
 import jwtDecode from "jwt-decode";
+import { useParams } from 'react-router-dom';
 
 let DBRUL = process.env.REACT_APP_BASE_URL
 
@@ -25,6 +26,7 @@ export default function Vitals() {
     const [vitals, setVitals] = useState(null)
     const [currentPage, setCurrentPage] = useState(1)
     // console.log(currentPage)
+    let params = useParams()
     let descending = vitals?.sort((a, b) => b.id - a.id)
     // console.log(descending)
     // console.log(vitals)
@@ -46,7 +48,7 @@ export default function Vitals() {
                     })
                 setVitals(userVitals.data)
             } else if (payload?.accountType === 'physician') {
-                let userVitals = await axios.get(`${DBRUL}/physician/${payload.username}/patients/${'anas'}/vitals`,
+                let userVitals = await axios.get(`${DBRUL}/physician/${payload.username}/patients/${params.patientUN}/vitals`,
                     {
                         headers: { Authorization: `Bearer ${token}` }
                     })

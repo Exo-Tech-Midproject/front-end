@@ -51,20 +51,20 @@ export default function CardGroups(props) {
 };
 
 function handelClick(){
-  if(payload.accountType === 'physician'){
-    setVistedGroup(groupName)
 
+  setVistedGroup(groupName)
+
+  if(payload.accountType === 'physician'){
+    
     navigator(`/dashboard/group/${id}`)
 
   }else{
     navigator(`/dashboard/group/${groupName}`)
   }
+
 }
 
 
-  // const handleImageError = () => {
-  //   setImageSrc("URL_OF_YOUR_FALLBACK_IMAGE_HERE");
-  // };
   
   return (
       <Card 

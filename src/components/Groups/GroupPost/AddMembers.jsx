@@ -11,12 +11,14 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import { LoginContext } from "../../../ContextApi/Auth";
-
+import AuthPhysician from '../../Auths/AuthPhysician';
 import Select from "@mui/material/Select";
 import Chip from "@mui/material/Chip";
 import axios from 'axios';
 import cookie from 'react-cookies';
 import jwtDecode from 'jwt-decode';
+import Snackbar from "@mui/material/Snackbar";
+import MuiAlert from "@mui/material/Alert";
 
 
 
@@ -40,9 +42,14 @@ export default function AddMembers() {
   const [personName, setPersonName] = useState([]);
   const [open, setOpen] = useState(false);
   const [subscribers, setSubscribers] = useState([]);
-  // const [selectedMembers, setSelectedMembers] = useState([]);
+  const [successMessage, setSuccessMessage] = useState("");
+  const [openSnackbar, setOpenSnackbar] = useState(false);
 
 //   const theme = useTheme(); // Use the theme
+
+const handleCloseSnackbar = () => {
+  setOpenSnackbar(false);
+};
 
 
   async function getSubscribers() {
@@ -76,7 +83,7 @@ export default function AddMembers() {
     try {
       const token = cookie.load('auth');
       const payload = await jwtDecode(token);
-      const groupName = {vistedGroup};
+      const groupName = vistedGroup;
       
       const members = await Promise.all(personName.map(async (element) => {
 
@@ -91,8 +98,9 @@ export default function AddMembers() {
 
       }));  
 
-        
-        setOpen(false);
+      setOpen(false);
+      setSuccessMessage("History added successfully");
+      setOpenSnackbar(true);
 
         console.log('mmmmmmmmmm',members)
 
@@ -114,11 +122,12 @@ export default function AddMembers() {
 
   return (
     <Box>
+      <AuthPhysician>
       <Button
         variant="outlined"
         onClick={handleClickOpen}
         sx={{
-          bgcolor: "#062942",
+          bgcolor: "#1F485B",
           borderRadius: "5px",
           margin: "2%",
           fontSize: "1.3rem",
@@ -127,12 +136,13 @@ export default function AddMembers() {
           "&:hover": {
             transform: "scale(1.1)",
             transition: "transform 0.5s ease",
-            background: "#1F485B",
+            background: "#062942",
           },
         }}
       >
         + Add Members
       </Button>
+      </AuthPhysician>
       <Dialog open={open} onClose={handleClose}>
         <Box
           sx={{
@@ -216,6 +226,11 @@ export default function AddMembers() {
             >
               Add
             </Button>
+            <Snackbar open={openSnackbar} autoHideDuration={6000} onClose={handleCloseSnackbar}>
+                                <MuiAlert onClose={handleCloseSnackbar} severity="success" sx={{width: "100%"}}>
+                                    {successMessage}
+                                </MuiAlert>
+                            </Snackbar>
             <Button
               color="error"
               onClick={handleClose}

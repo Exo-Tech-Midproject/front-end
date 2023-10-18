@@ -10,9 +10,11 @@ import VitalsChart from '../Vitals/VitalsChart';
 import cookie from 'react-cookies'
 import jwtDecode from 'jwt-decode';
 import axios from 'axios';
+import { useParams } from 'react-router-dom';
 let DBRUL = process.env.REACT_APP_BASE_URL
 export default function PrescriptionContainer() {
     const [prescription, setPrescription] = useState(null)
+    let params = useParams()
     let token = cookie.load('auth')
     let payload
     if (token) {
@@ -35,7 +37,7 @@ export default function PrescriptionContainer() {
             }
             if (payload?.accountType === 'physician') {
 
-                let userPresc = await axios.get(`${DBRUL}/physician/${payload?.username}/patients/${'anas'}/prescriptions`,
+                let userPresc = await axios.get(`${DBRUL}/physician/${payload?.username}/patients/${params.patientUN}/prescriptions`,
                     {
                         headers: { Authorization: `Bearer ${token}` }
                     })

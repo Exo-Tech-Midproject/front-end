@@ -12,12 +12,13 @@ import axios from 'axios';
 import cookie from 'react-cookies'
 import jwtDecode from 'jwt-decode';
 import AuthPhysician from '../Auths/AuthPhysician';
+import { useParams } from 'react-router-dom';
 let DBRUL = process.env.REACT_APP_BASE_URL
 
 
 export default function PrescriptionSingleCard({ slide, index, setPrescription, prescription }) {
     const [showModal, setShowModal] = useState(false)
-
+    let params = useParams()
     function handleShowDeleteModal() {
         setShowModal(true)
     }
@@ -29,7 +30,7 @@ export default function PrescriptionSingleCard({ slide, index, setPrescription, 
             let token = cookie.load('auth')
             // let token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Imhhc2FuIiwiYWNjb3VudFR5cGUiOiJwaHlzaWNpYW4iLCJpYXQiOjE2OTcxNzUzMjN9.xGG53_pQA-c8Uq10dELXS6GMJ2VP9SmJKE-ykQ2KEGo'
             const payload = await jwtDecode(token)
-            let userVitals = await axios.delete(`${DBRUL}/physician/${payload.username}/patients/${'anas'}/prescriptions/${id}`,
+            let userVitals = await axios.delete(`${DBRUL}/physician/${payload.username}/patients/${params.patientUN}/prescriptions/${id}`,
                 {
                     headers: { Authorization: `Bearer ${token}` }
                 })

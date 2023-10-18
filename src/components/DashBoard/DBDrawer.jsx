@@ -56,8 +56,8 @@ export default function DBDrawer({ open, handleDrawerClose, theme }) {
             <IconButton sx={{ alignSelf: 'flex-end', color: 'white', ":hover": { bgcolor: '#4B6477B0' } }} onClick={handleDrawerClose}>
                 {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
             </IconButton>
-
-            <Box paddingY={5} display={'flex'} flexDirection={'column'} alignItems={'center'} justifyContent={'space-evenly'} bgcolor='#1F485B'>
+            <Typography textAlign='center' color='white'>HEALTHAK</Typography>
+            <Box paddingY={5} display={'flex'} gap={2} flexDirection={'column'} alignItems={'center'} justifyContent={'space-evenly'} bgcolor='#1F485B'>
                 <Avatar sx={{ width: '80px', height: '80px' }} src={user?.profileImg || 'https://image.winudf.com/v2/image1/bmV0LndsbHBwci5ib3lzX3Byb2ZpbGVfcGljdHVyZXNfc2NyZWVuXzBfMTY2NzUzNzYxN18wOTk/screen-0.webp?fakeurl=1&type=.webp'} />
                 <Typography color={'white'} variant='h6'>{user?.fullName}</Typography>
             </Box>

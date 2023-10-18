@@ -25,7 +25,7 @@ export default function ChatInbox({ withWho }) {
   let token = cookie.load('auth')
   let payload = jwtDecode(token)
   const [roomName, setRoomName] = useState(null)
-
+  console.log(messages)
   // let userData = {
   //   username: payload.username,
   //   target: 'someone',
@@ -145,7 +145,7 @@ export default function ChatInbox({ withWho }) {
       <ChatInboxHead withWho={withWho} />
 
       <Box overflow='scroll' paddingX={2} py={1} display='flex' flexDirection='column' gap={4} height='100%' ref={messagesEndRef} >
-        {messages?.map(element => (<Message msg={element} name='Anas' />))}
+        {messages?.map(element => (<Message msg={element} name={element.sender} time={element.createdAt} withWho={withWho} />))}
 
       </Box>
 

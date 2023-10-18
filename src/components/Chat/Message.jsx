@@ -7,7 +7,15 @@ import { LoginContext } from '../../ContextApi/Auth';
 import cookie from 'react-cookies'
 import jwtDecode from 'jwt-decode';
 
-export default function Message({ name, msg }) {
+export default function Message({ name, msg, time, withWho }) {
+    console.log(withWho, time)
+    const date = new Date(time);
+    let hours = date.getHours();
+    const minutes = date.getMinutes();
+    const ampm = hours >= 12 ? 'PM' : 'AM';
+    hours %= 12;
+    hours = hours || 12; // if the hour is 0, it should be 12
+    const timeString = `${hours}:${minutes < 10 ? '0' : ''}${minutes} ${ampm}`
     const { user } = useContext(LoginContext)
     let token = cookie.load('auth')
     let payload = jwtDecode(token)
@@ -23,18 +31,12 @@ export default function Message({ name, msg }) {
         overflowWrap: 'break-word'
     }
     // let msg = `Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum consectetur minus, fugit, nam cupiditate omnis ratione officia fugiat assumenda, quaerat harum libero tempora esse magnam beatae vel repellendus. Vel, optio?`
-    const who = {
-        name: name,
-        pic: 'https://image.winudf.com/v2/image1/bmV0LndsbHBwci5ib3lzX3Byb2ZpbGVfcGljdHVyZXNfc2NyZWVuXzBfMTY2NzUzNzYxN18wOTk/screen-0.webp?fakeurl=1&type=.webp'
-    }
-    const reciever = {
-        name: name,
-        pic: 'https://image.winudf.com/v2/image1/bmV0LndsbHBwci5ib3lzX3Byb2ZpbGVfcGljdHVyZXNfc2NyZWVuXzJfMTY2NzUzNzYxOF8wNDY/screen-2.webp?fakeurl=1&type=.webp'
-    }
+
+
     return (
-        <Box display='flex' maxWidth='100%'  gap={2} alignItems='flex-end' flexWrap='wrap' flexDirection={msg.sender === payload.username ? 'row-reverse' : 'row'}  >
-            10:30am
-            <Avatar src={who.name === payload.username ? who.pic : reciever.pic} />
+        <Box display='flex' maxWidth='100%' gap={2} alignItems='flex-end' flexWrap='wrap' flexDirection={msg.sender === payload.username ? 'row-reverse' : 'row'}  >
+            {timeString}
+            <Avatar src={name === payload.username ? user.profileImg : withWho.profileImg} />
             <Box
                 // overflow='auto'
 

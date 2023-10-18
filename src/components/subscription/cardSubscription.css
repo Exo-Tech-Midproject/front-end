@@ -12,8 +12,7 @@
 
 .Subcard {
 	background: #fff;
-	border-radius: 4px;
-	box-shadow: 0px 14px 80px rgba(34, 35, 58, 0.5);
+	box-shadow: 0px 14px 80px rgba(33, 35, 58, 0.5);
 	min-height: 300px;
 	width: 400px;
 	border-radius: 25px;
@@ -24,6 +23,12 @@
 	justify-content: space-around;
 	transition: box-shadow 0.5s ease;
 
+
+	background-color: #f0f0f0;
+	border: 0.000001px solid #96cbe3;
+	/* padding: 10px;
+	margin: 10px; */
+
 }
 
 .Subcard:hover {
@@ -33,19 +38,27 @@
 
 
 .Subcard h3 {
-	font-size: large;
-	padding: 0 1rem;
-
-}
-
-.Subcard h4 {
-	font-size: 20px;
-	padding: 0 1rem;
+	padding-left: 5px;
+	margin-top: 8px;
+	font-size: 24px;
+	color: #333;
+	text-transform: capitalize;
+	font-weight: bold;
+	white-space: normal;
+	overflow: hidden;
 }
 
 .Subcard h5 {
-	font-size: small;
-	padding: 0 1rem;
+	padding-left: 5px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	font-size: 16px;
+	margin: 5px 0;
+	color: #414040;
+	font-weight: normal;
+	line-height: 1.2;
+	white-space: normal;
+	overflow: hidden;
 }
 
 .Subcard .Subtitle {
@@ -68,6 +81,7 @@
 	font-size: 14px;
 	cursor: pointer;
 	margin: 10px;
+	margin-bottom: 4px;
 	margin-left: 35px;
 }
 
@@ -92,6 +106,7 @@
 	align-items: center;
 	width: 100%;
 	min-height: 300px;
+	max-width: 230px;
 }
 
 

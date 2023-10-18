@@ -103,14 +103,19 @@ export default function CardSubscription() {
 							<div className="Subportada" style={{ backgroundImage: `url(${img})` }}></div>
 							<div className="Subtitle-total">
 								<AuthPhysician>
-									<h3>{user.insurance}</h3>
+									<h3>Name: {user.fullName}</h3>
+									<h5>Phone: {user.mobileNumber}</h5>
+									<h5>Email: {user.emailAddress}</h5>
+									<h5>Birthdate: {user.birthdate}</h5>
+									<h5>Gender: {user.gender}</h5>
+									<h5>Race: {user.race}</h5>
 								</AuthPhysician>
-								<h3>{user.fullName}</h3>
-								<h5>{user.emailAddress}</h5>
-								<h4>{user.mobileNumber}</h4>
 								<AuthPatient>
-									<div className="Subtitle">{user.department}</div>
-									<Rating sx={{ marginLeft: "25px" }} name="half-rating-read" defaultValue={user.rating} precision={0.5} size="medium" readOnly />
+									<h3>Name: {user.fullName}</h3>
+									<h5>Phone: {user.mobileNumber}</h5>
+									<h5>Email: {user.emailAddress}</h5>
+									<h5>Department:{user.department}</h5>
+									<Rating sx={{ marginLeft: "25px", marginBottom: "4px" }} name="half-rating-read" defaultValue={user.rating} precision={0.5} size="medium" readOnly />
 									<button className='subrateB' onClick={() => openRatingForm(user.username)}>Rate Physician</button>
 								</AuthPatient>
 							</div>

@@ -6,6 +6,12 @@ import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import cookie from 'react-cookies';
 import jwtDecode from 'jwt-decode';
+import { IconButton,  Tooltip } from '@mui/material';
+import DeletePostModal from './DeletePostModal'
+import AuthPhysician from '../../Auths/AuthPhysician';
+import HighlightOffOutlinedIcon from '@mui/icons-material/HighlightOffOutlined';
+
+
 
 let DBRUL = process.env.REACT_APP_BASE_URL;
 
@@ -22,6 +28,15 @@ export default function PostContent(props) {
 
   const [showFullContent, setShowFullContent] = useState(false);
 
+  const [showModal, setShowModal] = useState(false)
+
+    function handleShowDeleteModal() {
+        setShowModal(true)
+    }
+    function handleCloseDeleteModal() {
+        setShowModal(false)
+    }
+
   const { id } = useParams();
 
 
@@ -35,6 +50,7 @@ export default function PostContent(props) {
       let newArray = createdPost.filter((element) => element.id !== PostId);
       UpdateCreatedPost(newArray);
       console.log('fffffffffff', newArray);
+      setShowModal(false);
     } catch (err) {
       console.error(err);
     }
@@ -55,15 +71,16 @@ export default function PostContent(props) {
         margin: '2% auto',
         flexDirection: 'column',
         bgcolor: '#1F485B',
-        width: '90%',
+        width: '85%',
+        borderRadius:"5px"
       }}
     >
       <Box
         display="flex"
         sx={{
           flexDirection: 'column',
-          width: '90%',
-          margin: '10px',
+          width: '100%',
+          margin: '10px auto',
         }}
         p={3}
         maxWidth="100%"
@@ -72,38 +89,16 @@ export default function PostContent(props) {
         <Box
           sx={{
             display: 'flex',
-            justifyContent: 'space-between',
-            margin: '5px',
+            justifyContent: 'end',
+            // margin: '5px',
             alignItems: 'center',
           }}
         >
-          <Typography
-            sx={{
-              maxHeight: '80%',
-              textAlign: 'start',
-              lineHeight: '1.5',
-              fontSize: '1.4rem',
-              color: 'black',
-            }}
-          >
-            {formatDate(postDate)}
-          </Typography>
-          <Button
-            variant="contained"
-            color="error"
-            sx={{
-              fontSize: '1.1rem',
-              '&:hover': {
-                transform: 'scale(1.1)',
-                transition: 'transform 0.5s ease',
-              },
-            }}
-            onClick={() => {
-              handleDeletePost();
-            }}
-          >
-            Delete post
-          </Button>
+            <Tooltip componentsProps={{ tooltip: { sx: { bgcolor: 'white', color: 'black', '& .MuiTooltip-arrow': { color: 'white' } } } }} title="Delete" placement='right' sx={{ '.MuiTooltip-tooltip': { backgroundColor: 'white' } }} arrow>
+            <AuthPhysician>
+              <IconButton onClick={handleShowDeleteModal} color='error' > <HighlightOffOutlinedIcon /></IconButton>
+            </AuthPhysician>
+            </Tooltip>
         </Box>
 
         {postImage && (
@@ -168,7 +163,24 @@ export default function PostContent(props) {
             </Button>
           )}
         </Typography>
+        <Box sx={{
+          display:"flex",
+          justifyContent:"end"
+        }}>
+        <Typography
+            sx={{
+              maxHeight: '80%',
+              textAlign: 'start',
+              lineHeight: '1.5',
+              fontSize: '1.4rem',
+              color: 'black',
+            }}
+          >
+            {formatDate(postDate)}
+          </Typography>
+        </Box>
       </Box>
+      <DeletePostModal showModal={showModal} handleCloseDeleteModal={handleCloseDeleteModal} handleDeletePost={handleDeletePost} postId={PostId} />
     </Box>
   );
 }

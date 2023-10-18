@@ -27,7 +27,6 @@ export default function CreateGroup() {
 
   const [groupName, setGroupName] = useState('');
   const [description, setDescription] = useState('');
-  // const [groupImageUrl, setGroupImageUrl] = useState(DefaultImg);
   const [groupNameError, setGroupNameError] = useState(null);
   const [descriptionError, setDescriptionError] = useState(null);
   const [createdGroups, setCreatedGroups] = useState([]);
@@ -35,9 +34,10 @@ export default function CreateGroup() {
   const [temp, setTemp] = useState(DefaultImg);
   const [selectedFile, setSelectedFile] = useState(DefaultImg)
 
-
+  let ordered = createdGroups.sort((a , b) => b.id - a.id)
 
   const [snackbarOpen, setSnackbarOpen] = useState(false);
+
 
   const handleImageChange = (event) => {
     setSelectedFile(event.target.files[0]);
@@ -86,6 +86,8 @@ export default function CreateGroup() {
       setDescriptionError(null);
     }
   };
+
+  
 
   const handleGroupNameChange = (e) => {
     const inputValue = e.target.value;
@@ -305,16 +307,23 @@ export default function CreateGroup() {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
+        // bgcolor:"#062942",
+        // backgroundPosition: "center",
+        //         backgroundRepeat: "no-repeat",
+        //         backgroundSize: "cover",
+        //         backgroundImage:"url('https://cdn.create.vista.com/api/media/small/483426030/stock-photo-abstract-gradient-classic-blue-soft-color-background-background-color-graphic')",
+        height:"20vh",
         // height:"50px"
       }}>
         <Typography variant="h1" textTransform="capitalize" sx={{
-          marginBottom: '3%',
-          color: '#062942'
+          // marginBottom: '3%',
+          // color: 'white',
+          color: '#062942',
         }}>
           Your Groups
         </Typography>
       </Box>
-      <Container
+      <Box
         sx={{
           margin: '2%',
           flexWrap: 'wrap',
@@ -332,7 +341,7 @@ export default function CreateGroup() {
             groupImage={group.groupImage}
           />
         ))}
-      </Container>
+      </Box>
       <Snackbar open={snackbarOpen} autoHideDuration={6000} onClose={handleCloseSnackbar}>
         <MuiAlert
           elevation={6}

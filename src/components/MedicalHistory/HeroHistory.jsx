@@ -4,17 +4,17 @@ import HomeIcon from '@mui/icons-material/Home';
 import WhatshotIcon from '@mui/icons-material/Whatshot';
 import GrainIcon from '@mui/icons-material/Grain';
 import imageURL from '../../assets/images/History/HeroHistory.jpg'
-import {Box, Container} from "@mui/material";
+import Box from "@mui/material/Box";
 import * as React from "react";
 import Typography from "@mui/material/Typography";
 
-// const imageURL = "https://img.freepik.com/premium-photo/medical-history-with-stethoscope-clipboard-black-desk_512283-640.jpg?size=626&ext=jpg&uid=R33434868&ga=GA1.2.2039131302.1685617875&semt=ais";
-
 export default function HeroHistory() {
   return (
-    <Box>
+    <Box sx={{
+      display:'flex',
+      flexDirection:"column"
+    }}>
       <Box sx={{
-            paddingLeft:"15px",
             marginBottom:"20px",
         }}>
         <div role="presentation">
@@ -49,7 +49,7 @@ export default function HeroHistory() {
       </Breadcrumbs>
     </div>
     </Box>
-        <Container
+        <Box
             sx={{
                 backgroundImage: `url(${imageURL})`,
                 backgroundPosition: "center",
@@ -58,10 +58,8 @@ export default function HeroHistory() {
                 minHeight: "50vh",
                 width: "100%",
                 bgcolor:'white',
-                margin:"5px auto",
                 borderRadius: "5px",
                 display: "flex",
-                // justifyContent: "start",
                 alignItems: "center",
                 color: "#00222E",
                 boxShadow:'0px 1px 2px 0px rgba(0,0,0,0.4), 0px -1px 1px 0px rgba(0,0,0,0.14), 0px 1px 2px 0px rgba(0,0,0,0.12)',
@@ -100,11 +98,7 @@ export default function HeroHistory() {
                 Empowering Health Consciousness A Comprehensive Approach to Keeping a Watchful Eye on Your Well being
             </Typography>
             </Box>
-            {/* <Box sx={{
-                width:"30%"
-            }}>
-            </Box> */}
-        </Container>
+        </Box>
     </Box>
   )
 }

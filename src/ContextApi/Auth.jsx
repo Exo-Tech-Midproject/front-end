@@ -7,6 +7,7 @@ import cookie from 'react-cookies'
 export const LoginContext = createContext()
 let DBRUL = process.env.REACT_APP_BASE_URL
 export default function LoginProvider({ children }) {
+    const [vistedGroup , setVistedGroup] = useState('')
     const [loggedIn, setLoggedIn] = useState(false);
     const [user, setUser] = useState({});
     const [userType, setUserType] = useState('')
@@ -152,7 +153,7 @@ export default function LoginProvider({ children }) {
     }, [])
 
     return (
-        <LoginContext.Provider value={{ logout, loginPhysician, isPatient, isPhysician, loginPatient, loggedIn, user, userType }}>
+        <LoginContext.Provider value={{ logout, loginPhysician, isPatient, isPhysician, loginPatient, loggedIn, user, userType , setVistedGroup , vistedGroup }}>
             {children}
         </LoginContext.Provider>
     )

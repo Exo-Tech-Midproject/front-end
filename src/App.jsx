@@ -19,9 +19,9 @@ const Login = lazy(() => import("./pages/Login"))
 const Dashboard = lazy(() => import("./pages/Dashboard"))
 const Signup = lazy(() => import("./pages/signUp"))
 const AboutUs = lazy(() => import("./pages/AboutUs"))
-const QACategories= lazy(() => import("./pages/QACategories"))
-const QA= lazy(() => import("./pages/QA"))
-const NotFound= lazy(() => import("./pages/NotFound"))
+const QACategories = lazy(() => import("./pages/QACategories"))
+const QA = lazy(() => import("./pages/QA"))
+const NotFound = lazy(() => import("./pages/NotFound"))
 
 const ForgotPassword = lazy(() => import("./pages/ForgotPassword"))
 
@@ -32,27 +32,28 @@ const Loading = lazy(() => import("./components/Loading/Loading"))
 const Group = lazy(() => import("./pages/Group"))
 
 
-const socket = io('http://localhost:5000/');
+const socket = io('https://healthak.onrender.com/');
 
 const connectSocket = (userData) => {
-    socket.connect();
-    socket.emit('enter chat', userData);
+  socket.connect();
+  socket.emit('enter chat', userData);
 };
 
 const disconnectSocket = (roomName) => {
-    socket.disconnect();
-    socket.emit('leave-room', roomName)
+  socket.disconnect();
+  socket.emit('leave-room', roomName)
 };
 
 export { socket, connectSocket, disconnectSocket };
 // const Chat = lazy(() => import('../src/pages/Chat'));
 
 const App = () => {
-  const location = useLocation() 
+  const location = useLocation()
   return (
     <div>
       <AnimatePresence>
-      <Routes location={location} key={location.pathname}>
+        <Routes location={location} key={location.pathname}>
+
 
 
 
@@ -65,29 +66,30 @@ const App = () => {
 
 
 
-        <Route path='/dashboard/*' element={<Suspense fallback={<Loading />}><Dashboard /></Suspense>} />
-        <Route path='/QACategories' element={<Suspense fallback={<Loading />}><QACategories /></Suspense>} />
 
-        <Route path='/QA' element={<Suspense fallback={<Loading />}><QA /></Suspense>} />
-        <Route path='/ForgotPassword' element={<Suspense fallback={<Loading />}><ForgotPassword /></Suspense>} />
+          <Route path='/dashboard/*' element={<Suspense fallback={<Loading />}><Dashboard /></Suspense>} />
+          <Route path='/QACategories' element={<Suspense fallback={<Loading />}><QACategories /></Suspense>} />
 
-        <Route path='/404' element={<Suspense fallback={<Loading />}><NotFound /></Suspense>} />
-        
+          <Route path='/QA' element={<Suspense fallback={<Loading />}><QA /></Suspense>} />
+          <Route path='/ForgotPassword' element={<Suspense fallback={<Loading />}><ForgotPassword /></Suspense>} />
 
-
+          <Route path='/404' element={<Suspense fallback={<Loading />}><NotFound /></Suspense>} />
 
 
-        {/* <Route path='/dashboard/chat' element={<Suspense fallback={<Loading />}><Chat /></Suspense>} /> */}
 
 
-{/* <Route path='/dashboard/chat' element={<Suspense fallback={<Loading />}><Chat /></Suspense>} /> */}
 
-{/* <Route path='/Group' element={<Suspense fallback={<Loading />}><Group /></Suspense>} /> */}
+          {/* <Route path='/dashboard/chat' element={<Suspense fallback={<Loading />}><Chat /></Suspense>} /> */}
 
-</Routes>
+
+          {/* <Route path='/dashboard/chat' element={<Suspense fallback={<Loading />}><Chat /></Suspense>} /> */}
+
+          {/* <Route path='/Group' element={<Suspense fallback={<Loading />}><Group /></Suspense>} /> */}
+
+        </Routes>
       </AnimatePresence>
       {/* <Profile /></React.Suspense> */}
-      
+
     </div>
   )
 }

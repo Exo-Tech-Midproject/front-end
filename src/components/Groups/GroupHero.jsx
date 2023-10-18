@@ -30,8 +30,8 @@ export default function GroupHero() {
         }}>
         <Box
             sx={{
-                margin: "2%",
-                marginTop:'0'
+                // margin: "2%",
+                // marginTop:'0'
             }}
         >
         <div role="presentation">
@@ -67,15 +67,15 @@ export default function GroupHero() {
     </div>
         </Box>
         
-        <Container
+        <Box
             // width={"80%"}
             sx={{
                 // marginTop:"2%",
                 display:'flex',
                 justifyContent:"center",
-                minHeight: "30vh",
+                minHeight: "40vh",
                 alignItems:"center",
-                width:"100%"
+                width:"100%",
             }}
         >
             <Container sx={{
@@ -106,7 +106,7 @@ export default function GroupHero() {
                 </Container>
                 <Lottie animationData={groupHeroAnimation} style={{width:"60%"}}/>
             
-        </Container>
+        </Box>
         </ Box>
     )
 }

@@ -10,6 +10,7 @@ import AddVitalsModal from './AddVitalsModal';
 import axios from 'axios';
 import cookie from 'react-cookies'
 import jwtDecode from 'jwt-decode';
+import AuthPatient from "../Auths/AuthPatient";
 let DBRUL = process.env.REACT_APP_BASE_URL
 export default function VitalsCreateSection({ vitals, setVitals }) {
     const [showCreateModal, setShowCreateModal] = useState(false)
@@ -60,8 +61,9 @@ export default function VitalsCreateSection({ vitals, setVitals }) {
 
             </Box >
             <Box display='flex' justifyContent={'center'} position='relative'>
-                <Button onClick={handleShowCreateModal} variant='contained' color='medical' sx={{ alignSelf: 'center', position: 'relative', bottom: { xs: '15px', sm: '25px', md: '35px' }, width: { xs: '50%', md: '50%' }, height: { xs: '30px', sm: '50px', md: '70px' }, fontSize: { xs: '0.7rem', sm: '1rem', md: '2rem' } }}>Add New Record</Button>
-
+                <AuthPatient>
+                    <Button onClick={handleShowCreateModal} variant='contained' color='medical' sx={{ alignSelf: 'center', position: 'relative', bottom: { xs: '15px', sm: '25px', md: '35px' }, width: { xs: '50%', md: '50%' }, height: { xs: '30px', sm: '50px', md: '70px' }, fontSize: { xs: '0.7rem', sm: '1rem', md: '2rem' } }}>Add New Record</Button>
+                </AuthPatient>
             </Box >
             <AddVitalsModal showCreateModal={showCreateModal} setShowCreateModal={setShowCreateModal} handleCloseCreateModal={handleCloseCreateModal} handleCreateCard={handleCreateCard} />
         </>

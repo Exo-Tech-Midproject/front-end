@@ -20,7 +20,7 @@ export default function ChatContactShip({ handleSelectContact, activeChat, perso
             color={'medical'}
             bgcolor={person.username === activeChat ? '#1F485B88' : 'white'}
             onClick={() => handleSelectContact(person, person.username)}  >
-            <Avatar src={'https://image.winudf.com/v2/image1/bmV0LndsbHBwci5ib3lzX3Byb2ZpbGVfcGljdHVyZXNfc2NyZWVuXzBfMTY2NzUzNzYxN18wOTk/screen-0.webp?fakeurl=1&type=.webp'} sx={{ width: '40px', height: '40px' }} />
+            <Avatar src={person.profileImg || 'https://cdn5.vectorstock.com/i/1000x1000/27/89/user-account-flat-icon-vector-14992789.jpg'} sx={{ width: '40px', height: '40px' }} />
             <Box display='flex' flexDirection={'column'} justifyContent={'center'} alignItems='flex-start' color='black'  >
                 <Typography color='medical' fontSize={'12px'} fontWeight={700}>{person?.fullName}</Typography>
                 <Typography color='medical' fontWeight='400' fontSize={'12px'} textOverflow='clip'>{lastMsg.substring(0, 19) + '...'}</Typography>

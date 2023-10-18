@@ -4,10 +4,13 @@ import ChatContactShip from './ChatContactShip'
 
 export default function ChatContactList({ contacts, setWithWho, }) {
   const [activeChat, setActiveChat] = useState('')
+  // const [activeImg, setActiveImg] = useState('')
 
-  function handleSelectContact(withName, activeName) {
+
+  function handleSelectContact(withName, activeName,activeImg) {
     setWithWho(withName)
     setActiveChat(activeName)
+    // activeImg(activeImg)
   }
   // const [activeChat, setActiveChat]= useState('')
   return (

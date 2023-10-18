@@ -1,7 +1,8 @@
 @import url("https://fonts.googleapis.com/css?family=Roboto:400,400i,700");
 
 .mainP {
-	min-Height: 50vh;
+	margin-top: 100px;
+	min-Height: 300px;
 	margin: 5px 10px 0 10px;
 	display: flex;
 	justify-content: space-around;
@@ -11,9 +12,8 @@
 
 .Subcard {
 	background: #fff;
-	border-radius: 4px;
-	box-shadow: 0px 14px 80px rgba(34, 35, 58, 0.5);
-	height: auto;
+	box-shadow: 0px 14px 80px rgba(33, 35, 58, 0.5);
+	min-height: 300px;
 	width: 400px;
 	border-radius: 25px;
 	position: relative;
@@ -22,6 +22,12 @@
 	flex-direction: column;
 	justify-content: space-around;
 	transition: box-shadow 0.5s ease;
+
+
+	background-color: #f0f0f0;
+	border: 0.000001px solid #96cbe3;
+	/* padding: 10px;
+	margin: 10px; */
 
 }
 
@@ -32,18 +38,55 @@
 
 
 .Subcard h3 {
-	margin: 0;
-	padding: 0 1rem;
+	padding-left: 5px;
+	margin-top: 8px;
+	font-size: 24px;
+	color: #333;
+	text-transform: capitalize;
+	font-weight: bold;
+	white-space: normal;
+	overflow: hidden;
+}
+
+.Subcard h5 {
+	padding-left: 5px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	font-size: 16px;
+	margin: 5px 0;
+	color: #414040;
+	font-weight: normal;
+	line-height: 1.2;
+	white-space: normal;
+	overflow: hidden;
 }
 
 .Subcard .Subtitle {
-	padding: 1rem;
-	text-align: right;
+	text-align: left;
 	color: rgb(4, 183, 4);
 	font-weight: bold;
 	align-items: center;
 	font-size: 15px;
-	margin: 0;
+	margin: 10px;
+}
+
+
+
+.subrateB {
+	background-color: #1F485B;
+	color: #fff;
+	border: none;
+	border-radius: 5px;
+	padding: 5px 10px;
+	font-size: 14px;
+	cursor: pointer;
+	margin: 10px;
+	margin-bottom: 4px;
+	margin-left: 35px;
+}
+
+.subrateB:hover {
+	background-color: #2bd325;
 }
 
 .Subcard .Subdesc {
@@ -51,12 +94,6 @@
 	font-size: 15px;
 	justify-content: space-between;
 	min-height: max-content;
-}
-
-.Subcard svg {
-	width: 85px;
-	height: 85px;
-	margin: 0 auto;
 }
 
 .Subcard-text {
@@ -68,13 +105,10 @@
 .Subtitle-total {
 	align-items: center;
 	width: 100%;
-	justify-content: space-between;
-
+	min-height: 300px;
+	max-width: 230px;
 }
 
-path {
-	fill: white;
-}
 
 .img-Subportada {
 	width: 100%;
@@ -83,12 +117,10 @@ path {
 
 .Subportada {
 	width: 100%;
-	min-height: 150px;
-	/* Adjust the height */
+	height: 100%;
 	border-top-left-radius: 20px;
 	border-bottom-left-radius: 20px;
-
-	background-position: bottom center;
+	background-position: center;
 	background-size: cover;
 }
 
@@ -103,4 +135,43 @@ path {
 .star {
 	display: inline-block;
 	margin-right: 5px;
+}
+
+
+.rating14-form {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	text-align: center;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 300px;
+	background-color: white;
+	padding: 30px;
+	border-radius: 10px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+label {
+	font-size: 16px;
+	font-weight: bold;
+	margin-bottom: 10px;
+}
+
+
+button.subButton14 {
+	background-color: #1F485B;
+	color: #fff;
+	border: none;
+	padding: 10px 20px;
+	margin-top: 10px;
+	font-size: 16px;
+	cursor: pointer;
+	border-radius: 5px;
+}
+
+button.subButton14:hover {
+	background-color: #2bd325;
 }

@@ -8,6 +8,7 @@ import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import SideBarList from './SideBarList';
 import Avatar from '@mui/material/Avatar';
+import { LoginContext } from '../../ContextApi/Auth';
 
 
 
@@ -15,6 +16,7 @@ const drawerWidth = 240;
 
 
 export default function DBDrawer({ open, handleDrawerClose, theme }) {
+    const { user } = React.useContext(LoginContext)
     return (
         <Drawer
             sx={{
@@ -56,8 +58,8 @@ export default function DBDrawer({ open, handleDrawerClose, theme }) {
             </IconButton>
 
             <Box paddingY={5} display={'flex'} flexDirection={'column'} alignItems={'center'} justifyContent={'space-evenly'} bgcolor='#1F485B'>
-                <Avatar sx={{ width: '80px', height: '80px' }} src='https://image.winudf.com/v2/image1/bmV0LndsbHBwci5ib3lzX3Byb2ZpbGVfcGljdHVyZXNfc2NyZWVuXzBfMTY2NzUzNzYxN18wOTk/screen-0.webp?fakeurl=1&type=.webp' />
-                <Typography color={'white'} variant='h6'>Hasan Tommalieh</Typography>
+                <Avatar sx={{ width: '80px', height: '80px' }} src={user?.profileImg || 'https://image.winudf.com/v2/image1/bmV0LndsbHBwci5ib3lzX3Byb2ZpbGVfcGljdHVyZXNfc2NyZWVuXzBfMTY2NzUzNzYxN18wOTk/screen-0.webp?fakeurl=1&type=.webp'} />
+                <Typography color={'white'} variant='h6'>{user?.fullName}</Typography>
             </Box>
 
             <SideBarList />

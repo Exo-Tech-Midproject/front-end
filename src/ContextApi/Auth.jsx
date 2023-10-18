@@ -7,6 +7,7 @@ import cookie from 'react-cookies'
 export const LoginContext = createContext()
 let DBRUL = process.env.REACT_APP_BASE_URL
 export default function LoginProvider({ children }) {
+    const [vistedGroup , setVistedGroup] = useState('')
     const [loggedIn, setLoggedIn] = useState(false);
     const [user, setUser] = useState({});
     const [userType, setUserType] = useState('')
@@ -32,6 +33,7 @@ export default function LoginProvider({ children }) {
                     headers: { Authorization: `Bearer ${token}` }
                 })
                 let user = loggedUserData.data
+                cookie.save('auth', token)
                 let authenticated = await ValidateTokenPatient(token, user)
                 console.log(authenticated)
                 if (authenticated) return true
@@ -56,6 +58,7 @@ export default function LoginProvider({ children }) {
                     headers: { Authorization: `Bearer ${token}` }
                 })
                 let user = loggedUserData.data
+                cookie.save('auth', token)
                 let authenticated = await ValidateTokenPhysician(token, user)
                 console.log(authenticated)
                 if (authenticated) return true
@@ -87,7 +90,7 @@ export default function LoginProvider({ children }) {
                     setUserType(tokenChecker.accountType);
                 }
 
-                cookie.save('auth', token)
+
                 return true
             }
         } catch (e) {
@@ -115,7 +118,7 @@ export default function LoginProvider({ children }) {
                     setUserType(tokenChecker.accountType);
                 }
 
-                cookie.save('auth', token)
+
                 return true
             }
         } catch (e) {
@@ -132,15 +135,25 @@ export default function LoginProvider({ children }) {
     }
     useEffect(() => {
         const authCookie = cookie.load('auth');
+
         if (authCookie) {
-            ValidateTokenPatient(authCookie) || ValidateTokenPhysician(authCookie)
-        } else {
-            setLoggedIn(false)
+            let decoded = jwtDecode(authCookie)
+            if (decoded.accountType === 'patient') {
+                ValidateTokenPatient(authCookie)
+            } else if (decoded.accountType === 'physician') {
+                ValidateTokenPhysician(authCookie)
+
+            } else {
+
+                setLoggedIn(false)
+            }
         }
+        console.log(user)
+
     }, [])
 
     return (
-        <LoginContext.Provider value={{ logout, loginPhysician, isPatient, isPhysician, loginPatient, loggedIn, user, userType }}>
+        <LoginContext.Provider value={{ logout, loginPhysician, isPatient, isPhysician, loginPatient, loggedIn, user, userType , setVistedGroup , vistedGroup }}>
             {children}
         </LoginContext.Provider>
     )

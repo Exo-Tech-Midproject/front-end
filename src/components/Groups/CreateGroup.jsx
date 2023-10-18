@@ -10,38 +10,59 @@ import Divider from "@mui/material/Divider";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
 import AuthPhysician from '../Auths/AuthPhysician';
-import DefaultImg from '../../assets/images/Group-img/istockphoto-1413129950-612x612.jpg'
+// import DefaultImg from '../../assets/images/Group-img/istockphoto-1413129950-612x612.jpg'
 import axios from 'axios';
 import cookie from 'react-cookies'
 import jwtDecode from 'jwt-decode';
 let DBRUL = process.env.REACT_APP_BASE_URL
+
+const DefaultImg = ('https://img.freepik.com/premium-vector/avatar-bearded-doctor-doctor-with-stethoscope-vector-illustrationxa_276184-31.jpg')
+
+let defaultFormData = new FormData();
+
+defaultFormData.append('image', DefaultImg);
 
 
 export default function CreateGroup() {
 
   const [groupName, setGroupName] = useState('');
   const [description, setDescription] = useState('');
-  const [groupImageUrl, setGroupImageUrl] = useState(DefaultImg);
   const [groupNameError, setGroupNameError] = useState(null);
   const [descriptionError, setDescriptionError] = useState(null);
   const [createdGroups, setCreatedGroups] = useState([]);
   const [showForm, setShowForm] = useState(false);
+  const [temp, setTemp] = useState(DefaultImg);
+  const [selectedFile, setSelectedFile] = useState(DefaultImg)
+
+  let ordered = createdGroups.sort((a , b) => b.id - a.id)
 
   const [snackbarOpen, setSnackbarOpen] = useState(false);
 
-  async function fetchGroups (){
-    try{
-        let token = cookie.load('auth')
-        const payload = await jwtDecode(token)
-        let allGroups = await axios.get(`${DBRUL}/${payload.accountType}/${payload.username}/groups`,
-            {
-                headers: { Authorization: `Bearer ${token}` }
-            })
-        console.log(allGroups.data)
-        setCreatedGroups(allGroups.data)
-        console.log(allGroups, 'from delete function')
+
+  const handleImageChange = (event) => {
+    setSelectedFile(event.target.files[0]);
+    const imageUrl = URL.createObjectURL(event.target.files[0]);
+    setTemp(imageUrl)
+    // setSelectedFile(imageUrl)
+
+  };
+
+
+
+
+  async function fetchGroups() {
+    try {
+      let token = cookie.load('auth')
+      const payload = await jwtDecode(token)
+      let allGroups = await axios.get(`${DBRUL}/${payload.accountType}/${payload.username}/groups`,
+        {
+          headers: { Authorization: `Bearer ${token}` }
+        })
+      setCreatedGroups(allGroups.data)
+
+      return allGroups.data
     }
-    catch (error){
+    catch (error) {
       console.log(error)
     }
   }
@@ -50,66 +71,85 @@ export default function CreateGroup() {
   useEffect(() => {
     fetchGroups()
 
-}, [])
+  }, [])
 
-  const handleImageUpload = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      const imageUrl = URL.createObjectURL(file);
-      setGroupImageUrl(imageUrl);
-    }
-  };
+
+
 
   const handleDescriptionChange = (e) => {
     const inputValue = e.target.value;
     setDescription(inputValue);
 
-    if (inputValue.length < 5 || inputValue.length > 100) {
-      setDescriptionError('Description must be between 5 and 100 characters.');
+    if (inputValue.length < 5 || inputValue.length > 25) {
+      setDescriptionError('Description must be between 5 and 25 characters.');
     } else {
       setDescriptionError(null);
     }
   };
 
+  
+
   const handleGroupNameChange = (e) => {
     const inputValue = e.target.value;
     setGroupName(inputValue);
 
-    if (inputValue.length < 5) {
-      setGroupNameError('Group name must be at least 5 characters.');
+    if (inputValue.length < 5 || inputValue.length > 25) {
+      setGroupNameError('Group name must be between 5 and 25 characters.');
     } else {
       setGroupNameError(null);
     }
   };
 
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (groupName && description && !groupNameError && !descriptionError) {
-      if (description.length >= 5 && description.length <= 100) {
-        const newGroup = {
-                groupName:groupName,
-                description:description,
-                groupImage:groupImageUrl,
-              };
+      if (description.length >= 5 && description.length <= 25 && groupName.length >= 5 && groupName.length <= 25) {
+        let newGroup = {
+          groupName: groupName,
+          description: description,
+
+        };
+        if (selectedFile === DefaultImg) {
+          newGroup = {
+            groupName: groupName,
+            description: description,
+            groupImage: DefaultImg,
+
+          }
+        }
 
         let token = cookie.load('auth')
         const payload = await jwtDecode(token)
-        let allGroups = await axios.post(`${DBRUL}/physician/${payload.username}/groups`,newGroup,
+        let allGroups = await axios.post(`${DBRUL}/physician/${payload.username}/groups`, newGroup,
+          {
+            headers: { Authorization: `Bearer ${token}` }
+          })
+        let imgId = allGroups.data.id
+        const formData = new FormData();
+        formData.append('image', selectedFile);
+        if (selectedFile !== DefaultImg) {
+          let imgGroup = await axios.post(`${DBRUL}/physician/${payload.username}/groups/${imgId}/groupImg`, formData,
             {
-                headers: { Authorization: `Bearer ${token}` }
+              headers: {
+                Authorization: `Bearer ${token}`,
+                'Content-Type': 'multipart/form-data'
+              }
             })
-        console.log(allGroups.data)
-
-        setCreatedGroups([...createdGroups, allGroups.data]);
+          console.log(imgGroup, 'aaaaaaaaaaaaaaaaaaaaaai')
+        }
+        let banana = await fetchGroups()
+        setCreatedGroups(banana);
         setGroupName('');
         setDescription('');
-        setGroupImageUrl(DefaultImg);
+        setSelectedFile(DefaultImg);
+        setTemp(DefaultImg)
 
         setShowForm(false);
       }
     } else {
-      setSnackbarOpen(true); // Open the Snackbar for errors
+      setSnackbarOpen(true);
     }
   };
 
@@ -128,27 +168,24 @@ export default function CreateGroup() {
         margin: '1%',
       }}>
         <AuthPhysician>
-        <Button variant="contained"
-          sx={{
-            bgcolor: '#062942',
-            borderRadius: "5px",
-            margin: "3%",
-            fontSize: "1.3rem",
-            "&:hover": {
-              transform: "scale(1.1) ",
-              transition: 'transform 0.5s ease',
-              background: "#1F485B"
-            }
-          }}
-          onClick={() => setShowForm(!showForm)}
-        >{showForm ? " < Go Back " : "+ Create New Group"}</Button>
+          <Button variant="contained"
+            sx={{
+              bgcolor: '#062942',
+              borderRadius: "5px",
+              margin: "3%",
+              fontSize: "1.3rem",
+              "&:hover": {
+                transform: "scale(1.1) ",
+                transition: 'transform 0.5s ease',
+                background: "#1F485B"
+              }
+            }}
+            onClick={() => setShowForm(!showForm)}
+          >{showForm ? " < Go Back " : "+ Create New Group"}</Button>
         </AuthPhysician>
       </Container>
       {showForm && (
         <Box sx={{
-          // backgroundImage: `url(${imageURL})`,
-          // backgroundPosition: 'center',
-          // backgroundSize: 'cover',
           border: "0.01px solid #1F485B7f",
           bgcolor: "white",
           borderRadius: "4px",
@@ -182,13 +219,13 @@ export default function CreateGroup() {
                   borderRadius: '50%',
                 }}
                 alt="Group img"
-                src={groupImageUrl}
+                src={temp}
               />
 
               <label htmlFor="image-upload">
                 <Button variant="contained" component="span" sx={{
                   bgcolor: "#062942",
-                  marginTop:"10px"
+                  marginTop: "10px"
                 }}>
                   Upload Image
                 </Button>
@@ -197,8 +234,8 @@ export default function CreateGroup() {
                 accept="image/*"
                 id="image-upload"
                 type="file"
-                style={{ display: 'none'}}
-                onChange={handleImageUpload}
+                style={{ display: 'none' }}
+                onChange={handleImageChange}
               />
             </Container>
             <Stack spacing={3} sx={{
@@ -267,37 +304,44 @@ export default function CreateGroup() {
       )}
       <Divider sx={{ margin: '20px' }} />
       <Box sx={{
-        display:"flex",
-        justifyContent:"center",
-        alignItems:"center",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        // bgcolor:"#062942",
+        // backgroundPosition: "center",
+        //         backgroundRepeat: "no-repeat",
+        //         backgroundSize: "cover",
+        //         backgroundImage:"url('https://cdn.create.vista.com/api/media/small/483426030/stock-photo-abstract-gradient-classic-blue-soft-color-background-background-color-graphic')",
+        height:"20vh",
         // height:"50px"
       }}>
-      <Typography variant="h1" textTransform="capitalize" sx={{
-                marginBottom:'3%',
-                color:'#062942'
-            }}>
-                    Your Groups
-                </Typography>
+        <Typography variant="h1" textTransform="capitalize" sx={{
+          // marginBottom: '3%',
+          // color: 'white',
+          color: '#062942',
+        }}>
+          Your Groups
+        </Typography>
       </Box>
-      <Container
+      <Box
         sx={{
           margin: '2%',
           flexWrap: 'wrap',
           display: 'flex',
-          minHeight:"30vh"
+          minHeight: "30vh"
         }}
       >
         {createdGroups.map((group, index) => (
           <CardGroups key={index}
-          id={group.id}
-          createdGroups={createdGroups}
-          setCreatedGroups={setCreatedGroups}
+            id={group.id}
+            createdGroups={createdGroups}
+            setCreatedGroups={setCreatedGroups}
             groupName={group.groupName}
             description={group.description}
             groupImage={group.groupImage}
           />
         ))}
-      </Container>
+      </Box>
       <Snackbar open={snackbarOpen} autoHideDuration={6000} onClose={handleCloseSnackbar}>
         <MuiAlert
           elevation={6}

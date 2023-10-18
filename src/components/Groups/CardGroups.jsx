@@ -8,48 +8,67 @@ import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
 import Button from '@mui/material/Button';
 import AuthPhysician from '../Auths/AuthPhysician';
+import DeleteCardModal from './DeleteCardModal'
 import axios from 'axios';
 import cookie from 'react-cookies'
 import jwtDecode from 'jwt-decode';
+import { LoginContext } from '../../ContextApi/Auth';
 let DBRUL = process.env.REACT_APP_BASE_URL
 
 // import Box from "@mui/material/Box";
 
 export default function CardGroups(props) {
+
+  const {setVistedGroup } = React.useContext(LoginContext)
   
   const navigator = useNavigate()
 
   const { groupName, description, groupImage , createdGroups , id ,setCreatedGroups} = props;
 
-  const [imageSrc, setImageSrc] = useState(groupImage);
+  const [showModal, setShowModal] = useState(false)
 
+  function handleShowDeleteModal() {
+      setShowModal(true)
+  }
+  function handleCloseDeleteModal() {
+      setShowModal(false)
+  }
+
+  let token = cookie.load('auth')
+  const payload = jwtDecode(token)
+  
   async function handleDeleteCard(id) {
     try {
-      let token = cookie.load('auth')
-      const payload = await jwtDecode(token)
       await axios.delete(`${DBRUL}/physician/${payload.username}/groups/${id}`,
           {
               headers: { Authorization: `Bearer ${token}` }
           })
           setCreatedGroups(createdGroups.filter(element => element.id !== id))
+          setShowModal(false)
     } catch (err) {
         console.error(err);
     }
 };
 
 function handelClick(){
-  navigator(`/dashboard/group/${id}`)
+  if(payload.accountType === 'physician'){
+    setVistedGroup(groupName)
+
+    navigator(`/dashboard/group/${id}`)
+
+  }else{
+    navigator(`/dashboard/group/${groupName}`)
+  }
 }
 
 
-  const handleImageError = () => {
-    setImageSrc("URL_OF_YOUR_FALLBACK_IMAGE_HERE");
-  };
+  // const handleImageError = () => {
+  //   setImageSrc("URL_OF_YOUR_FALLBACK_IMAGE_HERE");
+  // };
   
   return (
       <Card 
       sx={{
-        // bgcolor: "#062942",
         bgcolor: "#1F485B",
         width: '350px',
         margin: '15px',
@@ -60,14 +79,12 @@ function handelClick(){
         maxHeight:430,
         alignItems: 'center',
         borderRadius: '10px',
-        // justifyContent:"center",
         alignContent:"space-between",
         boxShadow:"0 0 10px rgba(0, 0, 0, 0.1);",
         '&:hover': {
           borderRadius: '15px',
           transform: 'scale(1) translateY(-2%)',
           transition: 'all 0.5s ease-in-out, background 0.6s linear, transform 0.4s linear 0.1s',
-          // boxShadow: '0px 2px 5px 3px rgba(0,0,0,0.4), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 1px 3px 0px rgba(0,0,0,0.12)',
         },
       }}>
       
@@ -82,7 +99,7 @@ function handelClick(){
             
           <CardMedia
             component="img"
-            src={imageSrc}
+            src={groupImage}
             alt="Group Image"
             sx={{
               width: "175px",
@@ -91,18 +108,16 @@ function handelClick(){
               // margin: "10px auto",
               border: '0.3rem solid black'
             }}
-            onError={handleImageError}
           />
           
           <CardContent sx={{
             width:"300px",
             padding:"auto"
           }}>
-            <Typography gutterBottom variant="h3" component="div"
+            <Typography gutterBottom  component="div"
               sx={{
-                // color: "#4070f4",
                 color: "#f8f8ff",
-                
+                fontSize: "2.5rem",
               }}>
                 
               {groupName}
@@ -110,9 +125,7 @@ function handelClick(){
             <Typography variant="body1" color="text.secondary" sx={{
                   lineHeight: '1.5',
                   textAlign:"center",
-                  // margin:"10px auto",
                   color:"#f8f8ff",
-
             }}>
               {description}
             </Typography>
@@ -128,11 +141,12 @@ function handelClick(){
           transition: 'transform 0.5s ease',
         }
       }}
-      onClick={ () => {handleDeleteCard(id)}}
+      onClick={handleShowDeleteModal}
       >
         Delete Group
       </Button>
       </AuthPhysician>
+      <DeleteCardModal showModal={showModal} handleCloseDeleteModal={handleCloseDeleteModal} handleDeleteCard={handleDeleteCard} cardId={id} />
       </Card>
   );
 }

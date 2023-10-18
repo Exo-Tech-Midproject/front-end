@@ -73,10 +73,10 @@ export const section1Content = {
 
 export const section2Content = {
   items: [
-    { counter: 345, subtitle: "Lorem ipsum dolor" },
-    { counter: 345, before: "$", after: "B+", subtitle: "Lorem ipsum dolor" },
-    { counter: 4.4, after: "M+", subtitle: "Lorem ipsum dolor", decimals: true },
-    { counter: 28.7, after: "M+", subtitle: "Lorem ipsum dolor", decimals: true },
+    { counter: 345, subtitle: "Lorem ipsum dolor1" },
+    { counter: 345, before: "$", after: "B+", subtitle: "Lorem ipsum dolor2" },
+    { counter: 4.4, after: "M+", subtitle: "Lorem ipsum dolor3", decimals: true },
+    { counter: 28.7, after: "M+", subtitle: "Lorem ipsum dolor4", decimals: true },
   ],
 };
 
@@ -289,7 +289,7 @@ export const footerContent = {
   governance: {
     title: "Governance",
     links: [
-      { title: "HEALTHAK" },
+      { title: "HEALTHAK1" },
       { title: "HEALTHAK" },
       { title: "Forum" },
     ],

@@ -4,7 +4,7 @@ import BodyPhysician from '../components/physicians/BodyPhysician'
 
 export default function Group() {
   return (
-    <div>
+    <div style={{ paddingTop: '96px' }}>
       <HeroPhysician />
       <BodyPhysician />
     </div>

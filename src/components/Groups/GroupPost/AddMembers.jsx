@@ -1,150 +1,233 @@
-import * as React from "react";
+import React, { useState, useEffect } from "react";
 import Button from "@mui/material/Button";
-import TextareaAutosize from "@mui/material/TextareaAutosize";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
-import {useState} from "react";
 import Box from "@mui/material/Box";
-import AuthPhysician from '../../Auths/AuthPhysician';
+import OutlinedInput from "@mui/material/OutlinedInput";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import { LoginContext } from "../../../ContextApi/Auth";
 
+import Select from "@mui/material/Select";
+import Chip from "@mui/material/Chip";
+import axios from 'axios';
+import cookie from 'react-cookies';
+import jwtDecode from 'jwt-decode';
+
+
+
+const DB_URL = process.env.REACT_APP_BASE_URL;
+
+const ITEM_HEIGHT = 48;
+const ITEM_PADDING_TOP = 8;
+const MenuProps = {
+  PaperProps: {
+    style: {
+      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+      width: 250,
+    },
+  },
+};
 
 export default function AddMembers() {
-    const [open, setOpen] = useState(false);
-    const [patientList, setPatientList] = useState("");
 
-    const handleClickOpen = () => {
-        setOpen(true);
-    };
+  const { vistedGroup } = React.useContext(LoginContext)
 
-    const handleClose = () => {
-        setOpen(false);
-    };
+  const [personName, setPersonName] = useState([]);
+  const [open, setOpen] = useState(false);
+  const [subscribers, setSubscribers] = useState([]);
+  // const [selectedMembers, setSelectedMembers] = useState([]);
 
-    const handlePatientListChange = (event) => {
-        setPatientList(event.target.value);
-    };
+//   const theme = useTheme(); // Use the theme
 
-    const handleAddPatients = async () => {
-        const patients = patientList
-        .split("\n")
-        .map((line) => line.trim())
-        .filter((patient) => patient !== "");
 
-        try {
-            
-            const response = await fetch("/api/addMembersToGroups", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    username: "your_username", // Replace with your actual data
-                    patients: patients, // Send the list of patients
-                    groupName: "your_group_name", // Replace with your actual data
-                }),
-            });
+  async function getSubscribers() {
+    try {
+      const token = cookie.load('auth');
+      const payload = jwtDecode(token);
+      const response = await axios.get(`${DB_URL}/physician/${payload.username}/patients/subscribers`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      setSubscribers(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
-            if (response.ok) {
-                // Subscription successful, you can handle the success case here
-                // You may also want to handle potential errors
-                console.log("Patients added successfully");
-            } else {
-                // Handle errors, such as invalid patient usernames or server issues
-                console.error("Failed to add patients");
+  useEffect(() => {
+    getSubscribers();
+    
+  }, []);
+
+  const handleChange = (event) => {
+    const {
+      target: { value },
+    } = event;
+    setPersonName(typeof value === "string" ? value.split(",") : value);
+  };
+
+  async function handleAddMembers() {
+    
+
+    try {
+      const token = cookie.load('auth');
+      const payload = await jwtDecode(token);
+      const groupName = {vistedGroup};
+      
+      const members = await Promise.all(personName.map(async (element) => {
+
+          const response = await axios.post(
+            `${DB_URL}/physician/${payload.username}/patients/${element}/addtogroup/${groupName}`,
+            {},
+            {
+              headers: { Authorization: `Bearer ${token}` },
             }
-        } catch (error) {
-            console.error("Error:", error);
-        }
+          );
+          return response.data;
 
-        // Close the dialog
-        handleClose();
-    };
+      }));  
 
-    return (
-        <Box>
-            {/* <AuthPhysician> */}
-            <Button
-                variant="outlined"
-                onClick={handleClickOpen}
-                sx={{
-                    bgcolor: "#062942",
-                    borderRadius: "5px",
-                    margin: "2%",
-                    fontSize: "1.3rem",
-                    color: "white",
-                    width: "100%",
-                    "&:hover": {
-                        transform: "scale(1.1)",
-                        transition: "transform 0.5s ease",
-                        background: "#1F485B",
-                    },
-                }}
+        
+        setOpen(false);
+
+        console.log('mmmmmmmmmm',members)
+
+        setPersonName([])
+      }
+    catch (error) {
+      // Handle network or other errors
+      console.error("Error:", error);
+    }
+  }
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  return (
+    <Box>
+      <Button
+        variant="outlined"
+        onClick={handleClickOpen}
+        sx={{
+          bgcolor: "#062942",
+          borderRadius: "5px",
+          margin: "2%",
+          fontSize: "1.3rem",
+          color: "white",
+          width: "100%",
+          "&:hover": {
+            transform: "scale(1.1)",
+            transition: "transform 0.5s ease",
+            background: "#1F485B",
+          },
+        }}
+      >
+        + Add Members
+      </Button>
+      <Dialog open={open} onClose={handleClose}>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+            margin: "auto",
+          }}
+        >
+          <DialogTitle
+            sx={{
+              fontSize: "2.2rem",
+              bgcolor: "#1F485B",
+              color: "white",
+              width: "100%",
+              display: "flex",
+              justifyContent: "center",
+              fontWeight: "600",
+            }}
+          >
+            Add Members
+          </DialogTitle>
+          <DialogContent
+            sx={{
+              width: "500px",
+              height: "100%",
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <DialogContentText
+              sx={{
+                color: "#1F485B",
+                margin: "20px auto",
+                fontWeight: "600",
+              }}
             >
-                + Add Members
-            </Button>
-            {/* </AuthPhysician> */}
-            <Dialog open={open} onClose={handleClose}>
-                <Box
-                    sx={{
-                        display: "flex",
-                        flexDirection: "column",
-                        justifyContent:"center",
-                        alignItems: "center",
-                        margin:"auto"
-                    }}
+              Select your patient username
+            </DialogContentText>
+            <div>
+              <FormControl sx={{ m: 1, width: 300 }}>
+                <InputLabel id="demo-multiple-chip-label" sx={{ color: "#062942" }}>
+                  Add
+                </InputLabel>
+                <Select
+                  labelId="demo-multiple-chip-label"
+                  id="demo-multiple-chip"
+                  fullWidth
+                  multiple
+                  value={personName}
+                  onChange={handleChange}
+                  input={<OutlinedInput id="select-multiple-chip" label="Chip" />}
+                  renderValue={(selected) => (
+                    <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}>
+                      {selected.map((value) => (
+                        <Chip key={value} label={value} />
+                      ))}
+                    </Box>
+                  )}
+                  MenuProps={MenuProps}
                 >
-                    <DialogTitle
-                        sx={{
-                            fontSize: "2.2rem",
-                            bgcolor:"#1F485B",
-                            color:'white',
-                            width:"100%",
-                            display:"flex",
-                            justifyContent:"center",
-                            fontWeight:"600"
-                        }}
-                    >
-                        Add Members
-                    </DialogTitle>
-                    <DialogContent
-                        sx={{
-                            width: "500px",
-                            height: "100%",
-                        }}
-                    >
-                        <DialogContentText
-                            sx={{
-                                color: "#1F485B",
-                                margin: "20px auto",
-                                fontWeight:"600",
-                            }}
-                        >
-                            Enter a list of patient usernames (one per line)
-                        </DialogContentText>
-                        <TextareaAutosize
-                            style={{width: "350px", margin: "10px", lineHeight: "2", fontSize: "1.2rem"}}
-                            minRows={3}
-                            maxRows={12}
-                            placeholder="Patient usernames..."
-                            value={patientList}
-                            onChange={handlePatientListChange}
-                        />
-                    </DialogContent>
-                    <DialogActions>
-                    {/* <Box display='flex' gap={1} width='100%' justifyContent='center'> */}
-                        <Button color='medical' onClick={handleAddPatients} sx={{
-                            fontSize:"1.5rem"
-                        }}>Add</Button>
-                        <Button color='error' onClick={handleClose} sx={{
-                            fontSize:"1.5rem"
-                        }}>Cancel</Button>
-                        {/* </ Box> */}
-                    </DialogActions>
-                </Box>
-            </Dialog>
+                  {subscribers.map((subscriber) => (
+                    <MenuItem key={subscriber.username} value={subscriber.username}>
+                      {subscriber.fullName}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+            </div>
+          </DialogContent>
+          <DialogActions>
+            <Button
+              color="medical"
+              onClick={handleAddMembers}
+              sx={{
+                fontSize: "1.5rem",
+              }}
+            >
+              Add
+            </Button>
+            <Button
+              color="error"
+              onClick={handleClose}
+              sx={{
+                fontSize: "1.5rem",
+              }}
+            >
+              Cancel
+            </Button>
+          </DialogActions>
         </Box>
-    );
+      </Dialog>
+    </Box>
+  );
 }

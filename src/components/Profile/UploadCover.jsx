@@ -23,13 +23,13 @@ const style = {
 
 
 
-export default function DeleteGroup ({ showModal, handleCloseDeleteModal, handleDeleteCard, cardId }) {
+export default function UploadCoverModal({ showModal2, handleCoverChange, handleCloseModal2, handleUploadCover }) {
     return (
         <div>
 
             <Modal
-                open={showModal}
-                onClose={handleCloseDeleteModal}
+                open={showModal2}
+                onClose={handleCloseModal2}
                 aria-labelledby="parent-modal-title"
                 aria-describedby="parent-modal-description"
                 closeAfterTransition
@@ -42,17 +42,18 @@ export default function DeleteGroup ({ showModal, handleCloseDeleteModal, handle
             >
                 <Box sx={{ ...style, borderRadius: '4px' }} >
                     <Box display='flex' flexDirection='column' gap={4} mb={2}>
-                        <Typography color='#ed6c02' id="transition-modal-title" variant="h4" >
-                            Delete card
+                        <Typography color='#1F485B' id="transition-modal-title" variant="h4" >
+                            Update Cover Picture
                         </Typography>
-                        <Alert severity="error">
-                            <AlertTitle>Warning</AlertTitle>
-                            If you proceed this record will be deleted  <strong>permanantly!</strong>
+                        <Alert severity="info">
+                            <AlertTitle>Info</AlertTitle>
+                            To have the best experience make sure to choose images with <strong>Bigger</strong> width than height  
                         </Alert>
+                        <input onChange={handleCoverChange} type='file' />
                     </Box>
                     <Box display='flex' justifyContent='end' gap={0.5}>
-                        <Button variant='contained' color='warning' onClick={()=> handleDeleteCard(cardId)}>Proceed</Button>
-                        <Button variant='contained' color='medical' onClick={handleCloseDeleteModal}>Cancel</Button>
+                        <Button variant='contained' color='medical' onClick={handleUploadCover}>Upload</Button>
+                        <Button variant='outlined' color='warning' onClick={handleCloseModal2}>Cancel</Button>
                     </Box>
                 </Box>
 

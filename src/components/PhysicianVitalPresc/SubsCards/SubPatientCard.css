@@ -30,6 +30,7 @@
     max-width: 100%;
     vertical-align: top;
     opacity: 0.85;
+    min-height: 60%;
 }
 
 .snip1336 figcaption {
@@ -101,6 +102,7 @@
     display: block;
     font-size: 0.55em;
     color: white;
+    text-transform: capitalize;
 }
 
 .snip1336 p {

@@ -23,8 +23,8 @@ const SubPatientCard = ({ userInfo }) => {
                 </Typography>
                 {/* <p>{text}</p> */}
                 <Box display='flex' justifyContent='flex-end'>
-                    <Button component={Link} to={`/dashboard/doctor-control/prescription/${userInfo.username}`} variant='text' color={'snowWhite'}>Prescriptions</Button>
-                    <Button component={Link} to={`/dashboard/doctor-control/vitals/${userInfo.username}`} variant='text' color={'snowWhite'} >Vitals</Button>
+                    <Button component={Link} to={`/dashboard/patient-control/prescription/${userInfo.username}`} variant='text' color={'snowWhite'}>Prescriptions</Button>
+                    <Button component={Link} to={`/dashboard/patient-control/vitals/${userInfo.username}`} variant='text' color={'snowWhite'} >Vitals</Button>
                 </Box>
                 {/* <Link to={`/prescriptions/${userInfo.username}`} className="follow">
                     Prescriptions

@@ -12,6 +12,12 @@ const theme = createTheme({
       dark: '#112731',
       contrastText: '#fff'
     },
+    snowWhite: {
+      main: "#FFF",
+      light: '#FFF',
+      dark: '#F0F0F0',
+      contrastText: '#1F485B'
+    },
     background: {
       default: "#1F485B",
       secondary: "white"

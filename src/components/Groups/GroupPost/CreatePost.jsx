@@ -14,7 +14,9 @@ import jwtDecode from "jwt-decode";
 import {useParams} from "react-router-dom";
 let DBRUL = process.env.REACT_APP_BASE_URL;
 
-export default function CreatePost({createdPost, setCreatedPost}) {
+
+export default function CreatePost({getGroup, setCreatedPost}) {
+
     const [title, setPostTitle] = useState("");
     const [textContent, setPostContent] = useState("");
     const [postTitleError, setPostTitleError] = useState(null);
@@ -25,6 +27,9 @@ export default function CreatePost({createdPost, setCreatedPost}) {
     const [temp, setTemp] = useState('');
     const [selectedFile, setSelectedFile] = useState(null)
 
+    // console.log('getting data for patient post before ',getGroup.id)
+
+
     const handleImageChange = (event) => {
       setSelectedFile(event.target.files[0]);
       const imageUrl = URL.createObjectURL(event.target.files[0]);
@@ -32,19 +37,44 @@ export default function CreatePost({createdPost, setCreatedPost}) {
   };
 
     async function fetchPosts() {
-        try {
-            let token = cookie.load("auth");
-            const payload = await jwtDecode(token);
-
-            let allPosts = await axios.get(`${DBRUL}/${payload.accountType}/${payload.username}/groups/${id}/posts`, {
+      let token = cookie.load("auth");
+      const payload = await jwtDecode(token);
+      if(payload.accountType === 'physician'){
+      try {
+            let allPosts = await axios.get(`${DBRUL}/physician/${payload.username}/groups/${id}/posts`,
+            {
                 headers: {Authorization: `Bearer ${token}`},
             });
-            console.log("aaaaaaaaaaaaaaaaaaa", allPosts.data);
+            console.log("all posts for physician", allPosts.data);
+            
+            
             setCreatedPost(allPosts.data);
 
             return allPosts.data
         } catch (error) {
             console.log(error);
+        }
+      }
+      
+      if(payload.accountType === 'patient'){
+          // console.log("getting data for physician post ffffffffffffff", getGroup);
+
+          try{
+            let allPosts = await axios.get(`${DBRUL}/patient/${payload.username}/groups/66/posts`, {
+              headers: {Authorization: `Bearer ${token}`},
+          });
+          console.log("all posts for patient", allPosts.data);
+          // console.log("getting data for patient post", getGroup.id);
+
+          
+          setCreatedPost(allPosts.data);
+
+          return allPosts.data
+      
+          }
+          catch(error){
+            console.log(error)
+          }
         }
     }
 
@@ -90,15 +120,15 @@ export default function CreatePost({createdPost, setCreatedPost}) {
 
                 let token = cookie.load("auth");
                 const payload = await jwtDecode(token);
-                let allPosts = await axios.post(`${DBRUL}/physician/${payload.username}/groups/${id}/posts`, newPost, {
+                let allPosts = await axios.post(`${DBRUL}/physician/${payload.username}/groups/${getGroup.id}/posts`, newPost, {
                     headers: {Authorization: `Bearer ${token}`},
                 });
                 let postId = allPosts.data.id
-                console.log('pppppppppppppppppppppp',postId)
+                console.log('ppppppppppppppppppppppID',postId)
                 const formData = new FormData();
                 formData.append('image', selectedFile);
                 if (selectedFile !== null) {
-                  let imgPost = await axios.post(`${DBRUL}/physician/${payload.username}/groups/${id}/posts/${postId}/postImg`, formData,
+                  let imgPost = await axios.post(`${DBRUL}/physician/${payload.username}/groups/${getGroup.id}/posts/${postId}/postImg`, formData,
                     {
                       headers: {
                         Authorization: `Bearer ${token}`,
@@ -139,7 +169,7 @@ export default function CreatePost({createdPost, setCreatedPost}) {
                 <Button
                     variant="contained"
                     sx={{
-                        bgcolor: "#062942",
+                        bgcolor: "#1F485B",
                         borderRadius: "5px",
                         margin: "2% auto",
                         fontSize: "1.8rem",
@@ -147,7 +177,7 @@ export default function CreatePost({createdPost, setCreatedPost}) {
                         "&:hover": {
                             transform: "scale(1.1) ",
                             transition: "transform 0.5s ease",
-                            background: "#1F485B",
+                            background: "#062942",
                         },
                     }}
                     onClick={() => setShowForm(!showForm)}

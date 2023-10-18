@@ -13,7 +13,7 @@ import Link from '@mui/material/Link';
 
 import img1 from "./sss.png";
 import img2 from "./sss2.png";
-// import "./heroSubscription.css"
+
 export default function HeroSubscription() {
 
 	return (

@@ -10,7 +10,6 @@ import Divider from "@mui/material/Divider";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
 import AuthPhysician from '../Auths/AuthPhysician';
-// import DefaultImg from '../../assets/images/Group-img/istockphoto-1413129950-612x612.jpg'
 import axios from 'axios';
 import cookie from 'react-cookies'
 import jwtDecode from 'jwt-decode';
@@ -59,6 +58,7 @@ export default function CreateGroup() {
           headers: { Authorization: `Bearer ${token}` }
         })
       setCreatedGroups(allGroups.data)
+      console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',allGroups.data)
 
       return allGroups.data
     }
@@ -80,8 +80,8 @@ export default function CreateGroup() {
     const inputValue = e.target.value;
     setDescription(inputValue);
 
-    if (inputValue.length < 5 || inputValue.length > 25) {
-      setDescriptionError('Description must be between 5 and 25 characters.');
+    if (inputValue.length < 5 || inputValue.length > 15) {
+      setDescriptionError('Description must be between 5 and 15 characters.');
     } else {
       setDescriptionError(null);
     }
@@ -105,7 +105,7 @@ export default function CreateGroup() {
     e.preventDefault();
 
     if (groupName && description && !groupNameError && !descriptionError) {
-      if (description.length >= 5 && description.length <= 25 && groupName.length >= 5 && groupName.length <= 25) {
+      if (description.length >= 5 && description.length <= 25 && groupName.length >= 5 && groupName.length <= 15) {
         let newGroup = {
           groupName: groupName,
           description: description,
@@ -170,14 +170,14 @@ export default function CreateGroup() {
         <AuthPhysician>
           <Button variant="contained"
             sx={{
-              bgcolor: '#062942',
+              bgcolor: '#1F485B',
               borderRadius: "5px",
               margin: "3%",
               fontSize: "1.3rem",
               "&:hover": {
                 transform: "scale(1.1) ",
                 transition: 'transform 0.5s ease',
-                background: "#1F485B"
+                background: "#062942"
               }
             }}
             onClick={() => setShowForm(!showForm)}

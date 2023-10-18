@@ -12,14 +12,74 @@ import Container from "@mui/material/Container";
 import CreatePost from './GroupPost/CreatePost';
 import PostContent from './GroupPost/PostContent';
 import PostHeader from './GroupPost/PostHeader';
-import  { useState} from "react";
+import  { useEffect, useState} from "react";
 import AddMembers from './GroupPost/AddMembers';
+import axios from "axios";
+import cookie from "react-cookies";
+import jwtDecode from "jwt-decode";
+import {useParams} from "react-router-dom";
 
+let DBRUL = process.env.REACT_APP_BASE_URL;
 
 
 export default function Group() {
 
   const [createdPost, setCreatedPost] = useState([]);
+  const [ getGroup , setGetGroup] = useState('')
+
+  const params = useParams()
+
+  console.log('pppppppppp',params)
+
+  
+
+
+  async function fetchGroupData () {
+    let token = cookie.load("auth");
+        const payload = await jwtDecode(token);
+
+    if(payload.accountType === 'physician'){
+
+      try{
+            let groupData = await axios.get(`${DBRUL}/physician/${payload.username}/groups/${params.id}`, {
+  
+          headers: {Authorization: `Bearer ${token}`},
+  
+      });
+      setGetGroup(groupData.data)
+      return groupData
+  
+      }
+      catch(error){
+        console.log(error)
+      }
+    }
+    if(payload.accountType === 'patient'){
+
+      try{
+            let groupData = await axios.get(`${DBRUL}/patient/${payload.username}/groups/${params.id}`, {
+  
+          headers: {Authorization: `Bearer ${token}`},
+  
+      });
+      console.log('gggggggggggggggggg',groupData.data)
+      setGetGroup(groupData.data)
+      return groupData
+  
+      }
+      catch(error){
+        console.log(error)
+      }
+    }
+  }
+
+  useEffect(() => {
+    fetchGroupData();
+
+// eslint-disable-next-line react-hooks/exhaustive-deps
+}, []);
+
+
 
   let ordered = createdPost.sort((a , b) => b.id - a.id)
 
@@ -31,13 +91,14 @@ export default function Group() {
   }
 
   return (
-    <div>
-      <Box
-        sx={{
-          margin: "2%",
-          marginTop:'0'
-        }}
-      >
+    <Box
+    sx={{
+      paddingX:"36px",
+      paddingTop:"10px",
+      marginTop:"75px"
+    }}
+    >
+      <Box>
         <Box sx={{
           display:"flex",
           alignItems:"center",
@@ -82,8 +143,8 @@ export default function Group() {
             minHeight: "50vh",
             marginTop: "2%",
             width: "100%",
-            bgcolor: '#062942',
-            // bgcolor: 'white',
+            // bgcolor: '#062942',
+            bgcolor: '#1F485B',
             borderRadius: "3px",
             // backgroundPosition: "center",
             display: "flex",
@@ -127,7 +188,7 @@ export default function Group() {
         </Box>
       </Box>
       <Container>
-      <CreatePost createdPost={createdPost} setCreatedPost={setCreatedPost} />
+      <CreatePost  setCreatedPost={setCreatedPost}  getGroup={getGroup}/>
       </Container>
       <Box
         minHeight='80vh'
@@ -140,7 +201,7 @@ export default function Group() {
           borderRadius: "5px",
           flexDirection: "column"
         }}>
-          <PostHeader  />
+          <PostHeader setGetGroup={setGetGroup} getGroup={getGroup}/>
           <Box>
           {createdPost.map((post, index) => (
                 <PostContent
@@ -156,6 +217,6 @@ export default function Group() {
             
           </Box>
       </Box>
-    </div>
+    </Box>
   );
 }

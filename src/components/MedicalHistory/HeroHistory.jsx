@@ -12,53 +12,18 @@ export default function HeroHistory() {
   return (
     <Box sx={{
       display:'flex',
-      flexDirection:"column"
+      flexDirection:"column",
+      marginTop:"75px"
     }}>
-      <Box sx={{
-            marginBottom:"20px",
-        }}>
-        <div role="presentation">
-        <Breadcrumbs aria-label="breadcrumb">
-        <Link
-            underline="hover"
-            sx={{ display: 'flex',
-            alignItems: 'center'
-        }}
-            color="#062942"
-            href="/"
-        >
-            <HomeIcon sx={{ mr: 0.5 }} fontSize="inherit" />
-                Home
-        </Link>
-        <Link
-          underline="hover"
-          sx={{ display: 'flex', alignItems: 'center' }}
-          color="#062942"
-          href="/dashboard/Profile"
-        >
-          <WhatshotIcon sx={{ mr: 0.5 }} fontSize="inherit" />
-          Profile
-        </Link>
-        <Typography
-          sx={{ display: 'flex', alignItems: 'center' }}
-          color="#4070f4"
-        >
-          <GrainIcon sx={{ mr: 0.5 }} fontSize="inherit" />
-          Medical history
-        </Typography>
-      </Breadcrumbs>
-    </div>
-    </Box>
         <Box
             sx={{
                 backgroundImage: `url(${imageURL})`,
                 backgroundPosition: "center",
                 backgroundRepeat: "no-repeat",
                 backgroundSize: "cover",
-                minHeight: "50vh",
+                minHeight: "60vh",
                 width: "100%",
                 bgcolor:'white',
-                borderRadius: "5px",
                 display: "flex",
                 alignItems: "center",
                 color: "#00222E",
@@ -75,9 +40,10 @@ export default function HeroHistory() {
             }}>
             <Typography
                 gutterBottom
+                variant='h1'
                 sx={{
-                    fontSize: "4rem",
-                    marginBottom:"40px",
+                    // fontSize: "4rem",
+                    marginBottom:"35px",
                     color:"#ffffff"
                 }}
             >
@@ -89,7 +55,7 @@ export default function HeroHistory() {
                     textAlign: 'center',
                     fontSize: "1.7rem",
                     color:"white",
-                    paddingLeft:"10px",
+                    paddingLeft:"25px",
                     paddingRight:"10px",
                     lineHeight: '1.7',
                     margin:"0 50px 50px 70px"
@@ -97,6 +63,41 @@ export default function HeroHistory() {
             >
                 Empowering Health Consciousness A Comprehensive Approach to Keeping a Watchful Eye on Your Well being
             </Typography>
+            <Box sx={{
+            marginBottom:"20px",
+        }}>
+        <div role="presentation">
+        <Breadcrumbs aria-label="breadcrumb">
+        <Link
+            underline="hover"
+            sx={{ display: 'flex',
+            alignItems: 'center'
+        }}
+            color="white"
+            href="/"
+        >
+            <HomeIcon sx={{ mr: 0.5 }} fontSize="inherit" />
+                Home
+        </Link>
+        <Link
+          underline="hover"
+          sx={{ display: 'flex', alignItems: 'center' }}
+          color="white"
+          href="/dashboard/Profile"
+        >
+          <WhatshotIcon sx={{ mr: 0.5 }} fontSize="inherit" />
+          Profile
+        </Link>
+        <Typography
+          sx={{ display: 'flex', alignItems: 'center' }}
+          color="#4070f4"
+        >
+          <GrainIcon sx={{ mr: 0.5 }} fontSize="inherit" />
+          Medical history
+        </Typography>
+      </Breadcrumbs>
+    </div>
+    </Box>
             </Box>
         </Box>
     </Box>

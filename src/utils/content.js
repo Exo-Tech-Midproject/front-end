@@ -23,7 +23,19 @@ import sec6img from "../assets/images/section6/sec-6-img.gif"
 import sec6imgBottom from "../assets/images/section6/sec-6-bottom.png"
 
 //QASection
-import Sec9Image1 from "../assets/images/qaSection/dao.webp";
+import Sec9Image1 from "../assets/images/qaSection/seq1.webp";
+import Sec9Image2 from "../assets/images/qaSection/seq2.webp";
+import Sec9Image3 from "../assets/images/qaSection/seq3.webp";
+import Sec9Image4 from "../assets/images/qaSection/seq4.webp";
+import Sec9Image5 from "../assets/images/qaSection/seq5.webp";
+import Sec9Image6 from "../assets/images/qaSection/seq6.webp";
+import Sec9Image7 from "../assets/images/qaSection/seq7.webp";
+import Sec9Image8 from "../assets/images/qaSection/seq8.webp";
+import Sec9Image9 from "../assets/images/qaSection/seq9.webp";
+import Sec9Image10 from "../assets/images/qaSection/seq10.webp";
+import Sec9Image11 from "../assets/images/qaSection/seq11.webp";
+import Sec9Image12 from "../assets/images/qaSection/seq12.webp";
+
 //login section
 import doctorLogin from "../assets/images/loginSection/doctorLogin.png"
 
@@ -145,40 +157,104 @@ export const QASectionContent = {
   title: "Categories",
   ITEMS: [
     {
-      title: "Categort1",
+      title: "Internal Medicin",
       subtitle:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation u",
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod ",
       image: Sec9Image1,
     },
     {
-      title: "Categort2",
+      title: "Family Medicine",
       subtitle:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation u",
-      image: Sec9Image1,
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod ",
+      image: Sec9Image2,
     },
     {
-      title: "Categort3",
+      title: "Rheumatology",
       subtitle:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation u",
-      image: Sec9Image1,
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod ",
+      image: Sec9Image3,
     },
     {
-      title: "Categort4",
+      title: "Gynaecology",
       subtitle:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation u",
-      image: Sec9Image1,
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod ",
+      image: Sec9Image4,
     },
     {
-      title: "Categort5",
+      title: "Dermatology",
       subtitle:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation u",
-      image: Sec9Image1,
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod ",
+      image: Sec9Image5,
     },
     {
-      title: "Categort6",
+      title: "Pediatrics",
       subtitle:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation u",
-      image: Sec9Image1,
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod ",
+      image: Sec9Image6,
+    },
+    {
+      title: "Psychiatry",
+      subtitle:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod ",
+      image: Sec9Image7,
+    },
+    {
+      title: "Cardiology",
+      subtitle:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod ",
+      image: Sec9Image8,
+    },
+    {
+      title: "Neurology",
+      subtitle:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod ",
+      image: Sec9Image9,
+    },
+    {
+      title: "Endocrine",
+      subtitle:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod ",
+      image: Sec9Image10,
+    },
+    {
+      title: "Oncology",
+      subtitle:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod ",
+      image: Sec9Image11,
+    },
+    {
+      title: "Urology",
+      subtitle:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod ",
+      image: Sec9Image12,
+    },
+  ],
+};
+export const AboutUsSectionContent = {
+  ITEMS: [
+    {
+      title: "Tasneem Hassasneh",
+      subtitle:
+        "Software Developer",
+      
+    },
+    {
+      title: "Hasan Tummalei",
+      subtitle:
+      "Software Developer",
+     
+    },
+    {
+      title: "Anas Alnemrawi",
+      subtitle:
+      "Software Developer",
+   
+    },
+    {
+      title: "Abdullah Aljoulani",
+      subtitle:
+      "Software Developer",
+     
     },
   ],
 };

@@ -9,46 +9,9 @@ import HomeIcon from '@mui/icons-material/Home';
 import PanoramaFishEyeIcon from '@mui/icons-material/PanoramaFishEye';
 import Link from '@mui/material/Link';
 import ContactSupportOutlinedIcon from '@mui/icons-material/ContactSupportOutlined';
-import TextField from '@mui/material/TextField';
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
-import FormatBoldIcon from '@mui/icons-material/FormatBold';
-import FormatItalicIcon from '@mui/icons-material/FormatItalic';
-import FormatUnderlinedIcon from '@mui/icons-material/FormatUnderlined';
-import FormatColorFillIcon from '@mui/icons-material/FormatColorFill';
-import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
-import ToggleButton from '@mui/material/ToggleButton';
-import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
-import ArrowCircleUpIcon from '@mui/icons-material/ArrowCircleUp';
-
-const CustomToggleButton = ({ children, ...props }) => (
- 
-  <ToggleButton
-    sx={{
-      width: "30px",
-      height: "30px",
-      position: "relative",
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-      backgroundColor: "transparent",
-      borderRadius: "50%",
-      border: "0",
-      outline: "none",
-      "&:hover":{
-       backgroundColor: "#f1f1f1",
-      }
-    }} 
-    {...props}
-  >
-    {children}
-  </ToggleButton>
-);
+import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 function QASection() {
-  const [formats, setFormats] = React.useState(() => ['bold', 'italic']);
-
-  const handleFormat = (event, newFormats) => {
-    setFormats(newFormats);
-  }
   return (
     <Stack direction="column" >
       <Navbar />
@@ -110,176 +73,173 @@ function QASection() {
 
         </Stack>
       </Box>
-      <Box  sx={{ width:"100%", height:"70vh", bgcolor: "white" }}>
-        {/* <Box sx={{
-          position: "relative",
-          height: "140px",
-          width: "240px",
-          padding: "20px",
-          backgroundColor: "#FFF",
-          borderRadius: "4px",
-          color: "#333",
-          boxShadow: "0px 0px 60px 5px rgba(0, 0, 0, 0.4)",
-          "&:after": {
-            position: "absolute",
-            content: "''",
-            right: "-10px",
-            bottom: "18px",
-            width: "0",
-            height: "0",
-            borderLeft: "0px solid transparent",
-            borderRight: "10px solid transparent",
-            borderBottom: "10px solid #1a044e",
-          }
-        }}>
-          <Typography sx={{
-            fontSize: "20px",
-            textAlign: "center",
-            fontWeight: "bold",
-            letterSpacing: "4px",
-            lineHeight: "28px",
-          }}>Question
-          </Typography>
-          <TextField placeholder="Your Question" variant='standard' sx={{
-            position: "absolute",
-            bottom: "30px",
-            padding: "10px",
-            width: "82%",
-            background: "transparent",
-            transition: "all .25s ease",
-            "&:focus": {
-              outline: "none",
-              borderBottom: "1px solid #0d095e",
-              fontFamily: "'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', 'sans-serif'",
-            }
-          }} />
-          <Button sx={{
-            position: "absolute",
-            borderRadius: "30px",
-            borderBottomRightRadius: "0",
-            borderTopRightRadius: "0",
-            backgroundColor: "#0f0092",
-            color: "#FFF",
-            padding: "12px 25px",
-            display: "inline-block",
-            fontSize: "12px",
-            fontWeight: "bold",
-            letterSpacing: "5px",
-            right: "-10px",
-            bottom: "-20px",
-            cursor: "pointer",
-            transition: "all .25s ease",
-            boxShadow: "-5px 6px 20px 0px rgba(26, 26, 26, 0.4)",
-            "&:hover": {
-              backgroundColor: "#07013d",
-              boxShadow: "-5px 6px 20px 0px rgba(88, 88, 88, 0.569)",
-            }
-          }}>SEND</Button>
-        </Box> */}
-        <Box px={5} m="auto" sx={{
+      <Box sx={{ width: "100%", bgcolor: "white", height: "80vh" }}>
+      <Stack direction="row" spacing={4} alignItems="center" justifyContent="center" sx={{ height: "100%" }} >
+      <Box sx={{
           width: "450px",
           height: "fit-content",
           backgroundColor: "white",
           boxShadow: "0px 187px 75px rgba(0, 0, 0, 0.01), 0px 105px 63px rgba(0, 0, 0, 0.05), 0px 47px 47px rgba(0, 0, 0, 0.09), 0px 12px 26px rgba(0, 0, 0, 0.1), 0px 0px 0px rgba(0, 0, 0, 0.1)",
           borderRadius: "17px 17px 27px 27px",
         }}>
-          <Typography sx={{
-             width: "100%",
-             height: "50px",
-             position: "relative",
-             display: "flex",
-             alignItems: "center",
-             paddingLleft: "20px",
-             borderBottom: "1px solid #f1f1f1",
-             fontWeight: "700",
-             fontSize: "13px",
-             color: "#47484b",
-             "&:after":{
-              content: "''",
-  width: "8ch",
-  height: "1px",
-  position: "absolute",
-  bottom: "-1px",
-  backgroundColor: "#47484b",
-             }
-          }}>
-            Question
-            </Typography>
-        
-            <Box p={2}  class="comment-container">
-              <Stack direction="row">
-                <AccountCircleOutlinedIcon />
-                <Stack direction="column" >
-                  <Typography sx={{ fontSize: "18px",
-  lineHeight: "16px",
-  fontWeight: 600,
-  color: "#5f6064" }}>Tasneem Hassasneh</Typography>
-                  <Typography sx={{ fontSize: "12px", p:1 }}>Wednesday, March 13th at 2:45pm</Typography>
-                </Stack>
+        <Box p={3}>
+          <Box>
+            <Stack spacing={1} direction="row" alignItems="center"  sx={{width: "100%", }}>
+              <AccountCircleOutlinedIcon sx={{ color: "black" }} />
+              <Stack direction="column" spacing={0.4}>
+                <Typography sx={{
+                  fontWeight: "700",
+                  fontSize: "12px",
+                  color: "#47484b",
+                }}>Tasneem Hassasneh</Typography>
               </Stack>
-              <Typography sx={{ 
-                fontSize: "12px",
-  lineHeight: "16px",
-  fontWeight: 600,
-  color: "#5f6064", }}>
-                I've been using this product for a few days now and I'm really impressed! The interface is intuitive and easy to
-                use, and the features are exactly what I need to streamline my workflow.
-              </Typography>
-            </Box>
+            </Stack>
+          </Box>
+
+        </Box>
+        <Box sx={{
+          width: "100%",
+          height: "fit-content",
+          backgroundColor: "#f1f1f1",
+          padding: "8px",
+        }}>
           <Box sx={{
-            width: "100%",
-            height: "fit-content",
-            backgroundColor: "#f1f1f1",
+            backgroundColor: "#ffffff",
+            borderRadius: "8px 8px 21px 21px",
             padding: "8px",
           }}>
-            <Box sx={{
-              backgroundColor: "#ffffff",
-              borderRadius: "8px 8px 21px 21px",
-              padding: "8px",
-            }} class="box-container">
-              <textarea sx={{
-                 width: "100%",
-                 height: "40px",
-                 resize: "none",
-                 border: "0",
-                 borderRadius: "6px",
-                 padding: "12px 12px 10px 12px",
-                 fontSize: "13px",
-                 outline: "none",
-                 caretColor: "#0a84ff",
-              }} placeholder="Reply"></textarea>
-              <Box>
-                <ToggleButtonGroup
-                  value={formats}
-                  onChange={handleFormat}
-                  aria-label="text formatting"
-                >
-                  <CustomToggleButton value="bold" aria-label="bold">
-                    <FormatBoldIcon />
-                  </CustomToggleButton>
-                  <CustomToggleButton value="italic" aria-label="italic">
-                    <FormatItalicIcon />
-                  </CustomToggleButton>
-                  <CustomToggleButton value="underlined" aria-label="underlined">
-                    <FormatUnderlinedIcon />
-                  </CustomToggleButton>
-                </ToggleButtonGroup>
-                <Button sx={{
-                  width: "30px",
-                  height: "30px",
-                  backgroundColor: "#0a84ff",
-                  margin: "0 0 0 auto",
-                  "&:hover":{
-                    backgroundColor: "#026eda",
-                  }
-                }} type="submit" class="send" title="Send">
-                  <ArrowCircleUpIcon />
-                </Button>
-              </Box>
-            </Box>
+             <Box ><textarea style={{
+              width: "100%",
+              height: "40px",
+              resize: "none",
+              border: "0",
+              borderRadius: "6px",
+              padding: "12px 12px 10px 12px",
+              fontSize: "13px",
+              outline: "none",
+              caretColor: "#0a84ff",
+             }} placeholder='Ask Question'></textarea></Box>
+          <Box>
+            <Button sx={{
+              width: "30px",
+              height: "30px",
+              backgroundColor: "#0a84ff",
+              margin: "0 0 0 auto",
+              "&:hover": {
+                backgroundColor: "#026eda",
+              }
+            }}  variant="contained">
+              SEND
+            </Button>     
           </Box>
+          </Box>
+         
         </Box>
-      </Box>
+    </Box>
+        <Box sx={{
+          width: "450px",
+          height: "fit-content",
+          backgroundColor: "white",
+          boxShadow: "0px 187px 75px rgba(0, 0, 0, 0.01), 0px 105px 63px rgba(0, 0, 0, 0.05), 0px 47px 47px rgba(0, 0, 0, 0.09), 0px 12px 26px rgba(0, 0, 0, 0.1), 0px 0px 0px rgba(0, 0, 0, 0.1)",
+          borderRadius: "17px 17px 27px 27px",
+        }}>
+          <Box>
+            <Typography sx={{
+              width: "100%",
+              height: "50px",
+              position: "relative",
+              display: "flex",
+              alignItems: "center",
+              paddingLeft: "20px",
+              borderBottom: "1px solid #f1f1f1",
+              fontWeight: 700,
+              fontSize: "13px",
+              color: "#47484b",
+              "&:after": {
+                content: "''",
+                width: "8ch",
+                height: "1px",
+                position: "absolute",
+                bottom: "-1px",
+                backgroundColor: "#47484b",
+            }
+          }}>Qusetion</Typography>
+        </Box>
+        <Box p={3}>
+          <Box>
+            <Stack spacing={1} direction="row" alignItems="center"  sx={{width: "100%", }}>
+              <AccountCircleOutlinedIcon sx={{ color: "black" }} />
+              <Stack direction="column" spacing={0.4}>
+                <Typography sx={{
+                  fontWeight: "700",
+                  fontSize: "12px",
+                  color: "#47484b",
+                }}>Tasneem Hassasneh</Typography>
+                <Typography sx={{
+                  fontWeight: "600",
+                  fontSize: "10px",
+                  color: "#acaeb4",
+                }}>Wednesday, Oct 18th at 2:45pm</Typography>
+              </Stack>
+            </Stack>
+          </Box>
+          <Box p={1}>
+            <Typography sx={{
+              fontSize: "12px",
+              lineHeight: "16px",
+              fontWeight: 600,
+              color: "#5f6064",
+            }}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</Typography>
+          </Box>
+
+        </Box>
+        <Box sx={{
+          width: "100%",
+          height: "fit-content",
+          backgroundColor: "#f1f1f1",
+          padding: "8px",
+        }}>
+          <Box sx={{
+            backgroundColor: "#ffffff",
+            borderRadius: "8px 8px 21px 21px",
+            padding: "8px",
+          }}>
+             <Box ><textarea style={{
+              width: "100%",
+              height: "40px",
+              resize: "none",
+              border: "0",
+              borderRadius: "6px",
+              padding: "12px 12px 10px 12px",
+              fontSize: "13px",
+              outline: "none",
+              caretColor: "#0a84ff",
+             }} placeholder='Reply'></textarea></Box>
+          <Box>
+    
+            
+            <Button sx={{
+              width: "30px",
+              height: "30px",
+              backgroundColor: "#0a84ff",
+              margin: "0 0 0 auto",
+              "&:hover": {
+                backgroundColor: "#026eda",
+              }
+            }}  variant="contained">
+              <ArrowUpwardIcon />
+            </Button>
+            
+          </Box>
+          </Box>
+         
+        </Box>
+    </Box>
+
+
+      </Stack >
+     
+    </Box >
       <Footer />
     </Stack >
   );

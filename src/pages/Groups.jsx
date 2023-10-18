@@ -3,7 +3,8 @@ import GroupHero from '../components/Groups/GroupHero'
 
 export default function Groups() {
     const divStyle = {
-        minHeight:"80vh"
+        minHeight: "80vh",
+        paddingTop: '120px'
     };
     return (
         <div style={divStyle}>

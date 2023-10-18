@@ -107,7 +107,7 @@ export default function ProfileHeadSection({ getProfileInfo, profileInfo, setPro
             <Box maxHeight='70%' position='relative' display='flex' boxShadow='rgba(159, 162, 191, 0.18) 0px 9px 16px, rgba(159, 162, 191, 0.32) 0px 2px 2px' >
                 <Button onClick={handleShowModal2} variant='contained' sx={{ position: 'absolute', bottom: '-34px', right: '0', bgcolor: '#4B6477', ":hover": { bgcolor: '#1F485B' } }} startIcon={<FileUploadOutlinedIcon />}> Change Cover</Button>
                 <Avatar
-                    sx={{ width: '130px', height: '130px', position: 'absolute', left: '20px', bottom: '-80px', border: 'solid 2px #1F485BAA' }}
+                    sx={{ width: '130px', height: '130px', position: 'absolute', left: '20px', bottom: '-80px', boxShadow: `0 0 15px rgba(0, 0, 0, 0.8)` }}
                     src={profileInfo?.profileImg || 'https://cdn5.vectorstock.com/i/1000x1000/27/89/user-account-flat-icon-vector-14992789.jpg'}
 
                 >

@@ -57,7 +57,7 @@ export default function PrescriptionContainer() {
 
 
     return (
-        <>
+        <Box paddingTop={12} px={3} >
             <Box borderRadius={'15px'} paddingLeft='30px' paddingBottom={2}  >
                 <Typography variant='h5' fontWeight={'700'} sx={{ opacity: 0.8 }}>Prescription</Typography>
                 <Typography variant='subtitle2' sx={{ opacity: 0.4 }}>The recipe to get better.</Typography>
@@ -65,6 +65,6 @@ export default function PrescriptionContainer() {
             <IntroSection setPrescription={setPrescription} prescription={prescription} fetchUserPrescriptions={fetchUserPrescriptions} />
             <PrescriptionsSection prescription={prescription} setPrescription={setPrescription} />
             <VitalsChart />
-        </>
+        </Box>
     )
 }

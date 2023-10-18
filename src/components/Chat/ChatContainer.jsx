@@ -10,12 +10,12 @@ let DBRUL = process.env.REACT_APP_BASE_URL
 
 export default function ChatContainer() {
   const [contacts, setContact] = useState([])
-  const [withWho, setWithWho] = useState(contacts[0]?contacts[0]:null)
+  const [withWho, setWithWho] = useState(contacts[0] ? contacts[0] : null)
   let token = cookie.load('auth')
   let payload = jwtDecode(token)
 
 
-  
+
   async function fetchContact() {
     try {
 
@@ -47,7 +47,8 @@ export default function ChatContainer() {
 
   return (
     <div>
-      <Box height='calc(100vh - 105px)' display='flex'
+      <Box height='calc(100vh)' display='flex'
+        paddingTop={10}
         sx={
           {
             boxShadow: '0px 2px 3px 0px rgba(0,0,0,0.4), 0px -1px 1px 0px rgba(0,0,0,0.14), 0px 1px 3px 0px rgba(0,0,0,0.12)'

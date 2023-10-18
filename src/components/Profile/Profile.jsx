@@ -42,7 +42,7 @@ export default function Profile() {
         getProfileInfo()
     }, [])
     return (
-        <Grid container bgcolor={'#f2f5f9'} rowGap={4} >
+        <Grid container bgcolor={'#f2f5f9'} rowGap={4} mt={9} >
 
 
             <Grid item xs={12} md={8} paddingLeft={4} paddingTop={4} >

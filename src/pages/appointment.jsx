@@ -1,12 +1,11 @@
 
 import Appointment from '../components/appointment/appointments';
-import AppointmentLink from '../components/appointment/appointmentLink';
-
+import AppointmentsLink from '../components/appointment/appointmentsLink';
 export default function appointment() {
 	return (
 		<>
-		{/* <AppointmentLink /> */}
-			<Appointment />
+			{/* <Appointment /> */}
+			<AppointmentsLink />
 		</>
 	)
 }

@@ -1,17 +1,19 @@
 
 import axios from "axios";
 import jwtDecode from "jwt-decode";
-import { createContext, useEffect, useState } from "react";
+import { createContext, useEffect, useReducer, useState } from "react";
 import cookie from 'react-cookies'
+import { formReducer, initialState } from "../components/Reducers/SignUpDoctor";
 
 export const LoginContext = createContext()
 let DBRUL = process.env.REACT_APP_BASE_URL
 export default function LoginProvider({ children }) {
-    const [vistedGroup , setVistedGroup] = useState('')
+    const [vistedGroup, setVistedGroup] = useState('')
     const [loggedIn, setLoggedIn] = useState(false);
     const [user, setUser] = useState({});
     const [userType, setUserType] = useState('')
-
+    const [state, dispatch] = useReducer(formReducer, initialState);
+    console.log(state, 'my state')
     const isPatient = (accountType) => {
         return accountType === ('patient')
     }
@@ -153,7 +155,7 @@ export default function LoginProvider({ children }) {
     }, [])
 
     return (
-        <LoginContext.Provider value={{ logout, loginPhysician, isPatient, isPhysician, loginPatient, loggedIn, user, userType , setVistedGroup , vistedGroup }}>
+        <LoginContext.Provider value={{ logout, loginPhysician, isPatient, isPhysician, loginPatient, loggedIn, user, userType, setVistedGroup, vistedGroup, state, dispatch }}>
             {children}
         </LoginContext.Provider>
     )

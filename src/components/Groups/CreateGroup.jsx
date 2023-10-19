@@ -80,8 +80,8 @@ export default function CreateGroup() {
     const inputValue = e.target.value;
     setDescription(inputValue);
 
-    if (inputValue.length < 5 || inputValue.length > 15) {
-      setDescriptionError('Description must be between 5 and 15 characters.');
+    if ( inputValue.length > 20) {
+      setDescriptionError('Description must less than 20 characters.');
     } else {
       setDescriptionError(null);
     }
@@ -93,8 +93,8 @@ export default function CreateGroup() {
     const inputValue = e.target.value;
     setGroupName(inputValue);
 
-    if (inputValue.length < 5 || inputValue.length > 25) {
-      setGroupNameError('Group name must be between 5 and 25 characters.');
+    if ( inputValue.length > 20) {
+      setGroupNameError('Group name must be less than 20 characters.');
     } else {
       setGroupNameError(null);
     }
@@ -105,7 +105,7 @@ export default function CreateGroup() {
     e.preventDefault();
 
     if (groupName && description && !groupNameError && !descriptionError) {
-      if (description.length >= 5 && description.length <= 25 && groupName.length >= 5 && groupName.length <= 15) {
+      if (description.length <= 20  && groupName.length <= 20) {
         let newGroup = {
           groupName: groupName,
           description: description,
@@ -173,7 +173,7 @@ export default function CreateGroup() {
               bgcolor: '#1F485B',
               borderRadius: "5px",
               margin: "3%",
-              fontSize: "1.3rem",
+              fontSize: "1.5rem",
               "&:hover": {
                 transform: "scale(1.1) ",
                 transition: 'transform 0.5s ease',

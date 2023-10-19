@@ -38,39 +38,41 @@ export default function Group() {
     let token = cookie.load("auth");
         const payload = await jwtDecode(token);
 
-    if(payload.accountType === 'physician'){
+    // if(payload.accountType === 'physician'){
 
       try{
-            let groupData = await axios.get(`${DBRUL}/physician/${payload.username}/groups/${params.id}`, {
-  
+            let groupData = await axios.get(`${DBRUL}/${payload.accountType}/${payload.username}/groups/${params.id}`, {
+              
           headers: {Authorization: `Bearer ${token}`},
   
       });
       setGetGroup(groupData.data)
-      return groupData
-  
-      }
-      catch(error){
-        console.log(error)
-      }
-    }
-    if(payload.accountType === 'patient'){
-
-      try{
-            let groupData = await axios.get(`${DBRUL}/patient/${payload.username}/groups/${params.id}`, {
-  
-          headers: {Authorization: `Bearer ${token}`},
-  
-      });
       console.log('gggggggggggggggggg',groupData.data)
-      setGetGroup(groupData.data)
+
       return groupData
   
       }
       catch(error){
         console.log(error)
       }
-    }
+    // }
+    // if(payload.accountType === 'patient'){
+
+    //   try{
+    //         let groupData = await axios.get(`${DBRUL}/patient/${payload.username}/groups/${params.id}`, {
+  
+    //       headers: {Authorization: `Bearer ${token}`},
+  
+    //   });
+    //   console.log('gggggggggggggggggg',groupData.data)
+    //   setGetGroup(groupData.data)
+    //   return groupData
+  
+    //   }
+    //   catch(error){
+    //     console.log(error)
+    //   }
+    // }
   }
 
   useEffect(() => {

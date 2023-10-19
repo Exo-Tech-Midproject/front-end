@@ -64,7 +64,7 @@ export default function Appointment() {
 					{
 						headers: { Authorization: `Bearer ${token}` }
 					})
-				console.log("Events.data => ", Events.data);
+				// console.log("Events.data => ", Events.data);
 				return Events.data;
 			} else if (payload?.accountType === 'patient') {
 				let Events = await axios.get(
@@ -72,7 +72,7 @@ export default function Appointment() {
 					{
 						headers: { Authorization: `Bearer ${token}` }
 					})
-				console.log("Events.data => ", Events.data);
+				// console.log("Events.data => ", Events.data);
 				return Events.data;
 			}
 
@@ -85,6 +85,7 @@ export default function Appointment() {
 	useEffect(() => {
 		async function fetchEvents() {
 			const eventsData = await handleGetEvent();
+			
 			if (eventsData) {
 				setCurrentEvents(eventsData);
 			}
@@ -95,19 +96,20 @@ export default function Appointment() {
 
 	async function handleAddEvent() {
 		try {
+			
 			const calendarApi = calendarRef.current.getApi();
-			console.log("calendarApi ", calendarApi);
+			// console.log("calendarApi ", calendarApi);
 
 			let { event, patientName, time } = eventDetails;
 			let token = cookie.load('auth');
 			const payload = await jwtDecode(token);
 
-			console.log("eventDetails ", eventDetails);
+			// console.log("eventDetails ", eventDetails);
 			if (payload?.accountType === 'physician') {
 				let createdEvent = await axios.post(`${DBURL}/physician/${payload.username}/patients/${'anas'}/appointments`, eventDetails, {
 					headers: { Authorization: `Bearer ${token}` }
 				});
-				console.log("createdEvent", createdEvent)
+				// console.log("createdEvent", createdEvent)
 				setOpen(false);
 				return createdEvent;
 			}
@@ -276,12 +278,13 @@ export default function Appointment() {
 							selectMirror={true}
 							dayMaxEvents={true}
 							select={handleDateClick}
-							eventsSet={(events) => setCurrentEvents(events)}
+							events={currentEvents}
+							// eventsSet={(events) => setCurrentEvents(events)}
 							ref={calendarRef}
-							initialEvents={formattedEvents
-								// [{ title: 'event 1', date: '2023-10-01' },
-								// { title: 'event 2', date: '2023-10-02' }]
-							}
+							// initialEvents={
+							// 	[{ title: 'event 1', date: '2023-10-01' },
+							// 	{ title: 'event 2', date: '2023-10-02' }]
+							// }
 						/>
 					</Box>
 				</Box>

@@ -9,14 +9,14 @@ import theme from './utils/theme/index.js';
 import LoginProvider from './ContextApi/Auth.jsx';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
-    <LoginProvider>
-      <ThemeProvider theme={theme}>
-        <Router>
-          <CssBaseline />
-          <App />
-        </Router>
-      </ThemeProvider>
-    </LoginProvider>
-  </React.StrictMode>,
+	<React.StrictMode>
+		<LoginProvider>
+			<ThemeProvider theme={theme}>
+				<Router>
+					<CssBaseline />
+					<App />
+				</Router>
+			</ThemeProvider>
+		</LoginProvider>
+	</React.StrictMode>,
 )

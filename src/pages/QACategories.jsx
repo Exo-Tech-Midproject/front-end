@@ -4,12 +4,12 @@ import { motion } from "framer-motion"
 
 const QACategories = () => {
   return (
-    <motion.div 
-    initial={{width:0}}
-    exit={{x:window.innerWidth}}
-    animate={{width:"100%"}}
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ delay: 0.2, duration: 0.2 }}
     >
-      <QACategoriesSection  />
+      <QACategoriesSection />
     </motion.div>
   );
 };

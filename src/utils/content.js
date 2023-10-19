@@ -73,10 +73,10 @@ export const section1Content = {
 
 export const section2Content = {
   items: [
-    { counter: 345, subtitle: "Lorem ipsum dolor1" },
-    { counter: 345, before: "$", after: "B+", subtitle: "Lorem ipsum dolor2" },
-    { counter: 4.4, after: "M+", subtitle: "Lorem ipsum dolor3", decimals: true },
-    { counter: 28.7, after: "M+", subtitle: "Lorem ipsum dolor4", decimals: true },
+    { counter: 345, subtitle: "Doctors" },
+    { counter: 3300, before: "", after: "", subtitle: "Subscriptions", },
+    { counter: 4400, after: "", subtitle: "Patients", },
+    { counter: 9745, after: "", subtitle: "Prescriptions", },
   ],
 };
 
@@ -236,25 +236,25 @@ export const AboutUsSectionContent = {
       title: "Tasneem Hassasneh",
       subtitle:
         "Software Developer",
-      
+
     },
     {
       title: "Hasan Tummalei",
       subtitle:
-      "Software Developer",
-     
+        "Software Developer",
+
     },
     {
       title: "Anas Alnemrawi",
       subtitle:
-      "Software Developer",
-   
+        "Software Developer",
+
     },
     {
       title: "Abdullah Aljoulani",
       subtitle:
-      "Software Developer",
-     
+        "Software Developer",
+
     },
   ],
 };

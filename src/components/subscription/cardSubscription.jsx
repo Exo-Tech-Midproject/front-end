@@ -31,8 +31,8 @@ export default function CardSubscription() {
 						headers: { Authorization: `Bearer ${token}` }
 					}
 				);
-				console.log("data for patients => ", userSub.data);
-				console.log("data=> ", userSub.data)
+				// console.log("data for patients => ", userSub.data);
+				// console.log("data=> ", userSub.data)
 				setSubs(userSub.data)
 
 				return (userSub.data)
@@ -45,7 +45,7 @@ export default function CardSubscription() {
 						headers: { Authorization: `Bearer ${token}` }
 					}
 				);
-				console.log("data for physicians => ", userSub.data);
+				// console.log("data for physicians => ", userSub.data);
 				setSubs(userSub.data);
 
 				return (userSub.data)
@@ -70,8 +70,8 @@ export default function CardSubscription() {
 				headers: { Authorization: `Bearer ${token}` }
 			});
 
+			// console.log("response:", response.data);
 			return response
-			console.log("response:", response.data);
 		} catch (err) {
 			console.error("Error rating physician:", err);
 		}
@@ -84,7 +84,7 @@ export default function CardSubscription() {
 	const submitRating = async () => {
 		if (selectedPhysicianUsername) {
 			let res = await handleRatePhysician(selectedPhysicianUsername);
-			console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", res.data)
+
 			setSubs(await fetchUserSubscriptions())
 			setShowRatingForm(false);
 		}
@@ -95,46 +95,47 @@ export default function CardSubscription() {
 
 	let img = doc
 	return (
-		<div className="mainP">
-			{subs &&
-				subs.map((user, index) => (
-					<div className="Subcard" key={index}>
-						<div className="Subcard-text">
-							<div className="Subportada" style={{ backgroundImage: `url(${img})` }}></div>
-							<div className="Subtitle-total">
-								<AuthPhysician>
-									<h3>Name: {user.fullName}</h3>
-									<h5>Phone: {user.mobileNumber}</h5>
-									<h5>Email: {user.emailAddress}</h5>
-									<h5>Birthdate: {user.birthdate}</h5>
-									<h5>Gender: {user.gender}</h5>
-									<h5>Race: {user.race}</h5>
-								</AuthPhysician>
-								<AuthPatient>
-									<h3>Name: {user.fullName}</h3>
-									<h5>Phone: {user.mobileNumber}</h5>
-									<h5>Email: {user.emailAddress}</h5>
-									<h5>Department:{user.department}</h5>
-									<Rating sx={{ marginLeft: "25px", marginBottom: "4px" }} name="half-rating-read" defaultValue={user.rating} precision={0.5} size="medium" readOnly />
-									<button className='subrateB' onClick={() => openRatingForm(user.username)}>Rate Physician</button>
-								</AuthPatient>
+		<div className='ALL'>
+			<div className="mainP">
+				{subs &&
+					subs.map((user, index) => (
+						<div className="Subcard" key={index}>
+							<div className="Subcard-text">
+								<div className="Subportada" style={{ backgroundImage: `url(${img})` }}></div>
+								<div className="Subtitle-total">
+									<AuthPhysician>
+										<h3>Name: {user.fullName}</h3>
+										<h5>Phone: {user.mobileNumber}</h5>
+										<h5>Email: {user.emailAddress}</h5>
+										<h5>Birthdate: {user.birthdate}</h5>
+										<h5>Gender: {user.gender}</h5>
+										<h5>Race: {user.race}</h5>
+									</AuthPhysician>
+									<AuthPatient>
+										<h3>Name: {user.fullName}</h3>
+										<h5>Phone: {user.mobileNumber}</h5>
+										<h5>Email: {user.emailAddress}</h5>
+										<h5>Department:{user.department}</h5>
+										<Rating sx={{ marginLeft: "25px", marginBottom: "4px" }} name="half-rating-read" defaultValue={user.rating} precision={0.5} size="medium" readOnly />
+										<button className='subrateB' onClick={() => openRatingForm(user.username)}>Rate Physician</button>
+									</AuthPatient>
+								</div>
 							</div>
 						</div>
+					))}
+				{showRatingForm && (
+					<div className="rating14-form">
+						<label>Rate the Physician:</label>
+						<Rating
+							name="rating14-input"
+							value={rating}
+							precision={0.5}
+							onChange={(event, newValue) => setRating(newValue)}
+						/>
+						<button className='subButton14' onClick={submitRating}>Submit</button>
 					</div>
-				))}
-			{showRatingForm && (
-				<div className="rating14-form">
-					<label>Rate the Physician:</label>
-					<Rating
-						name="rating14-input"
-						value={rating}
-						precision={0.5}
-						onChange={(event, newValue) => setRating(newValue)}
-					/>
-					<button className='subButton14' onClick={submitRating}>Submit</button>
-				</div>
-			)}
+				)}
+			</div>
 		</div>
-
 	);
 }

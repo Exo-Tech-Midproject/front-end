@@ -11,59 +11,27 @@ import Stack from '@mui/material/Stack';
 import PanoramaFishEyeIcon from '@mui/icons-material/PanoramaFishEye';
 import Link from '@mui/material/Link';
 
-import img1 from "./sss.png";
+// import img1 from "./sss.png";
 import img2 from "./sss2.png";
-import "./heroSubscription.css"
+
 export default function HeroSubscription() {
 
 	return (
 		<>
 			<Box
 				sx={{
-					margin: "2%",
+					// margin: "6%",
+
 					marginTop: '0'
 				}}
 			>
-				<div role="presentation">
-					<Breadcrumbs aria-label="breadcrumb">
-						<Link
-							underline="hover"
-							sx={{
-								display: 'flex',
-								alignItems: 'center'
-							}}
-							color="#062942"
-							href="/"
-						>
-							<HomeIcon sx={{ mr: 0.5 }} fontSize="inherit" />
-							Home
-						</Link>
-						<Link
-							underline="hover"
-							sx={{ display: 'flex', alignItems: 'center' }}
-							color="#062942"
-							href="/dashboard/Profile"
-						>
-							<WhatshotIcon sx={{ mr: 0.5 }} fontSize="inherit" />
-							Profile
-						</Link>
-						<Link
-							underline="hover"
-							sx={{ display: 'flex', alignItems: 'center', textDecoration: "none", }}
-							color="#4070f4"
-							href="/dashboard/subscriptions"
-						>
-							<GrainIcon sx={{ mr: 0.5 }} fontSize="inherit" />
-							Subscriptions
-						</Link>
-					</Breadcrumbs>
-				</div>
+
 			</Box>
 			<Stack direction="column" >
 				<Box sx={{
-
-					height: "500px",
-					background: "#999999",
+					mt: 9.4,
+					height: "550px",
+					background: "#3D4F57",
 					backgroundImage: `url(${img2})`,
 					backgroundSize: '100%',
 					backgroundRepeat: 'no-repeat',
@@ -72,7 +40,7 @@ export default function HeroSubscription() {
 					backgroundBlendMode: 'overlay'
 				}}
 				>
-					<Stack sx={{ height: "100%" }} alignItems="center" justifyContent="center">
+					<Stack sx={{ height: "130%" }} alignItems="center" justifyContent="center">
 						<Title
 							variant={{ xs: "h3", sm: "h2", md: "h1" }}
 							sx={{ letterSpacing: "0.05em", mb: 1, color: "white", textShadow: "2px 2px 9px rgba(0, 0, 0, 0.5)" }}
@@ -96,8 +64,8 @@ export default function HeroSubscription() {
 								Home
 							</Link>
 							<Typography
-								sx={{ display: 'flex', alignItems: 'center',textShadow: "2px 2px 9px rgba(0, 0, 0, 0.5)" }}
-								color="#1F485B"
+								sx={{ display: 'flex', alignItems: 'center', textShadow: "2px 2px 9px rgba(0, 0, 0, 0.5)" }}
+								color="white"
 							>
 								<PanoramaFishEyeIcon sx={{ mr: 0.5 }} fontSize="inherit" />
 								Subscriptions

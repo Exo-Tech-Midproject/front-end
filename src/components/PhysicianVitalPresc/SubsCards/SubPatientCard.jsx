@@ -25,6 +25,7 @@ const SubPatientCard = ({ userInfo }) => {
                 <Box display='flex' justifyContent='flex-end'>
                     <Button component={Link} to={`/dashboard/patient-control/prescription/${userInfo.username}`} variant='text' color={'snowWhite'}>Prescriptions</Button>
                     <Button component={Link} to={`/dashboard/patient-control/vitals/${userInfo.username}`} variant='text' color={'snowWhite'} >Vitals</Button>
+                    <Button component={Link} to={`/dashboard/patient-control/history/${userInfo.username}`} variant='text' color={'snowWhite'} >History</Button>
                 </Box>
                 {/* <Link to={`/prescriptions/${userInfo.username}`} className="follow">
                     Prescriptions

@@ -58,7 +58,7 @@ export default function CreateGroup() {
           headers: { Authorization: `Bearer ${token}` }
         })
       setCreatedGroups(allGroups.data)
-      console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',allGroups.data)
+      // console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',allGroups.data)
 
       return allGroups.data
     }

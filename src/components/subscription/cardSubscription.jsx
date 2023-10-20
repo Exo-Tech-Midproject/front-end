@@ -1,20 +1,17 @@
 import React from 'react';
-
+import SubsPagination from "./subsPagination"
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { Link } from 'react-router-dom';
-import { Box, Button, Typography } from '@mui/material';
-import defaultPfp from '../../assets/images/defaultImges/we-are-not-the-same.jpg'
-import defaultCover from '../../assets/images/defaultImges/pharmacy.PNG'
-import { motion } from 'framer-motion';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import { Alert } from '@mui/material';
 
+import { Box, Button, Typography, Container, Grid } from '@mui/material';
+import defaultPfp from './doc.png'
+import defaultCover from './sss.png'
+import { motion } from 'framer-motion';
+
+import Heading from "./heading"
 import "./cardSubscription.css"
 import './subTest.css';
-import doc from "./doc.png"
-import { styled } from '@mui/material/styles';
+
 import Rating from '@mui/material/Rating';
 import { useEffect, useState } from 'react'
 import AuthPatient from '../Auths/AuthPatient';
@@ -26,11 +23,21 @@ let DBURL = process.env.REACT_APP_BASE_URL
 
 
 export default function CardSubscription() {
-	const [subs, setSubs] = useState(null);
+	const [currentPage, setCurrentPage] = useState(1);
+	const [subs, setSubs] = useState([]); // Initialize subs as an empty array
 	const [rating, setRating] = useState(0);
 	const [showRatingForm, setShowRatingForm] = useState(false);
 	const [selectedPhysicianUsername, setSelectedPhysicianUsername] = useState(null);
-	const [showErrorAlert, setShowErrorAlert] = useState(false);
+
+
+	// let descending = subs?.sort((a, b) => b.id - a.id)
+
+	const startIndex = 3 * (currentPage - 1);
+	const endIndex = startIndex + 3;
+	const currentPageRender = subs ? subs.slice(startIndex, endIndex) : []
+
+	// Calculate the total number of pages needed
+	const PaginationPages = Math.ceil(subs.length / 3);
 
 	// console.log("rating", rating)
 
@@ -73,24 +80,6 @@ export default function CardSubscription() {
 
 		fetchUserSubscriptions();
 	}, []);
-	const handleRatePhysician = async (physicianUsername) => {
-		try {
-			let token = cookie.load("auth");
-			let payload = await jwtDecode(token);
-
-			const response = await axios.get(
-				`${DBURL}/patient/${payload.username}/physicians/subscriptions`,
-				{
-					headers: { Authorization: `Bearer ${token}` }
-				}
-			);
-
-			console.log("response:", response.data);
-			return response
-		} catch (err) {
-			console.error("Error rating physician:", err);
-		}
-	};
 
 
 	const openRatingForm = async (physicianUsername) => {
@@ -130,10 +119,7 @@ export default function CardSubscription() {
 			let token = cookie.load("auth");
 			let payload = jwtDecode(token);
 
-			// Define the rating data to send to the server
 			const newRating = {
-				// Define the properties of the rating data here
-				// For example, you might have a "rating" property that represents the rating value
 				rating: rating,
 			};
 			console.log("newRating", newRating)
@@ -147,21 +133,11 @@ export default function CardSubscription() {
 					}
 				);
 
-				// Handle the response as needed
-				// console.log("Rating submitted successfully:", response.data);
-				// let ratingRRR = await fetchUserSubscriptions()
-				// 	setSubs(ratingRRR)
+				console.log("Rating submitted successfully:", response.data);
+				let ratingRRR = await fetchUserSubscriptions()
+				console.log(ratingRRR)
+				setSubs(ratingRRR)
 
-				const updatedSubs = subs.map((physician) => {
-					if (physician.username === selectedPhysicianUsername) {
-						// Update the avgRating with the new value
-						physician.avgRating = response.data.avgRating;
-					}
-					return physician;
-				});
-
-				// Set the updated subs state
-				setSubs(updatedSubs);
 
 				setShowRatingForm(false);
 				setRating(0);
@@ -173,80 +149,96 @@ export default function CardSubscription() {
 
 
 
-	let img = doc
 	return (
-		<div>
-			<ToastContainer position="top-right" autoClose={5000} />
-			<div className='ALL'>
-				<div className="mainP">
-					{subs &&
-						subs.map((user, index) => (
-							<motion.figure
-								transition={{ duration: 0.85 }}
-								initial={{ x: -500, opacity: 0, }}
-								animate={{ opacity: 1, x: 0, }}
-								whileHover={{ scale: 1.05 }}
-								className="snip1336">
-								<img src={user.coverImg || defaultCover} alt={user.fullName} />
-								<figcaption>
-									<img src={user.profileImg || defaultPfp} alt={user.fullName} className="profile" />
-									<Typography transition={{ deplay: 0.3, duration: 0.7 }} animate={{ opacity: 1, y: 0, }} initial={{ y: 500, opacity: 0, }} component={motion.h2} variant='h4'>
-										{user.fullName}
-										<AuthPhysician>
-											<span>{user.gender}</span>
-										</AuthPhysician>
-										<span>phone: {user.mobileNumber}</span>
-										<span>Email: {user.emailAddress}</span>
-									</Typography>
-									{/* <p>{text}</p> */}
-									<Box display='flex' justifyContent='flex-end' marginTop={"10px"}>
-										<AuthPatient>
-											<Button variant='text' color={'snowWhite'} onClick={() => openRatingForm(user.username)}>Rate Doctor</Button>
+		<>
+			<Heading />
+			<div>
 
-											<Rating
-												sx={{
-													marginLeft: "20px",
-													color: "white",
-													// Additional star styling
-													'& .MuiRating-icon': {
-														color: 'gold',
-														// You can add more styling properties here
-													},
-												}}
-												name="half-rating-read"
-												defaultValue={user.avgRating}
-												precision={0.5}
-												size="medium"
-												readOnly
-											/>
+				<ToastContainer position="top-right" autoClose={1000} />
+				<div className='ALL'>
+					<div className="mainP">
 
-										</AuthPatient>
+						<Grid container padding={2} rowGap={2} justifyContent="center" spacing={2}>
+							{currentPageRender &&
+								currentPageRender.map((user, index) => (
+									<div className='SubsCus'>
+										<Grid key={user.id}>
+											<motion.figure
+												transition={{ duration: 0.85 }}
+												initial={{ x: -500, opacity: 0 }}
+												animate={{ opacity: 1, x: 0 }}
+												whileHover={{ scale: 1.05 }}
+												className="Ssnip1336"
+											>
+												<img src={user.coverImg || defaultCover} alt={user.fullName} className="profileCover" />
+												<figcaption>
+													<img src={user.profileImg || defaultPfp} alt={user.fullName} className="profile" />
+													{console.log(user.fullName, user.profileImg)}
+													<Typography
+														transition={{ delay: 0.3, duration: 0.7 }}
+														animate={{ opacity: 1, y: 0 }}
+														initial={{ y: 500, opacity: 0 }}
+														component={motion.h2}
+														variant='h4'
+													>
+														{user.fullName}
+														<AuthPhysician>
+															<span>{user.gender}</span>
+														</AuthPhysician>
+														<span>phone: {user.mobileNumber}</span>
+														<span>Email: {user.emailAddress}</span>
+													</Typography>
+													<Box display='flex' justifyContent='flex-end' marginTop={"10px"}>
+														<AuthPatient>
+															<Button variant='text' color={'snowWhite'} onClick={() => openRatingForm(user.username)}>Rate Doctor</Button>
+															<Rating
+																sx={{
+																	marginLeft: "20px",
+																	color: "white",
+																	'& .MuiRating-icon': {
+																		color: 'gold',
+																	},
+																}}
+																name="half-rating-read"
+																defaultValue={user.avgRating}
+																precision={0.5}
+																size="medium"
+																readOnly
+															/>
+														</AuthPatient>
+													</Box>
+												</figcaption>
+											</motion.figure>
+										</Grid>
+									</div>
+								))}
+						</Grid>
 
-									</Box>
-								</figcaption>
+						{showRatingForm && (
+							<div className="rating14-form">
+								<label>Rate the Physician</label>
 
-							</motion.figure>
-						))}
-					{showRatingForm && (
-						<div className="rating14-form">
-							<label>Rate the Physician</label>
+								<Rating
+									name="rating14-input"
+									value={rating}
+									precision={0.5}
+									size="medium"
+									onChange={(event, newValue) => setRating(newValue)}
+								/>
+								<button className='subButton14' onClick={submitRating}>Submit</button>
+							</div>
+						)}
 
-							<Rating
-								name="rating14-input"
-								value={rating}
-								precision={0.5}
-								size="medium"
-								onChange={(event, newValue) => setRating(newValue)}
-							/>
-							<button className='subButton14' onClick={submitRating}>Submit</button>
-						</div>
-					)}
-
+					</div>
 				</div>
-				{showErrorAlert && (
-					<Alert severity="error">You have already rated this doctor.</Alert>
-				)}
+				<Box px={3} mb='10px'>
+					{/* <Divider /> */}
+				</Box>
+				<Container sx={{ marginBottom: '30px' }}>
+					<SubsPagination setCurrentPage={setCurrentPage} PaginationPages={PaginationPages} />
+
+				</Container>
 			</div>
-		</div>
+		</>
 	);
 }

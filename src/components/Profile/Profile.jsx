@@ -15,6 +15,7 @@ let DBRUL = process.env.REACT_APP_BASE_URL
 
 export default function Profile() {
     const [profileInfo, setProfileInfo] = useState(null)
+    const [appointmentsInfo, setAppointmentsInfo] = useState(null)
     let token = cookie.load('auth')
     let payload
     if (token) {
@@ -38,8 +39,26 @@ export default function Profile() {
         }
 
     }
+    const getAppointmentsInfo = async () => {
+        try {
+            if (payload) {
+                const response = await axios.get(`${DBRUL}/${payload.accountType}/${payload.username}/appointments`, {
+                    headers: { Authorization: `Bearer ${token}` }
+                    
+                });
+
+                let data = response.data
+                setAppointmentsInfo(data)
+                return data
+            }
+        } catch (error) {
+            console.error('Error uploading image:', error);
+        }
+
+    }
     useEffect(() => {
         getProfileInfo()
+        getAppointmentsInfo()
     }, [])
     return (
         <Grid container bgcolor={'#f2f5f9'} rowGap={4} mt={9} >
@@ -51,7 +70,7 @@ export default function Profile() {
 
             <Grid item xs={12} md={4} pl={4} pt={4}>
                 <Box minHeight={{ xs: '400px', md: '200px' }} ref={containerRef} p={2} borderRadius='15px' boxShadow='rgba(159, 162, 191, 0.18) 0px 9px 16px, rgba(159, 162, 191, 0.32) 0px 2px 2px' sx={{ height: '100%', overflow: 'auto', backgroundColor: 'white' }}>
-                    <ProfileCalendar containerRef={containerRef} />
+                    <ProfileCalendar containerRef={containerRef} appointmentsInfo={appointmentsInfo} />
                 </Box>
             </Grid>
 

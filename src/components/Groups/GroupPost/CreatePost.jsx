@@ -37,45 +37,38 @@ export default function CreatePost({getGroup, setCreatedPost}) {
   };
 
     async function fetchPosts() {
-      let token = cookie.load("auth");
-      const payload = await jwtDecode(token);
-      if(payload.accountType === 'physician'){
       try {
-            let allPosts = await axios.get(`${DBRUL}/physician/${payload.username}/groups/${id}/posts`,
+        let token = cookie.load("auth");
+        const payload = await jwtDecode(token);
+            let allPosts = await axios.get(`${DBRUL}/${payload.accountType}/${payload.username}/groups/${id}/posts`,
             {
                 headers: {Authorization: `Bearer ${token}`},
             });
             console.log("all posts for physician", allPosts.data);
-            
-            
             setCreatedPost(allPosts.data);
-
             return allPosts.data
         } catch (error) {
             console.log(error);
         }
-      }
       
-      if(payload.accountType === 'patient'){
-          // console.log("getting data for physician post ffffffffffffff", getGroup);
+      // if(payload.accountType === 'patient'){
 
-          try{
-            let allPosts = await axios.get(`${DBRUL}/patient/${payload.username}/groups/66/posts`, {
-              headers: {Authorization: `Bearer ${token}`},
-          });
-          console.log("all posts for patient", allPosts.data);
-          // console.log("getting data for patient post", getGroup.id);
+      //     try{
+      //       let allPosts = await axios.get(`${DBRUL}/patient/${payload.username}/groups/66/posts`, {
+      //         headers: {Authorization: `Bearer ${token}`},
+      //     });
+      //     console.log("all posts for patient", allPosts.data);
 
           
-          setCreatedPost(allPosts.data);
+      //     setCreatedPost(allPosts.data);
 
-          return allPosts.data
+      //     return allPosts.data
       
-          }
-          catch(error){
-            console.log(error)
-          }
-        }
+      //     }
+      //     catch(error){
+      //       console.log(error)
+      //     }
+      //   }
     }
 
     useEffect(() => {
@@ -213,7 +206,7 @@ export default function CreatePost({getGroup, setCreatedPost}) {
                             margin: "10px",
                         }}
                     >
-                        Add New Post
+                        Add New Blog
                     </Typography>
                 </Box>
                 <Box sx={{
@@ -262,10 +255,10 @@ export default function CreatePost({getGroup, setCreatedPost}) {
                   }} >
                     <form onSubmit={handleSubmit} spacing={2}>
                       <Box sx={{
-                        margin: "3%",
+                        paddingX: "10%",
                       }}>
                         <TextField
-                          label="Group Name"
+                          label="Blog Title"
                           variant="outlined"
                           fullWidth
                           value={title}
@@ -283,7 +276,7 @@ export default function CreatePost({getGroup, setCreatedPost}) {
                         margin: "3%",
                       }}>
                         <TextField
-                          label="Description"
+                          label="Blog Content"
                           variant="outlined"
                           fullWidth
                           multiline
@@ -311,8 +304,13 @@ export default function CreatePost({getGroup, setCreatedPost}) {
                     sx={{
                       fontSize: "2.2rem",
                       borderRadius: "5px",
-                      bgcolor: "#062942",
-                      width: "35%"
+                      bgcolor: "#1F485B",
+                      width: "35%",
+                      "&:hover": {
+                        transform: "scale(1) ",
+                        transition: "transform 0.5s ease",
+                        background: "#062942",
+                    },
                     }}
                     onClick={handleSubmit}>
                     Create a Post

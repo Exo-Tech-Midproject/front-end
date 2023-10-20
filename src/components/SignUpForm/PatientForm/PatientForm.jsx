@@ -15,6 +15,10 @@ import StepConnector, { stepConnectorClasses } from '@mui/material/StepConnector
 import FirstStep from './FirstStep';
 import SecondStep from './SecondStep';
 import ThirdStep from './ThirdStep';
+import { LoginContext } from '../../../ContextApi/Auth';
+import axios from 'axios';
+import SignModal2 from './SignModal2';
+let DBRUL = process.env.REACT_APP_BASE_URL
 
 
 const QontoStepIconRoot = styled('div')(({ theme, ownerState }) => ({
@@ -73,14 +77,14 @@ const ColorlibConnector = styled(StepConnector)(({ theme }) => ({
   [`&.${stepConnectorClasses.active}`]: {
     [`& .${stepConnectorClasses.line}`]: {
       backgroundImage:
-      'linear-gradient( 95deg,black 0%,#1F485B 50%,#67ABCB 100%)',  
+        'linear-gradient( 95deg,black 0%,#1F485B 50%,#67ABCB 100%)',
       //'linear-gradient( 95deg,rgb(242,113,33) 0%,rgb(233,64,87) 50%,rgb(138,35,135) 100%)',
     },
   },
   [`&.${stepConnectorClasses.completed}`]: {
     [`& .${stepConnectorClasses.line}`]: {
       backgroundImage:
-      'linear-gradient( 95deg,black 0%,#1F485B 50%,#67ABCB 100%)',  
+        'linear-gradient( 95deg,black 0%,#1F485B 50%,#67ABCB 100%)',
       //'linear-gradient( 95deg,rgb(242,113,33) 0%,rgb(233,64,87) 50%,rgb(138,35,135) 100%)',
     },
   },
@@ -105,13 +109,13 @@ const ColorlibStepIconRoot = styled('div')(({ theme, ownerState }) => ({
   alignItems: 'center',
   ...(ownerState.active && {
     backgroundImage:
-    'linear-gradient( 95deg,black 0%,#1F485B 50%,#67ABCB 100%)',  
+      'linear-gradient( 95deg,black 0%,#1F485B 50%,#67ABCB 100%)',
     //'linear-gradient( 136deg, rgb(242,113,33) 0%, rgb(233,64,87) 50%, rgb(138,35,135) 100%)',
     boxShadow: '0 4px 10px 0 rgba(0,0,0,.25)',
   }),
   ...(ownerState.completed && {
     backgroundImage:
-    'linear-gradient( 95deg,black 0%,#1F485B 50%,#67ABCB 100%)',  
+      'linear-gradient( 95deg,black 0%,#1F485B 50%,#67ABCB 100%)',
     //'linear-gradient( 136deg, rgb(242,113,33) 0%, rgb(233,64,87) 50%, rgb(138,35,135) 100%)',
   }),
 }));
@@ -156,7 +160,7 @@ const steps = [
   },
   {
     label: 'Create an ad group',
-    description:<SecondStep />,
+    description: <SecondStep />,
   },
   {
     label: 'Create an ad',
@@ -167,6 +171,50 @@ const steps = [
 export default function PatientForm() {
   const [activeStep, setActiveStep] = React.useState(0);
   const [completed, setCompleted] = React.useState({});
+  const [showModal, setShowModal] = React.useState(false)
+  console.log(showModal)
+  const [doneMsg, setDoneMsg] = React.useState({})
+  const { state2 } = React.useContext(LoginContext)
+  console.log(activeStep)
+  const handleSubmit = async () => {
+    const fullFormData = {
+      ...state2.firstStepData,
+      ...state2.secondStepData,
+      ...state2.thirdStepData,
+    };
+    try {
+      const response = await axios.post(`${DBRUL}/signup/patient`, fullFormData);
+      const data = response.data;
+      // Handle success response if needed
+      console.log(fullFormData)
+      console.log(data)
+      setShowModal(true)
+      // setActiveStep(0);
+      setDoneMsg({
+        message: 'Successful Registration',
+        type: 'success',
+        submsg: 'You have successfully joined our family, continue to login page to enjoy your services',
+        head: 'Congratulation!'
+      })
+    } catch (error) {
+      if (error.response && error.response.status === 500) {
+        // console.error('Error:', error.response.data);
+        // Show a modal with the error message
+        setShowModal(true);
+        console.log(error.response, error.response.status)
+        console.log(showModal)
+        setDoneMsg({
+          message: 'Failed Registration, Account already exists',
+          type: 'error',
+          submsg: 'Make sure to pick a unqiue username, email, phone number and lisence ID',
+          head: 'Unfortunately!'
+        })
+      } else {
+        console.error('Error:', error.message);
+        // Handle other errors here
+      }
+    }
+  };
 
   const totalSteps = () => {
     return steps.length;
@@ -188,8 +236,8 @@ export default function PatientForm() {
     const newActiveStep =
       isLastStep() && !allStepsCompleted()
         ? // It's the last step, but not all steps have been completed,
-          // find the first step that has been completed
-          steps.findIndex((step, i) => !(i in completed))
+        // find the first step that has been completed
+        steps.findIndex((step, i) => !(i in completed))
         : activeStep + 1;
     setActiveStep(newActiveStep);
   };
@@ -213,7 +261,7 @@ export default function PatientForm() {
 
   return (
     <Box sx={{ width: '500px' }}>
-      <Stepper  activeStep={activeStep} alternativeLabel connector={<ColorlibConnector />}>
+      <Stepper activeStep={activeStep} alternativeLabel connector={<ColorlibConnector />}>
         {steps.map((label, index) => (
           <Step key={steps.label} completed={completed[index]}>
             <StepLabel StepIconComponent={ColorlibStepIcon}>{steps.label}</StepLabel>
@@ -228,13 +276,17 @@ export default function PatientForm() {
             </Typography>
             <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
               <Box sx={{ flex: '1 1 auto' }} />
-              <Button onClick={handleReset}>Reset</Button>
+              <Button onClick={handleReset}>Start Over</Button>
+              <Button disabled={activeStep === 3 ? false : true} onClick={handleSubmit}>
+                Finish
+              </Button>
             </Box>
+
           </React.Fragment>
         ) : (
           <React.Fragment>
             <Typography sx={{ mt: 2, mb: 1, py: 1 }}>
-            {steps[activeStep].description}
+              {steps[activeStep].description}
             </Typography>
             <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
               <Button
@@ -246,23 +298,20 @@ export default function PatientForm() {
                 Back
               </Button>
               <Box sx={{ flex: '1 1 auto' }} />
-              <Button onClick={handleNext} sx={{ mr: 1 }}>
+              <Button onClick={handleComplete} sx={{ mr: 1 }}>
                 Next
               </Button>
               {activeStep !== steps.length &&
-                (completed[activeStep] ? (
+                (completed[activeStep] && (
                   <Typography variant="caption" sx={{ display: 'inline-block' }}>
                     Step {activeStep + 1} already completed
                   </Typography>
-                ) : (
-                  <Button onClick={handleComplete}>
-                   Finish
-                  </Button>
                 ))}
             </Box>
           </React.Fragment>
         )}
       </div>
-    </Box>
+      <SignModal2 showModal={showModal} setShowModal={setShowModal} doneMsg={doneMsg} />
+    </Box >
   );
 }

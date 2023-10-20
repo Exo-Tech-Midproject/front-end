@@ -15,7 +15,10 @@ import StepConnector, { stepConnectorClasses } from '@mui/material/StepConnector
 import FirstStep from './FirstStep';
 import SecondStep from './SecondStep';
 import ThirdStep from './ThirdStep';
-
+import { LoginContext } from '../../../ContextApi/Auth';
+import axios from 'axios';
+import SignModal from './SignModal';
+let DBRUL = process.env.REACT_APP_BASE_URL
 
 const QontoStepIconRoot = styled('div')(({ theme, ownerState }) => ({
   color: theme.palette.mode === 'dark' ? theme.palette.grey[700] : '#eaeaf0',
@@ -156,7 +159,7 @@ const steps = [
   },
   {
     label: 'Information',
-    description:<SecondStep />,
+    description: <SecondStep />,
   },
   {
     label: 'Information',
@@ -167,6 +170,49 @@ const steps = [
 export default function DoctorForm() {
   const [activeStep, setActiveStep] = React.useState(0);
   const [completed, setCompleted] = React.useState({});
+  const [showModal, setShowModal] = React.useState(false)
+  console.log(showModal)
+  const [doneMsg, setDoneMsg] = React.useState({})
+  const { state } = React.useContext(LoginContext)
+  console.log(activeStep)
+  const handleSubmit = async () => {
+    const fullFormData = {
+      ...state.firstStepData,
+      ...state.secondStepData,
+      ...state.thirdStepData,
+    };
+    try {
+      const response = await axios.post(`${DBRUL}/signup/physician`, fullFormData);
+      const data = response.data;
+      // Handle success response if needed
+      console.log(fullFormData)
+      console.log(data)
+      setShowModal(true)
+      // setActiveStep(0);
+      setDoneMsg({
+        message: 'Successful Registration',
+        type: 'success',
+        submsg: 'You have successfully joined our family, continue to login page to enjoy your services',
+        head: 'Congratulation!'
+      })
+    } catch (error) {
+      if (error.response && error.response.status === 500) {
+        // console.error('Error:', error.response.data);
+        // Show a modal with the error message
+        setShowModal(true);
+        console.log(showModal)
+        setDoneMsg({
+          message: 'Failed Registration, Account already exists',
+          type: 'error',
+          submsg: 'Make sure to pick a unqiue username, email, phone number and lisence ID',
+          head: 'Unfortunately!'
+        })
+      } else {
+        console.error('Error:', error.message);
+        // Handle other errors here
+      }
+    }
+  };
 
   const totalSteps = () => {
     return steps.length;
@@ -188,8 +234,8 @@ export default function DoctorForm() {
     const newActiveStep =
       isLastStep() && !allStepsCompleted()
         ? // It's the last step, but not all steps have been completed,
-          // find the first step that has been completed
-          steps.findIndex((step, i) => !(i in completed))
+        // find the first step that has been completed
+        steps.findIndex((step, i) => !(i in completed))
         : activeStep + 1;
     setActiveStep(newActiveStep);
   };
@@ -212,8 +258,8 @@ export default function DoctorForm() {
   };
 
   return (
-    <Box sx={{ width: {md:'500px', xs:'300px'} }}>
-      <Stepper  activeStep={activeStep} alternativeLabel connector={<ColorlibConnector />}>
+    <Box sx={{ width: { md: '500px', xs: '300px' } }}>
+      <Stepper activeStep={activeStep} alternativeLabel connector={<ColorlibConnector />}>
         {steps.map((label, index) => (
           <Step key={steps.label} >
             <StepLabel StepIconComponent={ColorlibStepIcon}>{steps.label}</StepLabel>
@@ -228,13 +274,17 @@ export default function DoctorForm() {
             </Typography>
             <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
               <Box sx={{ flex: '1 1 auto' }} />
-              <Button onClick={handleReset}>Reset</Button>
+              <Button onClick={handleReset}>Start Over</Button>
+              <Button disabled={activeStep === 3 ? false : true} onClick={handleSubmit}>
+                {/* <Button onClick={handleComplete}> */}
+                Finish
+              </Button>
             </Box>
           </React.Fragment>
         ) : (
           <React.Fragment>
             <Typography sx={{ mt: 2, mb: 1, py: 1 }}>
-            {steps[activeStep].description}
+              {steps[activeStep].description}
             </Typography>
             <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
               <Button
@@ -246,23 +296,22 @@ export default function DoctorForm() {
                 Back
               </Button>
               <Box sx={{ flex: '1 1 auto' }} />
-              <Button onClick={handleNext} sx={{ mr: 1 }}>
+              <Button onClick={handleComplete} sx={{ mr: 1 }}>
                 Next
               </Button>
               {activeStep !== steps.length &&
-                (completed[activeStep] ? (
+                (completed[activeStep] &&
                   <Typography variant="caption" sx={{ display: 'inline-block' }}>
                     Step {activeStep + 1} already completed
                   </Typography>
-                ) : (
-                  <Button onClick={handleComplete}>
-                   Finish
-                  </Button>
-                ))}
+
+
+                )}
             </Box>
           </React.Fragment>
         )}
       </div>
+      <SignModal showModal={showModal} setShowModal={setShowModal} doneMsg={doneMsg} />
     </Box>
   );
 }

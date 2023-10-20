@@ -50,7 +50,7 @@ export default function Profile() {
             </Grid >
 
             <Grid item xs={12} md={4} pl={4} pt={4}>
-                <Box ref={containerRef} p={2} borderRadius='15px' boxShadow='rgba(159, 162, 191, 0.18) 0px 9px 16px, rgba(159, 162, 191, 0.32) 0px 2px 2px' sx={{ height: '100%', overflow: 'auto', backgroundColor: 'white' }}>
+                <Box minHeight={{ xs: '400px', md: '200px' }} ref={containerRef} p={2} borderRadius='15px' boxShadow='rgba(159, 162, 191, 0.18) 0px 9px 16px, rgba(159, 162, 191, 0.32) 0px 2px 2px' sx={{ height: '100%', overflow: 'auto', backgroundColor: 'white' }}>
                     <ProfileCalendar containerRef={containerRef} />
                 </Box>
             </Grid>

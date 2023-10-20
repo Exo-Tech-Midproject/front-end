@@ -1,6 +1,20 @@
 import React from 'react';
-import './cardSubscription.css';
+
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { Link } from 'react-router-dom';
+import { Box, Button, Typography } from '@mui/material';
+import defaultPfp from '../../assets/images/defaultImges/we-are-not-the-same.jpg'
+import defaultCover from '../../assets/images/defaultImges/pharmacy.PNG'
+import { motion } from 'framer-motion';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import { Alert } from '@mui/material';
+
+import "./cardSubscription.css"
+import './subTest.css';
 import doc from "./doc.png"
+import { styled } from '@mui/material/styles';
 import Rating from '@mui/material/Rating';
 import { useEffect, useState } from 'react'
 import AuthPatient from '../Auths/AuthPatient';
@@ -16,8 +30,9 @@ export default function CardSubscription() {
 	const [rating, setRating] = useState(0);
 	const [showRatingForm, setShowRatingForm] = useState(false);
 	const [selectedPhysicianUsername, setSelectedPhysicianUsername] = useState(null);
-	console.log("rating", rating)
+	const [showErrorAlert, setShowErrorAlert] = useState(false);
 
+	// console.log("rating", rating)
 
 	async function fetchUserSubscriptions() {
 		try {
@@ -31,25 +46,24 @@ export default function CardSubscription() {
 						headers: { Authorization: `Bearer ${token}` }
 					}
 				);
-				// console.log("data for patients => ", userSub.data);
-				// console.log("data=> ", userSub.data)
+
 				setSubs(userSub.data)
-
+				console.log("userSub.data", userSub.data)
 				return (userSub.data)
 			}
 
-			if (payload?.accountType === 'physician') {
-				let userSub = await axios.get(
-					`${DBURL}/physician/${payload.username}/patients/subscribers`,
-					{
-						headers: { Authorization: `Bearer ${token}` }
-					}
-				);
-				// console.log("data for physicians => ", userSub.data);
-				setSubs(userSub.data);
+			// if (payload?.accountType === 'physician') {
+			// 	let userSub = await axios.get(
+			// 		`${DBURL}/physician/${payload.username}/patients/subscribers`,
+			// 		{
+			// 			headers: { Authorization: `Bearer ${token}` }
+			// 		}
+			// 	);
 
-				return (userSub.data)
-			}
+			// 	setSubs(userSub.data);
+
+			// 	return (userSub.data)
+			// }
 		} catch (err) {
 			console.log(err);
 		}
@@ -64,76 +78,173 @@ export default function CardSubscription() {
 			let token = cookie.load("auth");
 			let payload = await jwtDecode(token);
 
-			const response = await axios.post(`${DBURL}/patient/${payload.username}/rating/${physicianUsername}`, {
-				rating: rating
-			}, {
-				headers: { Authorization: `Bearer ${token}` }
-			});
+			const response = await axios.get(
+				`${DBURL}/patient/${payload.username}/physicians/subscriptions`,
+				{
+					headers: { Authorization: `Bearer ${token}` }
+				}
+			);
 
-			// console.log("response:", response.data);
+			console.log("response:", response.data);
 			return response
 		} catch (err) {
 			console.error("Error rating physician:", err);
 		}
 	};
-	const openRatingForm = (physicianUsername) => {
-		setSelectedPhysicianUsername(physicianUsername);
-		setShowRatingForm(true);
+
+
+	const openRatingForm = async (physicianUsername) => {
+		try {
+			let token = cookie.load("auth");
+			let payload = jwtDecode(token);
+			const response = await axios.get(
+				`${DBURL}/patient/${payload.username}/rating/`,
+				{
+					headers: { Authorization: `Bearer ${token}` }
+				}
+			);
+			let Ratingdata = response.data;
+
+			if (Array.isArray(Ratingdata)) {
+				const PhysiciansArray = [...new Set(Ratingdata.map(item => item.physician))];
+				if (!PhysiciansArray.includes(physicianUsername)) {
+					setSelectedPhysicianUsername(physicianUsername);
+					setShowRatingForm(true);
+				} else {
+					toast.error('You have already rated this doctor.');
+				}
+			}
+		} catch (err) {
+			console.error("Error rating physician:", err);
+		}
 	};
+
+
+
+	// console.log("showRatingForm", showRatingForm)
 
 	const submitRating = async () => {
 		if (selectedPhysicianUsername) {
-			let res = await handleRatePhysician(selectedPhysicianUsername);
+			console.log("selectedPhysicianUsername", selectedPhysicianUsername);
 
-			setSubs(await fetchUserSubscriptions())
-			setShowRatingForm(false);
+			let token = cookie.load("auth");
+			let payload = jwtDecode(token);
+
+			// Define the rating data to send to the server
+			const newRating = {
+				// Define the properties of the rating data here
+				// For example, you might have a "rating" property that represents the rating value
+				rating: rating,
+			};
+			console.log("newRating", newRating)
+
+			try {
+				const response = await axios.post(
+					`${DBURL}/patient/${payload.username}/rating/${selectedPhysicianUsername}`,
+					newRating,
+					{
+						headers: { Authorization: `Bearer ${token}` },
+					}
+				);
+
+				// Handle the response as needed
+				// console.log("Rating submitted successfully:", response.data);
+				// let ratingRRR = await fetchUserSubscriptions()
+				// 	setSubs(ratingRRR)
+
+				const updatedSubs = subs.map((physician) => {
+					if (physician.username === selectedPhysicianUsername) {
+						// Update the avgRating with the new value
+						physician.avgRating = response.data.avgRating;
+					}
+					return physician;
+				});
+
+				// Set the updated subs state
+				setSubs(updatedSubs);
+
+				setShowRatingForm(false);
+				setRating(0);
+			} catch (err) {
+				console.error("Error submitting rating:", err);
+			}
 		}
-
-		setRating(0)
 	};
+
 
 
 	let img = doc
 	return (
-		<div className='ALL'>
-			<div className="mainP">
-				{subs &&
-					subs.map((user, index) => (
-						<div className="Subcard" key={index}>
-							<div className="Subcard-text">
-								<div className="Subportada" style={{ backgroundImage: `url(${img})` }}></div>
-								<div className="Subtitle-total">
-									<AuthPhysician>
-										<h3>Name: {user.fullName}</h3>
-										<h5>Phone: {user.mobileNumber}</h5>
-										<h5>Email: {user.emailAddress}</h5>
-										<h5>Birthdate: {user.birthdate}</h5>
-										<h5>Gender: {user.gender}</h5>
-										<h5>Race: {user.race}</h5>
-									</AuthPhysician>
-									<AuthPatient>
-										<h3>Name: {user.fullName}</h3>
-										<h5>Phone: {user.mobileNumber}</h5>
-										<h5>Email: {user.emailAddress}</h5>
-										<h5>Department:{user.department}</h5>
-										<Rating sx={{ marginLeft: "25px", marginBottom: "4px" }} name="half-rating-read" defaultValue={user.rating} precision={0.5} size="medium" readOnly />
-										<button className='subrateB' onClick={() => openRatingForm(user.username)}>Rate Physician</button>
-									</AuthPatient>
-								</div>
-							</div>
+		<div>
+			<ToastContainer position="top-right" autoClose={5000} />
+			<div className='ALL'>
+				<div className="mainP">
+					{subs &&
+						subs.map((user, index) => (
+							<motion.figure
+								transition={{ duration: 0.85 }}
+								initial={{ x: -500, opacity: 0, }}
+								animate={{ opacity: 1, x: 0, }}
+								whileHover={{ scale: 1.05 }}
+								className="snip1336">
+								<img src={user.coverImg || defaultCover} alt={user.fullName} />
+								<figcaption>
+									<img src={user.profileImg || defaultPfp} alt={user.fullName} className="profile" />
+									<Typography transition={{ deplay: 0.3, duration: 0.7 }} animate={{ opacity: 1, y: 0, }} initial={{ y: 500, opacity: 0, }} component={motion.h2} variant='h4'>
+										{user.fullName}
+										<AuthPhysician>
+											<span>{user.gender}</span>
+										</AuthPhysician>
+										<span>phone: {user.mobileNumber}</span>
+										<span>Email: {user.emailAddress}</span>
+									</Typography>
+									{/* <p>{text}</p> */}
+									<Box display='flex' justifyContent='flex-end' marginTop={"10px"}>
+										<AuthPatient>
+											<Button variant='text' color={'snowWhite'} onClick={() => openRatingForm(user.username)}>Rate Doctor</Button>
+
+											<Rating
+												sx={{
+													marginLeft: "20px",
+													color: "white",
+													// Additional star styling
+													'& .MuiRating-icon': {
+														color: 'gold',
+														// You can add more styling properties here
+													},
+												}}
+												name="half-rating-read"
+												defaultValue={user.avgRating}
+												precision={0.5}
+												size="medium"
+												readOnly
+											/>
+
+										</AuthPatient>
+
+									</Box>
+								</figcaption>
+
+							</motion.figure>
+						))}
+					{showRatingForm && (
+						<div className="rating14-form">
+							<label>Rate the Physician</label>
+
+							<Rating
+								name="rating14-input"
+								value={rating}
+								precision={0.5}
+								size="medium"
+								onChange={(event, newValue) => setRating(newValue)}
+							/>
+							<button className='subButton14' onClick={submitRating}>Submit</button>
 						</div>
-					))}
-				{showRatingForm && (
-					<div className="rating14-form">
-						<label>Rate the Physician:</label>
-						<Rating
-							name="rating14-input"
-							value={rating}
-							precision={0.5}
-							onChange={(event, newValue) => setRating(newValue)}
-						/>
-						<button className='subButton14' onClick={submitRating}>Submit</button>
-					</div>
+					)}
+
+				</div>
+				{showErrorAlert && (
+					<Alert severity="error">You have already rated this doctor.</Alert>
 				)}
 			</div>
 		</div>

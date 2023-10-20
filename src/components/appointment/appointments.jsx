@@ -10,6 +10,9 @@ import GrainIcon from '@mui/icons-material/Grain';
 import Breadcrumbs from '@mui/material/Breadcrumbs';
 import Link from '@mui/material/Link';
 import Box from "@mui/material/Box";
+
+import AuthPatient from '../Auths/AuthPatient';
+import AuthPhysician from '../Auths/AuthPhysician';
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
@@ -22,6 +25,7 @@ import axios from 'axios';
 import jwtDecode from "jwt-decode";
 import cookie from 'react-cookies';
 let DBURL = process.env.REACT_APP_BASE_URL;
+
 
 export default function Appointment() {
 	const [currentEvents, setCurrentEvents] = useState([]);
@@ -85,7 +89,7 @@ export default function Appointment() {
 	useEffect(() => {
 		async function fetchEvents() {
 			const eventsData = await handleGetEvent();
-			
+
 			if (eventsData) {
 				setCurrentEvents(eventsData);
 			}
@@ -96,7 +100,7 @@ export default function Appointment() {
 
 	async function handleAddEvent() {
 		try {
-			
+
 			const calendarApi = calendarRef.current.getApi();
 			// console.log("calendarApi ", calendarApi);
 
@@ -163,7 +167,7 @@ export default function Appointment() {
 			.toString()
 			.padStart(2, '0')}-${eventDate.getDate().toString().padStart(2, '0')}`;
 		return {
-			title: `Patient: ${appointment.patientUsername} - Physician: ${appointment.physicianUsername}`,
+			title: `Patient: ${appointment.patientUsername} -Doctor: ${appointment.physicianUsername}`,
 			start: formattedDate,
 		};
 	});
@@ -247,19 +251,38 @@ export default function Appointment() {
 							},
 						}}>
 							{currentEvents.map((event) => (
-								<ListItem
-									key={event.id}
-									sx={{
-										backgroundColor: "#4cceac",
-										margin: "10px 0",
-										borderRadius: "2px",
-									}}
-								>
-									<ListItemText
-										primary={event.patientUsername}
-										secondary={<Typography> {new Date(event.date).toDateString()} </Typography>}
-									/>
-								</ListItem>
+								<>
+									<AuthPhysician>
+										<ListItem
+											key={event.id}
+											sx={{
+												backgroundColor: "#4cceac",
+												margin: "10px 0",
+												borderRadius: "2px",
+											}}
+										>
+											<ListItemText
+												primary={event.patientUsername}
+												secondary={<Typography> {new Date(event.date).toDateString()} </Typography>}
+											/>
+										</ListItem>
+									</AuthPhysician>
+									<AuthPatient>
+										<ListItem
+											key={event.id}
+											sx={{
+												backgroundColor: "#4cceac",
+												margin: "10px 0",
+												borderRadius: "2px",
+											}}
+										>
+											<ListItemText
+												primary={event.physicianUsername}
+												secondary={<Typography> {new Date(event.date).toDateString()} </Typography>}
+											/>
+										</ListItem>
+									</AuthPatient>
+								</>
 							))}
 						</List>
 					</Box>
@@ -278,13 +301,13 @@ export default function Appointment() {
 							selectMirror={true}
 							dayMaxEvents={true}
 							select={handleDateClick}
-							events={currentEvents}
+							events={formattedEvents}
 							// eventsSet={(events) => setCurrentEvents(events)}
 							ref={calendarRef}
-							// initialEvents={
-							// 	[{ title: 'event 1', date: '2023-10-01' },
-							// 	{ title: 'event 2', date: '2023-10-02' }]
-							// }
+						// initialEvents={
+						// 	[{ title: 'appointment 1', date: '2023-10-27' },
+						// 	{ title: 'appointment 2', date: '2023-10-29' }]
+						// }
 						/>
 					</Box>
 				</Box>

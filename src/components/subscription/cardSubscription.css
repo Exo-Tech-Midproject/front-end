@@ -1,23 +1,5 @@
 @import url("https://fonts.googleapis.com/css?family=Roboto:400,400i,700");
 
-.ALL {
-	width: 100%;
-	display: flex;
-	justify-content: space-around;
-}
-
-.mainP {
-	margin-top: 100px;
-	min-Height: 300px;
-	margin: 5px 10px 0 10px;
-	width: 85%;
-	display: flex;
-	justify-content: space-between;
-	flex-wrap: wrap;
-	margin-bottom: 20px;
-}
-
-
 .Subcard {
 	background: #fff;
 	box-shadow: 0px 14px 80px rgba(33, 35, 58, 0.5);
@@ -34,8 +16,8 @@
 
 	background-color: #f0f0f0;
 	border: 0.000001px solid #96cbe3;
-	/* padding: 10px;
-	margin: 10px; */
+	padding: 10px;
+	margin: 10px; 
 
 }
 
@@ -134,7 +116,7 @@
 
 .rating {
 	font-size: 1.5rem;
-	color: #FFD700;
+	color: white;
 	text-align: center;
 	margin-top: auto;
 	margin: 10px 0;
@@ -143,6 +125,8 @@
 .star {
 	display: inline-block;
 	margin-right: 5px;
+	border: #2bd325 solid 2px;
+
 }
 
 
@@ -181,5 +165,5 @@ button.subButton14 {
 }
 
 button.subButton14:hover {
-	background-color: #2bd325;
+	background-color: rgb(41, 90, 137);
 }

@@ -2,8 +2,6 @@ import * as React from "react";
 import Box from "@mui/material/Box";
 
 import HomeIcon from '@mui/icons-material/Home';
-import WhatshotIcon from '@mui/icons-material/Whatshot';
-import GrainIcon from '@mui/icons-material/Grain';
 import Breadcrumbs from '@mui/material/Breadcrumbs';
 import Typography from '@mui/material/Typography';
 import Title from "../Title"
@@ -21,7 +19,7 @@ export default function HeroSubscription() {
 			<Box
 				sx={{
 					// margin: "6%",
-
+					marginBottom:"0",
 					marginTop: '0'
 				}}
 			>

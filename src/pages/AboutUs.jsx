@@ -2,31 +2,23 @@
 
 import Navbar from '../components/Navbars/MainNavbar'
 import Footer from '../components/Footers/MainFooter'
-import { Box, Grid, Typography, Stack, Container } from '@mui/material';
+import { Box, Grid, Typography, Stack, Container,Divider,Button } from '@mui/material';
 import Title from "../components/Title"
 import Breadcrumbs from '@mui/material/Breadcrumbs';
 import HomeIcon from '@mui/icons-material/Home';
 import PanoramaFishEyeIcon from '@mui/icons-material/PanoramaFishEye'; import Link from '@mui/material/Link';
 import { AboutUsSectionContent } from "../utils/content";
 import TeamCard from "../components/Cards/TeamCard";
-import * as React from 'react';
-import ImageList from '@mui/material/ImageList';
-import ImageListItem from '@mui/material/ImageListItem';
-import CheckCircleIcon from '@mui/icons-material/CheckCircle';
-function srcset(image, size, rows = 1, cols = 1) {
-  return {
-    src: `${image}?w=${size * cols}&h=${size * rows}&fit=crop&auto=format`,
-    srcSet: `${image}?w=${size * cols}&h=${size * rows
-      }&fit=crop&auto=format&dpr=2 2x`,
-  };
-}
+import ImgList from '../components/ImgList/ImgList';
+import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
+import AboutProject from '../components/AboutProject/AboutProject';
 const { ITEMS } = AboutUsSectionContent;
 
 function AboutUs() {
 
   return (
 
-    <Stack direction="column" >
+    <Stack direction="column" height="100%">
       <Navbar />
       <Box sx={{
         mt: 8,
@@ -87,132 +79,49 @@ function AboutUs() {
       <Box sx={{ bgcolor: "white", }}>
         <Container>
           <Stack direction="row" spacing={5}>
-
-            <Container maxWidth="md">
-
-              <Title variant={{ xs: "h3", md: "h2" }} sx={{ textAlign: "center", color: "#1F485B", py: 1 }}>
-                HEALTHAK
-              </Title>
-              <Title variant={{ xs: "h5", md: "h6" }} sx={{ textAlign: "center", color: "#1F485B", py: 1 }}>
-                About the Project
-              </Title>
-              <Typography variant="body2" sx={{ textAlign: "center", fontSize: "15px", color: "gray", py: 1 }}>
-                Healthak is a portable Pharmacy/Clinic web application that aims to provide medical services, patient profiles, disease control, physician dashboards, patient groups, appointment scheduling, and communication channels. The application's focus is on providing seamless communication between patients and physicians, personalized patient health tracking, and educational resources for patients. Physicians can monitor their patients' health, receive alerts, and engage in real-time consultations.
-              </Typography>
-              <Title variant={{ xs: "h5", md: "h6" }} sx={{ textAlign: "center", color: "#1F485B", py: 1 }}>
-                Emergancy Care
-              </Title>
-              <Stack direction="row" spacing={4} alignItems="center" justifyContent="center">
-                <Stack direction="column" spacing={2}> <Typography
-                  sx={{ display: 'flex', alignItems: 'center', color: "gray", py: 1 }}>
-                  <CheckCircleIcon sx={{ mr: 0.5, color: "green" }} fontSize="inherit" />
-                  Primary Care
-                </Typography>
-                  <Typography
-                    sx={{ display: 'flex', alignItems: 'center', color: "gray", py: 1 }}>
-                    <CheckCircleIcon sx={{ mr: 0.5, color: "green" }} fontSize="inherit" />
-                    Medicine
-                  </Typography>
-                  </Stack>
-                <Stack direction="column" spacing={2}>
-                  <Typography
-                    sx={{ display: 'flex', alignItems: 'center', color: "gray", py: 1 }}>
-                    <CheckCircleIcon sx={{ mr: 0.5, color: "green" }} fontSize="inherit" />
-                    Orthopedic
-                  </Typography>
-                  <Typography
-                    sx={{ display: 'flex', alignItems: 'center', color: "gray", py: 1 }}>
-                    <CheckCircleIcon sx={{ mr: 0.5, color: "green" }} fontSize="inherit" />
-                    Cardiology
-                  </Typography>
-                </Stack>
-              </Stack>
-            </Container>
-            <ImageList
-              sx={{ width: 800, height: 450 }}
-              variant="quilted"
-              cols={4}
-              rowHeight={121}
-            >
-              {itemData.map((item) => (
-                <ImageListItem key={item.img} cols={item.cols || 1} rows={item.rows || 1}>
-                  <img
-                    {...srcset(item.img, 121, item.rows, item.cols)}
-                    alt={item.title}
-                    loading="lazy"
-                  />
-                </ImageListItem>
-              ))}
-            </ImageList>
+            <AboutProject />
+          <ImgList />
           </Stack>
 
         </Container>
       </Box>
-      {/* <Footer /> */}
+      <Box sx={{ width: "100%", height: "50vh",bgcolor:"white"}}>
+      <Container sx={{ height: "100%" }} justifyContent="center" alignItems="center">
+      <Stack  direction="row" sx={{ height: "100%" }} justifyContent="center" alignItems="center">
+      <Container >
+        <Title variant={{ xs: "h5", md: "h6" }} sx={{ color: "#1F485B", py: 1 }}>One Of the Famous Hospitals</Title>
+        <Typography variant="body2" sx={{fontSize: "15px", color: "gray", pb: 1 }}>
+              One of the famous hospitals known for its excellence in healthcare is the Mayo Clinic. Located in Rochester, Minnesota, the Mayo Clinic is renowned for its top-notch medical care, cutting-edge research, and patient-centered approach. It has a long-standing history of providing high-quality healthcare services across a wide range of medical specialties and is often recognized for its commitment to patient well-being. The Mayo Clinic has multiple campuses and facilities across the United States, making it a destination for patients seeking world-class medical treatment and expertise.</Typography>
+              <Divider color="#1F485B" sx={{  mb: 2 }} />
+              <Stack spacing={1} direction="row" alignItems="center"  sx={{width: "100%", }}>
+              <AccountCircleOutlinedIcon sx={{ color: "black" }} />
+              <Stack direction="column" spacing={0.4}>
+                <Typography sx={{
+                  fontWeight: "700",
+                  fontSize: "12px",
+                  color: "#1F485B"
+                }}>Tasneem Hassasneh</Typography>
+                <Typography sx={{
+                  fontWeight: "600",
+                  fontSize: "10px",
+                  color: "#47484b",
+                }}>@Software_Developer</Typography>
+              </Stack>
+            </Stack>
+      </Container>
+      <Container sx={{ width:700 , alignItems:"center", justifyContent:"center", textAlign:"center"}}>
+        <Title variant={{ xs: "h5", md: "h6" }} sx={{color: "#1F485B", py: 1 }}>We're Are Here For You</Title>
+        <Typography variant="body2" sx={{  fontSize: "15px", color: "gray", pb: 2 }}>We are here to provide you with expert guidance and information on all things related to medicine on our website. Whether you're seeking advice on a specific medical condition, looking for insights into the latest healthcare developments, or simply curious about general health and wellness, our platform is your trusted resource.</Typography>
+      <Button  variant='contained' sx={{bgcolor:"#1F485B"}}>Contact Us</Button> 
+      </Container>
+      </Stack >
+      </Container>
+    </Box >
+    <Divider color="#1F485B"  />
+      <Footer />
     </Stack>
 
   )
 }
 
 export default AboutUs
-const itemData = [
-  {
-    img: 'https://images.pexels.com/photos/12585207/pexels-photo-12585207.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-    title: 'Breakfast',
-    rows: 2,
-    cols: 2,
-  },
-  {
-    img: 'https://images.pexels.com/photos/4047070/pexels-photo-4047070.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-    title: 'Burger',
-  },
-  {
-    img: 'https://images.pexels.com/photos/3652103/pexels-photo-3652103.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-    title: 'Camera',
-  },
-  {
-    img: 'https://images.pexels.com/photos/3683074/pexels-photo-3683074.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-    title: 'Coffee',
-    cols: 2,
-  },
-  {
-    img: 'https://images.pexels.com/photos/7526052/pexels-photo-7526052.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-    title: 'Hats',
-    cols: 2,
-  },
-  {
-    img: 'https://images.pexels.com/photos/7856721/pexels-photo-7856721.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-    title: 'Honey',
-    author: '@arwinneil',
-    rows: 2,
-    cols: 2,
-  },
-  {
-    img: 'https://images.pexels.com/photos/8376163/pexels-photo-8376163.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-    title: 'Basketball',
-  },
-  {
-
-    img: 'https://images.pexels.com/photos/3873146/pexels-photo-3873146.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-    title: 'Fern',
-  },
-  {
-    img: 'https://images.pexels.com/photos/3873137/pexels-photo-3873137.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-    title: 'Mushrooms',
-    rows: 2,
-    cols: 2,
-  },
-  {
-    img: 'https://images.pexels.com/photos/8940479/pexels-photo-8940479.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-    title: 'Tomato basil',
-  },
-  {
-    img: 'https://images.pexels.com/photos/7722797/pexels-photo-7722797.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-    title: 'Sea star',
-  },
-  {
-    img: 'https://images.pexels.com/photos/3825573/pexels-photo-3825573.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-    title: 'Bike',
-    cols: 2,
-  },
-];

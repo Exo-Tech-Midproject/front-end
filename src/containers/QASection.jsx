@@ -73,10 +73,10 @@ function QASection() {
 
         </Stack>
       </Box>
-      <Box sx={{ width: "100%", bgcolor: "white", height: "80vh" }}>
+      <Box sx={{ width: "100%", bgcolor: "white", height: "100vh" }}>
       <Stack direction="row" spacing={4} alignItems="center" justifyContent="center" sx={{ height: "100%" }} >
       <Box sx={{
-          width: "450px",
+          width: "80%",
           height: "fit-content",
           backgroundColor: "white",
           boxShadow: "0px 187px 75px rgba(0, 0, 0, 0.01), 0px 105px 63px rgba(0, 0, 0, 0.05), 0px 47px 47px rgba(0, 0, 0, 0.09), 0px 12px 26px rgba(0, 0, 0, 0.1), 0px 0px 0px rgba(0, 0, 0, 0.1)",

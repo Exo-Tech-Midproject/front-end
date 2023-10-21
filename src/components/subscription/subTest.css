@@ -1,0 +1,158 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:300,400,600);
+
+.ALL {
+
+	width: 100%;
+	height: max-content;
+	display: flex;
+	justify-content: center;
+	margin-top: 20px;
+}
+
+.mainP {
+	min-Height: 300px;
+	/* margin: 5px 10px 0 10px; */
+	height: max-content;
+	width: 75%;
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
+	/* margin-bottom: 20px; */
+}
+
+.SubsCus {
+	display: flex;
+	/* justify-content: center; */
+	min-height: max-content;
+	min-width: max-content;
+}
+
+
+.rating14-form {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	text-align: center;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 300px;
+	background-color: white;
+	padding: 30px;
+	border-radius: 10px;
+	z-index: 1000;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.Ssnip1336 {
+	font-family: 'Roboto', Arial, sans-serif;
+	position: relative;
+	overflow: hidden;
+	margin: 10px;
+	opacity: 1;
+	min-width: 230px;
+	max-width: 315px;
+	width: 100%;
+	color: #ffffff;
+	text-align: left;
+	line-height: 1.4em;
+	background-color: #1F485B;
+	border-radius: 17px;
+	min-height: 400px;
+
+	box-shadow: '0px 2px 5px 3px rgba(0,0,0,0.4), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 1px 3px 0px rgba(0,0,0,0.12)';
+}
+
+.Ssnip1336 * {
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	-webkit-transition: all 0.25s ease;
+	transition: all 0.25s ease;
+}
+
+.profileCover {
+	max-width: 100%;
+	vertical-align: top;
+	opacity: 0.85;
+	min-height: 250px;
+}
+
+.Ssnip1336 figcaption {
+	width: 100%;
+	background-color: #1F485B;
+	padding: 25px;
+	position: relative;
+}
+
+.Ssnip1336 figcaption:before {
+	position: absolute;
+	content: '';
+	bottom: 100%;
+	left: 0;
+	width: 0;
+	height: 0;
+	border-style: solid;
+	border-width: 55px 0 0 400px;
+	border-color: transparent transparent transparent #1F485B;
+}
+
+/* .Ssnip1336 figcaption a {
+    padding: 5px;
+    border: 1px solid #ffffff;
+    border-radius: 3px;
+    color: #ffffff;
+    font-size: 0.7em;
+    text-transform: capitalize;
+    margin: 10px 0;
+    display: inline-block;
+    opacity: 0.8;
+    width: 47%;
+    text-align: center;
+    text-decoration: none;
+    font-weight: 600;
+    letter-spacing: 1px;
+} */
+
+/* .Ssnip1336 figcaption a:hover {
+    opacity: 1;
+} */
+
+.Ssnip1336 .profile {
+	border-radius: 50%;
+	width: 100px;
+	height: 100px;
+	position: absolute;
+	bottom: 100%;
+	left: 25px;
+	z-index: 1;
+	/* max-width: 90px; */
+	object-fit: cover;
+	opacity: 1;
+	box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+}
+
+.Ssnip1336 .follow {
+	margin-right: 4%;
+	border-color: white;
+	color: white;
+}
+
+.Ssnip1336 h2 {
+	margin: 0 0 5px;
+	font-weight: 300;
+}
+
+.Ssnip1336 h2 span {
+	display: block;
+	font-size: 0.55em;
+	color: white;
+	text-transform: capitalize;
+}
+
+.Ssnip1336 p {
+	margin: 0 0 10px;
+	font-size: 0.8em;
+	letter-spacing: 1px;
+	opacity: 0.8;
+}

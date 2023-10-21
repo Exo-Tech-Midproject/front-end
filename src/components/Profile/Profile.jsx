@@ -11,12 +11,16 @@ import cookie from 'react-cookies'
 import jwtDecode from 'jwt-decode';
 
 import ProfileCalendar from "./ProfileCalendar";
+import VitalsChart from "../Vitals/VitalsChart";
+import PresPieChart from "../Prescriptions/PresPieChart";
+import AuthPatient from "../Auths/AuthPatient";
 let DBRUL = process.env.REACT_APP_BASE_URL
 
 export default function Profile() {
     const [profileInfo, setProfileInfo] = useState(null)
     const [appointmentsInfo, setAppointmentsInfo] = useState([])
     const [prescriptionsInfo, setPrescriptionsInfo] = useState([])
+    const [vitals, setVitals] = useState([])
     let ordered = prescriptionsInfo?.slice(0, 10).sort((a, b) => b.id - a.id)
     console.log(ordered, 'odddarara')
     let token = cookie.load('auth')
@@ -92,10 +96,44 @@ export default function Profile() {
         }
 
     }
+    const getVitalsInfo = async () => {
+        try {
+            if (payload) {
+                if (payload.accountType === 'patient') {
+
+
+                    const response = await axios.get(`${DBRUL}/${payload.accountType}/${payload.username}/vitals`, {
+                        headers: { Authorization: `Bearer ${token}` }
+
+                    });
+
+                    let data = response.data
+                    setVitals(data)
+                    return data
+                }
+                else if (payload.accountType === 'physician') {
+
+
+                    const response = await axios.get(`${DBRUL}/${payload.accountType}/${payload.username}/patients/vitals`, {
+                        headers: { Authorization: `Bearer ${token}` }
+
+                    });
+
+                    let data = response.data
+                    setVitals(data)
+                    return data
+                }
+            }
+        } catch (error) {
+            console.error('Error uploading image:', error);
+        }
+
+    }
     useEffect(() => {
         getProfileInfo()
         getAppointmentsInfo()
         getPrescriptionsInfo()
+        getVitalsInfo()
     }, [])
     return (
         <Grid container bgcolor={'#f2f5f9'} rowGap={4} mt={9} >
@@ -123,6 +161,27 @@ export default function Profile() {
                 {/* <SidePageSection /> */}
                 <PrescriptionsSection prescriptionsInfo={ordered} getProfileInfo={getProfileInfo} profileInfo={profileInfo} setProfileInfo={setProfileInfo} />
             </Grid>
+            <Grid item xs={12} md={12} pl={4} pt={2} pr={4} >
+                <AuthPatient>
+                    <VitalsChart dataArr={vitals} />
+                </AuthPatient>
+            </Grid>
+            <AuthPatient>
+                <Grid item xs={12} md={12} pl={4} pt={2} pr={4} pb={10}  >
+                    <Box display='flex'
+                        flexWrap='wrap'
+                        justifyContent='space-around'
+                        width='100%'
+                        height='500px'
+                        bgcolor='white'
+                        borderRadius='15px'
+                        boxShadow='rgba(159, 162, 191, 0.18) 0px 9px 16px, rgba(159, 162, 191, 0.32) 0px 2px 2px'
+                        m='0 auto'>
+
+                        <PresPieChart data={prescriptionsInfo} />
+                    </Box>
+                </Grid>
+            </AuthPatient>
 
 
         </Grid >

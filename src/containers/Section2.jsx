@@ -3,24 +3,23 @@ import React from "react";
 import CountUp from "react-countup";
 import Title from "../components/Title";
 import { section2Content } from "../utils/content";
-
+import Counter from "../components/Counter/Counter";
 const { items } = section2Content;
-
+// const NumberEasing = require('che-react-number-easing');
 const CustomCounter = ({
   before = "",
   after = "",
   counter,
   subtitle,
   decimals = false,
+  // maxNum
 }) => (
   <Stack spacing={{ xs: 1, md: 2 }} alignItems="center">
-    <CountUp prefix={before} suffix={after} end={counter} decimals={decimals}>
-      {({ countUpRef }) => (
-        <Title variant={{ xs: "h4", md: "h2" }} sx={{ fontWeight: 300 }}>
-          <span ref={countUpRef} />
-        </Title>
-      )}
-    </CountUp>
+
+    <Title variant={{ xs: "h4", md: "h2" }} sx={{ fontWeight: 300 }}>
+      <Counter minimum={0} maximum={counter} />
+    </Title>
+
 
     <Typography variant="body2" color="white">
       {subtitle}
@@ -30,10 +29,10 @@ const CustomCounter = ({
 
 const Section2 = () => {
   return (
-    <Container sx={{ }}>
+    <Container sx={{}}>
       <Box
         sx={(theme) => ({
-          color:"white",
+          color: "white",
           position: "relative",
           py: 2,
           bgcolor: "#296079",
@@ -61,6 +60,7 @@ const Section2 = () => {
             </Grid>
           ))}
         </Grid>
+
       </Box>
     </Container>
   );

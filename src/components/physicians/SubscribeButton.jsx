@@ -29,22 +29,32 @@ export default function SubscribeButton({ physicianUN }) {
       }
     } catch (error) {
       console.log(error);
-        setAlreadySubscribed(true);
-        setSnackbarOpen(true);
+      setAlreadySubscribed(true);
+      setSnackbarOpen(true);
     }
   }
 
   return (
-    <div>
+    <>
       <Button
+
         onClick={handleSubscribeClick}
         sx={{
           background:
             'linear-gradient(90deg, rgba(12,184,182,1) 0%, rgba(11,145,144,1) 75%)',
           boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
-          padding: '10px 35px',
+          // padding: '10px 56px',
+          paddingX: '70px',
+          paddingY: '10px',
+          // width: '80%',
           borderRadius: '30px',
           color: '#ffffff',
+          position: 'absolute',
+          // top: '240px',
+          top: '48%',
+          fontSize: '1.10rem',
+          // left: '82px'
+          left: '19%'
         }}
       >
         Subscribe
@@ -55,6 +65,6 @@ export default function SubscribeButton({ physicianUN }) {
         onClose={() => setSnackbarOpen(false)}
         message={alreadySubscribed ? "You are already a subscriber" : "Subscription Successful!"}
       />
-    </div>
+    </>
   );
 }

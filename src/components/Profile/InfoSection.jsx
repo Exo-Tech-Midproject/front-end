@@ -38,7 +38,7 @@ export default function InfoSection({ profileInfo }) {
                         <Box width='33%'>
 
                             <iframe title="animation-profile3" style={{ width: '70%', height: '70%', border: 'none' }} src="https://lottie.host/?file=9a0e2d8a-3bc1-43a5-86b5-62dc6706fef9/nCbxXlNVM6.json"></iframe>
-                            <Typography color='#1F485B' fontSize={{ xs: '0.6rem', sm: '1rem', md: '1rem' }}>{profileInfo?.birthdate}</Typography>
+                            <Typography color='#1F485B' fontSize={{ xs: '0.6rem', sm: '1rem', md: '1rem' }}>{profileInfo?.birthdate || profileInfo?.birthDate}</Typography>
                         </Box>
                     </Box>
 
@@ -52,7 +52,7 @@ export default function InfoSection({ profileInfo }) {
 
                         <Box width='48%'>
                             <iframe title="animation-profile5" style={{ width: '70%', height: '70%', border: 'none' }} src="https://lottie.host/?file=86022618-bda3-4d3c-a75e-19acdfefe0f8/hw1RxdbUwH.json"></iframe>
-                            <Typography color='#1F485B' fontSize={{ xs: '0.6rem', sm: '1rem', md: '1rem' }}>{profileInfo?.maritalStatus}</Typography>
+                            <Typography color='#1F485B' fontSize={{ xs: '0.6rem', sm: '1rem', md: '1rem' }}>{profileInfo?.maritalStatus || profileInfo?.department}</Typography>
                         </Box>
                     </Box>
 

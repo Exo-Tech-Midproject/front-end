@@ -59,6 +59,7 @@ const App = () => {
 
 
           <Route path='/' element={<Suspense fallback={<Loading />}><Home /></Suspense>} />
+          {/* <Route path='/' element={<Home />} /> */}
           <Route path='/Login' element={<Suspense fallback={<Loading />}><Login /></Suspense>} />
           <Route path='/testlogin' element={<Suspense fallback={<Loading />}><LoginPatientTestingForm /></Suspense>} />
           <Route path='/testlogin2' element={<Suspense fallback={<Loading />}><LoginPhysicianTestingForm /></Suspense>} />

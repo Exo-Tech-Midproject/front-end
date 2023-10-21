@@ -50,7 +50,11 @@ export default function Appointment() {
 		return false;
 	}
 
-	const handleDateClick = (selected) => {
+	const handleDateClick = (selectInfo) => {
+		setEventDetails((prevState) => ({
+			...prevState,
+			date: selectInfo.startStr,
+		}));
 		setOpen(true);
 	};
 
@@ -110,22 +114,28 @@ export default function Appointment() {
 
 			// console.log("eventDetails ", eventDetails);
 			if (payload?.accountType === 'physician') {
-				let createdEvent = await axios.post(`${DBURL}/physician/${payload.username}/patients/${'anas'}/appointments`, eventDetails, {
+				let createdEvent = await axios.post(`${DBURL}/physician/${payload.username}/patients/${eventDetails.patientName}/appointments`, eventDetails, {
 					headers: { Authorization: `Bearer ${token}` }
 				});
 				// console.log("createdEvent", createdEvent)
+				const updatedEvents = [...currentEvents, createdEvent.data];
+				setCurrentEvents(updatedEvents);
 				setOpen(false);
 				return createdEvent;
 			}
 
 			if (event && time) {
-				calendarApi.addEvent({
+				const newEvent = {
 					title: event,
-					start: time,
+					start: new Date(time),
 					extendedProps: {
 						patientName,
 					},
-				});
+				};
+				calendarApi.addEvent(newEvent);
+
+				const updatedEvents = [...currentEvents, newEvent]; // Update the current events with the newly created event
+				setCurrentEvents(updatedEvents); // Update the currentEvents state
 
 				setEventDetails({
 					event: "",
@@ -133,6 +143,7 @@ export default function Appointment() {
 					time: "",
 				});
 			}
+
 		} catch (err) {
 			console.log(err);
 		}
@@ -142,6 +153,7 @@ export default function Appointment() {
 		const { id, value } = e.target;
 		setEventDetails({ ...eventDetails, [id]: value });
 	};
+
 
 	const formatDate = (date) => {
 		return new Intl.DateTimeFormat("en-US", {
@@ -324,7 +336,7 @@ export default function Appointment() {
 							p: 4,
 						}}
 					>
-						<Typography variant="h6" component="h2" gutterBottom>
+						<Typography color='#1F485B' variant="h6" component="h2" gutterBottom>
 							Add Event
 						</Typography>
 						<form
@@ -345,18 +357,21 @@ export default function Appointment() {
 								sx={{
 									marginBottom: 2,
 								}}
+								InputLabelProps={{ sx: { color: '#1F485B' } }}
 							/>
 							<TextField
 								id="patientName"
 								label="Patient Name"
 								fullWidth
+								required
 								value={eventDetails.patientName}
 								onChange={handleInputChange}
 								sx={{
 									marginBottom: 2,
 								}}
+								InputLabelProps={{ sx: { color: '#1F485B' } }}
 							/>
-							<TextField
+							{/* <TextField
 								id="date"
 								label="Time"
 								fullWidth
@@ -367,7 +382,7 @@ export default function Appointment() {
 								sx={{
 									marginBottom: 2,
 								}}
-							/>
+							/> */}
 							<Box
 								sx={{
 									display: 'flex',
@@ -378,20 +393,14 @@ export default function Appointment() {
 								<Button
 									variant="contained"
 									onClick={handleModalClose}
-									sx={{
-										backgroundColor: '#ff0000', // Change the color as needed
-										color: '#fff',
-									}}
+									color="error"
 								>
 									Cancel
 								</Button>
 								<Button
 									variant="contained"
 									onClick={handleAddEvent}
-									sx={{
-										backgroundColor: '#00ff00', // Change the color as needed
-										color: '#fff',
-									}}
+									color="medical"
 								>
 									Add Event
 								</Button>

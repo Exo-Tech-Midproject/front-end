@@ -223,7 +223,7 @@ export default function Post({ data, fetchUserpost, setpost }) {
 				</Box>
 
 				{/* replay */}
-				<AuthPatient >
+				<AuthPhysician >
 					<Box sx={{
 						width: "100%",
 						height: "fit-content",
@@ -270,7 +270,7 @@ export default function Post({ data, fetchUserpost, setpost }) {
 						</Box>
 
 					</Box>
-				</AuthPatient>
+				</AuthPhysician>
 			</Box>
 		</>
 	)

@@ -26,7 +26,7 @@ export default function ChatContactShip({ handleSelectContact, activeChat, perso
                 <Typography color='medical' fontWeight='400' fontSize={'12px'} textOverflow='clip'>{lastMsg.substring(0, 19) + '...'}</Typography>
             </Box>
             <Box>
-                <Badge badgeContent={number} color='medical' />
+                {/* <Badge badgeContent={number} color='medical' /> */}
             </Box>
         </Box >
     )

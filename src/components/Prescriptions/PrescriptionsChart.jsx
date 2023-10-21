@@ -24,7 +24,7 @@ export default function PrescriptionsChart({ prescription }) {
             marginTop='30px'
             marginBottom='30px'
             bgcolor={'white'}
-            py={10}
+            py={5}
             justifyContent='center'
             borderRadius='20px'
 

@@ -35,7 +35,7 @@ export default function PresPieChart({ data }) {
     });
     return (
         <>
-            <ResponsiveContainer width="30%" height={400}>
+            <ResponsiveContainer width="30%" height={470}>
                 <PieChart>
                     <Pie
                         data={chartData}
@@ -56,7 +56,7 @@ export default function PresPieChart({ data }) {
                     <Legend layout="horizontal" verticalAlign="bottom" align="center" />
                 </PieChart>
             </ResponsiveContainer>
-            <ResponsiveContainer width="30%" height={400}>
+            <ResponsiveContainer width="30%" height={470}>
                 <PieChart>
                     <Pie
                         data={chartData2}

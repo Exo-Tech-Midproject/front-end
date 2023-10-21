@@ -33,7 +33,7 @@ export default function CreateGroup() {
   const [temp, setTemp] = useState(DefaultImg);
   const [selectedFile, setSelectedFile] = useState(DefaultImg)
 
-  let ordered = createdGroups.sort((a , b) => b.id - a.id)
+  let ordered = createdGroups.sort((a, b) => b.id - a.id)
 
   const [snackbarOpen, setSnackbarOpen] = useState(false);
 
@@ -80,20 +80,20 @@ export default function CreateGroup() {
     const inputValue = e.target.value;
     setDescription(inputValue);
 
-    if ( inputValue.length > 20) {
+    if (inputValue.length > 20) {
       setDescriptionError('Description must less than 20 characters.');
     } else {
       setDescriptionError(null);
     }
   };
 
-  
+
 
   const handleGroupNameChange = (e) => {
     const inputValue = e.target.value;
     setGroupName(inputValue);
 
-    if ( inputValue.length > 20) {
+    if (inputValue.length > 20) {
       setGroupNameError('Group name must be less than 20 characters.');
     } else {
       setGroupNameError(null);
@@ -105,7 +105,7 @@ export default function CreateGroup() {
     e.preventDefault();
 
     if (groupName && description && !groupNameError && !descriptionError) {
-      if (description.length <= 20  && groupName.length <= 20) {
+      if (description.length <= 20 && groupName.length <= 20) {
         let newGroup = {
           groupName: groupName,
           description: description,
@@ -312,7 +312,7 @@ export default function CreateGroup() {
         //         backgroundRepeat: "no-repeat",
         //         backgroundSize: "cover",
         //         backgroundImage:"url('https://cdn.create.vista.com/api/media/small/483426030/stock-photo-abstract-gradient-classic-blue-soft-color-background-background-color-graphic')",
-        height:"20vh",
+        height: "20vh",
         // height:"50px"
       }}>
         <Typography variant="h1" textTransform="capitalize" sx={{
@@ -325,10 +325,12 @@ export default function CreateGroup() {
       </Box>
       <Box
         sx={{
-          margin: '2%',
+          margin: 'auto',
           flexWrap: 'wrap',
           display: 'flex',
-          minHeight: "30vh"
+          minHeight: "30vh",
+          justifyContent: 'center',
+          mb: '50px'
         }}
       >
         {createdGroups.map((group, index) => (

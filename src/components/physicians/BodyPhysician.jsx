@@ -46,7 +46,8 @@ export default function BodyPhysician() {
         display: "flex",
         flexDirection: "row",
         flexWrap: 'wrap',
-        justifyContent: "space-between"
+        gap: 3,
+        justifyContent: "center"
       }}>
         {allDoctors.slice(startIndex, endIndex).map((card) => (
           <Box sx={{
@@ -55,7 +56,8 @@ export default function BodyPhysician() {
             display: "flex",
             borderRadius: "5px",
             marginBottom: "30px",
-            position: "relative"
+            position: "relative",
+            maxHeight: '500px'
           }}>
             <Stack sx={{
               width: 350,
@@ -82,15 +84,16 @@ export default function BodyPhysician() {
                 alignItems: "center",
                 flexDirection: "column"
               }}>
-                <Typography sx={{
+                <Typography textTransform='capitalize' sx={{
                   marginBottom: "15px",
                   fontSize: "2rem",
                   fontWeight: 500,
                   lineHeight: 1.2,
+
                 }}>
                   {card.fullName}
                 </Typography>
-                <Typography variant='h5' sx={{
+                <Typography textTransform='uppercase' variant='h5' sx={{
                   color: "#1F485B"
                 }}>
                   {card.department}

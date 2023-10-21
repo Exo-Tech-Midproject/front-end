@@ -9,11 +9,14 @@ import {
 import useScrollPosition from "../../hooks/useScrollPosition";
 import CustomLink from "../Buttons/CustomLink";
 import SignupLink from "../Buttons/SignupLink";
+import DashBoardLink from "../Buttons/dashboardLink";
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import ContactSupportOutlinedIcon from '@mui/icons-material/ContactSupportOutlined';
 import HomeIcon from '@mui/icons-material/Home';
+import cookie from 'react-cookies'
 
 const Navbar = () => {
+  let token = cookie.load('auth')
   const scrollPosition = useScrollPosition();
 
   const theme = useTheme();
@@ -56,25 +59,25 @@ const Navbar = () => {
               flexWrap="wrap"
             >
               <CustomLink href="/">
-              <Stack direction="row" alignItems="center" justifyContent="center" spacing={1}>
-                  <HomeIcon fontSize="inherit"/>
-                <Typography variant="body2">Home</Typography>
+                <Stack direction="row" alignItems="center" justifyContent="center" spacing={1}>
+                  <HomeIcon fontSize="inherit" />
+                  <Typography variant="body2">Home</Typography>
                 </Stack>
               </CustomLink>
 
               <CustomLink href="/QACategories">
-              <Stack direction="row" alignItems="center" justifyContent="center" spacing={1}>
-                  <ContactSupportOutlinedIcon fontSize="inherit"/>
-                <Typography variant="body2">Q/A</Typography>
+                <Stack direction="row" alignItems="center" justifyContent="center" spacing={1}>
+                  <ContactSupportOutlinedIcon fontSize="inherit" />
+                  <Typography variant="body2">Q/A</Typography>
                 </Stack>
               </CustomLink>
 
               <CustomLink href="/AboutUs">
                 <Stack direction="row" alignItems="center" justifyContent="center" spacing={1}>
-                  <InfoOutlinedIcon fontSize="inherit"/>
-                <Typography variant="body2">About us</Typography>
+                  <InfoOutlinedIcon fontSize="inherit" />
+                  <Typography variant="body2">About us</Typography>
                 </Stack>
-                
+
               </CustomLink>
 
             </Stack>
@@ -82,10 +85,19 @@ const Navbar = () => {
 
           {/* Action Buttons */}
           <Stack direction="row" spacing={5} alignItems="center">
-            <CustomLink href="/Login" spacing={1}>
-              Login
-            </CustomLink>
-          <SignupLink href="/Signup" spacing={1}/>
+            {!token && (
+              <CustomLink href="/Login" spacing={1}>
+                Login
+              </CustomLink>
+            )}
+            {!token && (
+              <SignupLink href="/Signup" spacing={1} />
+            )}
+            {token && (
+              <DashBoardLink href="/dashboard" spacing={1} />
+            )}
+
+            {/* <DashBoardLink href="/dashboard" spacing={1} /> */}
           </Stack>
 
         </Stack>

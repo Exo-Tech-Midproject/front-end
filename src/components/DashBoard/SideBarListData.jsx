@@ -76,12 +76,6 @@ export let ListData3 = [
         path: '/dashboard/medical-history'
 
     },
-    {
-        items: 'Patient Control',
-        icon: <MonitorHeartIcon sx={{ color: `white` }} />,
-        path: '/dashboard/patient-control'
-
-    },
 
     {
         items: 'Appointment',
@@ -95,5 +89,28 @@ export let ListData3 = [
         path: '/dashboard/chat'
 
     }
+
+]
+export let ListData4 = [
+    {
+        items: 'Profile',
+        icon: <AccountCircleOutlinedIcon sx={{ color: `white` }} />,
+        path: '/dashboard/profile'
+
+    },
+    {
+        items: 'Groups',
+        icon: <Groups2OutlinedIcon sx={{ color: `white` }} />,
+        path: '/dashboard/groups'
+
+
+    },
+    {
+        items: 'Patient Control',
+        icon: <MonitorHeartIcon sx={{ color: `white` }} />,
+        path: '/dashboard/patient-control'
+
+    },
+
 
 ]

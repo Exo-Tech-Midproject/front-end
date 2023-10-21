@@ -7,7 +7,7 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import Typography from "@mui/material/Typography";
 import React, { useContext } from 'react'
-import { ListData1, ListData2, ListData3 } from './SideBarListData'
+import { ListData1, ListData2, ListData3, ListData4 } from './SideBarListData'
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
 import { Link, useNavigate } from 'react-router-dom';
 import { LoginContext } from "../../ContextApi/Auth";
@@ -31,25 +31,25 @@ export default function SideBarList() {
     }
     return (
         <>
-            <List>
-                <Typography variant='body2' mb={'12px'} pl={1.5} color={'white'}>Socials</Typography>
-                <Divider />
-                {
-                    ListData1.map(element => (
-
-                        <ListItem key={element.items} disablePadding>
-                            <ListItemButton component={Link} to={`${element.path}`} sx={{ ":hover": { bgcolor: '#4B6477B0' }, color: "white" }} >
-                                <ListItemIcon>
-                                    {element.icon}
-                                </ListItemIcon>
-                                <ListItemText primary={element.items} />
-                            </ListItemButton>
-                        </ListItem>
-                    ))
-                }
-
-            </List >
             <AuthPatient>
+                <List>
+                    <Typography variant='body2' mb={'12px'} pl={1.5} color={'white'}>Socials</Typography>
+                    <Divider />
+                    {
+                        ListData1.map(element => (
+
+                            <ListItem key={element.items} disablePadding>
+                                <ListItemButton component={Link} to={`${element.path}`} sx={{ ":hover": { bgcolor: '#4B6477B0' }, color: "white" }} >
+                                    <ListItemIcon>
+                                        {element.icon}
+                                    </ListItemIcon>
+                                    <ListItemText primary={element.items} />
+                                </ListItemButton>
+                            </ListItem>
+                        ))
+                    }
+
+                </List >
                 <List>
                     <Typography variant='body2' mb={'12px'} pl={1.5} color={'white'}>Medical</Typography>
                     <Divider />
@@ -69,6 +69,24 @@ export default function SideBarList() {
                 </List >
             </AuthPatient>
             <AuthPhysician>
+                <List>
+                    <Typography variant='body2' mb={'12px'} pl={1.5} color={'white'}>Socials</Typography>
+                    <Divider />
+                    {
+                        ListData4.map(element => (
+
+                            <ListItem key={element.items} disablePadding>
+                                <ListItemButton component={Link} to={`${element.path}`} sx={{ ":hover": { bgcolor: '#4B6477B0' }, color: "white" }} >
+                                    <ListItemIcon>
+                                        {element.icon}
+                                    </ListItemIcon>
+                                    <ListItemText primary={element.items} />
+                                </ListItemButton>
+                            </ListItem>
+                        ))
+                    }
+
+                </List >
                 <List>
                     <Typography variant='body2' mb={'12px'} pl={1.5} color={'white'}>Medical</Typography>
                     <Divider />

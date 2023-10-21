@@ -14,6 +14,7 @@ import ProfileCalendar from "./ProfileCalendar";
 import VitalsChart from "../Vitals/VitalsChart";
 import PresPieChart from "../Prescriptions/PresPieChart";
 import AuthPatient from "../Auths/AuthPatient";
+import PrescriptionsChart from "../Prescriptions/PrescriptionsChart";
 let DBRUL = process.env.REACT_APP_BASE_URL
 
 export default function Profile() {
@@ -168,7 +169,7 @@ export default function Profile() {
             </Grid>
             <AuthPatient>
                 <Grid item xs={12} md={12} pl={4} pt={2} pr={4} pb={10}  >
-                    <Box display='flex'
+                    {/* <Box display='flex'
                         flexWrap='wrap'
                         justifyContent='space-around'
                         width='100%'
@@ -176,10 +177,11 @@ export default function Profile() {
                         bgcolor='white'
                         borderRadius='15px'
                         boxShadow='rgba(159, 162, 191, 0.18) 0px 9px 16px, rgba(159, 162, 191, 0.32) 0px 2px 2px'
-                        m='0 auto'>
+                        m='0 auto'> */}
 
-                        <PresPieChart data={prescriptionsInfo} />
-                    </Box>
+                    {/* <PresPieChart data={prescriptionsInfo} /> */}
+                    <PrescriptionsChart prescription={prescriptionsInfo} />
+                    {/* </Box> */}
                 </Grid>
             </AuthPatient>
 

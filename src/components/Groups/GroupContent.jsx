@@ -12,12 +12,12 @@ import Container from "@mui/material/Container";
 import CreatePost from './GroupPost/CreatePost';
 import PostContent from './GroupPost/PostContent';
 import PostHeader from './GroupPost/PostHeader';
-import  { useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import AddMembers from './GroupPost/AddMembers';
 import axios from "axios";
 import cookie from "react-cookies";
 import jwtDecode from "jwt-decode";
-import {useParams} from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 let DBRUL = process.env.REACT_APP_BASE_URL;
 
@@ -25,51 +25,51 @@ let DBRUL = process.env.REACT_APP_BASE_URL;
 export default function Group() {
 
   const [createdPost, setCreatedPost] = useState([]);
-  const [ getGroup , setGetGroup] = useState('')
+  const [getGroup, setGetGroup] = useState('')
 
   const params = useParams()
 
-  console.log('pppppppppp',params)
-
-  
+  console.log('pppppppppp', params)
 
 
-  async function fetchGroupData () {
+
+
+  async function fetchGroupData() {
     let token = cookie.load("auth");
-        const payload = await jwtDecode(token);
+    const payload = await jwtDecode(token);
 
     // if(payload.accountType === 'physician'){
 
-      try{
-            let groupData = await axios.get(`${DBRUL}/${payload.accountType}/${payload.username}/groups/${params.id}`, {
-              
-          headers: {Authorization: `Bearer ${token}`},
-  
+    try {
+      let groupData = await axios.get(`${DBRUL}/${payload.accountType}/${payload.username}/groups/${params.id}`, {
+
+        headers: { Authorization: `Bearer ${token}` },
+
       });
       setGetGroup(groupData.data)
-      console.log('gggggggggggggggggg',groupData.data)
+      console.log('gggggggggggggggggg', groupData.data)
 
       return groupData
-  
-      }
-      catch(error){
-        console.log(error)
-      }
+
+    }
+    catch (error) {
+      console.log(error)
+    }
 
   }
 
   useEffect(() => {
     fetchGroupData();
 
-// eslint-disable-next-line react-hooks/exhaustive-deps
-}, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
 
 
-  let ordered = createdPost.sort((a , b) => b.id - a.id)
+  let ordered = createdPost.sort((a, b) => b.id - a.id)
 
 
-  function UpdateCreatedPost (array){
+  function UpdateCreatedPost(array) {
 
     setCreatedPost(array)
 
@@ -77,52 +77,53 @@ export default function Group() {
 
   return (
     <Box
-    sx={{
-      paddingX:"36px",
-      paddingTop:"10px",
-      marginTop:"75px"
-    }}
+      sx={{
+        paddingX: "36px",
+        paddingTop: "10px",
+        marginTop: "75px"
+      }}
     >
       <Box>
         <Box sx={{
-          display:"flex",
-          alignItems:"center",
-          justifyContent:"space-between"
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          paddingTop: 1.5
         }}>
-        <div role="presentation">
-          <Breadcrumbs aria-label="breadcrumb">
-            <Link
-              underline="hover"
-              sx={{ display: 'flex', alignItems: 'center' }}
-              color="#062942"
-              href="/"
-            >
-              <HomeIcon sx={{ mr: 0.5 }} fontSize="inherit" />
-              Home
-            </Link>
-            <Link
-              underline="hover"
-              sx={{ display: 'flex', alignItems: 'center' }}
-              color="#062942"
-              href="/dashboard/groups"
-            >
-              <WhatshotIcon sx={{ mr: 0.5 }} fontSize="inherit" />
-              My Groups
-            </Link>
-            <Typography
-              sx={{ display: 'flex', alignItems: 'center' }}
-              color="#4070f4"
-            >
-              <GrainIcon sx={{ mr: 0.5 }} fontSize="inherit" />
-              Group
-            </Typography>
-          </Breadcrumbs>
-        </div>
-        <Box>
-        <AddMembers />
+          <div role="presentation">
+            <Breadcrumbs aria-label="breadcrumb">
+              <Link
+                underline="hover"
+                sx={{ display: 'flex', alignItems: 'center' }}
+                color="#062942"
+                href="/"
+              >
+                <HomeIcon sx={{ mr: 0.5 }} fontSize="inherit" />
+                Home
+              </Link>
+              <Link
+                underline="hover"
+                sx={{ display: 'flex', alignItems: 'center' }}
+                color="#062942"
+                href="/dashboard/groups"
+              >
+                <WhatshotIcon sx={{ mr: 0.5 }} fontSize="inherit" />
+                My Groups
+              </Link>
+              <Typography
+                sx={{ display: 'flex', alignItems: 'center' }}
+                color="#4070f4"
+              >
+                <GrainIcon sx={{ mr: 0.5 }} fontSize="inherit" />
+                Group
+              </Typography>
+            </Breadcrumbs>
+          </div>
+          <Box>
+            <AddMembers />
+          </Box>
         </Box>
-        </Box>
-        
+
         <Box
           sx={{
             minHeight: "50vh",
@@ -139,17 +140,17 @@ export default function Group() {
           }}
         >
           <Box sx={{
-            width:"30%",
-            margin:"auto"
+            width: "30%",
+            margin: "auto"
           }}>
-          <Lottie animationData={groupAnimation} style={{ width: "100%" }} />
+            <Lottie animationData={groupAnimation} style={{ width: "100%" }} />
           </Box>
           <Box sx={{
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
-            maxWidth:"60%",
-            margin:"auto"
+            maxWidth: "60%",
+            margin: "auto"
           }}>
             <Typography variant="h2" textTransform="capitalize" sx={{
               marginBottom: '5%',
@@ -173,36 +174,36 @@ export default function Group() {
         </Box>
       </Box>
       <Container>
-      <CreatePost  setCreatedPost={setCreatedPost}  getGroup={getGroup}/>
+        <CreatePost setCreatedPost={setCreatedPost} getGroup={getGroup} />
       </Container>
-      <Box 
-      minHeight='80vh' 
-      display='flex'
-      maxWidth={'95%'}
+      <Box
+        minHeight='80vh'
+        display='flex'
+        maxWidth={'95%'}
         margin={"30px auto"}
-      sx={{
-        bgcolor: "white",
-        boxShadow: 'inset 0px 2px 3px 0px rgba(0,0,0,0.4), inset 0px 1px 3px 0px rgba(0,0,0,0.12)',
+        sx={{
+          bgcolor: "white",
+          boxShadow: 'inset 0px 2px 3px 0px rgba(0,0,0,0.4), inset 0px 1px 3px 0px rgba(0,0,0,0.12)',
           borderRadius: "5px",
           flexDirection: "column"
-      }}>
-      <Box>
-          <PostHeader setGetGroup={setGetGroup} getGroup={getGroup}/>
+        }}>
+        <Box>
+          <PostHeader setGetGroup={setGetGroup} getGroup={getGroup} />
           <Box>
-          {createdPost.map((post, index) => (
-                <PostContent
+            {createdPost.map((post, index) => (
+              <PostContent
                 PostId={post.id}
                 createdPost={createdPost}
                 UpdateCreatedPost={UpdateCreatedPost}
-                    key={index}
-                    postTitle={post.title}
-                    postContent={post.textContent}
-                    postImage={post.postImage}
-                />
+                key={index}
+                postTitle={post.title}
+                postContent={post.textContent}
+                postImage={post.postImage}
+              />
             ))}
-            
+
           </Box>
-          </Box>
+        </Box>
       </Box>
     </Box>
   );

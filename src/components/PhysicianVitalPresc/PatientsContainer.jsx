@@ -4,14 +4,21 @@ import { LoginContext } from '../../ContextApi/Auth';
 import axios from 'axios';
 import jwtDecode from "jwt-decode";
 import cookie from 'react-cookies'
-import { Box, Typography } from '@mui/material';
+import { Box, Container, Typography } from '@mui/material';
 import HeroSection from './HeroSection';
 import { motion } from 'framer-motion';
+import VitalsPagination from '../Vitals/VitalsPagination';
 
 let DBRUL = process.env.REACT_APP_BASE_URL
 export default function PatientsContainer() {
     const { user } = useContext(LoginContext)
     const [subs, setSubs] = useState(null)
+
+    const [currentPage, setCurrentPage] = useState(1)
+    let startIndex = 4 * (currentPage - 1)
+    let endIndex = startIndex + 4
+    let currentPageRender = subs ? subs.slice(startIndex, endIndex) : []
+    let PaginationPages = Math.ceil(subs?.length / 4)
     async function fetchUserSubs() {
         try {
 
@@ -51,12 +58,15 @@ export default function PatientsContainer() {
                 mt={4} variant='h2'
                 textAlign='center'>Patients List</Typography>
 
-            <Box display={'flex'} width='100%' justifyContent='center' mt={4} flexWrap={'wrap'}>
-                {subs?.map(sub => (<SubPatientCard
+            <Box display={'flex'} width='100%' justifyContent='center' mt={4} flexWrap={'wrap'} mb={'50px'} minHeight='60vh'>
+                {currentPageRender?.map(sub => (<SubPatientCard
                     userInfo={sub}
                 />))}
 
+                <Container sx={{ margin: '30px auto' }}>
+                    <VitalsPagination setCurrentPage={setCurrentPage} PaginationPages={PaginationPages} />
 
+                </Container>
             </Box>
 
         </>

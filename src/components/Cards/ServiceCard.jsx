@@ -4,7 +4,7 @@ import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import Container from '@mui/material/Container';
 import Divider from '@mui/material/Divider';
-import {Grid} from "@mui/material";
+import { Grid } from "@mui/material";
 import Title from "../Title";
 import Link from '@mui/material/Link';
 import MobileStepper from '@mui/material/MobileStepper';
@@ -27,6 +27,7 @@ import Sec9Image9 from "../../assets/images/qaSection/seq9.webp";
 import Sec9Image10 from "../../assets/images/qaSection/seq10.webp";
 import Sec9Image11 from "../../assets/images/qaSection/seq11.webp";
 import Sec9Image12 from "../../assets/images/qaSection/seq12.webp";
+import cookie from 'react-cookies'
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 const images = [
   {
@@ -119,7 +120,7 @@ const ServiceCard = ({ title, subtitle, image }) => {
   const theme = useTheme();
   const [activeStep, setActiveStep] = React.useState(0);
   const maxSteps = images.length;
-
+  let token = cookie.load('auth')
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
@@ -133,9 +134,9 @@ const ServiceCard = ({ title, subtitle, image }) => {
   };
 
   return (
-    <Box  sx={{width: "70%",height:"70vh", position: 'relative', bgcolor:"white"}}>
-      <AutoPlaySwipeableViews 
-      sx={{ height: "60vh",}}
+    <Box sx={{ width: "70%", height: "70vh", position: 'relative', bgcolor: "white" }}>
+      <AutoPlaySwipeableViews
+        sx={{ height: "60vh", }}
         axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
         index={activeStep}
         onChangeIndex={handleStepChange}
@@ -144,79 +145,87 @@ const ServiceCard = ({ title, subtitle, image }) => {
         {images.map((step, index) => (
           <Container>
             <Stack direction="row">
-              <Box  key={step.label} sx={{width:"50%" ,height:"60vh",py:2,}}>
+              <Box key={step.label} sx={{ width: "50%", height: "60vh", py: 2, }}>
                 <img
-                src={step.imgPath}
-                alt={step.label}
-                style={{  
-                  borderRadius:"5%",      
-                  width: '100%',
-                  height: '55vh',
-                  objectFit: 'cover',
+                  src={step.imgPath}
+                  alt={step.label}
+                  style={{
+                    borderRadius: "5%",
+                    width: '100%',
+                    height: '55vh',
+                    objectFit: 'cover',
                   }}
                 />
               </Box>
-              <Box sx={{width:"50%" ,height:"60vh", bgcolor:"blak",py:2}}>
-              <Stack direction="column" p={5} sx={{
-                height: '100%',}}>
-              <Typography sx={{color:"#24546A"}}variant="h5" gutterBottom>
-                {step.label}
-              </Typography>
-              <Divider color="#1F485B" sx={{ my:1 }} />
-              <Typography variant="body1" sx={{letterSpacing: "0.02em"}}>
-                {step.sublabel}
-              </Typography>   
-              <Link href={step.link} sx={{position:"fixed", top:350, width:"400px"}}>
-                <Button variant="contained" color="medical">
-                  Find out more
-                </Button></Link>    
-              </Stack>
-      
-            
-    
+              <Box sx={{ width: "50%", height: "60vh", bgcolor: "blak", py: 2 }}>
+                <Stack direction="column" p={5} sx={{
+                  height: '100%',
+                }}>
+                  <Typography sx={{ color: "#24546A" }} variant="h5" gutterBottom>
+                    {step.label}
+                  </Typography>
+                  <Divider color="#1F485B" sx={{ my: 1 }} />
+                  <Typography variant="body1" sx={{ letterSpacing: "0.02em" }}>
+                    {step.sublabel}
+                  </Typography>
+
+                  {token && (<Link href={step.link} sx={{ position: "fixed", top: 350, width: "400px" }}>
+
+                    <Button variant="contained" color="medical">
+                      Find out more
+                    </Button></Link>)}
+                  {!token && (<Link href={'/login'} sx={{ position: "fixed", top: 350, width: "400px" }}>
+
+                    <Button variant="contained" color="medical">
+                      Login for more details
+                    </Button></Link>)}
+                </Stack>
+
+
+
               </Box>
             </Stack>
           </Container>
-  
 
 
-  //         <Box
-  //           key={step.label}
-  //           sx={{
-  //             display: 'flex',
-  //             alignItems: 'center',
-  //             justifyContent: 'center',
-  //             overflow: 'hidden',
-  //             position: 'relative',
-  //           }}
-  //         >
-  // <img
-  //             src={step.imgPath}
-  //             alt={step.label}
-  //             style={{
-  //               width: '50%',
-  //               height: '100%',
-  //               objectFit: 'cover',
-  //             }}
-  //           />
-            
-  //           <Box >
-  //             <Stack direction="column" p={5} sx={{
-  //               height: '100%',}}>
-  //             <Typography variant="h5" gutterBottom>
-  //               {step.label}
-  //             </Typography>
-  //             <Divider color="#1F485B" sx={{ my:3 }} />
-  //             <Typography variant="body1">
-  //               {step.sublabel}
-  //             </Typography>
-  //             <Link href={step.link}>
-  //               <Button variant="contained" color="medical" sx={{ mt: 2 }} >
-  //                 Find out more
-  //               </Button></Link>
-  //             </Stack>
-  //           </Box>
-  //         </Box>
+
+          //         <Box
+          //           key={step.label}
+          //           sx={{
+          //             display: 'flex',
+          //             alignItems: 'center',
+          //             justifyContent: 'center',
+          //             overflow: 'hidden',
+          //             position: 'relative',
+          //           }}
+          //         >
+          // <img
+          //             src={step.imgPath}
+          //             alt={step.label}
+          //             style={{
+          //               width: '50%',
+          //               height: '100%',
+          //               objectFit: 'cover',
+          //             }}
+          //           />
+
+          //           <Box >
+          //             <Stack direction="column" p={5} sx={{
+          //               height: '100%',}}>
+          //             <Typography variant="h5" gutterBottom>
+          //               {step.label}
+          //             </Typography>
+          //             <Divider color="#1F485B" sx={{ my:3 }} />
+          //             <Typography variant="body1">
+          //               {step.sublabel}
+          //             </Typography>
+          //             <Link href={step.link}>
+          //               <Button variant="contained" color="medical" sx={{ mt: 2 }} >
+          //                 Find out more
+          //               </Button></Link>
+          //             </Stack>
+          //           </Box>
+          //         </Box>
         ))}
       </AutoPlaySwipeableViews>
       <MobileStepper

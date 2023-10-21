@@ -55,24 +55,7 @@ export default function Group() {
       catch(error){
         console.log(error)
       }
-    // }
-    // if(payload.accountType === 'patient'){
 
-    //   try{
-    //         let groupData = await axios.get(`${DBRUL}/patient/${payload.username}/groups/${params.id}`, {
-  
-    //       headers: {Authorization: `Bearer ${token}`},
-  
-    //   });
-    //   console.log('gggggggggggggggggg',groupData.data)
-    //   setGetGroup(groupData.data)
-    //   return groupData
-  
-    //   }
-    //   catch(error){
-    //     console.log(error)
-    //   }
-    // }
   }
 
   useEffect(() => {
@@ -192,17 +175,18 @@ export default function Group() {
       <Container>
       <CreatePost  setCreatedPost={setCreatedPost}  getGroup={getGroup}/>
       </Container>
-      <Box
-        minHeight='80vh'
-        display='flex'
-        maxWidth={'95%'}
+      <Box 
+      minHeight='80vh' 
+      display='flex'
+      maxWidth={'95%'}
         margin={"30px auto"}
-        sx={{
-          bgcolor: "white",
-          boxShadow: 'inset 0px 2px 3px 0px rgba(0,0,0,0.4), inset 0px 1px 3px 0px rgba(0,0,0,0.12)',
+      sx={{
+        bgcolor: "white",
+        boxShadow: 'inset 0px 2px 3px 0px rgba(0,0,0,0.4), inset 0px 1px 3px 0px rgba(0,0,0,0.12)',
           borderRadius: "5px",
           flexDirection: "column"
-        }}>
+      }}>
+      <Box>
           <PostHeader setGetGroup={setGetGroup} getGroup={getGroup}/>
           <Box>
           {createdPost.map((post, index) => (
@@ -217,6 +201,7 @@ export default function Group() {
                 />
             ))}
             
+          </Box>
           </Box>
       </Box>
     </Box>

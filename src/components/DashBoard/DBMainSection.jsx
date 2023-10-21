@@ -20,6 +20,7 @@ const Appointment = React.lazy(() => import('../../pages/appointment'));
 const PatientHistory = React.lazy(() => import('../MedicalHistory/MedicalHistory'));
 const Physician = React.lazy(() => import('../../pages/Physician'));
 const Subscription = React.lazy(() => import('../../pages/subscription'));
+const OneHistory = React.lazy(() => import('../../pages/History'));
 
 
 
@@ -68,6 +69,7 @@ export default function DBMain({ open }) {
                     <Route path='/patient-control' element={<React.Suspense fallback={<Loading />}><PhysicianControlPage /></React.Suspense>} />
                     <Route path='/patient-control/vitals/:patientUN' element={<React.Suspense fallback={<Loading />}><Vitals /></React.Suspense>} />
                     <Route path='/patient-control/prescription/:patientUN' element={<React.Suspense fallback={<Loading />}><Prescriptions /></React.Suspense>} />
+                    <Route path='/patient-control/medical-history/:patientUN' element={<React.Suspense fallback={<Loading />}><OneHistory /></React.Suspense>} />
 
 
 

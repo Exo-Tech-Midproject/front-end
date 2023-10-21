@@ -24,9 +24,8 @@ export default function HeroPhysicain() {
                 sx={{
                     background: "#112731BF",
                     backgroundImage: 'url("https://validtemplates.github.io/clinicom/assets/img/banner/4.jpg")',
-                    backgroundSize: "100%",
+                    backgroundSize: "cover",
                     backgroundRepeat: "no-repeat",
-                    objectFit: "cover",
                     backgroundPosition: "center",
                     backgroundBlendMode: "overlay",
                     width: "100%",

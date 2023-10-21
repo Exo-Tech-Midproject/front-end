@@ -1,11 +1,11 @@
-// import PatientHistory from "../components/MedicalHistory/MedicalHistory";
+import OneHistory from "../components/MedicalHistory/patientHistory";
 
-// const History = () => {
-//   return (
-//     <div>
-//       < PatientHistory />
-//     </div>
-//   );
-// };
+const History = () => {
+  return (
+    <div>
+      < OneHistory />
+    </div>
+  );
+};
 
-// export default History;
+export default History;

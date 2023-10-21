@@ -33,6 +33,7 @@ export default function PatientHistory() {
     const [successMessage, setSuccessMessage] = useState("");
     const [openSnackbar, setOpenSnackbar] = useState(false);
     const [view , setView] = useState(false)
+    const [historys , setHistorys] = useState([])
 
     const [formData, setFormData] = useState({
         patientUN: "",
@@ -56,52 +57,53 @@ export default function PatientHistory() {
         }));
     };
 
-    console.log("form data", formData);
 
     async function fetchHistory() {
+
         try {
             let token = cookie.load("auth");
             const payload = await jwtDecode(token);
+
             if (payload?.accountType === "physician") {
-                let history = await axios.get(
-                    `${DBRUL}/physician/${payload.username}/patients/${formData.patientUN}/disease`,
+                let allHistory = await axios.get(
+                    `${DBRUL}/physician/${payload.username}/patients/disease`,
                     {
                         headers: {Authorization: `Bearer ${token}`},
                     }
                 );
-                console.log("from get history", history.data);
-                setFormData(history.data);
-                console.log(history, "from history function");
-                
-                return history.data;
+                setHistorys(allHistory.data);
+                setView(false)                
+                return allHistory.data;
             }
-
-            
             
             if (payload?.accountType === "patient") {
                 
                 let history = await axios.get(`${DBRUL}/patient/${payload.username}/disease`, {
                     headers: {Authorization: `Bearer ${token}`},
                 });
-                console.log("from get history", history.data);
                 setFormData(history.data);
                 setView(true)
-                console.log(history, "from history function");
                 return history.data;
             }
             
         } catch (error) {
             console.log(error);
         }
-
         
     }
+            // console.log(view, "for see the view");
 
     useEffect(() => {
         fetchHistory();
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
+
+    let token = cookie.load("auth");
+    const payload = jwtDecode(token);
+
+    const existHistory = historys.map(history => history.username);
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -117,23 +119,8 @@ export default function PatientHistory() {
                 physicianUN: formData.physicianUN,
             };
             try {
-                let token = cookie.load("auth");
-                const payload = await jwtDecode(token);
 
-                if (formData.patientUN) {
-                    let response = await axios.put(
-                        `${DBRUL}/physician/${payload.username}/patients/${formData.patientUN}/disease`,
-                        newHistory,
-                        {
-                            headers: {Authorization: `Bearer ${token}`},
-                        }
-                    );
-
-                    setSuccessMessage("History updated successfully");
-                    setOpenSnackbar(true);
-
-                    console.log("Response Data:", response.data);
-                } else {
+                if (formData.patientUN !== existHistory) {
                     let response = await axios.post(
                         `${DBRUL}/physician/${payload.username}/patients/${formData.patientUN}/disease`,
                         newHistory,
@@ -143,6 +130,19 @@ export default function PatientHistory() {
                     );
 
                     setSuccessMessage("History added successfully");
+                    setOpenSnackbar(true);
+
+                    console.log("Response Data:", response.data);
+                } else {
+                    let response = await axios.put(
+                        `${DBRUL}/physician/${payload.username}/patients/${formData.patientUN}/disease`,
+                        newHistory,
+                        {
+                            headers: {Authorization: `Bearer ${token}`},
+                        }
+                    );
+
+                    setSuccessMessage("History updated successfully");
                     setOpenSnackbar(true);
 
                     console.log("Response Data:", response.data);
@@ -253,7 +253,7 @@ return (
                                         },
                                     }}
                                     InputProps={{
-                                        readOnly:{view},
+                                        readOnly:view,
                                 startAdornment: <InputAdornment 
                                 sx={{
                                     '& .MuiTypography-root': {
@@ -283,7 +283,7 @@ return (
                                         },
                                     }}
                                     InputProps={{
-                                        readOnly:{view},
+                                        // readOnly:false,
                                 startAdornment: <InputAdornment 
                                 sx={{
                                     '& .MuiTypography-root': {
@@ -314,7 +314,7 @@ return (
                                         },
                                     }}
                                     InputProps={{
-                                        readOnly:{view},
+                                        // readOnly:{view},
                                 startAdornment: <InputAdornment
                                 sx={{
                                     '& .MuiTypography-root': {
@@ -345,7 +345,7 @@ return (
                                         },
                                     }}
                                     InputProps={{
-                                        readOnly:{view},
+                                        // readOnly:{view},
                                         startAdornment: <InputAdornment 
                                         sx={{
                                             '& .MuiTypography-root': {
@@ -377,7 +377,7 @@ return (
                                         },
                                     }}
                                     InputProps={{
-                                        readOnly:{view},
+                                        // readOnly:{view},
                                         startAdornment: <InputAdornment 
                                         sx={{
                                             '& .MuiTypography-root': {
@@ -408,7 +408,7 @@ return (
                                         },
                                     }}
                                     InputProps={{
-                                        readOnly:{view},
+                                        // readOnly:{view},
                                         startAdornment: 
                                         <InputAdornment
                                         sx={{
@@ -440,7 +440,7 @@ return (
                                         },
                                     }}
                                     InputProps={{
-                                        readOnly:{view},
+                                        // readOnly:{view},
                                         startAdornment: <InputAdornment
                                         sx={{
                                             '& .MuiTypography-root': {

@@ -8,6 +8,9 @@ let DBRUL = process.env.REACT_APP_BASE_URL;
 
 export default function SubscribeButton({ physicianUN }) {
   const [snackbarOpen, setSnackbarOpen] = useState(false);
+  const [alreadySubscribed, setAlreadySubscribed] = useState(false);
+
+
 
   async function handleSubscribeClick() {
     try {
@@ -26,6 +29,8 @@ export default function SubscribeButton({ physicianUN }) {
       }
     } catch (error) {
       console.log(error);
+        setAlreadySubscribed(true);
+        setSnackbarOpen(true);
     }
   }
 
@@ -46,9 +51,9 @@ export default function SubscribeButton({ physicianUN }) {
       </Button>
       <Snackbar
         open={snackbarOpen}
-        autoHideDuration={3000} // Adjust the duration as needed
+        autoHideDuration={3000}
         onClose={() => setSnackbarOpen(false)}
-        message="Subscription Successful!"
+        message={alreadySubscribed ? "You are already a subscriber" : "Subscription Successful!"}
       />
     </div>
   );

@@ -10,7 +10,6 @@ import MuiAlert from "@mui/material/Alert";
 import HeroHistory from "./HeroHistory";
 import AuthPhysician from "../Auths/AuthPhysician";
 import InputAdornment from '@mui/material/InputAdornment';
-// import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import MedicalSection from "./MedicalSection";
 import EventNoteOutlinedIcon from "@mui/icons-material/EventNoteOutlined";
 import axios from "axios";
@@ -20,7 +19,7 @@ import jwtDecode from "jwt-decode";
 import { BsPersonSquare } from "react-icons/bs";
 import { FaUserDoctor } from "react-icons/fa6";
 import { FaNotesMedical } from "react-icons/fa";
-import { LiaNotesMedicalSolid } from "react-icons/lia";
+import { FaFileMedical } from "react-icons/fa6";
 import { BsFileEarmarkMedicalFill } from "react-icons/bs";
 import { FaBookMedical } from "react-icons/fa";
 import { FaFileMedicalAlt } from "react-icons/fa";
@@ -72,7 +71,8 @@ export default function PatientHistory() {
                     }
                 );
                 setHistorys(allHistory.data);
-                setView(false)                
+                console.log(token)
+                // setView(false)                
                 return allHistory.data;
             }
             
@@ -82,6 +82,7 @@ export default function PatientHistory() {
                     headers: {Authorization: `Bearer ${token}`},
                 });
                 setFormData(history.data);
+                console.log(token)
                 setView(true)
                 return history.data;
             }
@@ -91,7 +92,6 @@ export default function PatientHistory() {
         }
         
     }
-            // console.log(view, "for see the view");
 
     useEffect(() => {
         fetchHistory();
@@ -102,7 +102,16 @@ export default function PatientHistory() {
     let token = cookie.load("auth");
     const payload = jwtDecode(token);
 
-    const existHistory = historys.map(history => history.username);
+    // const existHistory = historys.map(history => history);
+
+    const existHistory = historys.filter((history) => {
+        if (formData.patientUN === history.username ) {
+          return true;
+        } else {
+          return false;
+        }
+      });
+
 
 
     const handleSubmit = async (e) => {
@@ -120,7 +129,10 @@ export default function PatientHistory() {
             };
             try {
 
-                if (formData.patientUN !== existHistory) {
+                console.log(formData.patientUN)
+                console.log(existHistory)
+
+                if (formData.patientUN !== existHistory[0].username) {
                     let response = await axios.post(
                         `${DBRUL}/physician/${payload.username}/patients/${formData.patientUN}/disease`,
                         newHistory,
@@ -283,7 +295,7 @@ return (
                                         },
                                     }}
                                     InputProps={{
-                                        // readOnly:false,
+                                        readOnly:view,
                                 startAdornment: <InputAdornment 
                                 sx={{
                                     '& .MuiTypography-root': {
@@ -314,7 +326,7 @@ return (
                                         },
                                     }}
                                     InputProps={{
-                                        // readOnly:{view},
+                                        readOnly:view,
                                 startAdornment: <InputAdornment
                                 sx={{
                                     '& .MuiTypography-root': {
@@ -345,7 +357,7 @@ return (
                                         },
                                     }}
                                     InputProps={{
-                                        // readOnly:{view},
+                                        readOnly:view,
                                         startAdornment: <InputAdornment 
                                         sx={{
                                             '& .MuiTypography-root': {
@@ -355,7 +367,7 @@ return (
                                         }}
                                         position="end"
                                     >
-                                            <LiaNotesMedicalSolid fontSize='30px' color='#1F485B' /></InputAdornment>,
+                                            <FaFileMedical fontSize='30px' color='#1F485B' /></InputAdornment>,
                                     }}
                                 />
                             </Grid>
@@ -369,7 +381,6 @@ return (
                                     value={formData.allergies}
                                     multiline
                                     onChange={handleInputChange}
-                                    rows={2}
                                     sx={{
                                         bgcolor: "#ECF3F8",
                                         "& label": {
@@ -377,7 +388,7 @@ return (
                                         },
                                     }}
                                     InputProps={{
-                                        // readOnly:{view},
+                                        readOnly:view,
                                         startAdornment: <InputAdornment 
                                         sx={{
                                             '& .MuiTypography-root': {
@@ -387,7 +398,7 @@ return (
                                         }}
                                         position="end"
                                     >
-                                            <BsFileEarmarkMedicalFill fontSize='40px' color='#1F485B' /></InputAdornment>,
+                                            <BsFileEarmarkMedicalFill fontSize='30px' color='#1F485B' /></InputAdornment>,
                                     }}
                                 />
                             </Grid>
@@ -408,7 +419,7 @@ return (
                                         },
                                     }}
                                     InputProps={{
-                                        // readOnly:{view},
+                                        readOnly:view,
                                         startAdornment: 
                                         <InputAdornment
                                         sx={{
@@ -440,7 +451,7 @@ return (
                                         },
                                     }}
                                     InputProps={{
-                                        // readOnly:{view},
+                                        readOnly:view,
                                         startAdornment: <InputAdornment
                                         sx={{
                                             '& .MuiTypography-root': {
@@ -472,7 +483,7 @@ return (
                                 }}
                                 onClick={handleSubmit}
                             >
-                                submit
+                                Submit
                             </Button>
                             <Snackbar open={openSnackbar} autoHideDuration={6000} onClose={handleCloseSnackbar}>
                                 <MuiAlert onClose={handleCloseSnackbar} severity="success" sx={{width: "100%"}}>

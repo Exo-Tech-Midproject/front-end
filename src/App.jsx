@@ -6,6 +6,7 @@ import LoginPhysicianTestingForm from "./components/LoginForm/LoginDoctorTesting
 import { io } from "socket.io-client"
 // import Loading from "./components/Loading/Loading"
 import { AnimatePresence } from "framer-motion"
+import './App.css'
 // import Home from "./pages/Home"
 
 // import Login from "./pages/Login"
@@ -57,12 +58,12 @@ const App = () => {
 
 
 
-        <Route path='/' element={<Suspense fallback={<Loading />}><Home /></Suspense>} />
-        <Route path='/Login' element={<Suspense fallback={<Loading />}><Login /></Suspense>} />
-        <Route path='/testlogin' element={<Suspense fallback={<Loading />}><LoginPatientTestingForm /></Suspense>} />
-        <Route path='/testlogin2' element={<Suspense fallback={<Loading />}><LoginPhysicianTestingForm /></Suspense>} />
-        <Route path='/Signup' element={<Suspense fallback={<Loading />}><Signup /></Suspense>} />
-        <Route path='/AboutUs' element={<Suspense fallback={<Loading />}><AboutUs /></Suspense>} />
+          <Route path='/' element={<Suspense fallback={<Loading />}><Home /></Suspense>} />
+          <Route path='/Login' element={<Suspense fallback={<Loading />}><Login /></Suspense>} />
+          <Route path='/testlogin' element={<Suspense fallback={<Loading />}><LoginPatientTestingForm /></Suspense>} />
+          <Route path='/testlogin2' element={<Suspense fallback={<Loading />}><LoginPhysicianTestingForm /></Suspense>} />
+          <Route path='/Signup' element={<Suspense fallback={<Loading />}><Signup /></Suspense>} />
+          <Route path='/AboutUs' element={<Suspense fallback={<Loading />}><AboutUs /></Suspense>} />
 
 
 

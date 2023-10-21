@@ -43,3 +43,18 @@
 .read-the-docs {
   color: #888;
 } */
+
+/* For Chrome */
+/* For Chrome, Safari, and Opera */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f9f9f9;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1F485B;
+  border-radius: 2px;
+}

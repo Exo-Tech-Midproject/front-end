@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import { Box, Container, TextField, Typography, Button, Link, Stack } from '@mui/material'
 import LockIcon from '@mui/icons-material/Lock';
 import EmailIcon from '@mui/icons-material/Email';
@@ -8,11 +8,14 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import IconButton from '@mui/material/IconButton';
 import { LoginContext } from '../../ContextApi/Auth';
 import { useNavigate } from 'react-router-dom';
+import LoginModalPatient from './LoginModalPatient';
 function PatientForm() {
     const [showPassword, setShowPassword] = React.useState(false);
     const navigator = useNavigate()
     const [username, setUsername] = React.useState('')
     const [password, setPassword] = React.useState('')
+    const [showModal, setShowModal] = useState(false)
+    const [msg, setMsg] = useState({})
     const { loginPatient } = useContext(LoginContext)
     const handleClickShowPassword = () => setShowPassword((show) => !show);
 
@@ -27,9 +30,27 @@ function PatientForm() {
             let logged = await loginPatient(username, password)
             console.log(logged)
             if (logged) {
-                navigator('/dashboard/profile')
+                setMsg({
+                    message: 'Successful Login',
+                    type: 'success',
+                    head: 'Success',
+                    submsg: 'You are now logged in, redirecting you to the dashboard'
+                })
+                setShowModal(true)
+                setTimeout(async () => {
+                    await navigator('/dashboard/profile')
+                    setShowModal(false)
+                }, 1500)
+
             } else {
                 console.log('you are not authorized')
+                setMsg({
+                    message: 'Wrong password or username',
+                    type: 'error',
+                    head: 'Failed to login',
+                    submsg: 'Make sure you are entering a correct password and username'
+                })
+                setShowModal(true)
             }
 
 
@@ -94,6 +115,7 @@ function PatientForm() {
                 </Stack>
 
             </Container>
+            <LoginModalPatient showModal={showModal} setShowModal={setShowModal} doneMsg={msg} />
         </Box>
     )
 }

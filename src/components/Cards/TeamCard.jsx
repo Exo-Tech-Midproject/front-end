@@ -28,7 +28,7 @@ const CustomLink = ({ children, }) => (
 	</Link>
 );
 
-const TeamCard = ({ title, subtitle }) => {
+const TeamCard = ({ title, subtitle, image }) => {
 	return (
 		<Box sx={{
 			padding: "1rem",
@@ -37,8 +37,8 @@ const TeamCard = ({ title, subtitle }) => {
 			backgroundColor: "#fff",
 			borderRadius: "0.375rem",
 			boxShadow: "0px 0px 0.25rem rgba(0, 0, 0, 0.2)",
-			alignItems:"center",
-			justifyContent:"space-around",
+			alignItems: "center",
+			justifyContent: "space-around",
 		}}>
 			<Stack direction="row" spacing={0} width="100%" alignItems="center" justifyContent="space-around">
 				<Box sx={{
@@ -59,11 +59,12 @@ const TeamCard = ({ title, subtitle }) => {
 							width: "1.75rem",
 							color: "#003870",
 						}} /> */}
-					<img src={img} alt="team img" style={{
+					<img src={image} alt="team img" style={{
 						width: "8rem",
 						height: "8rem",
 						borderRadius: "50%",
 						color: "#003870",
+						objectFit: 'cover'
 					}} />
 					{/* </Stack> */}
 

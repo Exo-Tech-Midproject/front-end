@@ -10,7 +10,10 @@ import GnosisImg from "../assets/images/section4/gnosis.webp";
 import AvalancheImg from "../assets/images/section4/avalanche.webp";
 import ArbitrumImg from "../assets/images/section4/arbitrum.webp";
 import FantomImg from "../assets/images/section4/fantom.webp";
-
+import hasan from '../components/Cards/hasan.jpg'
+import tasneem from '../components/Cards/Tasnrrm.jpg'
+import anas from '../components/Cards/image.png'
+import abdullah from '../components/Cards/abdullah.JPG'
 // Section5
 import sec5Ved from "../assets/images/section5/sec5Ved.mp4"
 import image1 from "../assets/images/section5/image1.webp"
@@ -236,25 +239,26 @@ export const AboutUsSectionContent = {
       title: "Tasneem Hassasneh",
       subtitle:
         "Software Developer",
+      image: tasneem
 
     },
     {
       title: "Hasan Tummalei",
       subtitle:
         "Software Developer",
-
+      image: hasan
     },
     {
       title: "Anas Alnemrawi",
       subtitle:
         "Software Developer",
-
+      image: anas
     },
     {
       title: "Abdullah Aljoulani",
       subtitle:
         "Software Developer",
-
+      image: abdullah
     },
   ],
 };

@@ -6,7 +6,7 @@ import React from 'react'
 // import MedicationOutlinedIcon from '@mui/icons-material/MedicationOutlined';
 import PrescriptionCard from './PrescriptionCard';
 
-export default function PrescriptionsSection() {
+export default function PrescriptionsSection({ prescriptionsInfo }) {
     return (
         <Box minHeight='100%' borderRadius={'15px'} bgcolor={'#fff'} boxShadow='rgba(159, 162, 191, 0.18) 0px 9px 16px, rgba(159, 162, 191, 0.32) 0px 2px 2px'>
             <Stack padding={2} gap={2} >
@@ -38,11 +38,12 @@ export default function PrescriptionsSection() {
                     },
                 }}>
                     <Stack gap={0.5} width='95%' alignSelf='center' >
+                        {prescriptionsInfo?.map(presCard => (<PrescriptionCard presCard={presCard} />))}
+
+                        {/* <PrescriptionCard />
                         <PrescriptionCard />
                         <PrescriptionCard />
-                        <PrescriptionCard />
-                        <PrescriptionCard />
-                        <PrescriptionCard />
+                        <PrescriptionCard /> */}
                     </Stack>
                 </Box>
             </Stack >

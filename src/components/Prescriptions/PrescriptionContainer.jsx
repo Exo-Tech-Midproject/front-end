@@ -11,9 +11,10 @@ import cookie from 'react-cookies'
 import jwtDecode from 'jwt-decode';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
+import PrescriptionsChart from './PrescriptionsChart';
 let DBRUL = process.env.REACT_APP_BASE_URL
 export default function PrescriptionContainer() {
-    const [prescription, setPrescription] = useState(null)
+    const [prescription, setPrescription] = useState([])
     let params = useParams()
     let token = cookie.load('auth')
     let payload
@@ -66,7 +67,8 @@ export default function PrescriptionContainer() {
             </Box >
             <IntroSection setPrescription={setPrescription} prescription={prescription} fetchUserPrescriptions={fetchUserPrescriptions} />
             <PrescriptionsSection prescription={prescription} setPrescription={setPrescription} />
-            <VitalsChart />
+            
+            <PrescriptionsChart prescription={prescription} />
         </Box>
     )
 }

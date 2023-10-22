@@ -191,20 +191,37 @@ export default function CardSubscription() {
 													<Box display='flex' justifyContent='flex-end' marginTop={"10px"}>
 														<AuthPatient>
 															<Button variant='text' color={'snowWhite'} onClick={() => openRatingForm(user.username)}>Rate Doctor</Button>
-															<Rating
-																sx={{
-																	marginLeft: "20px",
-																	color: "white",
-																	'& .MuiRating-icon': {
-																		color: 'gold',
-																	},
-																}}
-																name="half-rating-read"
-																defaultValue={user.avgRating}
-																precision={0.5}
-																size="medium"
-																readOnly
-															/>
+															{user.avgRating !== null ? (
+																<Rating
+																	sx={{
+																		marginLeft: "20px",
+																		color: "white",
+																		'& .MuiRating-icon': {
+																			color: 'gold',
+																		},
+																	}}
+																	name="half-rating-read"
+																	value={user.avgRating}
+																	precision={0.5}
+																	size="medium"
+																	readOnly
+																/>
+															) : (
+																<Rating
+																	sx={{
+																		marginLeft: "20px",
+																		color: "white",
+																		'& .MuiRating-icon': {
+																			color: 'gold',
+																		},
+																	}}
+																	name="half-rating-read"
+																	value={0}
+																	precision={0.5}
+																	size="medium"
+																	readOnly
+																/>
+															)}
 														</AuthPatient>
 													</Box>
 												</figcaption>

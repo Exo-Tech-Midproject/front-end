@@ -6,42 +6,39 @@ import {
   Typography,
   useMediaQuery,
   useTheme,
-  Link
+  Link,
 } from "@mui/material";
 import { section1Content } from "../utils/content";
-import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
+import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import Title from "../components/Title";
 import useMeasure from "react-use-measure";
 
 import LaunchButton from "../components/Buttons/LaunchButton";
 // import { motion } from 'framer-motion';
 
-const {
-  MainVed,
-  title,
-  subtitle,
-} = section1Content;
+const { MainVed, title, subtitle } = section1Content;
 
 const CustomButton = ({ children, ...props }) => (
   <Link href="/AboutUs">
-  <Button
-    variant="outlined"
-    sx={{
-      borderRadius: 4,
-      color: {xs:"#296079", md:"white"},
-      borderColor: {xs:"#296079", md:"white"},
-      height: 58,
-      px: 2,
-      "&:hover":{
-        color: "white",
-        borderColor: "#296079",
-        bgcolor:"#296079",
-      }
-    }}
-    {...props}
-  >
-    {children}
-  </Button></Link>
+    <Button
+      variant="outlined"
+      sx={{
+        borderRadius: 4,
+        color: { xs: "#296079", md: "white" },
+        borderColor: { xs: "#296079", md: "white" },
+        height: 58,
+        px: 2,
+        "&:hover": {
+          color: "white",
+          borderColor: "#296079",
+          bgcolor: "#296079",
+        },
+      }}
+      {...props}
+    >
+      {children}
+    </Button>
+  </Link>
 );
 
 const Section1 = () => {
@@ -49,9 +46,8 @@ const Section1 = () => {
   const isSmallScreen = useMediaQuery(theme.breakpoints.down("md"));
   const [ref, { height }] = useMeasure();
 
-
   return (
-    <Box sx={{ width: "100%" }}  >
+    <Box sx={{ width: "100%" }}>
       {/* Main Background */}
       <Box sx={{ position: "fixed", zIndex: -1, top: 0, left: 0, right: 0 }}>
         <video style={{ width: "100%" }} src={MainVed} autoPlay loop muted />
@@ -78,7 +74,8 @@ const Section1 = () => {
             bottom: 0,
             left: 0,
             right: 0,
-            height: "800px",
+            // height: "800px",
+            height: "100%",
             top: `calc(${height}px - 13%)`,
           }}
         ></Box>
@@ -92,7 +89,7 @@ const Section1 = () => {
             left: 0,
             right: 0,
             height: "800px",
-
+            height: "100%",
           }}
         ></Box>
       </Box>
@@ -105,19 +102,30 @@ const Section1 = () => {
           [theme.breakpoints.up("md")]: { mt: 6 },
         }}
       >
-
-        <Stack sx={{ height: "100%" }} justifyContent="center" alignItems="center">
-
+        <Stack
+          sx={{ height: "100%" }}
+          justifyContent="center"
+          alignItems="center"
+        >
           <Title
             variant={{ xs: "h3", sm: "h2", md: "h1" }}
-            sx={{ letterSpacing: "0.02em", mb: 1, color: {xs:"#1F485B", md:"white"} }}
+            sx={{
+              letterSpacing: "0.02em",
+              mb: 1,
+              color: { xs: "#1F485B", md: "white" },
+            }}
           >
             {title}
           </Title>
 
           <Title
             variant={{ xs: "h6", sm: "h5", md: "h4" }}
-            sx={{ fontWeight: 500, letterSpacing: "0.05em", mb: 5, color: {xs:"#1F485B", md:"white"} }}
+            sx={{
+              fontWeight: 500,
+              letterSpacing: "0.05em",
+              mb: 5,
+              color: { xs: "#1F485B", md: "white" },
+            }}
           >
             {subtitle}
           </Title>

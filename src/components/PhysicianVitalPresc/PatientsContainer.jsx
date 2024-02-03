@@ -58,7 +58,7 @@ export default function PatientsContainer() {
                 mt={4} variant='h2'
                 textAlign='center'>Patients List</Typography>
 
-            <Box display={'flex'} width='100%' justifyContent='center' mt={4} flexWrap={'wrap'} mb={'50px'} minHeight='60vh'>
+            <Box display={'flex'} flexDirection={'column'}  alignItems={'center'} width='100%' justifyContent='center' mt={4} flexWrap={'wrap'} mb={'50px'} minHeight='60vh'>
                 {currentPageRender?.map(sub => (<SubPatientCard
                     userInfo={sub}
                 />))}

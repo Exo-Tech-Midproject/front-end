@@ -5,17 +5,12 @@ import Modal from '@mui/material/Modal';
 import Fade from '@mui/material/Fade';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import { Divider, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField } from '@mui/material';
-import InputAdornment from '@mui/material/InputAdornment';
-import { BsHeartPulseFill } from 'react-icons/bs';
-import O2SatIcon from '../CustomIcons/O2Sat';
-import ThermostatOutlinedIcon from '@mui/icons-material/ThermostatOutlined';
-import { MdOutlineBloodtype } from 'react-icons/md';
-import BloodPreassureIcon from '../CustomIcons/BloodPreassure'
+import {  Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField } from '@mui/material';
 import { LoginContext } from '../../ContextApi/Auth';
 import cookie from 'react-cookies'
 import axios from 'axios';
 import jwtDecode from 'jwt-decode';
+import { useParams } from 'react-router-dom';
 let DBRUL = process.env.REACT_APP_BASE_URL
 
 const style = {
@@ -39,6 +34,7 @@ export default function AddPrescModal({ fetchUserPrescriptions, showModal, handl
     const [drugsList, setDrugsList] = React.useState([])
     console.log(user)
     console.log(drugsList)
+    const {patientUN} = useParams()
     const [formData, setFormData] = React.useState({
 
         drugname: '',
@@ -63,7 +59,7 @@ export default function AddPrescModal({ fetchUserPrescriptions, showModal, handl
 
             let token = cookie.load('auth')
             const payload = await jwtDecode(token)
-            let createdPres = await axios.post(`${DBRUL}/physician/${payload.username}/patients/${'anas'}/prescriptions`, requestData, {
+            let createdPres = await axios.post(`${DBRUL}/physician/${payload.username}/patients/${patientUN}/prescriptions`, requestData, {
                 headers: { Authorization: `Bearer ${token}` }
             })
             console.log(createdPres)
